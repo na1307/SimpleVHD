@@ -1,0 +1,217 @@
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+namespace ProjectV;
+
+/// <summary>
+/// Project V Config 클래스
+/// </summary>
+[XmlRoot("Config")]
+public sealed class PVConfig : IXmlSerializable {
+    private static readonly Lazy<PVConfig> _Instance = new(() => new());
+    private readonly string xPath;
+    private readonly Dictionary<ShutdownType, bool> shutdownAfter;
+    private readonly Dictionary<GuidType, Guid> bcdGuids;
+    private VhdFormat _VhdFormat;
+
+    /// <summary>
+    /// PVConfig의 현재 인스턴스
+    /// </summary>
+    public static PVConfig Instance => _Instance.Value;
+
+    /// <summary>
+    /// 현재 윈도우 버전
+    /// </summary>
+    public WinVer WinVer { get; private set; }
+
+    /// <summary>
+    /// 현재 운영 스타일
+    /// </summary>
+    public OperatingStyle OperatingStyle { get; set; }
+
+    /// <summary>
+    /// 현재 VHD 형식
+    /// </summary>
+    public VhdType VhdType { get; set; }
+
+    /// <summary>
+    /// 현재 VHD 포맷
+    /// </summary>
+    public VhdFormat VhdFormat {
+        get => _VhdFormat;
+        set {
+            _VhdFormat = value;
+            if (VhdFile != null) VhdFile = Regex.Match(VhdFile, "^(?<filename>.+\\.)vhdx?$", RegexOptions.IgnoreCase).Groups["filename"].Value + _VhdFormat.ToString().ToLower();
+        }
+    }
+
+    /// <summary>
+    /// 현재 VHD 디렉토리 경로
+    /// </summary>
+    public string VhdDirectory { get; private set; }
+
+    /// <summary>
+    /// 현재 VHD 파일 이름
+    /// </summary>
+    public string VhdFile { get; private set; }
+
+    /// <summary>
+    /// 현재 작업
+    /// </summary>
+    public DoAction Action { get; set; }
+
+    /// <summary>
+    /// 현재 임시 필드
+    /// </summary>
+    public string? Temp { get; set; }
+
+    /// <summary>
+    /// 현재 ShutdownAfterAction
+    /// </summary>
+    /// <param name="type">해당 작업 ShutdownType</param>
+    /// <returns>해당 작업에서 다시 시작하는 대신 종료해야 하는지 여부</returns>
+    public bool this[ShutdownType type] {
+        get => shutdownAfter[type];
+        set => shutdownAfter[type] = value;
+    }
+
+    /// <summary>
+    /// 현재 BCD GUID
+    /// </summary>
+    /// <param name="type">해당 GUID 종류</param>
+    /// <returns>GUID 문자열</returns>
+    public string this[GuidType type] => bcdGuids[type].ToString("B");
+
+    private PVConfig() {
+        try {
+            foreach (string drv in from drv in Directory.GetLogicalDrives() where File.Exists(drv + DirName + "\\" + ConfigName) select drv) {
+                xPath = drv + DirName + "\\" + ConfigName;
+                break;
+            }
+
+            if (xPath == null) throw new ConfigNotFoundException();
+
+            shutdownAfter = new(4) {
+                { ShutdownType.Backup, default },
+                { ShutdownType.Restore, default },
+                { ShutdownType.Revert, default },
+                { ShutdownType.Merge, default }
+            };
+
+            bcdGuids = new(5) {
+                { GuidType.Parent, Guid.Empty },
+                { GuidType.Child1, Guid.Empty },
+                { GuidType.Child2, Guid.Empty },
+                { GuidType.Ramdisk, Guid.Empty },
+                { GuidType.Processor, Guid.Empty }
+            };
+
+            ((IXmlSerializable)this).ReadXml(XmlReader.Create(xPath));
+
+            if (VhdDirectory == null || VhdFile == null) throw new InvalidConfigException(nameof(VhdDirectory) + " 또는 " + nameof(VhdFile) + "이 없습니다.");
+            foreach (var guid in bcdGuids) if (guid.Value == Guid.Empty) throw new InvalidConfigException(guid.Key.ToString() + " Guid가 없습니다.");
+        } catch (PVException) {
+            throw;
+        } catch (Exception ex) {
+            throw new InvalidConfigException(ex);
+        }
+    }
+
+    public override string ToString() {
+        System.Text.StringBuilder sb = new(1000);
+
+        ((IXmlSerializable)this).WriteXml(XmlWriter.Create(sb, new() { Indent = true }));
+
+        return sb.ToString();
+    }
+
+    public void SaveConfig() => ((IXmlSerializable)this).WriteXml(XmlWriter.Create(xPath, new() { Indent = true }));
+
+    XmlSchema? IXmlSerializable.GetSchema() => null;
+
+    void IXmlSerializable.ReadXml(XmlReader reader) {
+        if (reader == null) throw new ArgumentNullException(nameof(reader));
+
+        reader.MoveToContent();
+
+        while (reader.Read()) {
+            if (reader.NodeType == XmlNodeType.Element) {
+                switch (reader.LocalName) {
+                    case "ShutdownAfterAction":
+                        shutdownAfter[(ShutdownType)Enum.Parse(typeof(ShutdownType), reader.GetAttribute("Type"), false)] = reader.ReadElementContentAsBoolean();
+                        break;
+
+                    case "Guid":
+                        bcdGuids[(GuidType)Enum.Parse(typeof(GuidType), reader.GetAttribute("Type"), false)] = Guid.Parse(reader.ReadElementContentAsString());
+                        break;
+
+                    default:
+                        var p = GetType().GetProperty(reader.LocalName);
+                        var v = reader.ReadElementContentAsString();
+
+                        p.SetValue(this, !p.PropertyType.IsEnum ? v : Enum.Parse(p.PropertyType, v, false), null);
+                        break;
+                }
+            }
+        }
+
+        reader.Close();
+    }
+
+    void IXmlSerializable.WriteXml(XmlWriter writer) {
+        if (writer == null) throw new ArgumentNullException(nameof(writer));
+
+        writer.WriteStartDocument();
+        writer.WriteComment(ConfigComment);
+        writer.WriteStartElement("Config");
+
+        foreach (var p in GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)) {
+            switch (p.Name) {
+                //인덱서는 처리 안함
+                case "Item": continue;
+
+                case nameof(Temp):
+                    if (Temp != null) writer.WriteElementString(nameof(Temp), Temp);
+                    break;
+
+                default:
+                    writer.WriteElementString(p.Name, p.GetValue(this, null).ToString());
+                    break;
+            }
+        }
+
+        foreach (var shutdown in shutdownAfter) {
+            writer.WriteStartElement("ShutdownAfterAction");
+            writer.WriteAttributeString("Type", shutdown.Key.ToString());
+            writer.WriteString(shutdown.Value.ToString().ToLower());
+            writer.WriteEndElement();
+        }
+
+        foreach (var guid in bcdGuids) {
+            writer.WriteStartElement("Guid");
+            writer.WriteAttributeString("Type", guid.Key.ToString());
+            writer.WriteString(guid.Value.ToString("B"));
+            writer.WriteEndElement();
+        }
+
+        writer.WriteEndElement();
+        writer.WriteEndDocument();
+        writer.Close();
+    }
+
+    public class ConfigNotFoundException : PVException {
+        public ConfigNotFoundException() : base("설정 파일을 찾을 수 없습니다.") { }
+        public ConfigNotFoundException(string message) : base(message) { }
+        public ConfigNotFoundException(string message, Exception innerException) : base(message, innerException) { }
+    }
+
+    public class InvalidConfigException : PVException {
+        private const string dMessage = "설정 파일이 잘못되었습니다. " + ConfigName + " 파일을 살펴보세요.";
+
+        public InvalidConfigException(string reason) : base(dMessage + "\r\n\r\n" + reason) { }
+        public InvalidConfigException(Exception innerException) : base(dMessage, innerException) { }
+    }
+}

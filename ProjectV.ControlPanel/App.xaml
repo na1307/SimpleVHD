@@ -1,0 +1,28 @@
+﻿<Application x:Class="ProjectV.ControlPanel.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:ProjectV.ControlPanel" StartupUri="MainWindow.xaml" Startup="Application_Startup" Exit="Application_Exit" DispatcherUnhandledException="Application_DispatcherUnhandledException">
+    <Application.Resources>
+        <x:Static x:Key="BackupName" Member="local:Constants.BackupName"/>
+        <x:Static x:Key="BackupDescription" Member="local:Constants.BackupDescription"/>
+        <x:Static x:Key="RestoreName" Member="local:Constants.RestoreName"/>
+        <x:Static x:Key="RestoreDescription" Member="local:Constants.RestoreDescription"/>
+        <x:Static x:Key="RevertName" Member="local:Constants.RevertName"/>
+        <x:Static x:Key="RevertDescription" Member="local:Constants.RevertDescription"/>
+        <x:Static x:Key="MergeName" Member="local:Constants.MergeName"/>
+        <x:Static x:Key="MergeDescription" Member="local:Constants.MergeDescription"/>
+        <x:Static x:Key="ParentBootName" Member="local:Constants.ParentBootName"/>
+        <x:Static x:Key="ParentBootDescription" Member="local:Constants.ParentBootDescription"/>
+        <x:Static x:Key="ProcessorBootName" Member="local:Constants.ProcessorBootName"/>
+        <x:Static x:Key="ProcessorBootDescription" Member="local:Constants.ProcessorBootDescription"/>
+        <x:Static x:Key="ExpandName" Member="local:Constants.ExpandName"/>
+        <x:Static x:Key="ExpandDescription" Member="local:Constants.ExpandDescription"/>
+        <x:Static x:Key="ShrinkName" Member="local:Constants.ShrinkName"/>
+        <x:Static x:Key="ShrinkDescription" Member="local:Constants.ShrinkDescription"/>
+        <x:Static x:Key="ConvertTypeName" Member="local:Constants.ConvertTypeName"/>
+        <x:Static x:Key="ConvertTypeDescription" Member="local:Constants.ConvertTypeDescription"/>
+        <x:Static x:Key="ConvertFormatName" Member="local:Constants.ConvertFormatName"/>
+        <x:Static x:Key="ConvertFormatDescription" Member="local:Constants.ConvertFormatDescription"/>
+        <x:Static x:Key="SwitchStyleName" Member="local:Constants.SwitchStyleName"/>
+        <x:Static x:Key="SwitchStyleDescription" Member="local:Constants.SwitchStyleDescription"/>
+        <x:Static x:Key="UninstallName" Member="local:Constants.UninstallName"/>
+        <x:Static x:Key="UninstallDescription" Member="local:Constants.UninstallDescription"/>
+    </Application.Resources>
+</Application>

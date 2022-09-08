@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net40-client</TargetFramework>
+		<TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+		<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+		<TargetFrameworkProfile>Client</TargetFrameworkProfile>
+		<AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
+		<AssemblyName>Installer</AssemblyName>
+		<ApplicationIcon>program.ico</ApplicationIcon>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<IsPublishable>False</IsPublishable>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<WarningsAsErrors>Nullable</WarningsAsErrors>
+	</PropertyGroup>
+	<ItemGroup>
+		<Using Include="System.Xml.Linq" />
+		<Using Include="ProjectV.GlobalConstants" Static="true" />
+		<Using Remove="System.Net.Http" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Include="..\ProjectV\Properties\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="program.ico" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ProjectV\ProjectV.csproj" />
+	</ItemGroup>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).*&quot; &quot;$(SolutionDir)Bin&quot;" />
+	</Target>
+</Project>
