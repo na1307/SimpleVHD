@@ -55,13 +55,43 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
+            <Button x:Name="ExpandButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
+                <Image Source="resources/doexpand.png"/>
+            </Button>
+            <TextBlock Text="{StaticResource ExpandName}" FontSize="15" FontWeight="Bold" Width="125" Height="20" Grid.Row="0" Grid.Column="1"/>
+            <TextBlock Text="{StaticResource ExpandDescription}" FontSize="12" TextWrapping="Wrap" Width="125" Height="50" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="ShrinkButton" IsEnabled="False" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
+                <Image Source="resources/doshrink.png"/>
+            </Button>
+            <TextBlock Text="{StaticResource ShrinkName}" FontSize="15" FontWeight="Bold" Width="125" Height="20" Grid.Row="0" Grid.Column="1"/>
+            <TextBlock Text="{StaticResource ShrinkDescription}" FontSize="12" TextWrapping="Wrap" Width="125" Height="50" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
             <Button x:Name="TypeButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
                 <Image Source="resources/dotype.png"/>
             </Button>
             <TextBlock Text="{StaticResource ConvertTypeName}" FontSize="15" FontWeight="Bold" Width="125" Height="20" Grid.Row="0" Grid.Column="1"/>
             <TextBlock Text="{StaticResource ConvertTypeDescription}" FontSize="12" TextWrapping="Wrap" Width="125" Height="50" Grid.Row="1" Grid.Column="1"/>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="2" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="3*"/>
@@ -76,7 +106,7 @@
             <TextBlock Text="{StaticResource ConvertFormatName}" FontSize="15" FontWeight="Bold" Width="125" Height="20" Grid.Row="0" Grid.Column="1"/>
             <TextBlock Text="{StaticResource ConvertFormatDescription}" FontSize="12" TextWrapping="Wrap" Width="125" Height="50" Grid.Row="1" Grid.Column="1"/>
         </Grid>
-        <Grid Grid.Row="2" Grid.Column="0">
+        <Grid Grid.Row="3" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="3*"/>
@@ -91,7 +121,7 @@
             <TextBlock Text="{StaticResource SwitchStyleName}" FontSize="15" FontWeight="Bold" Width="125" Height="20" Grid.Row="0" Grid.Column="1"/>
             <TextBlock Text="{StaticResource SwitchStyleDescription}" FontSize="12" TextWrapping="Wrap" Width="125" Height="50" Grid.Row="1" Grid.Column="1"/>
         </Grid>
-        <Grid Grid.Row="2" Grid.Column="1">
+        <Grid Grid.Row="3" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="3*"/>

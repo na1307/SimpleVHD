@@ -4,8 +4,8 @@ using System.Drawing;
 namespace ProjectV.Processor.Actions;
 
 internal abstract class ActionProcessor {
-    protected static readonly PVConfig Config = PVConfig.Instance; // Shortcut
-    protected static readonly string VF = PVConfig.Instance.VhdFile; // Shortcut
+    protected static PVConfig Config => PVConfig.Instance; // Shortcut
+    protected static string VF => PVConfig.Instance.VhdFile; // Shortcut
     private const string dptemp = "dptemp.txt";
     private readonly string operationName;
     private readonly bool shutdownCondition;
@@ -128,6 +128,33 @@ internal abstract class ActionProcessor {
             File.Delete(PVDir + dptemp);
 
             if (diskpart.ExitCode != 0) throw new ProcessFailedException("diskpart 작업이 실패했습니다. 종료 코드는 " + diskpart.ExitCode + "입니다.");
+        }
+    }
+
+    protected string ProcessDiskpartOutput(params string[] cmds) {
+        if (cmds == null) throw new ArgumentNullException(nameof(cmds));
+
+        using (StreamWriter ds = new(PVDir + dptemp, false, System.Text.Encoding.GetEncoding(949))) {
+            foreach (var cmd in cmds) ds.WriteLine(cmd);
+
+            ds.WriteLine("exit");
+        }
+
+        using (Process diskpart = new() {
+            StartInfo = new() {
+                FileName = "cmd.exe",
+                Arguments = $"/c diskpart /s \"{PVDir}{dptemp}\"",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true
+            }
+        }) {
+            diskpart.Start();
+            diskpart.WaitForExit();
+
+            File.Delete(PVDir + dptemp);
+
+            return diskpart.ExitCode == 0 ? diskpart.StandardOutput.ReadToEnd() : throw new ProcessFailedException("diskpart 작업이 실패했습니다.");
         }
     }
 

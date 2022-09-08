@@ -69,6 +69,10 @@ public partial class FormMain {
                     new MergeProcessor().DoProcess();
                     break;
 
+                case DoAction.DoExpand:
+                    new ExpandProcessor().DoProcess();
+                    break;
+
                 case DoAction.DoConvertType:
                     new ConvertTypeProcessor().DoProcess();
                     break;

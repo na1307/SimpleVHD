@@ -11,7 +11,7 @@ public partial class ToolsControl {
     public ToolsControl() {
         InitializeComponent();
 
-        foreach (var button in new[] { ParentButton, ProcessorButton, TypeButton, FormatButton, StyleButton, UninstallButton }) {
+        foreach (var button in new[] { ParentButton, ProcessorButton, ExpandButton, ShrinkButton, TypeButton, FormatButton, StyleButton, UninstallButton }) {
             button.Click += PlayClickSound;
             button.Click += Button_Click;
         }
@@ -25,6 +25,7 @@ public partial class ToolsControl {
         }
 
         if (!BackupExists) {
+            ShrinkButton.IsEnabled = false;
             TypeButton.IsEnabled = false;
             FormatButton.IsEnabled = false;
         }
@@ -35,6 +36,8 @@ public partial class ToolsControl {
     private void Button_Click(object sender, RoutedEventArgs e) => ChangeContent(this, ((Button)sender).Name switch {
         nameof(ParentButton) => DoParentBoot,
         nameof(ProcessorButton) => DoProcessorBoot,
+        nameof(ExpandButton) => DoExpand,
+        nameof(ShrinkButton) => DoShrink,
         nameof(TypeButton) => DoConvertType,
         nameof(FormatButton) => DoConvertFormat,
         nameof(StyleButton) => DoSwitchStyle,

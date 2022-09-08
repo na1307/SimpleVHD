@@ -57,6 +57,7 @@
     <Compile Include="Actions\ConvertFormatProcessor.cs" />
     <Compile Include="Actions\ConvertTypeProcessor.cs" />
     <Compile Include="Actions\EmergencyRestoreProcessor.cs" />
+    <Compile Include="Actions\ExpandProcessor.cs" />
     <Compile Include="Actions\MergeProcessor.cs" />
     <Compile Include="Actions\RebuildProcessor.cs" />
     <Compile Include="Actions\RestoreProcessor.cs" />
