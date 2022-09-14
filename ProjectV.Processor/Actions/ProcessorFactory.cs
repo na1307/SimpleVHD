@@ -7,6 +7,7 @@ internal static class ProcessorFactory {
         DoAction.DoRevert => new RevertProcessor(),
         DoAction.DoMerge => new MergeProcessor(),
         DoAction.DoExpand => new ExpandProcessor(),
+        DoAction.DoShrink => new ShrinkProcessor(),
         DoAction.DoConvertType => new ConvertTypeProcessor(),
         DoAction.DoConvertFormat => new ConvertFormatProcessor(),
         DoAction.DoSwitchStyle => new SwitchStyleProcessor(),
