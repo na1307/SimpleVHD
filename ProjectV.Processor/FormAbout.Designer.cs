@@ -24,7 +24,7 @@ partial class FormAbout : Form {
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-            this.OK_Button = new System.Windows.Forms.Button();
+            this.okButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -34,16 +34,16 @@ partial class FormAbout : Form {
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // OK_Button
+            // okButton
             // 
-            this.OK_Button.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.OK_Button.Location = new System.Drawing.Point(244, 124);
-            this.OK_Button.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.OK_Button.Name = "OK_Button";
-            this.OK_Button.Size = new System.Drawing.Size(77, 25);
-            this.OK_Button.TabIndex = 0;
-            this.OK_Button.Text = "확인";
-            this.OK_Button.Click += new System.EventHandler(this.OK_Button_Click);
+            this.okButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.okButton.Location = new System.Drawing.Point(244, 124);
+            this.okButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(77, 25);
+            this.okButton.TabIndex = 0;
+            this.okButton.Text = "확인";
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // label1
             // 
@@ -84,7 +84,7 @@ partial class FormAbout : Form {
             // label4
             // 
             this.label4.AutoEllipsis = true;
-            this.label4.Location = new System.Drawing.Point(12, 65);
+            this.label4.Location = new System.Drawing.Point(12, 75);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(310, 15);
             this.label4.TabIndex = 1;
@@ -94,7 +94,7 @@ partial class FormAbout : Form {
             // label5
             // 
             this.label5.AutoEllipsis = true;
-            this.label5.Location = new System.Drawing.Point(12, 80);
+            this.label5.Location = new System.Drawing.Point(12, 90);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(310, 15);
             this.label5.TabIndex = 1;
@@ -103,7 +103,7 @@ partial class FormAbout : Form {
             // 
             // FormAbout
             // 
-            this.AcceptButton = this.OK_Button;
+            this.AcceptButton = this.okButton;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(334, 161);
             this.Controls.Add(this.pictureBox1);
@@ -112,7 +112,7 @@ partial class FormAbout : Form {
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.OK_Button);
+            this.Controls.Add(this.okButton);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -123,7 +123,6 @@ partial class FormAbout : Form {
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormAbout";
-            this.Load += new System.EventHandler(this.FormAbout_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -131,7 +130,7 @@ partial class FormAbout : Form {
 
     #endregion
 
-    private Button OK_Button;
+    private Button okButton;
     private Label label1;
     private PictureBox pictureBox1;
     private Label label2;

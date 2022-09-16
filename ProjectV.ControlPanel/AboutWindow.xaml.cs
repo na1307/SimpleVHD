@@ -10,9 +10,9 @@ public partial class AboutWindow {
     public AboutWindow() {
         InitializeComponent();
         Title = AssemblyTitle + " 정보";
-        BPN.Text = AssemblyProduct;
-        BV.Text = $"버전 {AssemblyInformationalVersion} (빌드 {BuildNumber})";
-        BC.Text = AssemblyCopyright;
+        ProductBlock.Text = AssemblyProduct;
+        VersionBlock.Text = $"버전 {AssemblyInformationalVersion} (빌드 {BuildNumber})";
+        CopyrightBlock.Text = AssemblyCopyright;
     }
 
     private void Button_Click(object sender, RoutedEventArgs e) => Close();

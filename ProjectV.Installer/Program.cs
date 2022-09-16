@@ -15,7 +15,17 @@ try {
     ForegroundColor = ConsoleColor.White;
     Clear();
 
-    var winVer = DetectWin();
+    var winVer = Environment.OSVersion.Version.Major switch {
+        6 => Environment.OSVersion.Version.Minor switch {
+            1 => WinVer.Seven,
+            2 => WinVer.Eight,
+            3 => WinVer.Epnt1,
+            4 => WinVer.Ten,
+            _ => throw new PlatformNotSupportedException(),
+        },
+        10 => WinVer.Ten,
+        _ => throw new PlatformNotSupportedException(),
+    };
 
     string pvDir = string.Empty;
     string pvDrv = string.Empty;
@@ -139,22 +149,6 @@ Set WshShell = Nothing"
     ErrorControl(ex.Message);
 } catch (Exception ex) {
     ErrorControl(ex.ToString());
-}
-
-WinVer DetectWin() {
-    var vs = Environment.OSVersion.Version.ToString().Split('.');
-
-    return int.Parse(vs[0]) switch {
-        6 => int.Parse(vs[1]) switch {
-            1 => WinVer.Seven,
-            2 => WinVer.Eight,
-            3 => WinVer.Epnt1,
-            4 => WinVer.Ten,
-            _ => throw new PlatformNotSupportedException(),
-        },
-        10 => WinVer.Ten,
-        _ => throw new PlatformNotSupportedException(),
-    };
 }
 
 bool ConfigExists() {

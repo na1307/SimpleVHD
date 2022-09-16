@@ -4,12 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="AboutWindow" Height="150" Width="300" Icon="resources\info.png" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False">
+        Height="150" Width="300" Icon="resources\info.png" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False">
     <Grid>
         <Image Source="resources\icon.ico" Width="50" Height="50" Margin="0,0,225,60"/>
-        <TextBlock x:Name="BPN" Text="Title" FontSize="16" FontWeight="Bold" Width="200" Height="25" Margin="50,0,0,85"/>
-        <TextBlock x:Name="BV" Text="Version" FontSize="12" Width="200" Height="20" Margin="50,0,0,40"/>
-        <TextBlock x:Name="BC" Text="Copyright" FontSize="12" Width="200" Height="20" Margin="50,0,0,0"/>
+        <TextBlock x:Name="ProductBlock" Text="Title" FontSize="16" FontWeight="Bold" Width="200" Height="25" Margin="50,0,0,85"/>
+        <TextBlock x:Name="VersionBlock" Text="Version" FontSize="12" Width="200" Height="20" Margin="50,0,0,40"/>
+        <TextBlock x:Name="CopyrightBlock" Text="Copyright" FontSize="12" Width="200" Height="20" Margin="50,0,0,0"/>
         <Button Content="확인" Width="50" Height="25" Margin="220,75,0,0" Click="Button_Click"/>
     </Grid>
 </Window>

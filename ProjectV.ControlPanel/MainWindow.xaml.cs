@@ -58,7 +58,7 @@ public partial class MainWindow {
                 break;
 
             case nameof(HelpButton):
-                MessageBox.Show("도움말 버튼");
+                Process.Start("https://na1307.github.io/ProjectV/");
                 break;
 
             case nameof(AboutButton):
