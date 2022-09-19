@@ -8,9 +8,9 @@ internal class SwitchStyleProcessor : ActionProcessor {
 
     protected override void DoProcessCore() {
         // 파일 삭제
-        File.Delete(VHDDir + Child1Name);
-        File.Delete(VHDDir + Child2Name);
-        File.Delete(VHDDir + ChildCName);
+        File.Delete(VHDDir + Child1Name + Config.VhdFormat.ToString().ToLower());
+        File.Delete(VHDDir + Child2Name + Config.VhdFormat.ToString().ToLower());
+        File.Delete(VHDDir + ChildCName + Config.VhdFormat.ToString().ToLower());
 
         var operatingStyle = (OperatingStyle)Enum.Parse(typeof(OperatingStyle), Config.Temp, false);
 
@@ -28,10 +28,10 @@ internal class SwitchStyleProcessor : ActionProcessor {
             // 차등 스타일 (수동 초기화)
             case OperatingStyle.DifferentialManual:
                 // 자식 VHD 재구축
-                ProcessDiskpart($"create vdisk file \"{VHDDir}{ChildCName}\" parent \"{VHDDir}{VF}\"");
+                ProcessDiskpart($"create vdisk file \"{VHDDir}{ChildCName + Config.VhdFormat.ToString().ToLower()}\" parent \"{VHDDir}{VF}\"");
 
-                File.Copy(VHDDir + ChildCName, VHDDir + Child1Name, true);
-                File.Copy(VHDDir + ChildCName, VHDDir + Child2Name, true);
+                File.Copy(VHDDir + ChildCName + Config.VhdFormat.ToString().ToLower(), VHDDir + Child1Name + Config.VhdFormat.ToString().ToLower(), true);
+                File.Copy(VHDDir + ChildCName + Config.VhdFormat.ToString().ToLower(), VHDDir + Child2Name + Config.VhdFormat.ToString().ToLower(), true);
 
                 // BCD 업데이트
                 ProcessBcdEdit("/default " + Config[GuidType.Child1]);
@@ -44,10 +44,10 @@ internal class SwitchStyleProcessor : ActionProcessor {
             // 차등 스타일 (자동 초기화)
             case OperatingStyle.DifferentialAuto:
                 // 자식 VHD 재구축
-                ProcessDiskpart($"create vdisk file \"{VHDDir}{ChildCName}\" parent \"{VHDDir}{VF}\"");
+                ProcessDiskpart($"create vdisk file \"{VHDDir}{ChildCName + Config.VhdFormat.ToString().ToLower()}\" parent \"{VHDDir}{VF}\"");
 
-                File.Copy(VHDDir + ChildCName, VHDDir + Child1Name, true);
-                File.Copy(VHDDir + ChildCName, VHDDir + Child2Name, true);
+                File.Copy(VHDDir + ChildCName + Config.VhdFormat.ToString().ToLower(), VHDDir + Child1Name + Config.VhdFormat.ToString().ToLower(), true);
+                File.Copy(VHDDir + ChildCName + Config.VhdFormat.ToString().ToLower(), VHDDir + Child2Name + Config.VhdFormat.ToString().ToLower(), true);
 
                 // BCD 업데이트
                 ProcessBcdEdit("/default " + Config[GuidType.Child1]);

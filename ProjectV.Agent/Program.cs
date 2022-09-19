@@ -41,8 +41,8 @@ try {
 }
 
 void rebuild() {
-    File.Copy(vhdDir + ChildCName, vhdDir + Child1Name, true);
-    File.Copy(vhdDir + ChildCName, vhdDir + Child2Name, true);
+    File.Copy(vhdDir + ChildCName + config.VhdFormat.ToString().ToLower(), vhdDir + Child1Name + config.VhdFormat.ToString().ToLower(), true);
+    File.Copy(vhdDir + ChildCName + config.VhdFormat.ToString().ToLower(), vhdDir + Child2Name + config.VhdFormat.ToString().ToLower(), true);
 
     config.Action = DoAction.DoRebuild;
     config.SaveConfig();
@@ -54,8 +54,8 @@ void rebuild() {
 
 void manual() {
     try {
-        File.Copy(vhdDir + ChildCName, vhdDir + Child2Name, true);
-        File.Copy(vhdDir + ChildCName, vhdDir + Child1Name, true);
+        File.Copy(vhdDir + ChildCName + config.VhdFormat.ToString().ToLower(), vhdDir + Child2Name + config.VhdFormat.ToString().ToLower(), true);
+        File.Copy(vhdDir + ChildCName + config.VhdFormat.ToString().ToLower(), vhdDir + Child1Name + config.VhdFormat.ToString().ToLower(), true);
     } catch (IOException) { }
 }
 
@@ -65,18 +65,18 @@ void auto() {
     string guid2 = config[GuidType.Child2];
 
     if (guidc == guid2) {
-        File.Copy(vhdDir + ChildCName, vhdDir + Child1Name, true);
+        File.Copy(vhdDir + ChildCName + config.VhdFormat.ToString().ToLower(), vhdDir + Child1Name + config.VhdFormat.ToString().ToLower(), true);
         ProcessBcdEdit($"/default {guid1}");
         ProcessBcdEdit($"/displayorder {guid1} /addfirst");
         ProcessBcdEdit($"/displayorder {guid2} /remove");
     } else if (guidc == guid1) {
-        File.Copy(vhdDir + ChildCName, vhdDir + Child2Name, true);
+        File.Copy(vhdDir + ChildCName + config.VhdFormat.ToString().ToLower(), vhdDir + Child2Name + config.VhdFormat.ToString().ToLower(), true);
         ProcessBcdEdit($"/default {guid2}");
         ProcessBcdEdit($"/displayorder {guid2} /addfirst");
         ProcessBcdEdit($"/displayorder {guid1} /remove");
     } else {
-        File.Copy(vhdDir + ChildCName, vhdDir + Child1Name, true);
-        File.Copy(vhdDir + ChildCName, vhdDir + Child2Name, true);
+        File.Copy(vhdDir + ChildCName + config.VhdFormat.ToString().ToLower(), vhdDir + Child1Name + config.VhdFormat.ToString().ToLower(), true);
+        File.Copy(vhdDir + ChildCName + config.VhdFormat.ToString().ToLower(), vhdDir + Child2Name + config.VhdFormat.ToString().ToLower(), true);
     }
 }
 
@@ -95,9 +95,9 @@ void uninstall() {
     Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).DeleteValue("PV_Agent");
     File.Delete(pvDir + "Agent.vbs");
 
-    File.Delete(vhdDir + Child1Name);
-    File.Delete(vhdDir + Child2Name);
-    File.Delete(vhdDir + ChildCName);
+    File.Delete(vhdDir + Child1Name + config.VhdFormat.ToString().ToLower());
+    File.Delete(vhdDir + Child2Name + config.VhdFormat.ToString().ToLower());
+    File.Delete(vhdDir + ChildCName + config.VhdFormat.ToString().ToLower());
 
     MessageBox.Show("Project V의 제거를 완료하였습니다.", "Project V", MessageBoxButtons.OK, MessageBoxIcon.Information);
 }

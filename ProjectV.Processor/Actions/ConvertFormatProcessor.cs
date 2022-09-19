@@ -12,9 +12,9 @@ internal class ConvertFormatProcessor : ActionProcessor {
     protected override void DoProcessCore() {
         // 기존 파일 삭제
         File.Delete(VHDDir + VF);
-        File.Delete(VHDDir + ChildCName);
-        File.Delete(VHDDir + Child1Name);
-        File.Delete(VHDDir + Child2Name);
+        File.Delete(VHDDir + ChildCName + Config.VhdFormat.ToString().ToLower());
+        File.Delete(VHDDir + Child1Name + Config.VhdFormat.ToString().ToLower());
+        File.Delete(VHDDir + Child2Name + Config.VhdFormat.ToString().ToLower());
 
         // 새 형식 지정
         var newFormat = (VhdFormat)Enum.Parse(typeof(VhdFormat), Config.Temp, false);
@@ -28,7 +28,7 @@ internal class ConvertFormatProcessor : ActionProcessor {
         ProcessDiskpart($"create vdisk file \"{VHDDir}{newVhd}\" source \"{BackupDir}{VF}\" type {Config.VhdType}");
 
         // 자식 생성
-        if (IsDifferentialStyle) {
+        if (Config.OperatingStyle is OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto) {
             ProcessDiskpart($"create vdisk file \"{VHDDir}{newChildC}\" parent \"{VHDDir}{newVhd}\"");
             File.Copy(VHDDir + newChildC, VHDDir + newChild1, true);
             File.Copy(VHDDir + newChildC, VHDDir + newChild2, true);

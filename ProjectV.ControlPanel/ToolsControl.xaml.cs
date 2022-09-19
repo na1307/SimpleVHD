@@ -18,7 +18,9 @@ public partial class ToolsControl {
     }
 
     private void UserControl_Loaded(object sender, RoutedEventArgs e) {
-        if (!IsDifferentialStyle) {
+        var config = PVConfig.Instance;
+
+        if (config.OperatingStyle is not (OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto)) {
             ParentButton.IsEnabled = false;
         }
 
@@ -27,7 +29,7 @@ public partial class ToolsControl {
             FormatButton.IsEnabled = false;
         }
 
-        if (PVConfig.Instance.WinVer == WinVer.Seven) FormatButton.IsEnabled = false;
+        if (config.WinVer == WinVer.Seven) FormatButton.IsEnabled = false;
     }
 
     private void Button_Click(object sender, RoutedEventArgs e) => ChangeContent(this, ((Button)sender).Name switch {

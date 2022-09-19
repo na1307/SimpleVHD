@@ -73,7 +73,7 @@ internal abstract class ActionProcessor {
     public void DoProcess() {
         try {
             ipForm.Show();
-            if (DifferentialOnly && !IsDifferentialStyle) throw new ProcessFailedException("단순 스타일에서는 " + operationName + " 작업이 지원되지 않습니다.");
+            if (DifferentialOnly && Config.OperatingStyle is not (OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto)) throw new ProcessFailedException("단순 스타일에서는 " + operationName + " 작업이 지원되지 않습니다.");
             if (NeedBackup && !File.Exists(BackupDir + VF)) throw new ProcessFailedException("백업 파일을 찾을 수 없습니다.");
             DoProcessCore();
         } catch (PVProcessorException ex) {
@@ -81,17 +81,17 @@ internal abstract class ActionProcessor {
         } catch (Exception ex) {
             ErrMsg(ex.ToString(), true);
         } finally {
-            if (IsDifferentialStyle) {
+            if (Config.OperatingStyle is OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto) {
                 if (AfterRebuild) {
-                    File.Delete(VHDDir + ChildCName);
-                    ProcessDiskpart($"create vdisk file \"{VHDDir}{ChildCName}\" parent \"{VHDDir}{VF}\"");
+                    File.Delete(VHDDir + ChildCName + Config.VhdFormat.ToString().ToLower());
+                    ProcessDiskpart($"create vdisk file \"{VHDDir}{ChildCName + Config.VhdFormat.ToString().ToLower()}\" parent \"{VHDDir}{VF}\"");
                 }
 
                 if (AfterRevert) {
-                    File.Delete(VHDDir + Child1Name);
-                    File.Delete(VHDDir + Child2Name);
-                    File.Copy(VHDDir + ChildCName, VHDDir + Child1Name, true);
-                    File.Copy(VHDDir + ChildCName, VHDDir + Child2Name, true);
+                    File.Delete(VHDDir + Child1Name + Config.VhdFormat.ToString().ToLower());
+                    File.Delete(VHDDir + Child2Name + Config.VhdFormat.ToString().ToLower());
+                    File.Copy(VHDDir + ChildCName + Config.VhdFormat.ToString().ToLower(), VHDDir + Child1Name + Config.VhdFormat.ToString().ToLower(), true);
+                    File.Copy(VHDDir + ChildCName + Config.VhdFormat.ToString().ToLower(), VHDDir + Child2Name + Config.VhdFormat.ToString().ToLower(), true);
                 }
             }
 

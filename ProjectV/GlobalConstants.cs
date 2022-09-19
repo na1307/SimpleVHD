@@ -7,7 +7,7 @@ public static class GlobalConstants {
     /// <summary>
     /// 빌드 번호
     /// </summary>
-    public const ulong BuildNumber = 7;
+    public const ulong BuildNumber = 8;
 
     /// <summary>
     /// Project V 디렉토리 이름
@@ -32,20 +32,15 @@ public static class GlobalConstants {
     /// <summary>
     /// 자식 1 파일 이름
     /// </summary>
-    public static readonly string Child1Name = "Child1." + PVConfig.Instance.VhdFormat.ToString().ToLower();
+    public const string Child1Name = "Child1.";
 
     /// <summary>
     /// 자식 2 파일 이름
     /// </summary>
-    public static readonly string Child2Name = "Child2." + PVConfig.Instance.VhdFormat.ToString().ToLower();
+    public const string Child2Name = "Child2.";
 
     /// <summary>
     /// 깨끗한 자식 파일 이름
     /// </summary>
-    public static readonly string ChildCName = "Clean." + PVConfig.Instance.VhdFormat.ToString().ToLower();
-
-    /// <summary>
-    /// 현재 차등 스타일을 사용 중인지 여부
-    /// </summary>
-    public static readonly bool IsDifferentialStyle = PVConfig.Instance.OperatingStyle is OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto;
+    public const string ChildCName = "Clean.";
 }

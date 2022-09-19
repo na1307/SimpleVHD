@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace ProjectV;
@@ -130,7 +129,7 @@ public sealed class PVConfig : IXmlSerializable {
 
     public void SaveConfig() => ((IXmlSerializable)this).WriteXml(XmlWriter.Create(xPath, new() { Indent = true }));
 
-    XmlSchema? IXmlSerializable.GetSchema() => null;
+    System.Xml.Schema.XmlSchema? IXmlSerializable.GetSchema() => null;
 
     void IXmlSerializable.ReadXml(XmlReader reader) {
         if (reader == null) throw new ArgumentNullException(nameof(reader));
