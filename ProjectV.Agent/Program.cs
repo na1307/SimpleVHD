@@ -15,7 +15,10 @@ try {
         if (File.Exists(drv + config.VhdDirectory + config.VhdFile)) vhdDir = drv + config.VhdDirectory;
     }
 
-    if (config.Action == DoAction.DoUninstall) uninstall();
+    if (config.Action == DoAction.DoUninstall) {
+        uninstall();
+        return;
+    }
 
     if (config.OperatingStyle == OperatingStyle.Simple) return;
 
