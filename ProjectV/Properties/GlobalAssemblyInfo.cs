@@ -14,4 +14,4 @@
 
 [assembly: AssemblyVersion("0.0")]
 [assembly: AssemblyFileVersion("1.0.0")]
-[assembly: AssemblyInformationalVersion("Beta")]
+[assembly: AssemblyInformationalVersion("Beta 2")]
