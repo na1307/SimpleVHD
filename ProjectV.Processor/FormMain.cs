@@ -97,10 +97,7 @@ public partial class FormMain {
                     throw new PVConfig.InvalidConfigException("Action이 잘못되었습니다.");
             }
 
-            if (!File.Exists(BackupDir + config.VhdFile)) {
-                button1.Enabled = false;
-                button3.Enabled = false;
-            }
+            if (!File.Exists(BackupDir + config.VhdFile)) button1.Enabled = false;
         } catch (PVProcessorException ex) {
             ErrMsg(ex.Message, true);
         } catch (Exception ex) {
@@ -125,17 +122,14 @@ public partial class FormMain {
     }
 
     private void button3_Click(object sender, EventArgs e) {
-        if (MessageBox.Show("VHD를 동적 확장 형식으로 강제로 복원합니다.\r\n\r\n정말 응급 복원 작업을 실행할까요?", "경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes) {
-            Hide();
-            new EmergencyRestoreProcessor().DoProcess();
-        }
+        FormAdvanced formAdvanced = new();
+
+        if (formAdvanced.ShowDialog() == DialogResult.OK) Hide();
     }
 
-    private void button4_Click(object sender, EventArgs e) => throw new NotImplementedException();
-
-    private void button5_Click(object sender, EventArgs e) {
+    private void button4_Click(object sender, EventArgs e) {
         using var cmd = Process.Start("cmd.exe"); cmd.WaitForExit();
     }
 
-    private void button6_Click(object sender, EventArgs e) => new FormAbout().ShowDialog();
+    private void button9_Click(object sender, EventArgs e) => new FormAbout().ShowDialog();
 }
