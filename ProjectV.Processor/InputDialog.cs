@@ -6,12 +6,11 @@ public partial class InputDialog {
 
     public InputDialog(string title, string content) {
         InitializeComponent();
-
         Text = title;
         label1.Text = content;
     }
 
-    private void OK_Button_Click(object sender, EventArgs e) {
+    protected override void OK_Button_Click(object sender, EventArgs e) {
         try {
             ulong.Parse(textBox1.Text);
         } catch (FormatException) {
@@ -19,12 +18,6 @@ public partial class InputDialog {
             return;
         }
 
-        DialogResult = DialogResult.OK;
-        Close();
-    }
-
-    private void Cancel_Button_Click(object sender, EventArgs e) {
-        DialogResult = DialogResult.Cancel;
-        Close();
+        base.OK_Button_Click(sender, e);
     }
 }
