@@ -17,12 +17,12 @@ internal class ConvertFormatProcessor : ActionProcessor {
         File.Delete(VHDDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
 
         // 새 형식 지정
-        var newFormat = (VhdFormat)Enum.Parse(typeof(VhdFormat), PVConfig.Instance.Temp, false);
+        if (!Enum.TryParse(PVConfig.Instance.Temp, false, out VhdFormat newFormat)) throw new ProcessFailedException("Temp가 잘못되었습니다.");
         var newVhdRegex = Regex.Match(PVConfig.Instance.VhdFile, @"^(?<filename>.+\.)vhdx?$", RegexOptions.IgnoreCase);
         var newVhd = newVhdRegex.Success ? newVhdRegex.Groups["filename"].Value + newFormat.ToString().ToLower() : throw new ProcessFailedException("정규식 오류");
-        var newChildC = "Clean." + newFormat.ToString().ToLower();
-        var newChild1 = "Child1." + newFormat.ToString().ToLower();
-        var newChild2 = "Child2." + newFormat.ToString().ToLower();
+        var newChildC = ChildCName + newFormat.ToString().ToLower();
+        var newChild1 = Child1Name + newFormat.ToString().ToLower();
+        var newChild2 = Child2Name + newFormat.ToString().ToLower();
 
         // 변환
         ProcessDiskpart($"create vdisk file \"{VHDDir}{newVhd}\" source \"{BackupDir}{PVConfig.Instance.VhdFile}\" type {PVConfig.Instance.VhdType}");

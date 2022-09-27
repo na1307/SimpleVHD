@@ -12,7 +12,7 @@ internal class SwitchStyleProcessor : ActionProcessor {
         File.Delete(VHDDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
         File.Delete(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower());
 
-        var operatingStyle = (OperatingStyle)Enum.Parse(typeof(OperatingStyle), PVConfig.Instance.Temp, false);
+        if (!Enum.TryParse(PVConfig.Instance.Temp, false, out OperatingStyle operatingStyle)) throw new ProcessFailedException("Temp가 잘못되었습니다.");
 
         switch (operatingStyle) {
             // 단순 스타일
