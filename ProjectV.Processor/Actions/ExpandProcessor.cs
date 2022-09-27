@@ -17,7 +17,7 @@ internal class ExpandProcessor : ActionProcessor {
         ProcessDiskpart($"select vdisk file \"{VHDDir}{PVConfig.Instance.VhdFile}\"", "expand vdisk maximum " + getNewSize());
 
         ulong getNewSize() {
-            InputDialog dlg = new("확장", $"현재 최대 크기는 {sz.Trim()} 입니다.\r\n\r\n새로운 최대 크기를 MB 단위로 입력하세요.\r\n새로운 최대 크기는 반드시 기존 크기보다 커야 합니다. (1GB = 1024MB)");
+            FormInput dlg = new("확장", $"현재 최대 크기는 {sz.Trim()} 입니다.\r\n\r\n새로운 최대 크기를 MB 단위로 입력하세요.\r\n새로운 최대 크기는 반드시 기존 크기보다 커야 합니다. (1GB = 1024MB)");
 
             while (true) {
                 switch (dlg.ShowDialog()) {

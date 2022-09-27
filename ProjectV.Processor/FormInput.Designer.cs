@@ -1,6 +1,6 @@
 ﻿namespace ProjectV.Processor;
 
-partial class InputDialog : FormDialog {
+partial class FormInput : FormDialog {
     /// <summary>
     /// Required designer variable.
     /// </summary>

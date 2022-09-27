@@ -16,7 +16,7 @@ Application.EnableVisualStyles();
 Application.SetCompatibleTextRenderingDefault(false);
 
 try {
-    if (PVDir == null || !File.Exists(PVDir + ConfigName)) {
+    if (PVDir == null) {
         ErrMsg("설정 파일을 찾지 못하였습니다.");
         return;
     }
@@ -26,7 +26,7 @@ try {
         return;
     }
 
-    if (VHDDir == null || !File.Exists(VHDDir + PVConfig.Instance.VhdFile)) {
+    if (VHDDir == null) {
         ErrMsg("원본 VHD 파일을 찾지 못하였습니다.");
         return;
     }
