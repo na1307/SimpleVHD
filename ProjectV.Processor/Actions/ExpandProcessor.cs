@@ -4,8 +4,8 @@ using System.Text.RegularExpressions;
 namespace ProjectV.Processor.Actions;
 
 internal class ExpandProcessor : ActionProcessor {
-    protected override bool AfterRebuild => true;
-    protected override bool AfterRevert => true;
+    protected sealed override bool AfterRebuild => true;
+    protected sealed override bool AfterRevert => true;
 
     public ExpandProcessor() : base("VHD 확장") { }
 
