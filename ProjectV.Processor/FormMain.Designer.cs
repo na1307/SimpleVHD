@@ -50,7 +50,7 @@ partial class FormMain : Form {
             this.button1.TabIndex = 1;
             this.button1.Text = "원본 VHD 자동 복원";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.button_Click);
             // 
             // button2
             // 
@@ -60,7 +60,7 @@ partial class FormMain : Form {
             this.button2.TabIndex = 1;
             this.button2.Text = "자식 VHD 자동 초기화";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.button_Click);
             // 
             // button3
             // 
@@ -106,7 +106,6 @@ partial class FormMain : Form {
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FormMain";
-            this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);
 
     }

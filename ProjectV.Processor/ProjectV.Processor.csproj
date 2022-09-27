@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="Actions\ActionProcessor.cs" />
     <Compile Include="Actions\BackupProcessor.cs" />
+    <Compile Include="Actions\ProcessorFactory.cs" />
     <Compile Include="Actions\RevertProcessor.cs" />
     <Compile Include="Actions\ConvertFormatProcessor.cs" />
     <Compile Include="Actions\ConvertTypeProcessor.cs" />
@@ -62,7 +63,6 @@
     <Compile Include="Actions\RebuildProcessor.cs" />
     <Compile Include="Actions\RestoreProcessor.cs" />
     <Compile Include="Actions\SwitchStyleProcessor.cs" />
-    <Compile Include="BackupDirectoryNotFoundException.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ErrDialog.cs" />
     <Compile Include="FormAbout.cs">
@@ -98,9 +98,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PVDirectoryNotFoundException.cs" />
     <Compile Include="PVProcessorException.cs" />
-    <Compile Include="VhdFileNotFoundException.cs" />
     <EmbeddedResource Include="FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </EmbeddedResource>

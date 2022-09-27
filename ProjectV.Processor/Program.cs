@@ -5,6 +5,9 @@ global using System.IO;
 global using System.Windows.Forms;
 global using static ProjectV.BcdEdit;
 global using static ProjectV.GlobalConstants;
+using ProjectV;
+using ProjectV.Processor;
+using ProjectV.Processor.Actions;
 using System.Threading;
 
 // It is unfortunate but we have to set it to Unknown first.
@@ -14,4 +17,34 @@ Thread.CurrentThread.SetApartmentState(ApartmentState.STA);
 Application.EnableVisualStyles();
 Application.SetCompatibleTextRenderingDefault(false);
 
-Application.Run(new ProjectV.Processor.FormMain());
+try {
+    if (PVDir == null || !File.Exists(PVDir + ConfigName)) {
+        ErrMsg("설정 파일을 찾지 못하였습니다.");
+        return;
+    }
+
+    if (BackupDir == null) {
+        ErrMsg("백업 디렉토리를 찾지 못하였습니다.");
+        return;
+    }
+
+    if (VHDDir == null || !File.Exists(VHDDir + PVConfig.Instance.VhdFile)) {
+        ErrMsg("원본 VHD 파일을 찾지 못하였습니다.");
+        return;
+    }
+
+    Application.ApplicationExit += (s, e) => {
+        PVConfig.Instance.Action = DoAction.DoNothing;
+        PVConfig.Instance.SaveConfig();
+    };
+
+    if (PVConfig.Instance.Action != DoAction.DoNothing) {
+        ProcessorFactory.Create(PVConfig.Instance.Action).DoProcess();
+        return;
+    }
+} catch (Exception ex) {
+    ErrMsg(ex.ToString());
+    return;
+}
+
+Application.Run(new FormMain());

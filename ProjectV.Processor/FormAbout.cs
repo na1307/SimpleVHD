@@ -3,7 +3,7 @@ using static ProjectV.AssemblyProperties;
 
 namespace ProjectV.Processor;
 
-public partial class FormAbout {
+public sealed partial class FormAbout {
     public FormAbout() {
         InitializeComponent();
         Text = AssemblyTitle + " 정보";
