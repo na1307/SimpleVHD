@@ -22,7 +22,12 @@ internal class ExpandProcessor : ActionProcessor {
             while (true) {
                 switch (dlg.ShowDialog()) {
                     case DialogResult.OK:
-                        var r = ulong.Parse(dlg.Input);
+                        ulong r;
+
+                        if (!ulong.TryParse(dlg.Input, out r)) {
+                            MessageBox.Show("숫자만 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            continue;
+                        }
 
                         if (MessageBox.Show($"최대 크기를 {r} MB로 확장합니다.\r\n\r\n다시 한 번 기존 크기보다 큰지, 정확하게 입력하였는지 확인해보시길 바랍니다.\r\n\r\n정말로 작업을 시작하시겠습니까?", "경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) != DialogResult.Yes) continue;
 
