@@ -6,8 +6,6 @@ global using System.Windows.Forms;
 global using static ProjectV.BcdEdit;
 global using static ProjectV.GlobalConstants;
 using ProjectV;
-using ProjectV.Processor;
-using ProjectV.Processor.Actions;
 using System.Threading;
 
 // It is unfortunate but we have to set it to Unknown first.
@@ -39,7 +37,7 @@ try {
     };
 
     if (PVConfig.Instance.Action != DoAction.DoNothing) {
-        ProcessorFactory.Create(PVConfig.Instance.Action).DoProcess();
+        ProjectV.Processor.Actions.ProcessorFactory.Create(PVConfig.Instance.Action).DoProcess();
         return;
     }
 } catch (Exception ex) {
@@ -47,4 +45,4 @@ try {
     return;
 }
 
-Application.Run(new FormMain());
+Application.Run(new ProjectV.Processor.FormMain());

@@ -4,8 +4,6 @@ using System.Drawing;
 namespace ProjectV.Processor.Actions;
 
 internal abstract class ActionProcessor {
-    protected static PVConfig Config => PVConfig.Instance; // Shortcut
-    protected static string VF => PVConfig.Instance.VhdFile; // Shortcut
     private const string dptemp = "dptemp.txt";
     private readonly string operationName;
     private readonly bool shutdownCondition;
@@ -54,12 +52,14 @@ internal abstract class ActionProcessor {
             TopLevel = true,
             TopMost = true
         };
+
         Label l = new() {
             AutoEllipsis = true,
             Dock = DockStyle.Fill,
             Text = operationName + " 작업이 진행 중입니다. 잠시 기다려 주세요...",
             TextAlign = ContentAlignment.MiddleCenter
         };
+
         ipForm.Controls.Add(l);
 
         ipForm.Disposed += (sender, e) => l.Dispose();
@@ -73,29 +73,29 @@ internal abstract class ActionProcessor {
     public void DoProcess() {
         try {
             ipForm.Show();
-            if (DifferentialOnly && Config.OperatingStyle is not (OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto)) throw new ProcessFailedException("단순 스타일에서는 " + operationName + " 작업이 지원되지 않습니다.");
-            if (NeedBackup && !File.Exists(BackupDir + VF)) throw new ProcessFailedException("백업 파일을 찾을 수 없습니다.");
+            if (DifferentialOnly && PVConfig.Instance.OperatingStyle is not (OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto)) throw new ProcessFailedException("단순 스타일에서는 " + operationName + " 작업이 지원되지 않습니다.");
+            if (NeedBackup && !File.Exists(BackupDir + PVConfig.Instance.VhdFile)) throw new ProcessFailedException("백업 파일을 찾을 수 없습니다.");
             DoProcessCore();
         } catch (PVProcessorException ex) {
             ErrMsg(ex.Message, true);
         } catch (Exception ex) {
             ErrMsg(ex.ToString(), true);
         } finally {
-            if (Config.OperatingStyle is OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto) {
+            if (PVConfig.Instance.OperatingStyle is OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto) {
                 if (AfterRebuild) {
-                    File.Delete(VHDDir + ChildCName + Config.VhdFormat.ToString().ToLower());
-                    ProcessDiskpart($"create vdisk file \"{VHDDir}{ChildCName + Config.VhdFormat.ToString().ToLower()}\" parent \"{VHDDir}{VF}\"");
+                    File.Delete(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower());
+                    ProcessDiskpart($"create vdisk file \"{VHDDir}{ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower()}\" parent \"{VHDDir}{PVConfig.Instance.VhdFile}\"");
                 }
 
                 if (AfterRevert) {
-                    File.Delete(VHDDir + Child1Name + Config.VhdFormat.ToString().ToLower());
-                    File.Delete(VHDDir + Child2Name + Config.VhdFormat.ToString().ToLower());
-                    File.Copy(VHDDir + ChildCName + Config.VhdFormat.ToString().ToLower(), VHDDir + Child1Name + Config.VhdFormat.ToString().ToLower(), true);
-                    File.Copy(VHDDir + ChildCName + Config.VhdFormat.ToString().ToLower(), VHDDir + Child2Name + Config.VhdFormat.ToString().ToLower(), true);
+                    File.Delete(VHDDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
+                    File.Delete(VHDDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
+                    File.Copy(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VHDDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
+                    File.Copy(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VHDDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
                 }
             }
 
-            if (RemoveTempAfterProcess) Config.Temp = null;
+            if (RemoveTempAfterProcess) PVConfig.Instance.Temp = null;
             ipForm.Close();
         }
 

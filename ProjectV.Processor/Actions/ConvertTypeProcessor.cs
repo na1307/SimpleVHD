@@ -10,8 +10,8 @@ internal class ConvertTypeProcessor : ActionProcessor {
     public ConvertTypeProcessor() : base("VHD 형식 변환") { }
 
     protected override void DoProcessCore() {
-        File.Delete(VHDDir + VF);
-        ProcessDiskpart($"create vdisk file \"{VHDDir}{VF}\" source \"{BackupDir}{VF}\" type {Config.Temp}");
-        Config.VhdType = (VhdType)Enum.Parse(typeof(VhdType), Config.Temp, false);
+        File.Delete(VHDDir + PVConfig.Instance.VhdFile);
+        ProcessDiskpart($"create vdisk file \"{VHDDir}{PVConfig.Instance.VhdFile}\" source \"{BackupDir}{PVConfig.Instance.VhdFile}\" type {PVConfig.Instance.Temp}");
+        PVConfig.Instance.VhdType = (VhdType)Enum.Parse(typeof(VhdType), PVConfig.Instance.Temp, false);
     }
 }

@@ -8,6 +8,6 @@ internal class EmergencyRestoreProcessor : RestoreProcessor {
 
     protected override void DoProcessCore() {
         base.DoProcessCore();
-        Config.VhdType = VhdType.Expandable;
+        PVConfig.Instance.VhdType = VhdType.Expandable;
     }
 }

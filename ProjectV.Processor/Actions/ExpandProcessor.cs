@@ -10,11 +10,11 @@ internal class ExpandProcessor : ActionProcessor {
     public ExpandProcessor() : base("VHD 확장") { }
 
     protected override void DoProcessCore() {
-        var output = ProcessDiskpartOutput($"select vdisk file \"{VHDDir}{VF}\"", "detail vdisk");
+        var output = ProcessDiskpartOutput($"select vdisk file \"{VHDDir}{PVConfig.Instance.VhdFile}\"", "detail vdisk");
         var m = Regex.Match(output, @"가상 크기:\s+(?<size>.+)$", RegexOptions.IgnoreCase | RegexOptions.Multiline);
         string sz = m.Success ? m.Groups["size"].Value : throw new ProcessFailedException("diskpart 작업이 실패했습니다.\r\n\r\n" + output);
 
-        ProcessDiskpart($"select vdisk file \"{VHDDir}{VF}\"", "expand vdisk maximum " + getNewSize());
+        ProcessDiskpart($"select vdisk file \"{VHDDir}{PVConfig.Instance.VhdFile}\"", "expand vdisk maximum " + getNewSize());
 
         ulong getNewSize() {
             InputDialog dlg = new("확장", $"현재 최대 크기는 {sz.Trim()} 입니다.\r\n\r\n새로운 최대 크기를 MB 단위로 입력하세요.\r\n새로운 최대 크기는 반드시 기존 크기보다 커야 합니다. (1GB = 1024MB)");
