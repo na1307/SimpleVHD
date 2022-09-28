@@ -75,11 +75,7 @@ internal abstract class ActionProcessor {
             if (DifferentialOnly && PVConfig.Instance.OperatingStyle is not (OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto)) throw new ProcessFailedException("단순 스타일에서는 " + Name + " 작업이 지원되지 않습니다.");
             if (NeedBackup && !File.Exists(BackupDir + PVConfig.Instance.VhdFile)) throw new ProcessFailedException("백업 파일을 찾을 수 없습니다.");
             DoProcessCore();
-        } catch (PVProcessorException ex) {
-            ErrMsg(ex.Message, true);
-        } catch (Exception ex) {
-            ErrMsg(ex.ToString(), true);
-        } finally {
+
             if (PVConfig.Instance.OperatingStyle is OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto) {
                 if (AfterRebuild) {
                     File.Delete(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower());
@@ -93,7 +89,11 @@ internal abstract class ActionProcessor {
                     File.Copy(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
                 }
             }
-
+        } catch (PVProcessorException ex) {
+            ErrMsg(ex.Message, true);
+        } catch (Exception ex) {
+            ErrMsg(ex.ToString(), true);
+        } finally {
             if (RemoveTempAfterProcess) PVConfig.Instance.Temp = null;
             ipForm.Close();
         }
@@ -153,7 +153,7 @@ internal abstract class ActionProcessor {
 
             File.Delete(PVDir + dptemp);
 
-            return diskpart.ExitCode == 0 ? diskpart.StandardOutput.ReadToEnd() : throw new ProcessFailedException("diskpart 작업이 실패했습니다.");
+            return diskpart.ExitCode == 0 ? diskpart.StandardOutput.ReadToEnd() : throw new ProcessFailedException("diskpart 작업이 실패했습니다. 종료 코드는 " + diskpart.ExitCode + "입니다.");
         }
     }
 
