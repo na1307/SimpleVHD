@@ -28,14 +28,4 @@ internal static class Constants {
     public const string SwitchStyleDescription = "Project V 운영 스타일을 전환합니다.";
     public const string UninstallName = "제거";
     public const string UninstallDescription = "Project V를 제거합니다.";
-    public static readonly bool BackupExists = false;
-
-    static Constants() {
-        foreach (var drv in Directory.GetLogicalDrives()) {
-            if (File.Exists(drv + BackupDirName + "\\" + PVConfig.Instance.VhdFile)) {
-                BackupExists = true;
-                break;
-            }
-        }
-    }
 }

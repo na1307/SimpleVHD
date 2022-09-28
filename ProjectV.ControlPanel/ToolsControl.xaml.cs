@@ -24,7 +24,7 @@ public partial class ToolsControl {
             ParentButton.IsEnabled = false;
         }
 
-        if (!BackupExists) {
+        if (!config.IsBackupExists()) {
             ShrinkButton.IsEnabled = false;
             TypeButton.IsEnabled = false;
             FormatButton.IsEnabled = false;

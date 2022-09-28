@@ -86,7 +86,9 @@ public sealed class PVConfig : IXmlSerializable {
 
     private PVConfig() {
         try {
-            foreach (string drv in from drv in Directory.GetLogicalDrives() where File.Exists(drv + DirName + "\\" + ConfigName) select drv) {
+            foreach (var drv in from drv in Directory.GetLogicalDrives()
+                                where File.Exists(drv + DirName + "\\" + ConfigName)
+                                select drv) {
                 xPath = drv + DirName + "\\" + ConfigName;
                 break;
             }
@@ -125,6 +127,20 @@ public sealed class PVConfig : IXmlSerializable {
         ((IXmlSerializable)this).WriteXml(XmlWriter.Create(sb, new() { Indent = true }));
 
         return sb.ToString();
+    }
+
+    /// <summary>
+    /// 백업 파일이 존재하는지 여부
+    /// </summary>
+    /// <returns>백업 파일이 존재하는지 여부</returns>
+    public bool IsBackupExists() {
+        foreach (var _ in from drv in Directory.GetLogicalDrives()
+                          where new DriveInfo(drv).DriveType == DriveType.Fixed && File.Exists(drv + BackupDirName + "\\" + VhdFile)
+                          select new { }) {
+            return true;
+        }
+
+        return false;
     }
 
     public void SaveConfig() => ((IXmlSerializable)this).WriteXml(XmlWriter.Create(xPath, new() { Indent = true }));

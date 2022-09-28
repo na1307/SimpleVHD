@@ -8,7 +8,7 @@ public partial class FormAdvanced {
         InitializeComponent();
         OK_Button.Visible = false;
 
-        if (!File.Exists(BackupDir + PVConfig.Instance.VhdFile)) {
+        if (!PVConfig.Instance.IsBackupExists()) {
             button2.Enabled = false;
         }
     }

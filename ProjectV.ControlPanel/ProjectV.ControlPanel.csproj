@@ -71,7 +71,6 @@
     <Compile Include="FormatControl.xaml.cs">
       <DependentUpon>FormatControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HomeControl.xaml.cs">
       <DependentUpon>HomeControl.xaml</DependentUpon>
     </Compile>

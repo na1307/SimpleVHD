@@ -13,7 +13,7 @@ public partial class FormMain {
     public FormMain() {
         InitializeComponent();
         if (PVConfig.Instance.OperatingStyle == OperatingStyle.Simple) button2.Enabled = false;
-        if (!File.Exists(BackupDir + PVConfig.Instance.VhdFile)) button1.Enabled = false;
+        if (!PVConfig.Instance.IsBackupExists()) button1.Enabled = false;
     }
 
     private void button_Click(object sender, EventArgs e) {

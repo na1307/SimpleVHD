@@ -15,11 +15,9 @@ public partial class HomeControl {
     }
 
     private void UserControl_Initialized(object sender, EventArgs e) {
-        if (!BackupExists) RestoreButton.IsEnabled = false;
+        if (!PVConfig.Instance.IsBackupExists()) RestoreButton.IsEnabled = false;
 
-        var config = PVConfig.Instance;
-
-        switch (config.OperatingStyle) {
+        switch (PVConfig.Instance.OperatingStyle) {
             case OperatingStyle.Simple:
                 RevertButton.Visibility = Visibility.Collapsed;
                 MergeButton.Visibility = Visibility.Collapsed;
