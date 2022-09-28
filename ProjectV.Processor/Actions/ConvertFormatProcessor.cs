@@ -11,10 +11,10 @@ internal class ConvertFormatProcessor : ActionProcessor {
 
     protected override void DoProcessCore() {
         // 기존 파일 삭제
-        File.Delete(VHDDir + PVConfig.Instance.VhdFile);
-        File.Delete(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower());
-        File.Delete(VHDDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
-        File.Delete(VHDDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
+        File.Delete(VhdDir + PVConfig.Instance.VhdFile);
+        File.Delete(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower());
+        File.Delete(VhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
+        File.Delete(VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
 
         // 새 형식 지정
         if (!Enum.TryParse(PVConfig.Instance.Temp, false, out VhdFormat newFormat)) throw new ProcessFailedException("Temp가 잘못되었습니다.");
@@ -25,25 +25,27 @@ internal class ConvertFormatProcessor : ActionProcessor {
         var newChild2 = Child2Name + newFormat.ToString().ToLower();
 
         // 변환
-        ProcessDiskpart($"create vdisk file \"{VHDDir}{newVhd}\" source \"{BackupDir}{PVConfig.Instance.VhdFile}\" type {PVConfig.Instance.VhdType}");
+        ProcessDiskpart($"create vdisk file \"{VhdDir}{newVhd}\" source \"{BackupDir}{PVConfig.Instance.VhdFile}\" type {PVConfig.Instance.VhdType}");
 
         // 자식 생성
         if (PVConfig.Instance.OperatingStyle is OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto) {
-            ProcessDiskpart($"create vdisk file \"{VHDDir}{newChildC}\" parent \"{VHDDir}{newVhd}\"");
-            File.Copy(VHDDir + newChildC, VHDDir + newChild1, true);
-            File.Copy(VHDDir + newChildC, VHDDir + newChild2, true);
+            ProcessDiskpart($"create vdisk file \"{VhdDir}{newChildC}\" parent \"{VhdDir}{newVhd}\"");
+            File.Copy(VhdDir + newChildC, VhdDir + newChild1, true);
+            File.Copy(VhdDir + newChildC, VhdDir + newChild2, true);
         }
 
         // BCD 업데이트
-        ProcessBcdEdit($"/set {PVConfig.Instance[GuidType.Parent]} device vhd=\"[{VHDDrv}]{PVConfig.Instance.VhdDirectory}{newVhd}\"", $"/set {PVConfig.Instance[GuidType.Parent]} osdevice vhd=\"[{VHDDrv}]{PVConfig.Instance.VhdDirectory}{newVhd}\"");
-        ProcessBcdEdit($"/set {PVConfig.Instance[GuidType.Child1]} device vhd=\"[{VHDDrv}]{PVConfig.Instance.VhdDirectory}{newChild1}\"", $"/set {PVConfig.Instance[GuidType.Child1]} osdevice vhd=\"[{VHDDrv}]{PVConfig.Instance.VhdDirectory}{newChild1}\"");
-        ProcessBcdEdit($"/set {PVConfig.Instance[GuidType.Child2]} device vhd=\"[{VHDDrv}]{PVConfig.Instance.VhdDirectory}{newChild2}\"", $"/set {PVConfig.Instance[GuidType.Child2]} osdevice vhd=\"[{VHDDrv}]{PVConfig.Instance.VhdDirectory}{newChild2}\"");
+        var drv = VhdDir.Substring(0, 2);
+
+        ProcessBcdEdit($"/set {PVConfig.Instance[GuidType.Parent]} device vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newVhd}\"", $"/set {PVConfig.Instance[GuidType.Parent]} osdevice vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newVhd}\"");
+        ProcessBcdEdit($"/set {PVConfig.Instance[GuidType.Child1]} device vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild1}\"", $"/set {PVConfig.Instance[GuidType.Child1]} osdevice vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild1}\"");
+        ProcessBcdEdit($"/set {PVConfig.Instance[GuidType.Child2]} device vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild2}\"", $"/set {PVConfig.Instance[GuidType.Child2]} osdevice vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild2}\"");
 
         // 백업 파일 삭제
-        File.Delete(BackupDrv + PVConfig.Instance.VhdFile);
+        File.Delete(BackupDir + PVConfig.Instance.VhdFile);
 
         // 백업 파일 변환
-        ProcessDiskpart($"create vdisk file \"{BackupDir}{newVhd}\" source \"{VHDDir}{newVhd}\" type expandable");
+        ProcessDiskpart($"create vdisk file \"{BackupDir}{newVhd}\" source \"{VhdDir}{newVhd}\" type expandable");
 
         PVConfig.Instance.VhdFormat = newFormat;
     }

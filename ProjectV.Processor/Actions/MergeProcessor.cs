@@ -10,22 +10,22 @@ internal class MergeProcessor : ActionProcessor {
 
     protected override void DoProcessCore() {
         // 파일 크기 측정
-        var clean = new FileInfo(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower()).Length;
-        var child1 = new FileInfo(VHDDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower()).Length;
-        var child2 = new FileInfo(VHDDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower()).Length;
+        var clean = new FileInfo(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower()).Length;
+        var child1 = new FileInfo(VhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower()).Length;
+        var child2 = new FileInfo(VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower()).Length;
 
-        string pc;
+        string child;
 
         if (clean == child1 && clean == child2) {
             throw new ProcessFailedException("병합할 항목이 없습니다.");
         } else if (clean == child1 && clean != child2) {
-            pc = Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower();
+            child = Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower();
         } else if (clean != child1 && clean == child2) {
-            pc = Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower();
+            child = Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower();
         } else {
             throw new ProcessFailedException("자식 VHD 둘 모두 깨끗한 VHD가 아닙니다. 초기화 시스템이 정상적으로 작동되지 않았을 수 있습니다.");
         }
 
-        ProcessDiskpart($"select vdisk file \"{VHDDir}{pc}\"", "merge vdisk depth 1");
+        ProcessDiskpart($"select vdisk file \"{VhdDir}{child}\"", "merge vdisk depth 1");
     }
 }

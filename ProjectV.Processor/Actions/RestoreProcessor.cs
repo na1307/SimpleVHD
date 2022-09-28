@@ -11,7 +11,7 @@ internal class RestoreProcessor : ActionProcessor {
     protected RestoreProcessor(string operation) : base(operation) { }
 
     protected override void DoProcessCore() {
-        File.Delete(VHDDir + PVConfig.Instance.VhdFile);
-        ProcessDiskpart($"create vdisk file \"{VHDDir}{PVConfig.Instance.VhdFile}\" source \"{BackupDir}{PVConfig.Instance.VhdFile}\" type {VType}");
+        File.Delete(VhdDir + PVConfig.Instance.VhdFile);
+        ProcessDiskpart($"create vdisk file \"{VhdDir}{PVConfig.Instance.VhdFile}\" source \"{BackupDir}{PVConfig.Instance.VhdFile}\" type {VType}");
     }
 }

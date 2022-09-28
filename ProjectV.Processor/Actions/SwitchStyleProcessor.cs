@@ -8,9 +8,9 @@ internal class SwitchStyleProcessor : ActionProcessor {
 
     protected override void DoProcessCore() {
         // 파일 삭제
-        File.Delete(VHDDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
-        File.Delete(VHDDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
-        File.Delete(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower());
+        File.Delete(VhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
+        File.Delete(VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
+        File.Delete(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower());
 
         if (!Enum.TryParse(PVConfig.Instance.Temp, false, out OperatingStyle operatingStyle)) throw new ProcessFailedException("Temp가 잘못되었습니다.");
 
@@ -28,10 +28,10 @@ internal class SwitchStyleProcessor : ActionProcessor {
             // 차등 스타일 (수동 초기화)
             case OperatingStyle.DifferentialManual:
                 // 자식 VHD 재구축
-                ProcessDiskpart($"create vdisk file \"{VHDDir}{ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower()}\" parent \"{VHDDir}{PVConfig.Instance.VhdFile}\"");
+                ProcessDiskpart($"create vdisk file \"{VhdDir}{ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower()}\" parent \"{VhdDir}{PVConfig.Instance.VhdFile}\"");
 
-                File.Copy(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VHDDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
-                File.Copy(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VHDDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
+                File.Copy(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
+                File.Copy(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
 
                 // BCD 업데이트
                 ProcessBcdEdit("/default " + PVConfig.Instance[GuidType.Child1]);
@@ -44,10 +44,10 @@ internal class SwitchStyleProcessor : ActionProcessor {
             // 차등 스타일 (자동 초기화)
             case OperatingStyle.DifferentialAuto:
                 // 자식 VHD 재구축
-                ProcessDiskpart($"create vdisk file \"{VHDDir}{ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower()}\" parent \"{VHDDir}{PVConfig.Instance.VhdFile}\"");
+                ProcessDiskpart($"create vdisk file \"{VhdDir}{ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower()}\" parent \"{VhdDir}{PVConfig.Instance.VhdFile}\"");
 
-                File.Copy(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VHDDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
-                File.Copy(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VHDDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
+                File.Copy(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
+                File.Copy(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
 
                 // BCD 업데이트
                 ProcessBcdEdit("/default " + PVConfig.Instance[GuidType.Child1]);

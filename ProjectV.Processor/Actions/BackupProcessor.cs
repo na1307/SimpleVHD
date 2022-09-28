@@ -6,6 +6,6 @@ internal class BackupProcessor : ActionProcessor {
 
     protected override void DoProcessCore() {
         File.Delete(BackupDir + PVConfig.Instance.VhdFile);
-        ProcessDiskpart($"create vdisk file \"{BackupDir}{PVConfig.Instance.VhdFile}\" source \"{VHDDir}{PVConfig.Instance.VhdFile}\" type expandable");
+        ProcessDiskpart($"create vdisk file \"{BackupDir}{PVConfig.Instance.VhdFile}\" source \"{VhdDir}{PVConfig.Instance.VhdFile}\" type expandable");
     }
 }

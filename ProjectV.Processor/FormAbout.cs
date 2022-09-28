@@ -11,7 +11,7 @@ public sealed partial class FormAbout {
         label1.Text = AssemblyProduct;
         label2.Text = $"버전 {AssemblyInformationalVersion} (빌드 {BuildNumber})";
         label3.Text = AssemblyCopyright;
-        label4.Text = "현재 설정된 VHD : " + VHDDir + PVConfig.Instance.VhdFile;
+        label4.Text = "현재 설정된 VHD : " + VhdDir + PVConfig.Instance.VhdFile;
         label5.Text = "현재 설정된 백업 : " + BackupDir + PVConfig.Instance.VhdFile;
     }
 

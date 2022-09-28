@@ -1,6 +1,4 @@
 ﻿#nullable enable
-using System.Drawing;
-
 namespace ProjectV.Processor.Actions;
 
 internal abstract class ActionProcessor {
@@ -57,7 +55,7 @@ internal abstract class ActionProcessor {
             AutoEllipsis = true,
             Dock = DockStyle.Fill,
             Text = operationName + " 작업이 진행 중입니다. 잠시 기다려 주세요...",
-            TextAlign = ContentAlignment.MiddleCenter
+            TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         };
 
         ipForm.Controls.Add(l);
@@ -83,15 +81,15 @@ internal abstract class ActionProcessor {
         } finally {
             if (PVConfig.Instance.OperatingStyle is OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto) {
                 if (AfterRebuild) {
-                    File.Delete(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower());
-                    ProcessDiskpart($"create vdisk file \"{VHDDir}{ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower()}\" parent \"{VHDDir}{PVConfig.Instance.VhdFile}\"");
+                    File.Delete(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower());
+                    ProcessDiskpart($"create vdisk file \"{VhdDir}{ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower()}\" parent \"{VhdDir}{PVConfig.Instance.VhdFile}\"");
                 }
 
                 if (AfterRevert) {
-                    File.Delete(VHDDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
-                    File.Delete(VHDDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
-                    File.Copy(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VHDDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
-                    File.Copy(VHDDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VHDDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
+                    File.Delete(VhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
+                    File.Delete(VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
+                    File.Copy(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
+                    File.Copy(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
                 }
             }
 

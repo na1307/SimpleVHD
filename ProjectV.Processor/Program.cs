@@ -16,17 +16,17 @@ Application.EnableVisualStyles();
 Application.SetCompatibleTextRenderingDefault(false);
 
 try {
-    if (PVDir == null) {
+    if (string.IsNullOrEmpty(PVDir)) {
         ErrMsg("설정 파일을 찾지 못하였습니다.");
         return;
     }
 
-    if (BackupDir == null) {
+    if (string.IsNullOrEmpty(BackupDir)) {
         ErrMsg("백업 디렉토리를 찾지 못하였습니다.");
         return;
     }
 
-    if (VHDDir == null) {
+    if (string.IsNullOrEmpty(VhdDir)) {
         ErrMsg("원본 VHD 파일을 찾지 못하였습니다.");
         return;
     }
