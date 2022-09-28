@@ -4,10 +4,9 @@ using System.Text.RegularExpressions;
 namespace ProjectV.Processor.Actions;
 
 internal class ExpandProcessor : ActionProcessor {
+    protected override string Name => "VHD 확장";
     protected sealed override bool AfterRebuild => true;
     protected sealed override bool AfterRevert => true;
-
-    public ExpandProcessor() : base("VHD 확장") { }
 
     protected override void DoProcessCore() {
         var output = ProcessDiskpartOutput($"select vdisk file \"{VhdDir}{PVConfig.Instance.VhdFile}\"", "detail vdisk");
@@ -22,9 +21,7 @@ internal class ExpandProcessor : ActionProcessor {
             while (true) {
                 switch (dlg.ShowDialog()) {
                     case DialogResult.OK:
-                        ulong r;
-
-                        if (!ulong.TryParse(dlg.Input, out r)) {
+                        if (!ulong.TryParse(dlg.Input, out var r)) {
                             MessageBox.Show("숫자만 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             continue;
                         }

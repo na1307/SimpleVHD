@@ -3,9 +3,12 @@ namespace ProjectV.Processor.Actions;
 
 internal abstract class ActionProcessor {
     private const string dptemp = "dptemp.txt";
-    private readonly string operationName;
-    private readonly bool shutdownCondition;
     private readonly Form ipForm;
+
+    /// <summary>
+    /// 작업의 이름
+    /// </summary>
+    protected abstract string Name { get; }
 
     /// <summary>
     /// 작업이 차등 스타일에서만 지원되는지 여부
@@ -32,14 +35,12 @@ internal abstract class ActionProcessor {
     /// </summary>
     protected virtual bool RemoveTempAfterProcess => false;
 
-    protected ActionProcessor(string operation) : this(operation, false) { }
+    /// <summary>
+    /// 작업 후 다시 시작하는 대신 종료할지 여부
+    /// </summary>
+    protected virtual bool Shutdown => false;
 
-    protected ActionProcessor(string operation, bool shutdown) {
-        if (string.IsNullOrWhiteSpace(operation)) throw new ArgumentException($"'{nameof(operation)}'은(는) null이거나 공백일 수 없습니다.", nameof(operation));
-
-        operationName = operation;
-        shutdownCondition = shutdown;
-
+    protected ActionProcessor() {
         ipForm = new() {
             AutoScaleMode = AutoScaleMode.None,
             ClientSize = new(300, 50),
@@ -54,7 +55,7 @@ internal abstract class ActionProcessor {
         Label l = new() {
             AutoEllipsis = true,
             Dock = DockStyle.Fill,
-            Text = operationName + " 작업이 진행 중입니다. 잠시 기다려 주세요...",
+            Text = Name + " 작업이 진행 중입니다. 잠시 기다려 주세요...",
             TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         };
 
@@ -71,7 +72,7 @@ internal abstract class ActionProcessor {
     public void DoProcess() {
         try {
             ipForm.Show();
-            if (DifferentialOnly && PVConfig.Instance.OperatingStyle is not (OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto)) throw new ProcessFailedException("단순 스타일에서는 " + operationName + " 작업이 지원되지 않습니다.");
+            if (DifferentialOnly && PVConfig.Instance.OperatingStyle is not (OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto)) throw new ProcessFailedException("단순 스타일에서는 " + Name + " 작업이 지원되지 않습니다.");
             if (NeedBackup && !File.Exists(BackupDir + PVConfig.Instance.VhdFile)) throw new ProcessFailedException("백업 파일을 찾을 수 없습니다.");
             DoProcessCore();
         } catch (PVProcessorException ex) {
@@ -97,7 +98,7 @@ internal abstract class ActionProcessor {
             ipForm.Close();
         }
 
-        Environment.ExitCode = !shutdownCondition ? RestartCode : ShutdownCode;
+        Environment.ExitCode = !Shutdown ? RestartCode : ShutdownCode;
         Application.Exit();
     }
 

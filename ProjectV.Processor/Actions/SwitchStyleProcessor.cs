@@ -2,9 +2,8 @@
 namespace ProjectV.Processor.Actions;
 
 internal class SwitchStyleProcessor : ActionProcessor {
+    protected override string Name => "운영 스타일 전환";
     protected sealed override bool RemoveTempAfterProcess => true;
-
-    public SwitchStyleProcessor() : base("운영 스타일 전환") { }
 
     protected override void DoProcessCore() {
         // 파일 삭제

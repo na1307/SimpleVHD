@@ -2,7 +2,8 @@
 namespace ProjectV.Processor.Actions;
 
 internal class BackupProcessor : ActionProcessor {
-    public BackupProcessor() : base("백업", PVConfig.Instance[ShutdownType.Backup]) { }
+    protected override string Name => "백업";
+    protected override bool Shutdown => PVConfig.Instance[ShutdownType.Backup];
 
     protected override void DoProcessCore() {
         File.Delete(BackupDir + PVConfig.Instance.VhdFile);

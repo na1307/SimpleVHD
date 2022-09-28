@@ -2,12 +2,11 @@
 namespace ProjectV.Processor.Actions;
 
 internal class ConvertTypeProcessor : ActionProcessor {
+    protected override string Name => "VHD 형식 변환";
     protected sealed override bool NeedBackup => true;
     protected sealed override bool AfterRebuild => true;
     protected sealed override bool AfterRevert => true;
     protected sealed override bool RemoveTempAfterProcess => true;
-
-    public ConvertTypeProcessor() : base("VHD 형식 변환") { }
 
     protected override void DoProcessCore() {
         File.Delete(VhdDir + PVConfig.Instance.VhdFile);

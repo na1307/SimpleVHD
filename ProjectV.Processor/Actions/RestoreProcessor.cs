@@ -2,13 +2,12 @@
 namespace ProjectV.Processor.Actions;
 
 internal class RestoreProcessor : ActionProcessor {
+    protected override string Name => "복원";
     protected sealed override bool NeedBackup => true;
     protected sealed override bool AfterRebuild => true;
     protected sealed override bool AfterRevert => true;
+    protected override bool Shutdown => PVConfig.Instance[ShutdownType.Restore];
     protected virtual VhdType VType => PVConfig.Instance.VhdType;
-
-    public RestoreProcessor() : base("복원", PVConfig.Instance[ShutdownType.Restore]) { }
-    protected RestoreProcessor(string operation) : base(operation) { }
 
     protected override void DoProcessCore() {
         File.Delete(VhdDir + PVConfig.Instance.VhdFile);

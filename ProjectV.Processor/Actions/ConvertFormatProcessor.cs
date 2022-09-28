@@ -4,10 +4,9 @@ using System.Text.RegularExpressions;
 namespace ProjectV.Processor.Actions;
 
 internal class ConvertFormatProcessor : ActionProcessor {
+    protected override string Name => "VHD 포맷 변환";
     protected sealed override bool NeedBackup => true;
     protected sealed override bool RemoveTempAfterProcess => true;
-
-    public ConvertFormatProcessor() : base("VHD 포맷 변환") { }
 
     protected override void DoProcessCore() {
         // 기존 파일 삭제

@@ -2,11 +2,11 @@
 namespace ProjectV.Processor.Actions;
 
 internal class MergeProcessor : ActionProcessor {
+    protected override string Name => "병합";
     protected sealed override bool DifferentialOnly => true;
     protected sealed override bool AfterRebuild => true;
     protected sealed override bool AfterRevert => true;
-
-    public MergeProcessor() : base("병합", PVConfig.Instance[ShutdownType.Merge]) { }
+    protected override bool Shutdown => PVConfig.Instance[ShutdownType.Merge];
 
     protected override void DoProcessCore() {
         // 파일 크기 측정
