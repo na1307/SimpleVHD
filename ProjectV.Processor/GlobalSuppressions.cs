@@ -5,7 +5,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Major Bug", "S2201:Return values from functions without side effects should not be ignored", Scope = "member", Target = "~M:ProjectV.Processor.FormInput.OK_Button_Click(System.Object,System.EventArgs)")]
 [assembly: SuppressMessage("Major Code Smell", "S1871:Two branches in a conditional structure should not have exactly the same implementation", Scope = "member", Target = "~M:ProjectV.Processor.Actions.SwitchStyleProcessor.DoProcessCore")]
 [assembly: SuppressMessage("Style", "IDE0063:간단한 'using' 문 사용", Scope = "member", Target = "~M:ProjectV.Processor.Actions.ActionProcessor.ProcessDiskpart(System.String[])")]
 [assembly: SuppressMessage("Style", "IDE0063:간단한 'using' 문 사용", Scope = "member", Target = "~M:ProjectV.Processor.Actions.ActionProcessor.ProcessDiskpartOutput(System.String[])~System.String")]

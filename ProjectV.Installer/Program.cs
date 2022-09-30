@@ -6,10 +6,10 @@ using System.Text.RegularExpressions;
 using static ProjectV.BcdEdit;
 using static System.Console;
 
-const string rs = "==================================================";
+const string line = "==================================================";
 
 try {
-    Title = AssemblyProperties.AssemblyTitle;
+    Title = "Project V 설치";
     WindowHeight = 24;
     BackgroundColor = ConsoleColor.DarkBlue;
     ForegroundColor = ConsoleColor.White;
@@ -43,7 +43,7 @@ try {
 
     if (string.IsNullOrEmpty(pvDir)) throw new RequirementNotFoundException();
 
-    foreach (string f in from f in new[] { "Boot\\ProjectV.wim", "Boot\\boot.sdi" } where !File.Exists(pvDir + f) select f) throw new RequirementNotFoundException(Path.GetFileName(f));
+    foreach (string file in from f in new[] { "Boot\\ProjectV.wim", "Boot\\boot.sdi" } where !File.Exists(pvDir + f) select f) throw new RequirementNotFoundException(Path.GetFileName(file));
 
     if (File.Exists(pvDir + "\\" + ConfigName) && !ConfigExists()) return;
 
@@ -80,20 +80,20 @@ Set WshShell = Nothing"
 
     var bcdDesctiption = BcdEditRegex("/enum {current}", @"^description\s+(?<name>.+)$").Groups["name"].Value;
 
-    Dictionary<string,string> guids = new(5);
+    Dictionary<string, string> guids = new(5);
 
     guids.Add("Parent", BcdEditGuid("/enum {current} /v"));
 
     guids.Add("Child1", BcdEditGuid("/copy {current} /d \"" + bcdDesctiption + "\""));
 
-    ProcessBcdEdit($@"/set {guids["Child1"]} device vhd=""[{vhdDrv}]{vhdPath}Child1.{vhdFormat}");
-    ProcessBcdEdit($@"/set {guids["Child1"]} osdevice vhd=""[{vhdDrv}]{vhdPath}Child1.{vhdFormat}");
+    ProcessBcdEdit($@"/set {guids["Child1"]} device vhd=""[{vhdDrv}]{vhdPath}{Child1Name}{vhdFormat}");
+    ProcessBcdEdit($@"/set {guids["Child1"]} osdevice vhd=""[{vhdDrv}]{vhdPath}{Child1Name}{vhdFormat}");
     ProcessBcdEdit($@"/displayorder {guids["Child1"]} /remove");
 
     guids.Add("Child2", BcdEditGuid("/copy {current} /d \"" + bcdDesctiption + "\""));
 
-    ProcessBcdEdit($@"/set {guids["Child2"]} device vhd=""[{vhdDrv}]{vhdPath}Child2.{vhdFormat}");
-    ProcessBcdEdit($@"/set {guids["Child2"]} osdevice vhd=""[{vhdDrv}]{vhdPath}Child2.{vhdFormat}");
+    ProcessBcdEdit($@"/set {guids["Child2"]} device vhd=""[{vhdDrv}]{vhdPath}{Child2Name}{vhdFormat}");
+    ProcessBcdEdit($@"/set {guids["Child2"]} osdevice vhd=""[{vhdDrv}]{vhdPath}{Child2Name}{vhdFormat}");
     ProcessBcdEdit($@"/displayorder {guids["Child2"]} /remove");
 
     guids.Add("Ramdisk", BcdEditGuid("/create /device"));
@@ -155,7 +155,7 @@ bool ConfigExists() {
     while (true) {
         Clear();
         Beep();
-        Write(ConfigName + " 파일이 존재합니다. 이미 설치된 것 같습니다. 계속 하시겠습니까?\r\n\r\n Y or N) : ");
+        Write("Project V가 이미 설치된 것 같습니다. 계속하시겠습니까?\r\n\r\n Y or N) : ");
 
         switch (ReadLine().ToUpper()) {
             case "Y": return true;
@@ -173,11 +173,11 @@ VhdType GetVhdType() {
 $@"
 현재 VHD의 유형을 선택하세요.
 
-{rs}
+{line}
  1. 동적 확장 [Expandable]
 
  2. 고정 크기 [Fixed]
-{rs}
+{line}
 
  1 or 2) : "
  );
@@ -198,13 +198,13 @@ OperatingStyle GetOperatingStyle() {
 $@"
 설치 후 기본적으로 사용할 VHD 운영 스타일을 선택하세요.
 
-{rs}
- 1. 단순 스타일         [원본 백업, 복원]
+{line}
+ 1. 단순 스타일                  [원본 백업, 복원]
 
- 2. 차등 스타일 (수동 초기화)       [변경분 초기화]
+ 2. 차등 스타일 (수동 초기화)      [변경분 초기화]
 
- 3. 차등 스타일 (자동 초기화)  [변경분 자동 초기화]
-{rs}
+ 3. 차등 스타일 (자동 초기화) [변경분 자동 초기화]
+{line}
 
  1 ~ 3) : "
  );
@@ -223,7 +223,7 @@ string GetBackupDrive() {
         Clear();
         Beep();
 
-        WriteLine("\r\n아래의 목록을 보고 백업을 저장할 드라이브를 입력하세요.\r\n\r\n" + rs + "\r\n 문자  레이블      Fs    크기\r\n" + (new string('-', 50)));
+        WriteLine("\r\n아래의 목록을 보고 백업을 저장할 드라이브를 입력하세요.\r\n\r\n" + line + "\r\n 문자  레이블      Fs    크기\r\n" + (new string('-', 50)));
 
         foreach (var drvinfo in from drv in Directory.GetLogicalDrives()
                                 let drvinfo = new DriveInfo(drv)
@@ -232,7 +232,7 @@ string GetBackupDrive() {
             WriteLine(" " + drvinfo.Name[0] + "     " + drvinfo.VolumeLabel + "      " + drvinfo.DriveFormat + "    " + (drvinfo.TotalSize / 1024 / 1024 / 1024) + " GB");
         }
 
-        Write(rs + "\r\n\r\n ex) D or D:");
+        Write(line + "\r\n\r\n ex) D or D:");
 
         var input = ReadLine();
 
@@ -250,7 +250,7 @@ void ErrorControl(string message) {
     BackgroundColor = ConsoleColor.DarkRed;
     ForegroundColor = ConsoleColor.White;
     Clear();
-    WriteLine(rs + "\r\n" + message + "\r\n" + rs);
+    WriteLine(line + "\r\n" + message + "\r\n" + line);
     Beep();
     Beep();
     Beep();
