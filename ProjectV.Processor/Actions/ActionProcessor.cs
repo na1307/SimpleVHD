@@ -96,10 +96,9 @@ internal abstract class ActionProcessor {
         } finally {
             if (RemoveTempAfterProcess) PVConfig.Instance.Temp = null;
             ipForm.Close();
+            Environment.ExitCode = !Shutdown ? RestartCode : ShutdownCode;
+            Application.Exit();
         }
-
-        Environment.ExitCode = !Shutdown ? RestartCode : ShutdownCode;
-        Application.Exit();
     }
 
     protected virtual void DoProcessCore() { }

@@ -85,7 +85,6 @@ partial class FormDialog : Form {
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
-            this.SizeChanged += new System.EventHandler(this.FormDialog_SizeChanged);
             this.TableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

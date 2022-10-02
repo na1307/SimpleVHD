@@ -31,10 +31,7 @@ try {
         return;
     }
 
-    Application.ApplicationExit += (s, e) => {
-        PVConfig.Instance.Action = DoAction.DoNothing;
-        PVConfig.Instance.SaveConfig();
-    };
+    Application.ApplicationExit += Nothing;
 
     if (PVConfig.Instance.Action != DoAction.DoNothing) {
         ProjectV.Processor.Actions.ProcessorFactory.Create(PVConfig.Instance.Action).DoProcess();
@@ -46,3 +43,9 @@ try {
 }
 
 Application.Run(new ProjectV.Processor.FormMain());
+
+void Nothing(object sender, EventArgs e) {
+    Application.ApplicationExit -= Nothing;
+    PVConfig.Instance.Action = DoAction.DoNothing;
+    PVConfig.Instance.SaveConfig();
+}

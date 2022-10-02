@@ -1,7 +1,7 @@
 ﻿#nullable enable
 namespace ProjectV.Processor;
 
-public partial class FormMain {
+public sealed partial class FormMain {
     protected sealed override CreateParams CreateParams {
         get {
             var myCp = base.CreateParams;

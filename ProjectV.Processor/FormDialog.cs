@@ -4,6 +4,11 @@ namespace ProjectV.Processor;
 public partial class FormDialog {
     protected FormDialog() => InitializeComponent();
 
+    protected sealed override void OnSizeChanged(EventArgs e) {
+        base.OnSizeChanged(e);
+        TableLayoutPanel1.Location = new(Size.Width - 190, Size.Height - 70);
+    }
+
     protected virtual void OK_Button_Click(object sender, EventArgs e) {
         DialogResult = DialogResult.OK;
         Close();
@@ -13,6 +18,4 @@ public partial class FormDialog {
         DialogResult = DialogResult.Cancel;
         Close();
     }
-
-    private void FormDialog_SizeChanged(object sender, EventArgs e) => TableLayoutPanel1.Location = new(Size.Width - 190, Size.Height - 70);
 }
