@@ -8,7 +8,7 @@ public partial class FormAdvanced {
         InitializeComponent();
         OK_Button.Visible = false;
 
-        if (!PVConfig.Instance.IsBackupExists()) {
+        if (!BackupExists) {
             button2.Enabled = false;
         }
     }

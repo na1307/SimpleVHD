@@ -6,7 +6,7 @@ internal class MergeProcessor : ActionProcessor {
     protected sealed override bool DifferentialOnly => true;
     protected sealed override bool AfterRebuild => true;
     protected sealed override bool AfterRevert => true;
-    protected override bool Shutdown => PVConfig.Instance[ShutdownType.Merge];
+    protected override bool Shutdown => PVConfig.Instance[DoAction.DoMerge];
 
     protected override void DoProcessCore() {
         // 파일 크기 측정

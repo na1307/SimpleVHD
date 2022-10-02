@@ -12,7 +12,7 @@ namespace ProjectV;
 public sealed class PVConfig : IXmlSerializable {
     private static readonly Lazy<PVConfig> _Instance = new(() => new());
     private readonly string xPath;
-    private readonly Dictionary<ShutdownType, bool> shutdownAfter;
+    private readonly Dictionary<DoAction, bool> shutdownAfter;
     private readonly Dictionary<GuidType, Guid> bcdGuids;
     private VhdFormat _VhdFormat;
 
@@ -72,7 +72,7 @@ public sealed class PVConfig : IXmlSerializable {
     /// </summary>
     /// <param name="type">해당 작업 ShutdownType</param>
     /// <returns>해당 작업에서 다시 시작하는 대신 종료해야 하는지 여부</returns>
-    public bool this[ShutdownType type] {
+    public bool this[DoAction type] {
         get => shutdownAfter[type];
         set => shutdownAfter[type] = value;
     }
@@ -86,9 +86,9 @@ public sealed class PVConfig : IXmlSerializable {
 
     private PVConfig() {
         try {
-            foreach (var drv in from drv in Directory.GetLogicalDrives()
-                                where File.Exists(drv + DirName + "\\" + ConfigName)
-                                select drv) {
+            foreach (var drv in from d in DriveInfo.GetDrives()
+                                where d.CheckFixed() && File.Exists(d.Name + DirName + "\\" + ConfigName)
+                                select d.Name) {
                 xPath = drv + DirName + "\\" + ConfigName;
                 break;
             }
@@ -96,10 +96,10 @@ public sealed class PVConfig : IXmlSerializable {
             if (xPath == null) throw new ConfigNotFoundException();
 
             shutdownAfter = new(4) {
-                { ShutdownType.Backup, default },
-                { ShutdownType.Restore, default },
-                { ShutdownType.Revert, default },
-                { ShutdownType.Merge, default }
+                { DoAction.DoBackup, default },
+                { DoAction.DoRestore, default },
+                { DoAction.DoRevert, default },
+                { DoAction.DoMerge, default }
             };
 
             bcdGuids = new(5) {
@@ -129,20 +129,6 @@ public sealed class PVConfig : IXmlSerializable {
         return sb.ToString();
     }
 
-    /// <summary>
-    /// 백업 파일이 존재하는지 여부
-    /// </summary>
-    /// <returns>백업 파일이 존재하는지 여부</returns>
-    public bool IsBackupExists() {
-        foreach (var _ in from drv in Directory.GetLogicalDrives()
-                          where new DriveInfo(drv).DriveType == DriveType.Fixed && File.Exists(drv + BackupDirName + "\\" + VhdFile)
-                          select new { }) {
-            return true;
-        }
-
-        return false;
-    }
-
     public void SaveConfig() => ((IXmlSerializable)this).WriteXml(XmlWriter.Create(xPath, new() { Indent = true }));
 
     System.Xml.Schema.XmlSchema? IXmlSerializable.GetSchema() => null;
@@ -156,7 +142,7 @@ public sealed class PVConfig : IXmlSerializable {
             if (reader.NodeType == XmlNodeType.Element) {
                 switch (reader.LocalName) {
                     case "ShutdownAfterAction":
-                        shutdownAfter[(ShutdownType)Enum.Parse(typeof(ShutdownType), reader.GetAttribute("Type"), false)] = reader.ReadElementContentAsBoolean();
+                        shutdownAfter[(DoAction)Enum.Parse(typeof(DoAction), "Do" + reader.GetAttribute("Type"), false)] = reader.ReadElementContentAsBoolean();
                         break;
 
                     case "Guid":
@@ -200,7 +186,7 @@ public sealed class PVConfig : IXmlSerializable {
 
         foreach (var shutdown in shutdownAfter) {
             writer.WriteStartElement("ShutdownAfterAction");
-            writer.WriteAttributeString("Type", shutdown.Key.ToString());
+            writer.WriteAttributeString("Type", shutdown.Key.ToString().Substring(2));
             writer.WriteString(shutdown.Value.ToString().ToLower());
             writer.WriteEndElement();
         }

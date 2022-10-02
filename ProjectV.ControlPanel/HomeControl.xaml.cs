@@ -15,7 +15,7 @@ public partial class HomeControl {
     }
 
     private void UserControl_Initialized(object sender, EventArgs e) {
-        if (!PVConfig.Instance.IsBackupExists()) RestoreButton.IsEnabled = false;
+        if (!BackupExists) RestoreButton.IsEnabled = false;
 
         switch (PVConfig.Instance.OperatingStyle) {
             case OperatingStyle.Simple:

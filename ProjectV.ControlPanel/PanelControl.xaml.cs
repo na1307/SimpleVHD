@@ -27,7 +27,7 @@ public partial class PanelControl {
                 TitleBlock.Text = BackupName;
                 SubTitleBlock.Text = BackupDescription;
                 ContentBlock1.Text = "현재 부모 VHD를 백업 폴더로 백업합니다.\r\n\r\n작업 시간 : 오래 걸림 (부모의 크기에 비례)";
-                ShutdownBox.IsChecked = PVConfig.Instance[ShutdownType.Backup];
+                ShutdownBox.IsChecked = PVConfig.Instance[DoAction.DoBackup];
                 break;
 
             case PanelAction.DoRestore:
@@ -35,7 +35,7 @@ public partial class PanelControl {
                 TitleBlock.Text = RestoreName;
                 SubTitleBlock.Text = RestoreDescription;
                 ContentBlock1.Text = "백업 폴더에 보관한 부모 VHD로 복원합니다.\r\n\r\n작업 시간 : 오래 걸림 (백업본의 크기에 비례)";
-                ShutdownBox.IsChecked = PVConfig.Instance[ShutdownType.Restore];
+                ShutdownBox.IsChecked = PVConfig.Instance[DoAction.DoRestore];
                 break;
 
             case PanelAction.DoRevert:
@@ -43,7 +43,7 @@ public partial class PanelControl {
                 TitleBlock.Text = RevertName;
                 SubTitleBlock.Text = RevertDescription;
                 ContentBlock1.Text = "변경분을 깨끗하게 초기화 합니다.\r\n\r\n작업 시간 : 아주 짧음";
-                ShutdownBox.IsChecked = PVConfig.Instance[ShutdownType.Revert];
+                ShutdownBox.IsChecked = PVConfig.Instance[DoAction.DoRevert];
                 break;
 
             case PanelAction.DoMerge:
@@ -51,7 +51,7 @@ public partial class PanelControl {
                 TitleBlock.Text = MergeName;
                 SubTitleBlock.Text = MergeDescription;
                 ContentBlock1.Text = "변경분을 VHD에 병합합니다.\r\n\r\n작업 시간 : 오래 걸림 (변경분의 크기에 비례)";
-                ShutdownBox.IsChecked = PVConfig.Instance[ShutdownType.Merge];
+                ShutdownBox.IsChecked = PVConfig.Instance[DoAction.DoMerge];
                 break;
 
             case PanelAction.DoExpand:
@@ -112,19 +112,19 @@ public partial class PanelControl {
     private void ShutdownBox_Click(object sender, RoutedEventArgs e) {
         switch (pAction) {
             case PanelAction.DoBackup:
-                PVConfig.Instance[ShutdownType.Backup] = ShutdownBox.IsChecked.GetValueOrDefault();
+                PVConfig.Instance[DoAction.DoBackup] = ShutdownBox.IsChecked.GetValueOrDefault();
                 break;
 
             case PanelAction.DoRestore:
-                PVConfig.Instance[ShutdownType.Restore] = ShutdownBox.IsChecked.GetValueOrDefault();
+                PVConfig.Instance[DoAction.DoRestore] = ShutdownBox.IsChecked.GetValueOrDefault();
                 break;
 
             case PanelAction.DoRevert:
-                PVConfig.Instance[ShutdownType.Revert] = ShutdownBox.IsChecked.GetValueOrDefault();
+                PVConfig.Instance[DoAction.DoRevert] = ShutdownBox.IsChecked.GetValueOrDefault();
                 break;
 
             case PanelAction.DoMerge:
-                PVConfig.Instance[ShutdownType.Merge] = ShutdownBox.IsChecked.GetValueOrDefault();
+                PVConfig.Instance[DoAction.DoMerge] = ShutdownBox.IsChecked.GetValueOrDefault();
                 break;
 
             default:

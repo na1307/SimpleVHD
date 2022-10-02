@@ -1,5 +1,6 @@
 ﻿#nullable enable
 global using static ProjectV.Processor.Constants;
+using System.Linq;
 
 namespace ProjectV.Processor;
 
@@ -11,10 +12,10 @@ internal static class Constants {
     public static readonly string VhdDir = string.Empty;
 
     static Constants() {
-        foreach (var drv in Directory.GetLogicalDrives()) {
+        foreach (var drv in DriveInfo.GetDrives().Where(Extensions.CheckFixed).Select(d => d.Name)) {
             if (File.Exists(drv + DirName + "\\" + ConfigName)) PVDir = drv + DirName + "\\";
             if (Directory.Exists(drv + BackupDirName)) BackupDir = drv + BackupDirName + "\\";
-            if (File.Exists(drv.Substring(0, 2) + PVConfig.Instance.VhdDirectory + PVConfig.Instance.VhdFile)) VhdDir = drv.Substring(0, 2) + PVConfig.Instance.VhdDirectory;
+            if (File.Exists(drv.Left(2) + PVConfig.Instance.VhdDirectory + PVConfig.Instance.VhdFile)) VhdDir = drv.Left(2) + PVConfig.Instance.VhdDirectory;
         }
     }
 }

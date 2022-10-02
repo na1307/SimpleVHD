@@ -10,7 +10,7 @@ string vhdDir = string.Empty;
 try {
     config = PVConfig.Instance;
 
-    foreach (var drv in from d in Directory.GetLogicalDrives() select d.Substring(0, 2)) {
+    foreach (var drv in DriveInfo.GetDrives().Where(Extensions.CheckFixed).Select(Extensions.GetLetter)) {
         if (File.Exists(drv + "\\" + DirName + "\\" + ConfigName)) pvDir = drv + "\\" + DirName + "\\";
         if (File.Exists(drv + config.VhdDirectory + config.VhdFile)) vhdDir = drv + config.VhdDirectory;
     }

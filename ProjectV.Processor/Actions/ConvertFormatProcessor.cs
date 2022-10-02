@@ -27,14 +27,14 @@ internal class ConvertFormatProcessor : ActionProcessor {
         ProcessDiskpart($"create vdisk file \"{VhdDir}{newVhd}\" source \"{BackupDir}{PVConfig.Instance.VhdFile}\" type {PVConfig.Instance.VhdType}");
 
         // 자식 생성
-        if (PVConfig.Instance.OperatingStyle is OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto) {
+        if (IsDifferentialStyle) {
             ProcessDiskpart($"create vdisk file \"{VhdDir}{newChildC}\" parent \"{VhdDir}{newVhd}\"");
             File.Copy(VhdDir + newChildC, VhdDir + newChild1, true);
             File.Copy(VhdDir + newChildC, VhdDir + newChild2, true);
         }
 
         // BCD 업데이트
-        var drv = VhdDir.Substring(0, 2);
+        var drv = VhdDir.Left(2);
 
         ProcessBcdEdit($"/set {PVConfig.Instance[GuidType.Parent]} device vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newVhd}\"", $"/set {PVConfig.Instance[GuidType.Parent]} osdevice vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newVhd}\"");
         ProcessBcdEdit($"/set {PVConfig.Instance[GuidType.Child1]} device vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild1}\"", $"/set {PVConfig.Instance[GuidType.Child1]} osdevice vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild1}\"");

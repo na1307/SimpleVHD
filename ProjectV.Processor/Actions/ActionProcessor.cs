@@ -72,11 +72,11 @@ internal abstract class ActionProcessor {
     public void DoProcess() {
         try {
             ipForm.Show();
-            if (DifferentialOnly && PVConfig.Instance.OperatingStyle is not (OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto)) throw new ProcessFailedException("단순 스타일에서는 " + Name + " 작업이 지원되지 않습니다.");
+            if (DifferentialOnly && !IsDifferentialStyle) throw new ProcessFailedException("단순 스타일에서는 " + Name + " 작업이 지원되지 않습니다.");
             if (NeedBackup && !File.Exists(BackupDir + PVConfig.Instance.VhdFile)) throw new ProcessFailedException("백업 파일을 찾을 수 없습니다.");
             DoProcessCore();
 
-            if (PVConfig.Instance.OperatingStyle is OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto) {
+            if (IsDifferentialStyle) {
                 if (AfterRebuild) {
                     File.Delete(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower());
                     ProcessDiskpart($"create vdisk file \"{VhdDir}{ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower()}\" parent \"{VhdDir}{PVConfig.Instance.VhdFile}\"");

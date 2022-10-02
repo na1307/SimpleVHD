@@ -6,7 +6,7 @@ internal class RestoreProcessor : ActionProcessor {
     protected sealed override bool NeedBackup => true;
     protected sealed override bool AfterRebuild => true;
     protected sealed override bool AfterRevert => true;
-    protected override bool Shutdown => PVConfig.Instance[ShutdownType.Restore];
+    protected override bool Shutdown => PVConfig.Instance[DoAction.DoRestore];
     protected virtual VhdType VType => PVConfig.Instance.VhdType;
 
     protected override void DoProcessCore() {

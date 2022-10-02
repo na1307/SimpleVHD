@@ -20,11 +20,11 @@ public partial class ToolsControl {
     private void UserControl_Loaded(object sender, RoutedEventArgs e) {
         var config = PVConfig.Instance;
 
-        if (config.OperatingStyle is not (OperatingStyle.DifferentialManual or OperatingStyle.DifferentialAuto)) {
+        if (!IsDifferentialStyle) {
             ParentButton.IsEnabled = false;
         }
 
-        if (!config.IsBackupExists()) {
+        if (!BackupExists) {
             ShrinkButton.IsEnabled = false;
             TypeButton.IsEnabled = false;
             FormatButton.IsEnabled = false;

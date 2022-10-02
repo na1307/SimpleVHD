@@ -10,10 +10,10 @@ public partial class OptionsControl {
     private void UserControl_Loaded(object sender, RoutedEventArgs e) {
         var config = PVConfig.Instance;
 
-        SBackupBox.IsChecked = config[ShutdownType.Backup];
-        SRestoreBox.IsChecked = config[ShutdownType.Restore];
-        SRevertBox.IsChecked = config[ShutdownType.Revert];
-        SMergeBox.IsChecked = config[ShutdownType.Merge];
+        SBackupBox.IsChecked = config[DoAction.DoBackup];
+        SRestoreBox.IsChecked = config[DoAction.DoRestore];
+        SRevertBox.IsChecked = config[DoAction.DoRevert];
+        SMergeBox.IsChecked = config[DoAction.DoMerge];
 
         foreach (System.Text.RegularExpressions.Match guid in BcdEditRegexAll("/enum {bootmgr} /v", @"\{.+\}")) if (guid.Value == config[GuidType.Processor]) HideProcessorBox.IsChecked = false;
     }
@@ -23,19 +23,19 @@ public partial class OptionsControl {
 
         switch (((CheckBox)sender).Name) {
             case nameof(SBackupBox):
-                config[ShutdownType.Backup] = SBackupBox.IsChecked.GetValueOrDefault();
+                config[DoAction.DoBackup] = SBackupBox.IsChecked.GetValueOrDefault();
                 break;
 
             case nameof(SRestoreBox):
-                config[ShutdownType.Restore] = SRestoreBox.IsChecked.GetValueOrDefault();
+                config[DoAction.DoRestore] = SRestoreBox.IsChecked.GetValueOrDefault();
                 break;
 
             case nameof(SRevertBox):
-                config[ShutdownType.Revert] = SRevertBox.IsChecked.GetValueOrDefault();
+                config[DoAction.DoRevert] = SRevertBox.IsChecked.GetValueOrDefault();
                 break;
 
             case nameof(SMergeBox):
-                config[ShutdownType.Merge] = SMergeBox.IsChecked.GetValueOrDefault();
+                config[DoAction.DoMerge] = SMergeBox.IsChecked.GetValueOrDefault();
                 break;
 
             case nameof(HideProcessorBox):

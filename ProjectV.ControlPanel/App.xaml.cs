@@ -9,6 +9,7 @@ global using System.Windows.Media;
 global using System.Windows.Media.Imaging;
 global using static ProjectV.BcdEdit;
 global using static ProjectV.GlobalConstants;
+global using static ProjectV.GlobalProperties;
 using System.Threading;
 
 namespace ProjectV.ControlPanel;

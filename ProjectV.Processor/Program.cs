@@ -5,6 +5,7 @@ global using System.IO;
 global using System.Windows.Forms;
 global using static ProjectV.BcdEdit;
 global using static ProjectV.GlobalConstants;
+global using static ProjectV.GlobalProperties;
 using ProjectV;
 using System.Threading;
 

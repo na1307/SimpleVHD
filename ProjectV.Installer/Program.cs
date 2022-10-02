@@ -31,10 +31,9 @@ try {
     string pvDrv = string.Empty;
     string pvPath = string.Empty;
 
-    foreach (var drv in from v in Directory.GetLogicalDrives()
-                        let v2 = v.Substring(0, 2)
-                        where Directory.Exists(v2 + "\\" + DirName)
-                        select v2) {
+    foreach (var drv in from d in DriveInfo.GetDrives()
+                        where d.CheckFixed() && Directory.Exists(d.Name + DirName)
+                        select d.GetLetter()) {
         pvDir = drv + "\\" + DirName + "\\";
         pvDrv = drv;
         pvPath = "\\" + DirName + "\\";
@@ -43,7 +42,7 @@ try {
 
     if (string.IsNullOrEmpty(pvDir)) throw new RequirementNotFoundException();
 
-    foreach (string file in from f in new[] { "Boot\\ProjectV.wim", "Boot\\boot.sdi" } where !File.Exists(pvDir + f) select f) throw new RequirementNotFoundException(Path.GetFileName(file));
+    foreach (var file in from f in new[] { "Boot\\ProjectV.wim", "Boot\\boot.sdi" } where !File.Exists(pvDir + f) select f) throw new RequirementNotFoundException(Path.GetFileName(file));
 
     if (File.Exists(pvDir + "\\" + ConfigName) && !ConfigExists()) return;
 
@@ -225,10 +224,7 @@ string GetBackupDrive() {
 
         WriteLine("\r\n아래의 목록을 보고 백업을 저장할 드라이브를 입력하세요.\r\n\r\n" + line + "\r\n 문자  레이블      Fs    크기\r\n" + (new string('-', 50)));
 
-        foreach (var drvinfo in from drv in Directory.GetLogicalDrives()
-                                let drvinfo = new DriveInfo(drv)
-                                where drvinfo.DriveType == DriveType.Fixed
-                                select drvinfo) {
+        foreach (var drvinfo in DriveInfo.GetDrives().Where(ProjectV.Extensions.CheckFixed)) {
             WriteLine(" " + drvinfo.Name[0] + "     " + drvinfo.VolumeLabel + "      " + drvinfo.DriveFormat + "    " + (drvinfo.TotalSize / 1024 / 1024 / 1024) + " GB");
         }
 
@@ -244,7 +240,7 @@ void BackupBcd(string path, int i) => ProcessBcdEdit("/export \"" + path + "Back
 
 string BcdEditGuid(string arg) => BcdEditRegex(arg, @"(?<guid>\{.+\})").Groups["guid"].Value;
 
-IEnumerable<XElement> GenerateXEs(Dictionary<string, string> keyValuePairs) => ((ShutdownType[])Enum.GetValues(typeof(ShutdownType))).Select<ShutdownType, XElement>(e => new("ShutdownAfterAction", new XAttribute("Type", e.ToString()), false)).Concat(keyValuePairs.Select<KeyValuePair<string, string>, XElement>(p => new("Guid", new XAttribute("Type", p.Key), p.Value)));
+IEnumerable<XElement> GenerateXEs(Dictionary<string, string> keyValuePairs) => ShutdownAction.Select(e => new XElement("ShutdownAfterAction", new XAttribute("Type", e.ToString().Substring(2)), false)).Concat(keyValuePairs.Select(p => new XElement("Guid", new XAttribute("Type", p.Key), p.Value)));
 
 void ErrorControl(string message) {
     BackgroundColor = ConsoleColor.DarkRed;
