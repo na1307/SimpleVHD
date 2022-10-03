@@ -1,5 +1,4 @@
 ﻿using ProjectV;
-using System.Windows.Forms;
 using static ProjectV.BcdEdit;
 
 PVConfig config;
@@ -59,7 +58,9 @@ void manual() {
     try {
         File.Copy(vhdDir + ChildCName + config.VhdFormat.ToString().ToLower(), vhdDir + Child2Name + config.VhdFormat.ToString().ToLower(), true);
         File.Copy(vhdDir + ChildCName + config.VhdFormat.ToString().ToLower(), vhdDir + Child1Name + config.VhdFormat.ToString().ToLower(), true);
-    } catch (IOException) { }
+    } catch (IOException) {
+        //
+    }
 }
 
 void auto() {
