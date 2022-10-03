@@ -14,7 +14,7 @@ internal class ExpandProcessor : ActionProcessor {
 
         ProcessDiskpart($"select vdisk file \"{VhdDir}{PVConfig.Instance.VhdFile}\"", "expand vdisk maximum " + getNewSize(m.Success ? m.Groups["size"].Value : throw new ProcessFailedException("diskpart 작업이 실패했습니다.\r\n\r\n" + output)));
 
-        ulong getNewSize(string size) {
+        static ulong getNewSize(string size) {
             FormInput dlg = new("확장", $"현재 최대 크기는 {size.Trim()} 입니다.\r\n\r\n새로운 최대 크기를 MB 단위로 입력하세요.\r\n새로운 최대 크기는 반드시 기존 크기보다 커야 합니다. (1GB = 1024MB)");
 
             while (true) {

@@ -142,7 +142,7 @@ try {
     ErrorControl(ex.ToString());
 }
 
-bool ConfigExists() {
+static bool ConfigExists() {
     while (true) {
         Clear();
         Beep();
@@ -156,7 +156,7 @@ bool ConfigExists() {
     }
 }
 
-VhdType GetVhdType() {
+static VhdType GetVhdType() {
     while (true) {
         Clear();
         Beep();
@@ -181,7 +181,7 @@ $@"
     }
 }
 
-OperatingStyle GetOperatingStyle() {
+static OperatingStyle GetOperatingStyle() {
     while (true) {
         Clear();
         Beep();
@@ -209,7 +209,7 @@ $@"
     }
 }
 
-string GetBackupDrive() {
+static string GetBackupDrive() {
     while (true) {
         Clear();
         Beep();
@@ -228,13 +228,13 @@ string GetBackupDrive() {
     }
 }
 
-void BackupBcd(string path, int i) => ProcessBcdEdit("/export \"" + path + "Backup-BCD-0" + i + "\"");
+static void BackupBcd(string path, int i) => ProcessBcdEdit("/export \"" + path + "Backup-BCD-0" + i + "\"");
 
-string BcdEditGuid(string arg) => BcdEditRegex(arg, @"(?<guid>\{.+\})").Groups["guid"].Value;
+static string BcdEditGuid(string arg) => BcdEditRegex(arg, @"(?<guid>\{.+\})").Groups["guid"].Value;
 
-IEnumerable<XElement> GenerateXEs(Dictionary<string, string> keyValuePairs) => ShutdownAction.Select(e => new XElement("ShutdownAfterAction", new XAttribute("Type", e.ToString().Substring(2)), false)).Concat(keyValuePairs.Select(p => new XElement("Guid", new XAttribute("Type", p.Key), p.Value)));
+static IEnumerable<XElement> GenerateXEs(Dictionary<string, string> keyValuePairs) => ShutdownAction.Select(e => new XElement("ShutdownAfterAction", new XAttribute("Type", e.ToString().Substring(2)), false)).Concat(keyValuePairs.Select(p => new XElement("Guid", new XAttribute("Type", p.Key), p.Value)));
 
-void ErrorControl(string message) {
+static void ErrorControl(string message) {
     BackgroundColor = ConsoleColor.DarkRed;
     ForegroundColor = ConsoleColor.White;
     Clear();
