@@ -96,8 +96,7 @@ void uninstall() {
     ProcessBcdEdit($"/delete {config[GuidType.Processor]} /cleanup");
     ProcessBcdEdit($"/delete {config[GuidType.Ramdisk]} /cleanup");
 
-    Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).DeleteValue("PV_Agent");
-    File.Delete(pvDir + "Agent.vbs");
+    Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).DeleteValue("PVStartup");
 
     File.Delete(vhdDir + Child1Name + config.VhdFormat.ToString().ToLower());
     File.Delete(vhdDir + Child2Name + config.VhdFormat.ToString().ToLower());

@@ -65,15 +65,7 @@ try {
 
     Directory.CreateDirectory(GetBackupDrive() + "\\" + BackupDirName);
 
-    using (StreamWriter vbs = new(pvDir + "Agent.vbs", false, System.Text.Encoding.GetEncoding(949))) {
-        vbs.WriteLine(
-$@"Set WshShell = CreateObject(""WScript.Shell"")
-WshShell.Run """"""{pvDir}Bin\Agent.exe"""""", 0
-Set WshShell = Nothing"
-);
-    }
-
-    Registry.SetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "PV_Agent", pvDir + "Agent.vbs", RegistryValueKind.String);
+    Registry.SetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "PVStartup", pvDir + "Bin\\Startup.exe", RegistryValueKind.String);
 
     BackupBcd(pvDir, 1);
 

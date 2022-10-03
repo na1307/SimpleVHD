@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectV", "ProjectV\ProjectV.csproj", "{B4B1C8A9-35EC-44E6-A5A9-89C9BAA0DBAA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectV.Agent", "ProjectV.Agent\ProjectV.Agent.csproj", "{00344650-08CF-438E-A1F1-6C3A1455E621}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectV.Startup", "ProjectV.Startup\ProjectV.Startup.csproj", "{00344650-08CF-438E-A1F1-6C3A1455E621}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectV.ControlPanel", "ProjectV.ControlPanel\ProjectV.ControlPanel.csproj", "{B06D377B-CC67-4F48-A9AF-87A913F6740F}"
 EndProject
