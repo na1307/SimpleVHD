@@ -22,7 +22,7 @@ public partial class App {
 
     internal static void SystemRestart() {
         using (Process shutdown = new() {
-            StartInfo = new() {
+            StartInfo = {
                 FileName = "shutdown.exe",
                 Arguments = "/r /t 0",
                 UseShellExecute = true,

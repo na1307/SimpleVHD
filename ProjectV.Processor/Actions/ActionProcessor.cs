@@ -113,7 +113,7 @@ internal abstract class ActionProcessor {
         }
 
         using (Process diskpart = new() {
-            StartInfo = new() {
+            StartInfo = {
                 FileName = "diskpart.exe",
                 Arguments = $"/s \"{PVDir}{dptemp}\"",
                 UseShellExecute = false,
@@ -139,7 +139,7 @@ internal abstract class ActionProcessor {
         }
 
         using (Process diskpart = new() {
-            StartInfo = new() {
+            StartInfo = {
                 FileName = "cmd.exe",
                 Arguments = $"/c diskpart /s \"{PVDir}{dptemp}\"",
                 UseShellExecute = false,

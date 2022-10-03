@@ -8,17 +8,53 @@ namespace ProjectV;
 /// </summary>
 public static class BcdEdit {
     /// <summary>
-    /// bcdedit 작업을 실행하고 그 출력을 반환
+    /// bcdedit 명령을 실행함
+    /// </summary>
+    /// <param name="arg">bcdedit 명령으로 실행할 매개 변수</param>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="BcdException"></exception>
+    public static void ProcessBcdEdit(string arg) {
+        if (string.IsNullOrWhiteSpace(arg)) throw new ArgumentException($"'{nameof(arg)}'은(는) null이거나 공백일 수 없습니다.", nameof(arg));
+
+        using Process bcdedit = new() {
+            StartInfo = {
+                FileName = "bcdedit.exe",
+                Arguments = arg,
+                Verb = "runas",
+                UseShellExecute = true,
+                WindowStyle = ProcessWindowStyle.Hidden
+            }
+        };
+
+        bcdedit.Start();
+        bcdedit.WaitForExit();
+
+        if (bcdedit.ExitCode != 0) throw new BcdException();
+    }
+
+    /// <summary>
+    /// 여러 bcdedit 명령을 실행함
+    /// </summary>
+    /// <param name="args">bcdedit 명령으로 실행할 매개 변수</param>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static void ProcessBcdEdit(params string[] args) {
+        if (args == null) throw new ArgumentNullException(nameof(args));
+
+        args.ToList().ForEach(ProcessBcdEdit);
+    }
+
+    /// <summary>
+    /// bcdedit 명령을 실행하고 그 출력을 반환함
     /// </summary>
     /// <param name="arg">bcdedit 명령으로 실행할 매개 변수</param>
     /// <returns>실행한 bcdedit 명령의 전체 출력</returns>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="BcdException"></exception>
-    public static string ProcessBcdEdit(string arg) {
+    public static string ProcessBcdEditOutput(string arg) {
         if (string.IsNullOrWhiteSpace(arg)) throw new ArgumentException($"'{nameof(arg)}'은(는) null이거나 공백일 수 없습니다.", nameof(arg));
 
         using Process bcdedit = new() {
-            StartInfo = new() {
+            StartInfo = {
                 FileName = "bcdedit.exe",
                 Arguments = arg,
                 UseShellExecute = false,
@@ -36,17 +72,6 @@ public static class BcdEdit {
     }
 
     /// <summary>
-    /// 여러 bcdedit 작업을 실행함
-    /// </summary>
-    /// <param name="args">bcdedit 명령으로 실행할 매개 변수</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    public static void ProcessBcdEdit(params string[] args) {
-        if (args == null) throw new ArgumentNullException(nameof(args));
-
-        foreach (var arg in args) ProcessBcdEdit(arg);
-    }
-
-    /// <summary>
     /// bcdedit 작업을 실행하고 그 출력에서 정규식 일치를 반환
     /// </summary>
     /// <param name="arg">bcdedit 명령으로 실행할 매개 변수</param>
@@ -54,7 +79,7 @@ public static class BcdEdit {
     /// <returns>정규식 <see cref="Match"/></returns>
     /// <exception cref="BcdException"></exception>
     public static Match BcdEditRegex(string arg, string pattern) {
-        var output = ProcessBcdEdit(arg);
+        var output = ProcessBcdEditOutput(arg);
         var m = Regex.Match(output, pattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
         return m.Success ? m : throw new BcdException(output);
@@ -68,7 +93,7 @@ public static class BcdEdit {
     /// <returns>정규식 <see cref="MatchCollection"/></returns>
     /// <exception cref="BcdException"></exception>
     public static MatchCollection BcdEditRegexAll(string arg, string pattern) {
-        var output = ProcessBcdEdit(arg);
+        var output = ProcessBcdEditOutput(arg);
         var m = Regex.Matches(output, pattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
         return m.Count > 0 ? m : throw new BcdException(output);
