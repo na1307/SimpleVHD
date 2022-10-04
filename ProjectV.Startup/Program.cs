@@ -97,7 +97,18 @@ static void uninstall(string pvDir, string vhdDir) {
     ProcessBcdEdit($"/delete {PVConfig.Instance[GuidType.Processor]} /cleanup");
     ProcessBcdEdit($"/delete {PVConfig.Instance[GuidType.Ramdisk]} /cleanup");
 
-    Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).DeleteValue("PVStartup");
+    using (System.Diagnostics.Process regedit = new() {
+        StartInfo = {
+            FileName = "reg.exe",
+            Arguments = "delete HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run /v PVStartup /f",
+            Verb = "runas",
+            UseShellExecute = true,
+            WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
+        }
+    }) {
+        regedit.Start();
+        regedit.WaitForExit();
+    }
 
     File.Delete(vhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
     File.Delete(vhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
