@@ -23,6 +23,7 @@ try {
     }
 
     PVConfig.Instance.Action = DoAction.DoNothing;
+    PVConfig.Instance.SaveConfig();
 
     switch (PVConfig.Instance.OperatingStyle) {
         case OperatingStyle.DifferentialManual:
@@ -38,9 +39,11 @@ try {
     return;
 }
 
+static void copy(string vhdDir, string vhd) => File.Copy(vhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), vhdDir + vhd + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
+
 static void rebuild(string vhdDir) {
-    File.Copy(vhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), vhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
-    File.Copy(vhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), vhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
+    copy(vhdDir, Child1Name);
+    copy(vhdDir, Child2Name);
 
     PVConfig.Instance.Action = DoAction.DoRebuild;
     PVConfig.Instance.SaveConfig();
@@ -52,31 +55,33 @@ static void rebuild(string vhdDir) {
 
 static void manual(string vhdDir) {
     try {
-        File.Copy(vhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), vhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
-        File.Copy(vhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), vhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
+        copy(vhdDir, Child2Name);
+        copy(vhdDir, Child1Name);
     } catch (IOException) {
         //
     }
 }
 
 static void auto(string vhdDir) {
-    string guidc = BcdEditRegex("/enum {current} /v", @"^identifier\s+(?<guid>\{.+\})").Groups["guid"].Value;
-    string guid1 = PVConfig.Instance[GuidType.Child1];
-    string guid2 = PVConfig.Instance[GuidType.Child2];
+    var guid1 = PVConfig.Instance[GuidType.Child1];
+    var guid2 = PVConfig.Instance[GuidType.Child2];
+    var vhd = string.Empty;
 
-    if (guidc == guid2) {
-        File.Copy(vhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), vhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
-        ProcessBcdEdit($"/default {guid1}");
-        ProcessBcdEdit($"/displayorder {guid1} /addfirst");
-        ProcessBcdEdit($"/displayorder {guid2} /remove");
-    } else if (guidc == guid1) {
-        File.Copy(vhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), vhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
+    try {
+        vhd = Child1Name;
+        copy(vhdDir, vhd);
+
+        vhd = Child2Name;
+        copy(vhdDir, vhd);
+    } catch (IOException) when (vhd == Child1Name) {
+        copy(vhdDir, Child2Name);
         ProcessBcdEdit($"/default {guid2}");
         ProcessBcdEdit($"/displayorder {guid2} /addfirst");
         ProcessBcdEdit($"/displayorder {guid1} /remove");
-    } else {
-        File.Copy(vhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), vhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
-        File.Copy(vhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), vhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
+    } catch (IOException) when (vhd == Child2Name) {
+        ProcessBcdEdit($"/default {guid1}");
+        ProcessBcdEdit($"/displayorder {guid1} /addfirst");
+        ProcessBcdEdit($"/displayorder {guid2} /remove");
     }
 }
 
