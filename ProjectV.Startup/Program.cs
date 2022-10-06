@@ -17,7 +17,7 @@ try {
 
     if (PVConfig.Instance.OperatingStyle == OperatingStyle.Simple) return;
 
-    if (PVConfig.Instance.Action == DoAction.DoParentBoot && PVConfig.Instance.VhdFormat == VhdFormat.VHDX) {
+    if (PVConfig.Instance.Action == DoAction.DoParentBoot && PVConfig.Instance.VhdFormat == VhdFormat.Vhdx) {
         rebuild(vhdDir);
         return;
     }

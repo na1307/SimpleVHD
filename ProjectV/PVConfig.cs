@@ -153,7 +153,7 @@ public sealed class PVConfig : IXmlSerializable {
                         var p = GetType().GetProperty(reader.LocalName);
                         var v = reader.ReadElementContentAsString();
 
-                        p.SetValue(this, !p.PropertyType.IsEnum ? v : Enum.Parse(p.PropertyType, v, false), null);
+                        p.SetValue(this, !p.PropertyType.IsEnum ? v : Enum.Parse(p.PropertyType, v, true), null);
                         break;
                 }
             }

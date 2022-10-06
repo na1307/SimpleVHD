@@ -20,13 +20,13 @@ public partial class FormatControl {
 
     private void UserControl_Loaded(object sender, RoutedEventArgs e) {
         switch (PVConfig.Instance.VhdFormat) {
-            case VhdFormat.VHD:
+            case VhdFormat.Vhd:
                 VhdImage.Source = new BitmapImage(new(@"resources\back.png", UriKind.Relative));
                 VhdBlock.Text = "뒤로";
                 VhdBorder.BorderBrush = Brushes.Red;
                 break;
 
-            case VhdFormat.VHDX:
+            case VhdFormat.Vhdx:
                 VhdxImage.Source = new BitmapImage(new(@"resources\back.png", UriKind.Relative));
                 VhdxBlock.Text = "뒤로";
                 VhdxBorder.BorderBrush = Brushes.Red;
@@ -42,11 +42,11 @@ public partial class FormatControl {
 
         switch (((Button)sender).Name) {
             case nameof(VhdButton):
-                if (vf != VhdFormat.VHD) doProcess(VhdFormat.VHD); else MainWindow.ChangeContent(back);
+                if (vf != VhdFormat.Vhd) doProcess(VhdFormat.Vhd); else MainWindow.ChangeContent(back);
                 break;
 
             case nameof(VhdxButton):
-                if (vf != VhdFormat.VHDX) doProcess(VhdFormat.VHDX); else MainWindow.ChangeContent(back);
+                if (vf != VhdFormat.Vhdx) doProcess(VhdFormat.Vhdx); else MainWindow.ChangeContent(back);
                 break;
 
             default:

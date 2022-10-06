@@ -7,9 +7,9 @@ public enum VhdFormat {
     /// <summary>
     /// VHD 포맷
     /// </summary>
-    VHD,
+    Vhd,
     /// <summary>
     /// VHDX 포맷
     /// </summary>
-    VHDX
+    Vhdx
 }
