@@ -20,7 +20,7 @@
   <ItemGroup>
     <Using Include="System.Xml.Linq" />
     <Using Include="ProjectV.GlobalConstants" Static="true" />
-    <Using Include="ProjectV.GlobalProperties" Static="true"/>
+    <Using Include="ProjectV.GlobalProperties" Static="true" />
     <Using Remove="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
