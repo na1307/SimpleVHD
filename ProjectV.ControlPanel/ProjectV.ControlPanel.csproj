@@ -68,22 +68,22 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="ErrDialog.cs" />
-    <Compile Include="FormatControl.xaml.cs">
-      <DependentUpon>FormatControl.xaml</DependentUpon>
+    <Compile Include="FormatScreen.xaml.cs">
+      <DependentUpon>FormatScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HomeControl.xaml.cs">
-      <DependentUpon>HomeControl.xaml</DependentUpon>
+    <Compile Include="HomeScreen.xaml.cs">
+      <DependentUpon>HomeScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="OptionsControl.xaml.cs">
-      <DependentUpon>OptionsControl.xaml</DependentUpon>
+    <Compile Include="OptionsScreen.xaml.cs">
+      <DependentUpon>OptionsScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="PanelAction.cs" />
-    <Compile Include="PanelControl.xaml.cs">
-      <DependentUpon>PanelControl.xaml</DependentUpon>
+    <Compile Include="ActionScreen.xaml.cs">
+      <DependentUpon>ActionScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -98,14 +98,14 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="StyleControl.xaml.cs">
-      <DependentUpon>StyleControl.xaml</DependentUpon>
+    <Compile Include="StyleScreen.xaml.cs">
+      <DependentUpon>StyleScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ToolsControl.xaml.cs">
-      <DependentUpon>ToolsControl.xaml</DependentUpon>
+    <Compile Include="ToolsScreen.xaml.cs">
+      <DependentUpon>ToolsScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TypeControl.xaml.cs">
-      <DependentUpon>TypeControl.xaml</DependentUpon>
+    <Compile Include="TypeScreen.xaml.cs">
+      <DependentUpon>TypeScreen.xaml</DependentUpon>
     </Compile>
     <None Include="app.config" />
     <None Include="app.manifest" />
@@ -121,11 +121,11 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </ApplicationDefinition>
-    <Page Include="FormatControl.xaml">
+    <Page Include="FormatScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="HomeControl.xaml">
+    <Page Include="HomeScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
@@ -133,23 +133,23 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="OptionsControl.xaml">
+    <Page Include="OptionsScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="PanelControl.xaml">
+    <Page Include="ActionScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="StyleControl.xaml">
+    <Page Include="StyleScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="ToolsControl.xaml">
+    <Page Include="ToolsScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="TypeControl.xaml">
+    <Page Include="TypeScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

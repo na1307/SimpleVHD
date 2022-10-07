@@ -2,12 +2,12 @@
 namespace ProjectV.ControlPanel;
 
 /// <summary>
-/// TypeControl.xaml에 대한 상호 작용 논리
+/// FormatScreen.xaml에 대한 상호 작용 논리
 /// </summary>
-public partial class FormatControl {
+public partial class FormatScreen {
     private readonly ContentControl back;
 
-    public FormatControl(ContentControl backscreen) {
+    public FormatScreen(ContentControl backscreen) {
         InitializeComponent();
 
         foreach (var button in new[] { VhdButton, VhdxButton }) {

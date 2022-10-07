@@ -2,12 +2,12 @@
 namespace ProjectV.ControlPanel;
 
 /// <summary>
-/// TypeControl.xaml에 대한 상호 작용 논리
+/// TypeScreen.xaml에 대한 상호 작용 논리
 /// </summary>
-public partial class TypeControl {
+public partial class TypeScreen {
     private readonly ContentControl back;
 
-    public TypeControl(ContentControl backscreen) {
+    public TypeScreen(ContentControl backscreen) {
         InitializeComponent();
 
         foreach (var button in new[] { ExpandableButton, FixedButton }) {

@@ -2,13 +2,13 @@
 namespace ProjectV.ControlPanel;
 
 /// <summary>
-/// PanelControl.xaml에 대한 상호 작용 논리
+/// ActionScreen.xaml에 대한 상호 작용 논리
 /// </summary>
-public partial class PanelControl {
+public partial class ActionScreen {
     private readonly ContentControl back;
     private readonly PanelAction pAction;
 
-    public PanelControl(ContentControl backscreen, PanelAction action) {
+    public ActionScreen(ContentControl backscreen, PanelAction action) {
         InitializeComponent();
 
         DoButton.Click += MainWindow.PlayClickSound;

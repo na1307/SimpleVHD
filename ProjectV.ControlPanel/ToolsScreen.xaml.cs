@@ -5,10 +5,10 @@ using static ProjectV.ControlPanel.PanelAction;
 namespace ProjectV.ControlPanel;
 
 /// <summary>
-/// ToolsControl.xaml에 대한 상호 작용 논리
+/// ToolsScreen.xaml에 대한 상호 작용 논리
 /// </summary>
-public partial class ToolsControl {
-    public ToolsControl() {
+public partial class ToolsScreen {
+    public ToolsScreen() {
         InitializeComponent();
 
         foreach (var button in new[] { ParentButton, ProcessorButton, ExpandButton, ShrinkButton, TypeButton, FormatButton, StyleButton, UninstallButton }) {

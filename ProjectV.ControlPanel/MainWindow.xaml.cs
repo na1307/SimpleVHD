@@ -10,19 +10,19 @@ public partial class MainWindow {
     internal static void ChangeContent(ContentControl parent, PanelAction action) {
         switch (action) {
             case PanelAction.DoConvertType:
-                ChangeContent(new TypeControl(parent));
+                ChangeContent(new TypeScreen(parent));
                 break;
 
             case PanelAction.DoConvertFormat:
-                ChangeContent(new FormatControl(parent));
+                ChangeContent(new FormatScreen(parent));
                 break;
 
             case PanelAction.DoSwitchStyle:
-                ChangeContent(new StyleControl(parent));
+                ChangeContent(new StyleScreen(parent));
                 break;
 
             default:
-                ChangeContent(new PanelControl(parent, action));
+                ChangeContent(new ActionScreen(parent, action));
                 break;
         }
     }
@@ -39,22 +39,22 @@ public partial class MainWindow {
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e) {
-        ContentArea.Content = new HomeControl();
+        ContentArea.Content = new HomeScreen();
         AboutButton.ToolTip = AssemblyProperties.AssemblyTitle + (string)AboutButton.ToolTip;
     }
 
     private void Button_Click(object sender, RoutedEventArgs e) {
         switch (((Button)sender).Name) {
             case nameof(HomeButton):
-                ContentArea.Content = new HomeControl();
+                ContentArea.Content = new HomeScreen();
                 break;
 
             case nameof(ToolsButton):
-                ContentArea.Content = new ToolsControl();
+                ContentArea.Content = new ToolsScreen();
                 break;
 
             case nameof(OptionButton):
-                ContentArea.Content = new OptionsControl();
+                ContentArea.Content = new OptionsScreen();
                 break;
 
             case nameof(HelpButton):

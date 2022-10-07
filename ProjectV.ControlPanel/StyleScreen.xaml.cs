@@ -2,12 +2,12 @@
 namespace ProjectV.ControlPanel;
 
 /// <summary>
-/// StyleControl.xaml에 대한 상호 작용 논리
+/// StyleScreen.xaml에 대한 상호 작용 논리
 /// </summary>
-public partial class StyleControl {
+public partial class StyleScreen {
     private readonly ContentControl back;
 
-    public StyleControl(ContentControl backscreen) {
+    public StyleScreen(ContentControl backscreen) {
         InitializeComponent();
 
         foreach (var button in new[] { SimpleButton, DifferentialManualButton, DifferentialAutoButton }) {

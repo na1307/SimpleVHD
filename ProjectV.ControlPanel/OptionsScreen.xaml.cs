@@ -2,10 +2,10 @@
 namespace ProjectV.ControlPanel;
 
 /// <summary>
-/// OptionsControl.xaml에 대한 상호 작용 논리
+/// OptionsScreen.xaml에 대한 상호 작용 논리
 /// </summary>
-public partial class OptionsControl {
-    public OptionsControl() => InitializeComponent();
+public partial class OptionsScreen {
+    public OptionsScreen() => InitializeComponent();
 
     private void UserControl_Loaded(object sender, RoutedEventArgs e) {
         var config = PVConfig.Instance;

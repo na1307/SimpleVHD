@@ -5,10 +5,10 @@ using static ProjectV.ControlPanel.PanelAction;
 namespace ProjectV.ControlPanel;
 
 /// <summary>
-/// HomeControl.xaml에 대한 상호 작용 논리
+/// HomeScreen.xaml에 대한 상호 작용 논리
 /// </summary>
-public partial class HomeControl {
-    public HomeControl() {
+public partial class HomeScreen {
+    public HomeScreen() {
         InitializeComponent();
 
         foreach (var button in new[] { RevertButton, MergeButton, BackupButton, RestoreButton }) button.Click += PlayClickSound;
