@@ -14,16 +14,9 @@ public static class AssemblyProperties {
     public static string VersionNumber {
         get {
             var attribute = GetAttribute<AssemblyFileVersionAttribute>();
+            var version = Version.Parse(attribute != null ? attribute.Version : GetAttribute<AssemblyVersionAttribute>()!.Version);
 
-            if (attribute != null) {
-                var version = Version.Parse(attribute.Version);
-
-                return version.ToString(2) + (version.Build == 0 ? string.Empty : "." + version.Build.ToString());
-            } else {
-                var version = Version.Parse(GetAttribute<AssemblyVersionAttribute>()!.Version);
-
-                return version.ToString(2) + (version.Build == 0 ? string.Empty : "." + version.Build.ToString());
-            }
+            return version.ToString(2) + (version.Build == 0 ? string.Empty : "." + version.Build.ToString());
         }
     }
 
