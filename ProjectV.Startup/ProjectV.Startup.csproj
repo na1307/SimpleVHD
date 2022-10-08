@@ -1,21 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <UseWindowsForms>true</UseWindowsForms>
-    <TargetFramework>net40-client</TargetFramework>
-    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
     <AssemblyName>Startup</AssemblyName>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <IsPublishable>False</IsPublishable>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <WarningsAsErrors>Nullable</WarningsAsErrors>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
     <Using Include="ProjectV.GlobalConstants" Static="true" />
@@ -28,7 +16,4 @@
   <ItemGroup>
     <ProjectReference Include="..\ProjectV\ProjectV.csproj" />
   </ItemGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).*&quot; &quot;$(SolutionDir)Bin&quot;" />
-  </Target>
 </Project>

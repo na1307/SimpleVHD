@@ -1,16 +1,8 @@
-﻿#nullable enable
-global using System;
-global using System.Diagnostics;
-global using System.IO;
-global using System.Linq;
+﻿global using System.Diagnostics;
 global using System.Windows;
 global using System.Windows.Controls;
 global using System.Windows.Media;
 global using System.Windows.Media.Imaging;
-global using static ProjectV.BcdEdit;
-global using static ProjectV.GlobalConstants;
-global using static ProjectV.GlobalProperties;
-using System.Threading;
 
 namespace ProjectV.ControlPanel;
 

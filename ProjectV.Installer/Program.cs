@@ -3,6 +3,7 @@ using ProjectV;
 using ProjectV.Installer;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 using static ProjectV.BcdEdit;
 using static System.Console;
 

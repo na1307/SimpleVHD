@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace ProjectV.Processor.Actions;
+﻿namespace ProjectV.Processor.Actions;
 
 internal class EmergencyRestoreProcessor : RestoreProcessor {
     protected override string Name => "응급 복원";

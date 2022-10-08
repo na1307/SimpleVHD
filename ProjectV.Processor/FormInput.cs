@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace ProjectV.Processor;
+﻿namespace ProjectV.Processor;
 
 public partial class FormInput {
     public string Input => textBox1.Text;

@@ -1,7 +1,4 @@
-﻿#nullable enable
-global using static ProjectV.Processor.ErrDialog;
-
-namespace ProjectV.Processor;
+﻿namespace ProjectV.Processor;
 
 public static class ErrDialog {
     public static void ErrMsg(string message, bool exit) {

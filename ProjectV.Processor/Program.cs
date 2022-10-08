@@ -1,13 +1,4 @@
-﻿#nullable enable
-global using System;
-global using System.Diagnostics;
-global using System.IO;
-global using System.Windows.Forms;
-global using static ProjectV.BcdEdit;
-global using static ProjectV.GlobalConstants;
-global using static ProjectV.GlobalProperties;
-using ProjectV;
-using System.Threading;
+﻿using ProjectV;
 
 // It is unfortunate but we have to set it to Unknown first.
 Thread.CurrentThread.SetApartmentState(ApartmentState.Unknown);

@@ -1,7 +1,4 @@
-﻿#nullable enable
-global using static ProjectV.ControlPanel.ErrDialog;
-
-namespace ProjectV.ControlPanel;
+﻿namespace ProjectV.ControlPanel;
 
 public static class ErrDialog {
     public static void ErrMsg(string message, bool exit) {

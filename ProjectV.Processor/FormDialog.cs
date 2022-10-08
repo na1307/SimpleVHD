@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace ProjectV.Processor;
+﻿namespace ProjectV.Processor;
 
 public partial class FormDialog {
     protected FormDialog() => InitializeComponent();

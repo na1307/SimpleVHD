@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace ProjectV.ControlPanel;
+﻿namespace ProjectV.ControlPanel;
 
 /// <summary>
 /// StyleScreen.xaml에 대한 상호 작용 논리

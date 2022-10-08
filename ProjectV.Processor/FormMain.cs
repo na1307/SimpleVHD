@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace ProjectV.Processor;
+﻿namespace ProjectV.Processor;
 
 public sealed partial class FormMain {
     protected sealed override CreateParams CreateParams {

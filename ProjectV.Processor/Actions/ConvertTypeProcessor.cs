@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace ProjectV.Processor.Actions;
+﻿namespace ProjectV.Processor.Actions;
 
 internal class ConvertTypeProcessor : ActionProcessor {
     protected override string Name => "VHD 형식 변환";

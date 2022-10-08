@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace ProjectV.Processor.Actions;
+﻿namespace ProjectV.Processor.Actions;
 
 internal class RevertProcessor : ActionProcessor {
     protected override string Name => "초기화";

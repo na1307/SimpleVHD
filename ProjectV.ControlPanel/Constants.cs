@@ -1,7 +1,4 @@
-﻿#nullable enable
-global using static ProjectV.ControlPanel.Constants;
-
-namespace ProjectV.ControlPanel;
+﻿namespace ProjectV.ControlPanel;
 
 internal static class Constants {
     public const string BackupName = "백업";

@@ -1,5 +1,19 @@
 <Project>
- <PropertyGroup>
-   <LangVersion>latest</LangVersion>
- </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net40-client</TargetFramework>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <IsPublishable>False</IsPublishable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /IY &quot;$(TargetDir)$(TargetName).*&quot; &quot;$(SolutionDir)Bin&quot;" />
+  </Target>
 </Project>

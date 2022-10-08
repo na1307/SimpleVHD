@@ -1,8 +1,4 @@
-﻿#nullable enable
-global using static ProjectV.Processor.Constants;
-using System.Linq;
-
-namespace ProjectV.Processor;
+﻿namespace ProjectV.Processor;
 
 internal static class Constants {
     public const int RestartCode = 0;

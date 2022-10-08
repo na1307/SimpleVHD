@@ -1,5 +1,4 @@
-﻿#nullable enable
-using static ProjectV.AssemblyProperties;
+﻿using static ProjectV.AssemblyProperties;
 
 namespace ProjectV.ControlPanel;
 

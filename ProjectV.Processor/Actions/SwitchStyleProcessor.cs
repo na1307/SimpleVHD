@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace ProjectV.Processor.Actions;
+﻿namespace ProjectV.Processor.Actions;
 
 internal class SwitchStyleProcessor : ActionProcessor {
     protected override string Name => "운영 스타일 전환";

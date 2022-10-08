@@ -1,5 +1,4 @@
-﻿#nullable enable
-using static ProjectV.ControlPanel.MainWindow;
+﻿using static ProjectV.ControlPanel.MainWindow;
 using static ProjectV.ControlPanel.PanelAction;
 
 namespace ProjectV.ControlPanel;

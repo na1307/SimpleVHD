@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace ProjectV.Processor;
+﻿namespace ProjectV.Processor;
 
 internal abstract class PVProcessorException : PVException {
     protected PVProcessorException(string message) : base(message) { }

@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace ProjectV.Processor.Actions;
+﻿namespace ProjectV.Processor.Actions;
 
 internal class BackupProcessor : ActionProcessor {
     protected override string Name => "백업";

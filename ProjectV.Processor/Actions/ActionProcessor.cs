@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace ProjectV.Processor.Actions;
+﻿namespace ProjectV.Processor.Actions;
 
 internal abstract class ActionProcessor {
     private const string dptemp = "dptemp.txt";

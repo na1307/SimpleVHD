@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace ProjectV.Processor.Actions;
+﻿namespace ProjectV.Processor.Actions;
 
 internal static class ProcessorFactory {
     public static ActionProcessor Create(DoAction action) => action switch {
