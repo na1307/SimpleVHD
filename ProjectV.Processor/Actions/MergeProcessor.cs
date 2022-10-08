@@ -17,9 +17,9 @@ internal class MergeProcessor : ActionProcessor {
 
         if (clean == child1 && clean == child2) {
             throw new ProcessFailedException("병합할 항목이 없습니다.");
-        } else if (clean == child1 && clean != child2) {
+        } else if (clean == child1) {
             child = Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower();
-        } else if (clean != child1 && clean == child2) {
+        } else if (clean == child2) {
             child = Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower();
         } else {
             throw new ProcessFailedException("자식 VHD 둘 모두 깨끗한 VHD가 아닙니다. 초기화 시스템이 정상적으로 작동되지 않았을 수 있습니다.");

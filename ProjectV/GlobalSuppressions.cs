@@ -5,6 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Major Code Smell", "S3925:\"ISerializable\" should be implemented correctly", Scope = "namespaceanddescendants", Target = "~N:ProjectV")]
-[assembly: SuppressMessage("Major Bug", "S1751:Loops with at most one iteration should be refactored", Scope = "type", Target = "~T:ProjectV.PVConfig")]
-[assembly: SuppressMessage("Major Bug", "S1751:Loops with at most one iteration should be refactored", Scope = "member", Target = "~P:ProjectV.GlobalProperties.BackupExists~System.Boolean")]
+[assembly: SuppressMessage("Performance", "CA1806:메서드 결과를 무시하지 마세요.", Scope = "member", Target = "~M:ProjectV.Firmware.#cctor")]

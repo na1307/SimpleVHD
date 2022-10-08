@@ -2,7 +2,10 @@
 root = true
 
 [*.{cs,vb}]
+dotnet_diagnostic.CA1824.severity=silent
 dotnet_diagnostic.S1075.severity=silent
+dotnet_diagnostic.S1751.severity=silent
+dotnet_diagnostic.S3925.severity=silent
 
 # C# 파일
 [*.cs]

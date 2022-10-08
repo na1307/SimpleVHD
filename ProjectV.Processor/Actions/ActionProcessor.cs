@@ -102,7 +102,7 @@ internal abstract class ActionProcessor {
 
     protected virtual void DoProcessCore() { }
 
-    protected void ProcessDiskpart(params string[] cmds) {
+    protected static void ProcessDiskpart(params string[] cmds) {
         if (cmds == null) throw new ArgumentNullException(nameof(cmds));
 
         using (StreamWriter ds = new(PVDir + dptemp, false, System.Text.Encoding.GetEncoding(949))) {
@@ -128,7 +128,7 @@ internal abstract class ActionProcessor {
         }
     }
 
-    protected string ProcessDiskpartOutput(params string[] cmds) {
+    protected static string ProcessDiskpartOutput(params string[] cmds) {
         if (cmds == null) throw new ArgumentNullException(nameof(cmds));
 
         using (StreamWriter ds = new(PVDir + dptemp, false, System.Text.Encoding.GetEncoding(949))) {
