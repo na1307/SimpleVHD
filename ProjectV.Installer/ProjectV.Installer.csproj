@@ -6,8 +6,6 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Using Include="ProjectV.GlobalConstants" Static="true" />
-    <Using Include="ProjectV.GlobalProperties" Static="true" />
     <Using Remove="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>

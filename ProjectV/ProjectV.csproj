@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <Using Include="ProjectV.GlobalConstants" Static="true" />
-    <Using Include="ProjectV.GlobalProperties" Static="true" />
     <Using Remove="System.Net.Http" />
   </ItemGroup>
 </Project>

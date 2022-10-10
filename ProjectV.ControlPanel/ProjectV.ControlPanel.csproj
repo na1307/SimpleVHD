@@ -30,8 +30,6 @@
     <Resource Include="resources\tools.png" />
   </ItemGroup>
   <ItemGroup>
-    <Using Include="ProjectV.GlobalConstants" Static="true" />
-    <Using Include="ProjectV.GlobalProperties" Static="true" />
     <Using Include="ProjectV.BcdEdit" Static="true" />
     <Using Include="ProjectV.ControlPanel.Constants" Static="true" />
     <Using Include="ProjectV.ControlPanel.ErrDialog" Static="true" />

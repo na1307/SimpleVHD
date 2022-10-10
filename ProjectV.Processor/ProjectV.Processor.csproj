@@ -6,8 +6,6 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <Using Include="ProjectV.GlobalConstants" Static="true" />
-    <Using Include="ProjectV.GlobalProperties" Static="true" />
     <Using Include="ProjectV.BcdEdit" Static="true" />
     <Using Include="ProjectV.Processor.Constants" Static="true" />
     <Using Include="ProjectV.Processor.ErrDialog" Static="true" />
