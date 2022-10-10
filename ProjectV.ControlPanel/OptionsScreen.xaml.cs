@@ -4,45 +4,27 @@
 /// OptionsScreen.xaml에 대한 상호 작용 논리
 /// </summary>
 public partial class OptionsScreen {
-    public OptionsScreen() => InitializeComponent();
+    public OptionsScreen() {
+        InitializeComponent();
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e) {
-        var config = PVConfig.Instance;
+        SBackupBox.IsChecked = PVConfig.Instance[DoAction.DoBackup];
+        SRestoreBox.IsChecked = PVConfig.Instance[DoAction.DoRestore];
+        SRevertBox.IsChecked = PVConfig.Instance[DoAction.DoRevert];
+        SMergeBox.IsChecked = PVConfig.Instance[DoAction.DoMerge];
 
-        SBackupBox.IsChecked = config[DoAction.DoBackup];
-        SRestoreBox.IsChecked = config[DoAction.DoRestore];
-        SRevertBox.IsChecked = config[DoAction.DoRevert];
-        SMergeBox.IsChecked = config[DoAction.DoMerge];
-
-        foreach (System.Text.RegularExpressions.Match guid in BcdEditRegexAll("/enum {bootmgr} /v", @"\{.+\}")) if (guid.Value == config[GuidType.Processor]) HideProcessorBox.IsChecked = false;
-    }
-
-    private void CheckBox_Click(object sender, RoutedEventArgs e) {
-        var config = PVConfig.Instance;
-
-        switch (((CheckBox)sender).Name) {
-            case nameof(SBackupBox):
-                config[DoAction.DoBackup] = SBackupBox.IsChecked.GetValueOrDefault();
-                break;
-
-            case nameof(SRestoreBox):
-                config[DoAction.DoRestore] = SRestoreBox.IsChecked.GetValueOrDefault();
-                break;
-
-            case nameof(SRevertBox):
-                config[DoAction.DoRevert] = SRevertBox.IsChecked.GetValueOrDefault();
-                break;
-
-            case nameof(SMergeBox):
-                config[DoAction.DoMerge] = SMergeBox.IsChecked.GetValueOrDefault();
-                break;
-
-            case nameof(HideProcessorBox):
-                ProcessBcdEdit("/displayorder " + config[GuidType.Processor] + (!HideProcessorBox.IsChecked.GetValueOrDefault() ? " /addlast" : " /remove"));
-                break;
-
-            default:
-                throw new NotImplementedException();
+        foreach (var _ in BcdEditRegexAll("/enum {bootmgr} /v", @"\{.+\}").Cast<System.Text.RegularExpressions.Match>().Where(guid => guid.Value == PVConfig.Instance[GuidType.Processor])) {
+            HideProcessorBox.IsChecked = false;
+            break;
         }
     }
+
+    private void ShutdownBox_Click(object sender, RoutedEventArgs e) => PVConfig.Instance[((CheckBox)sender).Name switch {
+        nameof(SBackupBox) => DoAction.DoBackup,
+        nameof(SRestoreBox) => DoAction.DoRestore,
+        nameof(SRevertBox) => DoAction.DoRevert,
+        nameof(SMergeBox) => DoAction.DoMerge,
+        _ => throw new NotImplementedException()
+    }] = ((CheckBox)sender).IsChecked!.Value;
+
+    private void HideProcessorBox_Click(object sender, RoutedEventArgs e) => ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.Processor] + (!HideProcessorBox.IsChecked!.Value ? " /addlast" : " /remove"));
 }

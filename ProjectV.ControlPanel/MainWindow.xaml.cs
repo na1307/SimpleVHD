@@ -1,59 +1,49 @@
-﻿namespace ProjectV.ControlPanel;
+﻿using System.ComponentModel;
+
+namespace ProjectV.ControlPanel;
 
 /// <summary>
 /// MainWindow.xaml에 대한 상호 작용 논리
 /// </summary>
-public partial class MainWindow {
-    internal static void PlayClickSound(object sender, RoutedEventArgs e) => new System.Media.SoundPlayer(Properties.Resources.Interaction).Play();
+public partial class MainWindow : INotifyPropertyChanged {
+    private Screen _Screen = new HomeScreen();
 
-    internal static void ChangeContent(ContentControl parent, PanelAction action) {
-        switch (action) {
-            case PanelAction.DoConvertType:
-                ChangeContent(new TypeScreen(parent));
-                break;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-            case PanelAction.DoConvertFormat:
-                ChangeContent(new FormatScreen(parent));
-                break;
-
-            case PanelAction.DoSwitchStyle:
-                ChangeContent(new StyleScreen(parent));
-                break;
-
-            default:
-                ChangeContent(new ActionScreen(parent, action));
-                break;
+    public Screen Screen {
+        get => _Screen;
+        set {
+            _Screen = value;
+            OnPropertyChanged("Screen");
         }
     }
 
-    internal static void ChangeContent(ContentControl newcontent) => ((MainWindow)Application.Current.MainWindow).ContentArea.Content = newcontent;
-
     public MainWindow() {
         InitializeComponent();
+        DataContext = this;
 
         foreach (var button in new[] { HomeButton, ToolsButton, OptionButton, HelpButton, AboutButton, ExitButton }) {
             button.Click += PlayClickSound;
             button.Click += Button_Click;
         }
-    }
 
-    private void Window_Loaded(object sender, RoutedEventArgs e) {
-        ContentArea.Content = new HomeScreen();
         AboutButton.ToolTip = AssemblyProperties.AssemblyTitle + (string)AboutButton.ToolTip;
     }
+
+    internal static void PlayClickSound(object sender, RoutedEventArgs e) => new System.Media.SoundPlayer(Properties.Resources.Interaction).Play();
 
     private void Button_Click(object sender, RoutedEventArgs e) {
         switch (((Button)sender).Name) {
             case nameof(HomeButton):
-                ContentArea.Content = new HomeScreen();
+                Screen = new HomeScreen();
                 break;
 
             case nameof(ToolsButton):
-                ContentArea.Content = new ToolsScreen();
+                Screen = new ToolsScreen();
                 break;
 
             case nameof(OptionButton):
-                ContentArea.Content = new OptionsScreen();
+                Screen = new OptionsScreen();
                 break;
 
             case nameof(HelpButton):
@@ -72,4 +62,6 @@ public partial class MainWindow {
                 throw new InvalidOperationException();
         }
     }
+
+    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new(name));
 }

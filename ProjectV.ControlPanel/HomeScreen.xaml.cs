@@ -1,5 +1,4 @@
-﻿using static ProjectV.ControlPanel.MainWindow;
-using static ProjectV.ControlPanel.PanelAction;
+﻿using static ProjectV.ControlPanel.PanelAction;
 
 namespace ProjectV.ControlPanel;
 
@@ -10,10 +9,8 @@ public partial class HomeScreen {
     public HomeScreen() {
         InitializeComponent();
 
-        foreach (var button in new[] { RevertButton, MergeButton, BackupButton, RestoreButton }) button.Click += PlayClickSound;
-    }
+        foreach (var button in new[] { RevertButton, MergeButton, BackupButton, RestoreButton }) button.Click += MainWindow.PlayClickSound;
 
-    private void UserControl_Initialized(object sender, EventArgs e) {
         if (!BackupExists) RestoreButton.IsEnabled = false;
 
         switch (PVConfig.Instance.OperatingStyle) {
@@ -35,7 +32,7 @@ public partial class HomeScreen {
         }
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e) => ChangeContent(this, ((Button)sender).Name switch {
+    private void Button_Click(object sender, RoutedEventArgs e) => ((MainWindow)Application.Current.MainWindow).Screen = SubScreenFactory.Create(this, ((Button)sender).Name switch {
         nameof(RevertButton) => DoRevert,
         nameof(MergeButton) => DoMerge,
         nameof(BackupButton) => DoBackup,

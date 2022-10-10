@@ -12,8 +12,8 @@
     <Resource Include="resources\doexpand.png" />
     <Resource Include="resources\doformat.png" />
     <Resource Include="resources\domerge.png" />
-    <Resource Include="resources\doparent.png" />
-    <Resource Include="resources\doprocessor.png" />
+    <Resource Include="resources\doparentboot.png" />
+    <Resource Include="resources\doprocessorboot.png" />
     <Resource Include="resources\dorestore.png" />
     <Resource Include="resources\dorevert.png" />
     <Resource Include="resources\doshrink.png" />

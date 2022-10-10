@@ -1,5 +1,4 @@
-﻿using static ProjectV.ControlPanel.MainWindow;
-using static ProjectV.ControlPanel.PanelAction;
+﻿using static ProjectV.ControlPanel.PanelAction;
 
 namespace ProjectV.ControlPanel;
 
@@ -11,13 +10,9 @@ public partial class ToolsScreen {
         InitializeComponent();
 
         foreach (var button in new[] { ParentButton, ProcessorButton, ExpandButton, ShrinkButton, TypeButton, FormatButton, StyleButton, UninstallButton }) {
-            button.Click += PlayClickSound;
+            button.Click += MainWindow.PlayClickSound;
             button.Click += Button_Click;
         }
-    }
-
-    private void UserControl_Loaded(object sender, RoutedEventArgs e) {
-        var config = PVConfig.Instance;
 
         if (!IsDifferentialStyle) {
             ParentButton.IsEnabled = false;
@@ -29,10 +24,10 @@ public partial class ToolsScreen {
             FormatButton.IsEnabled = false;
         }
 
-        if (config.WinVer == WinVer.Seven) FormatButton.IsEnabled = false;
+        if (PVConfig.Instance.WinVer == WinVer.Seven) FormatButton.IsEnabled = false;
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e) => ChangeContent(this, ((Button)sender).Name switch {
+    private void Button_Click(object sender, RoutedEventArgs e) => ((MainWindow)Application.Current.MainWindow).Screen = SubScreenFactory.Create(this, ((Button)sender).Name switch {
         nameof(ParentButton) => DoParentBoot,
         nameof(ProcessorButton) => DoProcessorBoot,
         nameof(ExpandButton) => DoExpand,
