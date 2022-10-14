@@ -20,9 +20,8 @@ public static class BcdEdit {
             StartInfo = {
                 FileName = "bcdedit.exe",
                 Arguments = arg,
-                Verb = "runas",
-                UseShellExecute = true,
-                WindowStyle = ProcessWindowStyle.Hidden
+                UseShellExecute = false,
+                CreateNoWindow = true,
             }
         };
 
@@ -40,7 +39,7 @@ public static class BcdEdit {
     public static void ProcessBcdEdit(params string[] args) {
         if (args == null) throw new ArgumentNullException(nameof(args));
 
-        args.ToList().ForEach(ProcessBcdEdit);
+        Array.ForEach(args, ProcessBcdEdit);
     }
 
     /// <summary>

@@ -1,5 +1,32 @@
 ﻿using ProjectV;
+using System.Diagnostics;
 using static ProjectV.BcdEdit;
+
+// 관리자 권한 체크
+try {
+    using Process process = new() {
+        StartInfo = {
+            FileName = "diskpart.exe",
+            UseShellExecute = false,
+            CreateNoWindow = true,
+        }
+    };
+
+    process.Start();
+    process.Kill();
+} catch (System.ComponentModel.Win32Exception) {
+    using Process process = new() {
+        StartInfo = {
+            FileName = System.Reflection.Assembly.GetExecutingAssembly().Location,
+            Verb = "runas",
+            UseShellExecute = true,
+            WindowStyle = ProcessWindowStyle.Hidden
+        }
+    };
+
+    process.Start();
+    return;
+}
 
 try {
     string pvDir = string.Empty;
@@ -63,25 +90,23 @@ static void manual(string vhdDir) {
 }
 
 static void auto(string vhdDir) {
+    var guidc = BcdEditRegex("/enum {current} /v", @"^identifier\s+(?<guid>\{.+\})").Groups["guid"].Value;
     var guid1 = PVConfig.Instance[GuidType.Child1];
     var guid2 = PVConfig.Instance[GuidType.Child2];
-    var vhd = string.Empty;
 
-    try {
-        vhd = Child1Name;
-        copy(vhdDir, vhd);
-
-        vhd = Child2Name;
-        copy(vhdDir, vhd);
-    } catch (IOException) when (vhd == Child1Name) {
+    if (guidc == guid2) {
+        copy(vhdDir, Child1Name);
+        ProcessBcdEdit($"/default {guid1}");
+        ProcessBcdEdit($"/displayorder {guid1} /addfirst");
+        ProcessBcdEdit($"/displayorder {guid2} /remove");
+    } else if (guidc == guid1) {
         copy(vhdDir, Child2Name);
         ProcessBcdEdit($"/default {guid2}");
         ProcessBcdEdit($"/displayorder {guid2} /addfirst");
         ProcessBcdEdit($"/displayorder {guid1} /remove");
-    } catch (IOException) when (vhd == Child2Name) {
-        ProcessBcdEdit($"/default {guid1}");
-        ProcessBcdEdit($"/displayorder {guid1} /addfirst");
-        ProcessBcdEdit($"/displayorder {guid2} /remove");
+    } else {
+        copy(vhdDir, Child1Name);
+        copy(vhdDir, Child2Name);
     }
 }
 
@@ -97,18 +122,7 @@ static void uninstall(string pvDir, string vhdDir) {
     ProcessBcdEdit($"/delete {PVConfig.Instance[GuidType.Processor]} /cleanup");
     ProcessBcdEdit($"/delete {PVConfig.Instance[GuidType.Ramdisk]} /cleanup");
 
-    using (System.Diagnostics.Process regedit = new() {
-        StartInfo = {
-            FileName = "reg.exe",
-            Arguments = "delete HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run /v PVStartup /f",
-            Verb = "runas",
-            UseShellExecute = true,
-            WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
-        }
-    }) {
-        regedit.Start();
-        regedit.WaitForExit();
-    }
+    Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).DeleteValue("PVStartup");
 
     File.Delete(vhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
     File.Delete(vhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
