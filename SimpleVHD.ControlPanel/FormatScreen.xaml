@@ -1,0 +1,17 @@
+﻿<local:SwitchScreen x:Class="SimpleVHD.ControlPanel.FormatScreen"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:local="clr-namespace:SimpleVHD.ControlPanel"
+                    mc:Ignorable="d"
+                    d:DesignHeight="450" d:DesignWidth="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <local:EntryControl x:Name="VhdEntry" Grid.Column="0" Title="VHD 포맷" Description="- 윈도우 7 이상 사용 가능&#x0a;- 최대 크기 2TB&#x0a;&#x0a;&#x0a;※ 부모, 자식, 백업 일괄 변환&#x0a;※ 백업본을 기준으로 작업" Start="EntryControl_Start" Back="EntryControl_Back"/>
+        <local:EntryControl x:Name="VhdxEntry" Grid.Column="1" Title="VHDX 포맷" Description="- 윈도우 8 이상 사용 가능&#x0a;- 최대 크기 64TB&#x0a;- 정전 복구 기능&#x0a;&#x0a;※ 부모, 자식, 백업 일괄 변환&#x0a;※ 백업본을 기준으로 작업" Start="EntryControl_Start" Back="EntryControl_Back"/>
+    </Grid>
+</local:SwitchScreen>

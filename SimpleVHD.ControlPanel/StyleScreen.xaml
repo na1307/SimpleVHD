@@ -1,0 +1,19 @@
+﻿<local:SwitchScreen x:Class="SimpleVHD.ControlPanel.StyleScreen"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:local="clr-namespace:SimpleVHD.ControlPanel"
+                    mc:Ignorable="d"
+                    d:DesignHeight="450" d:DesignWidth="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <local:EntryControl x:Name="SimpleEntry" Title="단순" Description="VHD 파일을 통채로 백업하고 교체하는 스타일" Grid.Column="0" Start="EntryControl_Start" Back="EntryControl_Back"/>
+        <local:EntryControl x:Name="ManualEntry" Title="차등 (수동 초기화)" Description="자식 VHD를 사용하고 원하는 시기에 자식 VHD를 초기화하는 방식으로 빠르게 되돌아가는 스타일" Grid.Column="1" Start="EntryControl_Start" Back="EntryControl_Back"/>
+        <local:EntryControl x:Name="AutoEntry" Title="차등 (자동 초기화)" Description="자식 VHD를 매번 자동으로 초기화하여 항상 동일한 상태를 유지하는 스타일" Grid.Column="2" Start="EntryControl_Start" Back="EntryControl_Back"/>
+    </Grid>
+</local:SwitchScreen>

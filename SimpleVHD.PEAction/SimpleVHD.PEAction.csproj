@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>PEAction</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Include="BluehillShared.ErrDialogForms" Static="true" />
+    <Using Include="SimpleVHD.BcdEdit" Static="true" />
+    <Using Include="SimpleVHD.PEAction.Constants" Static="true" />
+    <Using Include="System.Diagnostics" />
+    <Using Remove="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SimpleVHD\Properties\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleVHD\SimpleVHD.csproj" />
+  </ItemGroup>
+  <Import Project="..\BluehillShared\BluehillShared.Forms\BluehillShared.Forms.projitems" Label="Shared" />
+</Project>

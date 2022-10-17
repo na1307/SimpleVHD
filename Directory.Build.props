@@ -19,7 +19,7 @@
   <ItemGroup>
     <Using Include="BluehillShared" />
     <Using Include="Bluehill.Hangul" />
-    <Using Include="ProjectV.GlobalConstants" Static="true" />
-    <Using Include="ProjectV.GlobalProperties" Static="true" />
+    <Using Include="SimpleVHD.GlobalConstants" Static="true" />
+    <Using Include="SimpleVHD.GlobalProperties" Static="true" />
   </ItemGroup>
 </Project>

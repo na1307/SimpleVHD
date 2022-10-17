@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Installer</AssemblyName>
+    <ApplicationIcon>program.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Remove="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SimpleVHD\Properties\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="program.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleVHD\SimpleVHD.csproj" />
+  </ItemGroup>
+</Project>
