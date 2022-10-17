@@ -24,7 +24,7 @@ public partial class ToolsScreen {
             FormatButton.IsEnabled = false;
         }
 
-        if (PVConfig.Instance.WinVer == WinVer.Seven) FormatButton.IsEnabled = false;
+        if (PVConfig.Instance.WindowsVersion == WindowsVersion.Seven) FormatButton.IsEnabled = false;
     }
 
     private void Button_Click(object sender, RoutedEventArgs e) => ((MainWindow)Application.Current.MainWindow).Screen = SubScreenFactory.Create(this, ((Button)sender).Name switch {

@@ -24,7 +24,7 @@ public sealed class PVConfig : IXmlSerializable {
     /// <summary>
     /// 현재 윈도우 버전
     /// </summary>
-    public WinVer WinVer { get; private set; }
+    public WindowsVersion WindowsVersion { get; private set; }
 
     /// <summary>
     /// 현재 운영 스타일

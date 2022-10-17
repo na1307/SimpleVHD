@@ -16,18 +16,6 @@ try {
     ForegroundColor = ConsoleColor.White;
     Clear();
 
-    var winVer = Environment.OSVersion.Version.Major switch {
-        6 => Environment.OSVersion.Version.Minor switch {
-            1 => WinVer.Seven,
-            2 => WinVer.Eight,
-            3 => WinVer.Epnt1,
-            4 => WinVer.Ten,
-            _ => throw new PlatformNotSupportedException(),
-        },
-        10 => WinVer.Ten,
-        _ => throw new PlatformNotSupportedException(),
-    };
-
     string pvDir = string.Empty;
     string pvDrv = string.Empty;
     string pvPath = string.Empty;
@@ -113,7 +101,7 @@ try {
         new XComment(ConfigComment),
         new XElement(
             "Config",
-            new XElement("WinVer", winVer.ToString()),
+            new XElement("WindowsVersion", Winver.WindowsVersion.ToString()),
             new XElement("OperatingStyle", OperatingStyle.Simple.ToString()),
             new XElement("VhdType", vhdType.ToString()),
             new XElement("VhdFormat", ((VhdFormat)Enum.Parse(typeof(VhdFormat), vhdFormat.ToUpper(), true)).ToString()),

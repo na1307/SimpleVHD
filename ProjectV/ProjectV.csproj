@@ -2,4 +2,5 @@
   <ItemGroup>
     <Using Remove="System.Net.Http" />
   </ItemGroup>
+  <Import Project="..\BluehillShared\BluehillShared\BluehillShared.projitems" Label="Shared" />
 </Project>

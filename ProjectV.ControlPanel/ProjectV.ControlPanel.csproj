@@ -30,9 +30,9 @@
     <Resource Include="resources\tools.png" />
   </ItemGroup>
   <ItemGroup>
+    <Using Include="BluehillShared.ErrDialogWpf" Static="true" />
     <Using Include="ProjectV.BcdEdit" Static="true" />
     <Using Include="ProjectV.ControlPanel.Constants" Static="true" />
-    <Using Include="ProjectV.ControlPanel.ErrDialog" Static="true" />
     <Using Remove="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
@@ -41,4 +41,5 @@
   <ItemGroup>
     <ProjectReference Include="..\ProjectV\ProjectV.csproj" />
   </ItemGroup>
+  <Import Project="..\BluehillShared\BluehillShared.Wpf\BluehillShared.Wpf.projitems" Label="Shared" />
 </Project>

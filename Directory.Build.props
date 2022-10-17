@@ -1,10 +1,7 @@
 <Project>
   <PropertyGroup>
     <TargetFramework>net40-client</TargetFramework>
-    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <IsPublishable>False</IsPublishable>
@@ -17,9 +14,11 @@
     <AnalysisLevel>latest</AnalysisLevel>
   </PropertyGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /IY &quot;$(TargetDir)$(TargetName).*&quot; &quot;$(SolutionDir)Bin&quot;" />
+    <Exec Command="xcopy /IY &quot;$(TargetDir)*.*&quot; &quot;$(SolutionDir)Bin&quot;" />
   </Target>
   <ItemGroup>
+    <Using Include="BluehillShared" />
+    <Using Include="Bluehill.Hangul" />
     <Using Include="ProjectV.GlobalConstants" Static="true" />
     <Using Include="ProjectV.GlobalProperties" Static="true" />
   </ItemGroup>

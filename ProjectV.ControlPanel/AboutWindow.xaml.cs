@@ -1,4 +1,4 @@
-﻿using static ProjectV.AssemblyProperties;
+﻿using static BluehillShared.AssemblyProperties;
 
 namespace ProjectV.ControlPanel;
 

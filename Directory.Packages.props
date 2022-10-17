@@ -1,0 +1,6 @@
+<Project>
+  <ItemGroup>
+    <PackageReference Include="PostSharp" Version="6.10.15" />
+    <PackageReference Include="Bluehill.Hangul" Version="1.0.0" />
+  </ItemGroup>
+</Project>

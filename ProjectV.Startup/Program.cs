@@ -1,6 +1,7 @@
 ﻿using ProjectV;
 using System.Diagnostics;
 using static ProjectV.BcdEdit;
+using Extensions = ProjectV.Extensions;
 
 // 관리자 권한 체크
 try {
