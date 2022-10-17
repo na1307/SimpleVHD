@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectV.ControlPanel", "Pr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectV.Installer", "ProjectV.Installer\ProjectV.Installer.csproj", "{BE1274C0-724A-4546-AD09-88B15AC913E7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectV.Processor", "ProjectV.Processor\ProjectV.Processor.csproj", "{0B627772-77D8-40E9-ABB6-8ED8E1C86FED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectV.PEAction", "ProjectV.PEAction\ProjectV.PEAction.csproj", "{0B627772-77D8-40E9-ABB6-8ED8E1C86FED}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BluehillShared", "BluehillShared\BluehillShared\BluehillShared.shproj", "{924F3C61-E147-416F-B112-A070A8A04A82}"
 EndProject

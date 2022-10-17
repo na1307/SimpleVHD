@@ -24,7 +24,7 @@ public partial class ActionScreen {
         if (MessageBox.Show("작업 실행 시 컴퓨터가 재부팅됩니다.\r\n\r\n정말 작업을 실행할까요?", "경고", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) != MessageBoxResult.Yes) return;
 
         PVConfig.Instance.Action = (DoAction)pAction;
-        ProcessBcdEdit("/bootsequence " + PVConfig.Instance[pAction is not (PanelAction.DoParentBoot or PanelAction.DoUninstall) ? GuidType.Processor : GuidType.Parent]);
+        ProcessBcdEdit("/bootsequence " + PVConfig.Instance[pAction is not (PanelAction.DoParentBoot or PanelAction.DoUninstall) ? GuidType.PE : GuidType.Parent]);
         App.SystemRestart();
     }
 

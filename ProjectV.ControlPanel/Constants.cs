@@ -16,9 +16,9 @@ internal static class Constants {
     public const string ParentBootName = "부모 VHD 부팅";
     public const string ParentBootDescription = "부모 VHD로 부팅합니다.";
     public const string ParentBootAdditional = "변경분이 초기화됩니다.";
-    public const string ProcessorBootName = "작업기 부팅";
-    public const string ProcessorBootDescription = "Project V 작업기로 부팅합니다.";
-    public const string ProcessorBootAdditional = "작업기로 부팅 후 수동 작업을 수행하실 수 있습니다.";
+    public const string PEBootName = "PE 부팅";
+    public const string PEBootDescription = "Project V PE로 부팅합니다.";
+    public const string PEBootAdditional = "PE로 부팅 후 수동 작업을 수행하실 수 있습니다.";
     public const string ExpandName = "VHD 확장";
     public const string ExpandDescription = "VHD의 최대 크기를 확장합니다.";
     public const string ExpandAdditional = "파티션은 자동으로 확장되지 않으며, 직접 확장하셔야 합니다.\r\n\r\n변경분이 초기화됩니다.\r\n\r\n작업 시간 : 짧음";

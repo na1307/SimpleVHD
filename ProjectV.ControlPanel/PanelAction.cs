@@ -1,7 +1,7 @@
 ﻿namespace ProjectV.ControlPanel;
 
 public enum PanelAction {
-    DoProcessorBoot = DoAction.DoNothing,
+    DoPEBoot = DoAction.DoNothing,
     DoBackup = DoAction.DoBackup,
     DoRestore = DoAction.DoRestore,
     DoRevert = DoAction.DoRevert,

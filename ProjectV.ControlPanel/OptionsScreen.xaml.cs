@@ -12,8 +12,8 @@ public partial class OptionsScreen {
         SRevertBox.IsChecked = PVConfig.Instance[DoAction.DoRevert];
         SMergeBox.IsChecked = PVConfig.Instance[DoAction.DoMerge];
 
-        foreach (var _ in BcdEditRegexAll("/enum {bootmgr} /v", @"\{.+\}").Cast<System.Text.RegularExpressions.Match>().Where(guid => guid.Value == PVConfig.Instance[GuidType.Processor])) {
-            HideProcessorBox.IsChecked = false;
+        foreach (var _ in BcdEditRegexAll("/enum {bootmgr} /v", @"\{.+\}").Cast<System.Text.RegularExpressions.Match>().Where(guid => guid.Value == PVConfig.Instance[GuidType.PE])) {
+            HidePEBox.IsChecked = false;
             break;
         }
     }
@@ -26,5 +26,5 @@ public partial class OptionsScreen {
         _ => throw new NotImplementedException()
     }] = ((CheckBox)sender).IsChecked!.Value;
 
-    private void HideProcessorBox_Click(object sender, RoutedEventArgs e) => ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.Processor] + (!HideProcessorBox.IsChecked!.Value ? " /addlast" : " /remove"));
+    private void HidePEBox_Click(object sender, RoutedEventArgs e) => ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.PE] + (!HidePEBox.IsChecked!.Value ? " /addlast" : " /remove"));
 }

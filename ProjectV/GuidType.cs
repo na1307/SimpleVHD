@@ -17,11 +17,11 @@ public enum GuidType {
     /// </summary>
     Child2,
     /// <summary>
-    /// 작업기에서 사용할 boot.sdi 설정 GUID
+    /// PE에서 사용할 boot.sdi 설정 GUID
     /// </summary>
     Ramdisk,
     /// <summary>
-    /// 작업기의 GUID
+    /// PE의 GUID
     /// </summary>
-    Processor
+    PE
 }

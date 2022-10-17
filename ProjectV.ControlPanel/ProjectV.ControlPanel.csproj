@@ -13,7 +13,7 @@
     <Resource Include="resources\doformat.png" />
     <Resource Include="resources\domerge.png" />
     <Resource Include="resources\doparentboot.png" />
-    <Resource Include="resources\doprocessorboot.png" />
+    <Resource Include="resources\dopeboot.png" />
     <Resource Include="resources\dorestore.png" />
     <Resource Include="resources\dorevert.png" />
     <Resource Include="resources\doshrink.png" />

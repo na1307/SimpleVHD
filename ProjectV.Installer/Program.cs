@@ -81,19 +81,19 @@ try {
     ProcessBcdEdit($@"/set {guids["Ramdisk"]} ramdisksdidevice partition={pvDrv}");
     ProcessBcdEdit($@"/set {guids["Ramdisk"]} ramdisksdipath {pvPath}Boot\boot.sdi");
 
-    guids.Add("Processor", BcdEditGuid("/create /d \"Project V Processor\" /application OSLOADER"));
+    guids.Add("PE", BcdEditGuid("/create /d \"Project V PE Action\" /application OSLOADER"));
 
-    ProcessBcdEdit($@"/set {guids["Processor"]} device ramdisk=""[{pvDrv}]{pvPath}Boot\ProjectV.wim,{guids["Ramdisk"]}""");
-    ProcessBcdEdit($@"/set {guids["Processor"]} path \windows\system32\winload.{(Firmware.IsWindowsUEFI ? "efi" : "exe")}");
-    ProcessBcdEdit($@"/set {guids["Processor"]} inherit {{bootloadersettings}}");
-    ProcessBcdEdit($@"/set {guids["Processor"]} osdevice ramdisk=""[{pvDrv}]{pvPath}Boot\ProjectV.wim,{guids["Ramdisk"]}""");
-    ProcessBcdEdit($@"/set {guids["Processor"]} systemroot \windows");
-    ProcessBcdEdit($@"/set {guids["Processor"]} detecthal yes");
-    ProcessBcdEdit($@"/set {guids["Processor"]} winpe yes");
-    ProcessBcdEdit($@"/displayorder {guids["Processor"]} /addlast");
+    ProcessBcdEdit($@"/set {guids["PE"]} device ramdisk=""[{pvDrv}]{pvPath}Boot\ProjectV.wim,{guids["Ramdisk"]}""");
+    ProcessBcdEdit($@"/set {guids["PE"]} path \windows\system32\winload.{(Firmware.IsWindowsUEFI ? "efi" : "exe")}");
+    ProcessBcdEdit($@"/set {guids["PE"]} inherit {{bootloadersettings}}");
+    ProcessBcdEdit($@"/set {guids["PE"]} osdevice ramdisk=""[{pvDrv}]{pvPath}Boot\ProjectV.wim,{guids["Ramdisk"]}""");
+    ProcessBcdEdit($@"/set {guids["PE"]} systemroot \windows");
+    ProcessBcdEdit($@"/set {guids["PE"]} detecthal yes");
+    ProcessBcdEdit($@"/set {guids["PE"]} winpe yes");
+    ProcessBcdEdit($@"/displayorder {guids["PE"]} /addlast");
 
     ProcessBcdEdit($@"/timeout 5");
-    ProcessBcdEdit($@"/bootsequence {guids["Processor"]}");
+    ProcessBcdEdit($@"/bootsequence {guids["PE"]}");
 
     BackupBcd(pvDir, 2);
 

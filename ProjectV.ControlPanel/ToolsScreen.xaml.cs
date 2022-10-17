@@ -9,7 +9,7 @@ public partial class ToolsScreen {
     public ToolsScreen() {
         InitializeComponent();
 
-        foreach (var button in new[] { ParentButton, ProcessorButton, ExpandButton, ShrinkButton, TypeButton, FormatButton, StyleButton, UninstallButton }) {
+        foreach (var button in new[] { ParentButton, PEButton, ExpandButton, ShrinkButton, TypeButton, FormatButton, StyleButton, UninstallButton }) {
             button.Click += MainWindow.PlayClickSound;
             button.Click += Button_Click;
         }
@@ -29,7 +29,7 @@ public partial class ToolsScreen {
 
     private void Button_Click(object sender, RoutedEventArgs e) => ((MainWindow)Application.Current.MainWindow).Screen = SubScreenFactory.Create(this, ((Button)sender).Name switch {
         nameof(ParentButton) => DoParentBoot,
-        nameof(ProcessorButton) => DoProcessorBoot,
+        nameof(PEButton) => DoPEBoot,
         nameof(ExpandButton) => DoExpand,
         nameof(ShrinkButton) => DoShrink,
         nameof(TypeButton) => DoConvertType,

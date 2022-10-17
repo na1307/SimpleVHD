@@ -9,7 +9,7 @@ public abstract class SwitchScreen : SubScreen {
         PVConfig.Instance.Action = action;
         PVConfig.Instance.Temp = value.ToString();
 
-        ProcessBcdEdit("/bootsequence " + PVConfig.Instance[GuidType.Processor]);
+        ProcessBcdEdit("/bootsequence " + PVConfig.Instance[GuidType.PE]);
         App.SystemRestart();
     }
 }

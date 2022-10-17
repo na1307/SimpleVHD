@@ -107,7 +107,7 @@ public sealed class PVConfig : IXmlSerializable {
                 { GuidType.Child1, Guid.Empty },
                 { GuidType.Child2, Guid.Empty },
                 { GuidType.Ramdisk, Guid.Empty },
-                { GuidType.Processor, Guid.Empty }
+                { GuidType.PE, Guid.Empty }
             };
 
             ((IXmlSerializable)this).ReadXml(XmlReader.Create(xPath));

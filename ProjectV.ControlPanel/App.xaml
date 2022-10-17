@@ -14,8 +14,8 @@
         <x:Static x:Key="MergeDescription" Member="local:Constants.MergeDescription"/>
         <x:Static x:Key="ParentBootName" Member="local:Constants.ParentBootName"/>
         <x:Static x:Key="ParentBootDescription" Member="local:Constants.ParentBootDescription"/>
-        <x:Static x:Key="ProcessorBootName" Member="local:Constants.ProcessorBootName"/>
-        <x:Static x:Key="ProcessorBootDescription" Member="local:Constants.ProcessorBootDescription"/>
+        <x:Static x:Key="PEBootName" Member="local:Constants.PEBootName"/>
+        <x:Static x:Key="PEBootDescription" Member="local:Constants.PEBootDescription"/>
         <x:Static x:Key="ExpandName" Member="local:Constants.ExpandName"/>
         <x:Static x:Key="ExpandDescription" Member="local:Constants.ExpandDescription"/>
         <x:Static x:Key="ShrinkName" Member="local:Constants.ShrinkName"/>
