@@ -14,9 +14,7 @@ public static class GlobalProperties {
     /// </summary>
     public static bool BackupExists {
         get {
-            foreach (var _ in from drv in DriveInfo.GetDrives()
-                              where drv.CheckFixed() && File.Exists(drv.Name + BackupDirName + "\\" + PVConfig.Instance.VhdFile)
-                              select drv) {
+            foreach (var _ in DriveInfo.GetDrives().Where(drv => drv.CheckFixed() && (File.Exists(drv.Name + BackupDirName + "\\" + PVConfig.Instance.VhdFile) || File.Exists(drv.Name + DirName + "\\" + IncludedBackupDirName + "\\" + PVConfig.Instance.VhdFile)))) {
                 return true;
             }
 

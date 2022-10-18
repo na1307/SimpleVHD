@@ -16,9 +16,9 @@ try {
     ForegroundColor = ConsoleColor.White;
     Clear();
 
-    string pvDir = string.Empty;
-    string pvDrv = string.Empty;
-    string pvPath = string.Empty;
+    var pvDir = string.Empty;
+    var pvDrv = string.Empty;
+    var pvPath = string.Empty;
 
     foreach (var drv in from d in DriveInfo.GetDrives()
                         where d.CheckFixed() && Directory.Exists(d.Name + DirName)
@@ -31,7 +31,11 @@ try {
 
     if (string.IsNullOrEmpty(pvDir)) throw new RequirementNotFoundException();
 
-    foreach (var file in from f in new[] { "Boot\\SimpleVHD.wim", "Boot\\boot.sdi" } where !File.Exists(pvDir + f) select f) throw new RequirementNotFoundException(Path.GetFileName(file));
+    foreach (var file in from f in new[] { "Boot\\SimpleVHD.wim", "Boot\\boot.sdi" }
+                         where !File.Exists(pvDir + f)
+                         select f) {
+        throw new RequirementNotFoundException(Path.GetFileName(file));
+    }
 
     if (File.Exists(pvDir + "\\" + ConfigName) && !ConfigExists()) return;
 
@@ -51,8 +55,9 @@ try {
     var vhdType = GetVhdType();
     var vhdFormat = Regex.Match(vhdName, "^.+\\.(?<ext>vhdx?)$", RegexOptions.IgnoreCase).Groups["ext"].Value.ToLower();
     var operatingStyle = GetOperatingStyle();
+    var backDrv = GetBackupDrive();
 
-    Directory.CreateDirectory(GetBackupDrive() + "\\" + BackupDirName);
+    Directory.CreateDirectory(string.Equals(backDrv, pvDrv, StringComparison.OrdinalIgnoreCase) ? pvDir + IncludedBackupDirName : backDrv + "\\" + BackupDirName);
 
     Registry.SetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "PVStartup", pvDir + "Bin\\Startup.exe", RegistryValueKind.String);
 
@@ -62,26 +67,26 @@ try {
 
     Dictionary<string, string> guids = new(5);
 
-    guids.Add("Parent", BcdEditGuid("/enum {current} /v"));
+    guids.Add("Parent", BcdEditGuid($"/enum {{current}} /v"));
 
-    guids.Add("Child1", BcdEditGuid("/copy {current} /d \"" + bcdDesctiption + "\""));
+    guids.Add("Child1", BcdEditGuid($"/copy {{current}} /d \"{bcdDesctiption}\""));
 
     ProcessBcdEdit($@"/set {guids["Child1"]} device vhd=""[{vhdDrv}]{vhdPath}{Child1Name}{vhdFormat}");
     ProcessBcdEdit($@"/set {guids["Child1"]} osdevice vhd=""[{vhdDrv}]{vhdPath}{Child1Name}{vhdFormat}");
     ProcessBcdEdit($@"/displayorder {guids["Child1"]} /remove");
 
-    guids.Add("Child2", BcdEditGuid("/copy {current} /d \"" + bcdDesctiption + "\""));
+    guids.Add("Child2", BcdEditGuid($"/copy {{current}} /d \"{bcdDesctiption}\""));
 
     ProcessBcdEdit($@"/set {guids["Child2"]} device vhd=""[{vhdDrv}]{vhdPath}{Child2Name}{vhdFormat}");
     ProcessBcdEdit($@"/set {guids["Child2"]} osdevice vhd=""[{vhdDrv}]{vhdPath}{Child2Name}{vhdFormat}");
     ProcessBcdEdit($@"/displayorder {guids["Child2"]} /remove");
 
-    guids.Add("Ramdisk", BcdEditGuid("/create /device"));
+    guids.Add("Ramdisk", BcdEditGuid($"/create /device"));
 
     ProcessBcdEdit($@"/set {guids["Ramdisk"]} ramdisksdidevice partition={pvDrv}");
     ProcessBcdEdit($@"/set {guids["Ramdisk"]} ramdisksdipath {pvPath}Boot\boot.sdi");
 
-    guids.Add("PE", BcdEditGuid("/create /d \"SimpleVHD PE Action\" /application OSLOADER"));
+    guids.Add("PE", BcdEditGuid($"/create /d \"SimpleVHD PE Action\" /application OSLOADER"));
 
     ProcessBcdEdit($@"/set {guids["PE"]} device ramdisk=""[{pvDrv}]{pvPath}Boot\SimpleVHD.wim,{guids["Ramdisk"]}""");
     ProcessBcdEdit($@"/set {guids["PE"]} path \windows\system32\winload.{(Firmware.IsWindowsUEFI ? "efi" : "exe")}");
@@ -104,7 +109,7 @@ try {
             new XElement("WindowsVersion", Winver.WindowsVersion.ToString()),
             new XElement("OperatingStyle", OperatingStyle.Simple.ToString()),
             new XElement("VhdType", vhdType.ToString()),
-            new XElement("VhdFormat", ((VhdFormat)Enum.Parse(typeof(VhdFormat), vhdFormat.ToUpper(), true)).ToString()),
+            new XElement("VhdFormat", ((VhdFormat)Enum.Parse(typeof(VhdFormat), vhdFormat, true)).ToString()),
             new XElement("VhdDirectory", vhdPath),
             new XElement("VhdFile", vhdName),
             new XElement("Action", DoAction.DoSwitchStyle.ToString()),
@@ -123,8 +128,6 @@ try {
     }) {
         shutdown.Start();
     }
-} catch (PlatformNotSupportedException) {
-    ErrorControl("이 운영 체제는 지원되지 않습니다.");
 } catch (PVInstallerException ex) {
     ErrorControl(ex.Message);
 } catch (Exception ex) {

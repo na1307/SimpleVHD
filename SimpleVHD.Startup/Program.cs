@@ -30,8 +30,8 @@ try {
 }
 
 try {
-    string pvDir = string.Empty;
-    string vhdDir = string.Empty;
+    var pvDir = string.Empty;
+    var vhdDir = string.Empty;
 
     foreach (var drv in DriveInfo.GetDrives().Where(Extensions.CheckFixed).Select(Extensions.GetLetter)) {
         if (File.Exists(drv + "\\" + DirName + "\\" + ConfigName)) pvDir = drv + "\\" + DirName + "\\";

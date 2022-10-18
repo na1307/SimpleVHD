@@ -10,7 +10,13 @@ internal static class Constants {
     static Constants() {
         foreach (var drv in DriveInfo.GetDrives().Where(Extensions.CheckFixed).Select(d => d.Name)) {
             if (File.Exists(drv + DirName + "\\" + ConfigName)) PVDir = drv + DirName + "\\";
-            if (Directory.Exists(drv + BackupDirName)) BackupDir = drv + BackupDirName + "\\";
+
+            if (Directory.Exists(drv + BackupDirName)) {
+                BackupDir = drv + BackupDirName + "\\";
+            } else if (Directory.Exists(PVDir + IncludedBackupDirName)) {
+                BackupDir = PVDir + IncludedBackupDirName + "\\";
+            }
+
             if (File.Exists(drv.Left(2) + PVConfig.Instance.VhdDirectory + PVConfig.Instance.VhdFile)) VhdDir = drv.Left(2) + PVConfig.Instance.VhdDirectory;
         }
     }

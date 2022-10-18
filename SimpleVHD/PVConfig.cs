@@ -112,8 +112,9 @@ public sealed class PVConfig : IXmlSerializable {
 
             ((IXmlSerializable)this).ReadXml(XmlReader.Create(xPath));
 
-            if (VhdDirectory == null || VhdFile == null) throw new InvalidConfigException(nameof(VhdDirectory) + " 또는 " + nameof(VhdFile) + "이 없습니다.");
-            foreach (var guid in bcdGuids) if (guid.Value == Guid.Empty) throw new InvalidConfigException(guid.Key.ToString() + " Guid가 없습니다.");
+            if (VhdDirectory == null) throw new InvalidConfigException(nameof(VhdDirectory) + "가 없습니다.");
+            if (VhdFile == null) throw new InvalidConfigException(nameof(VhdFile) + "이 없습니다.");
+            foreach (var guid in bcdGuids.Where(guid => guid.Value == Guid.Empty)) throw new InvalidConfigException(guid.Key.ToString() + " Guid가 없습니다.");
         } catch (PVException) {
             throw;
         } catch (Exception ex) {

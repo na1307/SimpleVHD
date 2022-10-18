@@ -7,20 +7,25 @@ public static class GlobalConstants {
     /// <summary>
     /// 빌드 번호
     /// </summary>
-    public const ulong BuildNumber = 131;
+    public const ulong BuildNumber = 134;
 
     /// <summary>
-    /// SimpleVHD 디렉토리 이름
+    /// 핵심 디렉토리 이름
     /// </summary>
     public const string DirName = "SimpleVHD";
 
     /// <summary>
-    /// SimpleVHD 백업 디렉토리 이름
+    /// 백업 디렉토리 이름
     /// </summary>
-    public const string BackupDirName = "SimpleVHD-Backup";
+    public const string BackupDirName = $"{DirName}-{IncludedBackupDirName}";
 
     /// <summary>
-    /// SimpleVHD 설정 파일 이름
+    /// 포함된 백업 디렉토리 이름
+    /// </summary>
+    public const string IncludedBackupDirName = "Backup";
+
+    /// <summary>
+    /// 설정 파일 이름
     /// </summary>
     public const string ConfigName = "Config.xml";
 
