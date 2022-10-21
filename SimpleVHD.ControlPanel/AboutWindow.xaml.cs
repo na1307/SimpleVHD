@@ -5,7 +5,7 @@ namespace SimpleVHD.ControlPanel;
 /// <summary>
 /// AboutWindow.xaml에 대한 상호 작용 논리
 /// </summary>
-public partial class AboutWindow {
+public sealed partial class AboutWindow {
     public AboutWindow() {
         InitializeComponent();
         Title = AssemblyTitle + " 정보";

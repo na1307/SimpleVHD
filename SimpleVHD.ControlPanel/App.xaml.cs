@@ -9,7 +9,7 @@ namespace SimpleVHD.ControlPanel;
 /// <summary>
 /// App.xaml에 대한 상호 작용 논리
 /// </summary>
-public partial class App {
+public sealed partial class App {
     private static readonly Mutex mutex = new(true, "PVControl");
 
     internal static void SystemRestart() {
