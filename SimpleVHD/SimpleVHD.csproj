@@ -3,7 +3,6 @@
     <Using Remove="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="PostSharp" />
     <PackageReference Include="Bluehill.Hangul" />
   </ItemGroup>
   <Import Project="..\BluehillShared\BluehillShared\BluehillShared.projitems" Label="Shared" />

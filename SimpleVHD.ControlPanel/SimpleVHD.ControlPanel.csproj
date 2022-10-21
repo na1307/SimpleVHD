@@ -42,7 +42,6 @@
     <ProjectReference Include="..\SimpleVHD\SimpleVHD.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="PostSharp" />
     <PackageReference Include="Bluehill.Hangul" />
   </ItemGroup>
   <Import Project="..\BluehillShared\BluehillShared.Wpf\BluehillShared.Wpf.projitems" Label="Shared" />

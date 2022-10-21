@@ -18,7 +18,6 @@
     <ProjectReference Include="..\SimpleVHD\SimpleVHD.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="PostSharp" />
     <PackageReference Include="Bluehill.Hangul" />
   </ItemGroup>
 </Project>

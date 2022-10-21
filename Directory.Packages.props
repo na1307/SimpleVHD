@@ -3,7 +3,6 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="PostSharp" Version="6.10.15" />
     <PackageVersion Include="Bluehill.Hangul" Version="1.0.0" />
   </ItemGroup>
 </Project>
