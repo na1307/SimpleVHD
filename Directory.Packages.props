@@ -3,6 +3,6 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Bluehill.Hangul" Version="1.0.0" />
+    <PackageVersion Include="Bluehill.Hangul" Version="1.0.1" />
   </ItemGroup>
 </Project>
