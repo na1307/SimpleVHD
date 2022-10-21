@@ -3,32 +3,6 @@ using System.Diagnostics;
 using static SimpleVHD.BcdEdit;
 using Extensions = SimpleVHD.Extensions;
 
-// 관리자 권한 체크
-try {
-    using Process process = new() {
-        StartInfo = {
-            FileName = "diskpart.exe",
-            UseShellExecute = false,
-            CreateNoWindow = true,
-        }
-    };
-
-    process.Start();
-    process.Kill();
-} catch (System.ComponentModel.Win32Exception) {
-    using Process process = new() {
-        StartInfo = {
-            FileName = System.Reflection.Assembly.GetExecutingAssembly().Location,
-            Verb = "runas",
-            UseShellExecute = true,
-            WindowStyle = ProcessWindowStyle.Hidden
-        }
-    };
-
-    process.Start();
-    return;
-}
-
 try {
     var pvDir = string.Empty;
     var vhdDir = string.Empty;
@@ -70,6 +44,8 @@ try {
 static void copy(string vhdDir, string vhd) => File.Copy(vhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), vhdDir + vhd + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
 
 static void rebuild(string vhdDir) {
+    checkadmin();
+
     copy(vhdDir, Child1Name);
     copy(vhdDir, Child2Name);
 
@@ -91,6 +67,8 @@ static void manual(string vhdDir) {
 }
 
 static void auto(string vhdDir) {
+    checkadmin();
+
     var guidc = BcdEditRegex("/enum {current} /v", @"^identifier\s+(?<guid>\{.+\})").Groups["guid"].Value;
     var guid1 = PVConfig.Instance[GuidType.Child1];
     var guid2 = PVConfig.Instance[GuidType.Child2];
@@ -112,6 +90,8 @@ static void auto(string vhdDir) {
 }
 
 static void uninstall(string pvDir, string vhdDir) {
+    checkadmin();
+
     File.Delete(pvDir + ConfigName);
     File.Delete(pvDir + "Backup-BCD-01");
     File.Delete(pvDir + "Backup-BCD-02");
@@ -130,4 +110,31 @@ static void uninstall(string pvDir, string vhdDir) {
     File.Delete(vhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower());
 
     MessageBox.Show("SimpleVHD의 제거를 완료하였습니다.", "SimpleVHD", MessageBoxButtons.OK, MessageBoxIcon.Information);
+}
+
+static void checkadmin() {
+    try {
+        using Process process = new() {
+            StartInfo = {
+                FileName = "diskpart.exe",
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            }
+        };
+
+        process.Start();
+        process.Kill();
+    } catch (System.ComponentModel.Win32Exception) {
+        using Process process = new() {
+            StartInfo = {
+                FileName = System.Reflection.Assembly.GetExecutingAssembly().Location,
+                Verb = "runas",
+                UseShellExecute = true,
+                WindowStyle = ProcessWindowStyle.Hidden
+            }
+        };
+
+        process.Start();
+        Environment.Exit(0);
+    }
 }
