@@ -31,11 +31,9 @@ try {
 
     if (string.IsNullOrEmpty(pvDir)) throw new RequirementNotFoundException();
 
-    foreach (var file in from f in new[] { "Boot\\SimpleVHD.wim", "Boot\\boot.sdi" }
-                         where !File.Exists(pvDir + f)
-                         select f) {
-        throw new RequirementNotFoundException(Path.GetFileName(file));
-    }
+    var requires = new[] { "Boot\\SimpleVHD.wim", "Boot\\boot.sdi" }.Where(f => !File.Exists(pvDir + f));
+
+    if (requires.Any()) throw new RequirementNotFoundException(Path.GetFileName(requires.First()));
 
     if (File.Exists(pvDir + "\\" + ConfigName) && !ConfigExists()) return;
 
@@ -57,7 +55,7 @@ try {
     var operatingStyle = GetOperatingStyle();
     var backDrv = GetBackupDrive();
 
-    Directory.CreateDirectory(string.Equals(backDrv, pvDrv, StringComparison.OrdinalIgnoreCase) ? pvDir + IncludedBackupDirName : backDrv + "\\" + BackupDirName);
+    Directory.CreateDirectory(backDrv.Equals(pvDrv, StringComparison.OrdinalIgnoreCase) ? pvDir + IncludedBackupDirName : backDrv + "\\" + BackupDirName);
 
     Registry.SetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "PVStartup", pvDir + "Bin\\Startup.exe", RegistryValueKind.String);
 
@@ -216,7 +214,7 @@ static string GetBackupDrive() {
 
         var input = ReadLine();
 
-        if (Regex.IsMatch(input, "^[A-Z]:?$", RegexOptions.IgnoreCase) && (new DriveInfo(input).DriveType == DriveType.Fixed)) return input[0] + ":";
+        if (Regex.IsMatch(input, "^[A-Z]:?$", RegexOptions.IgnoreCase) && new DriveInfo(input).CheckFixed()) return input[0] + ":";
     }
 }
 

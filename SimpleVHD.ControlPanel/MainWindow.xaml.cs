@@ -14,7 +14,7 @@ public sealed partial class MainWindow : INotifyPropertyChanged {
         get => _Screen;
         set {
             _Screen = value;
-            OnPropertyChanged("Screen");
+            OnPropertyChanged(nameof(Screen));
         }
     }
 

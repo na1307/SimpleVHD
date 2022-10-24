@@ -12,15 +12,7 @@ public static class GlobalProperties {
     /// <summary>
     /// 백업 파일이 존재하는지 여부
     /// </summary>
-    public static bool BackupExists {
-        get {
-            foreach (var _ in DriveInfo.GetDrives().Where(drv => drv.CheckFixed() && (File.Exists(drv.Name + BackupDirName + "\\" + PVConfig.Instance.VhdFile) || File.Exists(drv.Name + DirName + "\\" + IncludedBackupDirName + "\\" + PVConfig.Instance.VhdFile)))) {
-                return true;
-            }
-
-            return false;
-        }
-    }
+    public static bool BackupExists => DriveInfo.GetDrives().Any(drv => drv.CheckFixed() && (File.Exists(drv.Name + BackupDirName + "\\" + PVConfig.Instance.VhdFile) || File.Exists(drv.Name + DirName + "\\" + IncludedBackupDirName + "\\" + PVConfig.Instance.VhdFile)));
 
     /// <summary>
     /// 작업 후 다시 시작하는 대신 종료할 수 있는 작업

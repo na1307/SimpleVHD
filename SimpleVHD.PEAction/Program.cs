@@ -36,7 +36,7 @@ try {
 
 Application.Run(new SimpleVHD.PEAction.FormMain());
 
-void Nothing(object sender, EventArgs e) {
+static void Nothing(object sender, EventArgs e) {
     Application.ApplicationExit -= Nothing;
     PVConfig.Instance.Action = DoAction.DoNothing;
     PVConfig.Instance.SaveConfig();

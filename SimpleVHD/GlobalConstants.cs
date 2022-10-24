@@ -7,7 +7,7 @@ public static class GlobalConstants {
     /// <summary>
     /// 빌드 번호
     /// </summary>
-    public const ulong BuildNumber = 136;
+    public const ulong BuildNumber = 137;
 
     /// <summary>
     /// 핵심 디렉토리 이름
