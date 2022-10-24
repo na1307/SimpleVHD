@@ -106,8 +106,7 @@ internal abstract class Action {
         if (cmds == null) throw new ArgumentNullException(nameof(cmds));
 
         using (StreamWriter ds = new(PVDir + dptemp, false, System.Text.Encoding.GetEncoding(949))) {
-            foreach (var cmd in cmds) ds.WriteLine(cmd);
-
+            cmds.ForEach(ds.WriteLine);
             ds.WriteLine("exit");
         }
 
@@ -132,8 +131,7 @@ internal abstract class Action {
         if (cmds == null) throw new ArgumentNullException(nameof(cmds));
 
         using (StreamWriter ds = new(PVDir + dptemp, false, System.Text.Encoding.GetEncoding(949))) {
-            foreach (var cmd in cmds) ds.WriteLine(cmd);
-
+            cmds.ForEach(ds.WriteLine);
             ds.WriteLine("exit");
         }
 

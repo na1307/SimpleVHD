@@ -39,7 +39,7 @@ public static class BcdEdit {
     public static void ProcessBcdEdit(params string[] args) {
         if (args == null) throw new ArgumentNullException(nameof(args));
 
-        Array.ForEach(args, ProcessBcdEdit);
+        args.ForEach(ProcessBcdEdit);
     }
 
     /// <summary>

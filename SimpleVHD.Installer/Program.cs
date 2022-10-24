@@ -205,11 +205,7 @@ static string GetBackupDrive() {
         Beep();
 
         WriteLine("\r\n아래의 목록을 보고 백업을 저장할 드라이브를 입력하세요.\r\n\r\n" + line + "\r\n 문자  레이블      Fs    크기\r\n" + (new string('-', 50)));
-
-        foreach (var drvinfo in DriveInfo.GetDrives().Where(SimpleVHD.Extensions.CheckFixed)) {
-            WriteLine(" " + drvinfo.Name[0] + "     " + drvinfo.VolumeLabel + "      " + drvinfo.DriveFormat + "    " + (drvinfo.TotalSize / 1024 / 1024 / 1024) + " GB");
-        }
-
+        DriveInfo.GetDrives().Where(SimpleVHD.Extensions.CheckFixed).Select(d => " " + d.Name[0] + "     " + d.VolumeLabel + "      " + d.DriveFormat + "    " + (d.TotalSize / 1024 / 1024 / 1024) + " GB").ForEach(WriteLine);
         Write(line + "\r\n\r\n ex) D or D:");
 
         var input = ReadLine();
