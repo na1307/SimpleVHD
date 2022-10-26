@@ -29,6 +29,5 @@ public partial class ActionScreen {
     }
 
     private void BackButton_Click(object sender, RoutedEventArgs e) => GoBack();
-
     private void ShutdownBox_Click(object sender, RoutedEventArgs e) => PVConfig.Instance[(DoAction)pAction] = ShutdownBox.IsChecked!.Value;
 }

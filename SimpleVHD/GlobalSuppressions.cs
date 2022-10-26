@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Performance", "CA1806:메서드 결과를 무시하지 마세요.", Scope = "member", Target = "~M:SimpleVHD.Firmware.#cctor")]
+[assembly: SuppressMessage("Minor Code Smell", "S3241:Methods should not return values that are never used", Scope = "member", Target = "~M:SimpleVHD.Firmware.#cctor")]

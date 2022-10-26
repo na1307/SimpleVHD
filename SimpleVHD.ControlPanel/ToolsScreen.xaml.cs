@@ -9,7 +9,10 @@ public partial class ToolsScreen {
     public ToolsScreen() {
         InitializeComponent();
 
-        new[] { ParentButton, PEButton, ExpandButton, ShrinkButton, TypeButton, FormatButton, StyleButton, UninstallButton }.ForEach(b => MainWindow.AddPlay(b, Button_Click));
+        foreach (var button in new[] { ParentButton, PEButton, ExpandButton, ShrinkButton, TypeButton, FormatButton, StyleButton, UninstallButton }) {
+            button.Click += MainWindow.PlayClickSound;
+            button.Click += Button_Click;
+        }
 
         if (!IsDifferentialStyle) {
             ParentButton.IsEnabled = false;

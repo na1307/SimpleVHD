@@ -22,18 +22,15 @@ public sealed partial class MainWindow : INotifyPropertyChanged {
         InitializeComponent();
         DataContext = this;
 
-        new[] { HomeButton, ToolsButton, OptionButton, HelpButton, AboutButton, ExitButton }.ForEach(b => AddPlay(b, Button_Click));
+        foreach (var button in new[] { HomeButton, ToolsButton, OptionButton, HelpButton, AboutButton, ExitButton }) {
+            button.Click += PlayClickSound;
+            button.Click += Button_Click;
+        }
 
         AboutButton.ToolTip = AssemblyProperties.AssemblyTitle + (string)AboutButton.ToolTip;
     }
 
     internal static void PlayClickSound(object sender, RoutedEventArgs e) => new System.Media.SoundPlayer(Properties.Resources.Interaction).Play();
-    internal static void AddPlay(Button button) => button.Click += PlayClickSound;
-
-    internal static void AddPlay(Button button, RoutedEventHandler additional) {
-        AddPlay(button);
-        button.Click += additional;
-    }
 
     private void Button_Click(object sender, RoutedEventArgs e) {
         switch (((Button)sender).Name) {

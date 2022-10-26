@@ -9,7 +9,10 @@ public partial class HomeScreen {
     public HomeScreen() {
         InitializeComponent();
 
-        new[] { RevertButton, MergeButton, BackupButton, RestoreButton }.ForEach(MainWindow.AddPlay);
+        foreach (var button in new[] { RevertButton, MergeButton, BackupButton, RestoreButton }) {
+            button.Click += MainWindow.PlayClickSound;
+            button.Click += Button_Click;
+        }
 
         if (!BackupExists) RestoreButton.IsEnabled = false;
 

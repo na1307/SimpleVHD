@@ -15,7 +15,7 @@ public static class GlobalProperties {
     public static bool BackupExists => DriveInfo.GetDrives().Any(drv => drv.CheckFixed() && (File.Exists(drv.Name + BackupDirName + "\\" + PVConfig.Instance.VhdFile) || File.Exists(drv.Name + DirName + "\\" + IncludedBackupDirName + "\\" + PVConfig.Instance.VhdFile)));
 
     /// <summary>
-    /// 작업 후 다시 시작하는 대신 종료할 수 있는 작업
+    /// 작업 후 다시 시작하는 대신 시스템을 종료할 수 있는 작업
     /// </summary>
     public static IEnumerable<DoAction> ShutdownAction {
         get {
