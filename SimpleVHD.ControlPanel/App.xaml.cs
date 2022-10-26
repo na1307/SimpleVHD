@@ -42,13 +42,9 @@ public sealed partial class App {
     private void Application_Exit(object sender, ExitEventArgs e) => PVConfig.Instance.SaveConfig();
 
     private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e) {
-        if (e.Exception is PVConfig.ConfigNotFoundException) {
+        if (e.Exception is PVException) {
             e.Handled = true;
-            ErrMsg("설정 파일을 찾을 수 없습니다. SimpleVHD가 아예 설치되어 있지 않았을 수 있습니다.");
-            Shutdown(1);
-        } else if (e.Exception is PVConfig.InvalidConfigException) {
-            e.Handled = true;
-            ErrMsg(e.Exception.Message + (e.Exception.InnerException != null ? "\r\n\r\n" + e.Exception.InnerException.Message : null));
+            ErrMsg(e.Exception.Message == ConfigFileNotFoundMessage ? "설정 파일을 찾을 수 없습니다. SimpleVHD가 아예 설치되어 있지 않았을 수 있습니다." : e.Exception.Message);
             Shutdown(1);
         } else {
             ErrMsg(e.Exception.ToString());

@@ -21,5 +21,6 @@
     <Using Include="Bluehill.Hangul" />
     <Using Include="SimpleVHD.GlobalConstants" Static="true" />
     <Using Include="SimpleVHD.GlobalProperties" Static="true" />
+    <Using Include="SimpleVHD.Extensions" Alias="Extensions" />
   </ItemGroup>
 </Project>

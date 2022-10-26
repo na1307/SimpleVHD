@@ -30,6 +30,6 @@
                 <CheckBox x:Name="SMergeBox" Content="병합 후" Grid.Row="1" Grid.Column="1" Width="150" Height="15" Click="ShutdownBox_Click"/>
             </Grid>
         </GroupBox>
-        <CheckBox x:Name="HidePEBox" Content="부팅 메뉴에서 SimpleVHD PE Action 숨기기" IsChecked="True" Grid.Row="1" Grid.Column="0" Width="250" Height="15" Click="HidePEBox_Click"/>
+        <CheckBox x:Name="HidePEBox" Content="부팅 메뉴에서 SimpleVHD PE Action 숨기기" Grid.Row="1" Grid.Column="0" Width="250" Height="15" Click="HidePEBox_Click"/>
     </Grid>
 </local:Screen>

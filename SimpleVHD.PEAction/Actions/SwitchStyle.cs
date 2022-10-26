@@ -10,7 +10,7 @@ internal class SwitchStyle : Action {
         File.Delete(VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
         File.Delete(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower());
 
-        if (!Enum.TryParse(PVConfig.Instance.Temp, false, out OperatingStyle operatingStyle)) throw new ProcessFailedException("Temp가 잘못되었습니다.");
+        if (!Enum.TryParse(PVConfig.Instance.Temp, false, out OperatingStyle operatingStyle)) throw new InvalidTempException();
 
         switch (operatingStyle) {
             // 단순 스타일
@@ -56,7 +56,7 @@ internal class SwitchStyle : Action {
                 break;
 
             default:
-                throw new PVConfig.InvalidConfigException("Temp가 잘못되었습니다.");
+                throw new InvalidTempException();
         }
 
         PVConfig.Instance.OperatingStyle = operatingStyle;

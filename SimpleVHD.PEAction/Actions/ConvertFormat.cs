@@ -15,7 +15,7 @@ internal class ConvertFormat : Action {
         File.Delete(VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower());
 
         // 새 형식 지정
-        if (!Enum.TryParse(PVConfig.Instance.Temp, false, out VhdFormat newFormat)) throw new ProcessFailedException("Temp가 잘못되었습니다.");
+        if (!Enum.TryParse(PVConfig.Instance.Temp, false, out VhdFormat newFormat)) throw new InvalidTempException();
         var newVhdRegex = Regex.Match(PVConfig.Instance.VhdFile, @"^(?<filename>.+\.)vhdx?$", RegexOptions.IgnoreCase);
         var newVhd = newVhdRegex.Success ? newVhdRegex.Groups["filename"].Value + newFormat.ToString().ToLower() : throw new ProcessFailedException("정규식 오류");
         var newChildC = ChildCName + newFormat.ToString().ToLower();

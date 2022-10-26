@@ -28,7 +28,7 @@ public partial class HomeScreen {
                 break;
 
             default:
-                throw new PVConfig.InvalidConfigException("OperatingStyle이 잘못되었습니다.");
+                throw new NotImplementedException();
         }
     }
 

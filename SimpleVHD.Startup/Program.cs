@@ -1,16 +1,16 @@
 ﻿using SimpleVHD;
 using System.Diagnostics;
 using static SimpleVHD.BcdEdit;
-using Extensions = SimpleVHD.Extensions;
 
 try {
-    var pvDir = string.Empty;
-    var vhdDir = string.Empty;
+    string pvDir, vhdDir;
 
-    foreach (var drv in DriveInfo.GetDrives().Where(Extensions.CheckFixed).Select(Extensions.GetLetter)) {
-        if (File.Exists(drv + "\\" + DirName + "\\" + ConfigName)) pvDir = drv + "\\" + DirName + "\\";
-        if (File.Exists(drv + PVConfig.Instance.VhdDirectory + PVConfig.Instance.VhdFile)) vhdDir = drv + PVConfig.Instance.VhdDirectory;
-    }
+    var drvs = DriveInfo.GetDrives().Where(Extensions.CheckFixed);
+    var pvDrvs = drvs.Where(d => File.Exists(d + "\\" + DirName + "\\" + ConfigName)).Select(d => d.Name);
+    var vhdDrvs = drvs.Where(d => File.Exists(d + PVConfig.Instance.VhdDirectory + PVConfig.Instance.VhdFile)).Select(Extensions.GetLetter);
+
+    pvDir = pvDrvs.Any() ? pvDrvs.First() + DirName + "\\" : throw new FileNotFoundException("설정 파일을 찾을 수 없습니다.", ConfigName);
+    vhdDir = vhdDrvs.Any() ? vhdDrvs.First() + PVConfig.Instance.VhdDirectory : throw new FileNotFoundException("VHD 파일을 찾을 수 없습니다.", PVConfig.Instance.VhdFile);
 
     if (PVConfig.Instance.Action == DoAction.DoUninstall) {
         uninstall(pvDir, vhdDir);

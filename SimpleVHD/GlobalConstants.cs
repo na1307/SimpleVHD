@@ -7,7 +7,7 @@ public static class GlobalConstants {
     /// <summary>
     /// 빌드 번호
     /// </summary>
-    public const ulong BuildNumber = 140;
+    public const ulong BuildNumber = 147;
 
     /// <summary>
     /// 핵심 디렉토리 이름
@@ -33,6 +33,11 @@ public static class GlobalConstants {
     /// XML 설정 파일 주석 내용
     /// </summary>
     public const string ConfigComment = "이 파일을 절대 편집하지 마세요!";
+
+    /// <summary>
+    /// 설정 파일을 찾지 못했을 때 메시지
+    /// </summary>
+    public const string ConfigFileNotFoundMessage = "설정 파일을 찾을 수 없습니다.";
 
     /// <summary>
     /// 자식 1 파일 이름

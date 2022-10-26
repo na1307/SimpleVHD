@@ -153,10 +153,14 @@ internal abstract class Action {
         }
     }
 
-    protected sealed class ProcessFailedException : PVActionException {
+    protected class ProcessFailedException : PVActionException {
         private const string dMessage = "작업이 실패했습니다.\r\n\r\n";
 
         public ProcessFailedException(string reason) : base(dMessage + reason) { }
         public ProcessFailedException(string reason, Exception innerException) : base(dMessage + reason, innerException) { }
+    }
+
+    protected sealed class InvalidTempException : ProcessFailedException {
+        public InvalidTempException() : base("설정 파일의 Temp 항목이 잘못되었습니다.") { }
     }
 }

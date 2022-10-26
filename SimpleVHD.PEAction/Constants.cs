@@ -8,16 +8,28 @@ internal static class Constants {
     public static readonly string VhdDir = string.Empty;
 
     static Constants() {
-        foreach (var drv in DriveInfo.GetDrives().Where(Extensions.CheckFixed).Select(d => d.Name)) {
-            if (File.Exists(drv + DirName + "\\" + ConfigName)) PVDir = drv + DirName + "\\";
+        var drvs = DriveInfo.GetDrives().Where(Extensions.CheckFixed);
 
-            if (Directory.Exists(drv + BackupDirName)) {
-                BackupDir = drv + BackupDirName + "\\";
-            } else if (Directory.Exists(PVDir + IncludedBackupDirName)) {
-                BackupDir = PVDir + IncludedBackupDirName + "\\";
-            }
+        var pvDirs = from d in drvs
+                     where File.Exists(d.Name + DirName + "\\" + ConfigName)
+                     select d.Name;
 
-            if (File.Exists(drv.Left(2) + PVConfig.Instance.VhdDirectory + PVConfig.Instance.VhdFile)) VhdDir = drv.Left(2) + PVConfig.Instance.VhdDirectory;
+        var backupDirs = from d in drvs
+                         where Directory.Exists(d.Name + BackupDirName)
+                         select d.Name;
+
+        var vhdDirs = from d in drvs
+                      where File.Exists(d.GetLetter() + PVConfig.Instance.VhdDirectory + PVConfig.Instance.VhdFile)
+                      select d.GetLetter();
+
+        if (pvDirs.Any()) PVDir = pvDirs.First() + DirName + "\\";
+
+        if (backupDirs.Any()) {
+            BackupDir = backupDirs.First() + BackupDirName + "\\";
+        } else if (Directory.Exists(PVDir + IncludedBackupDirName)) {
+            BackupDir = PVDir + IncludedBackupDirName + "\\";
         }
+
+        if (vhdDirs.Any()) VhdDir = vhdDirs.First() + PVConfig.Instance.VhdDirectory;
     }
 }

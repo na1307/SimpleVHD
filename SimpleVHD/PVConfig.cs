@@ -86,14 +86,11 @@ public sealed class PVConfig : IXmlSerializable {
 
     private PVConfig() {
         try {
-            foreach (var drv in from d in DriveInfo.GetDrives()
-                                where d.CheckFixed() && File.Exists(d.Name + DirName + "\\" + ConfigName)
-                                select d.Name) {
-                xPath = drv + DirName + "\\" + ConfigName;
-                break;
-            }
+            var drvs = from d in DriveInfo.GetDrives()
+                       where d.CheckFixed() && File.Exists(d.Name + DirName + "\\" + ConfigName)
+                       select d.Name;
 
-            if (xPath == null) throw new ConfigNotFoundException();
+            xPath = drvs.Any() ? drvs.First() + DirName + "\\" + ConfigName : throw new PVConfigException(ConfigFileNotFoundMessage);
 
             shutdownAfter = new(4) {
                 { DoAction.DoBackup, default },
@@ -112,16 +109,16 @@ public sealed class PVConfig : IXmlSerializable {
 
             ((IXmlSerializable)this).ReadXml(XmlReader.Create(xPath));
 
-            if (VhdDirectory == null) throw new InvalidConfigException(nameof(VhdDirectory) + "가 없습니다.");
-            if (VhdFile == null) throw new InvalidConfigException(nameof(VhdFile) + "이 없습니다.");
+            if (VhdDirectory == null) throw new InvalidConfigException("설정 파일에 " + nameof(VhdDirectory) + " 항목이 없습니다.");
+            if (VhdFile == null) throw new InvalidConfigException("설정 파일에" + nameof(VhdFile) + " 항목이 없습니다.");
 
-            var guids = bcdGuids.Where(g => g.Value == Guid.Empty);
+            var emptyGuids = bcdGuids.Where(g => g.Value == Guid.Empty);
 
-            if (guids.Any()) throw new InvalidConfigException(guids.First().Key.ToString() + " Guid가 없습니다.");
+            if (emptyGuids.Any()) throw new InvalidConfigException("설정 파일에 " + emptyGuids.First().Key.ToString() + " Guid가 없습니다.");
         } catch (PVException) {
             throw;
         } catch (Exception ex) {
-            throw new InvalidConfigException(ex);
+            throw new InvalidConfigException(ex.Message, ex);
         }
     }
 
@@ -207,16 +204,15 @@ public sealed class PVConfig : IXmlSerializable {
         writer.Close();
     }
 
-    public class ConfigNotFoundException : PVException {
-        public ConfigNotFoundException() : base("설정 파일을 찾을 수 없습니다.") { }
-        public ConfigNotFoundException(string message) : base(message) { }
-        public ConfigNotFoundException(string message, Exception innerException) : base(message, innerException) { }
+    private class PVConfigException : PVException {
+        public PVConfigException(string message) : base(message) { }
+        public PVConfigException(string message, Exception innerException) : base(message, innerException) { }
     }
 
-    public class InvalidConfigException : PVException {
+    private sealed class InvalidConfigException : PVConfigException {
         private const string dMessage = "설정 파일이 잘못되었습니다. " + ConfigName + " 파일을 살펴보세요.";
 
         public InvalidConfigException(string reason) : base(dMessage + "\r\n\r\n" + reason) { }
-        public InvalidConfigException(Exception innerException) : base(dMessage, innerException) { }
+        public InvalidConfigException(string reason, Exception innerException) : base(dMessage + "\r\n\r\n" + reason, innerException) { }
     }
 }

@@ -16,20 +16,19 @@ try {
     ForegroundColor = ConsoleColor.White;
     Clear();
 
-    var pvDir = string.Empty;
-    var pvDrv = string.Empty;
-    var pvPath = string.Empty;
+    string pvDir, pvDrv, pvPath;
 
-    foreach (var drv in from d in DriveInfo.GetDrives()
-                        where d.CheckFixed() && Directory.Exists(d.Name + DirName)
-                        select d.GetLetter()) {
-        pvDir = drv + "\\" + DirName + "\\";
-        pvDrv = drv;
+    var drvs = from d in DriveInfo.GetDrives()
+               where d.CheckFixed() && Directory.Exists(d.Name + DirName)
+               select d.GetLetter();
+
+    if (drvs.Any()) {
+        pvDrv = drvs.First();
         pvPath = "\\" + DirName + "\\";
-        break;
+        pvDir = pvDrv + pvPath;
+    } else {
+        throw new RequirementNotFoundException();
     }
-
-    if (string.IsNullOrEmpty(pvDir)) throw new RequirementNotFoundException();
 
     var requires = new[] { "Boot\\SimpleVHD.wim", "Boot\\boot.sdi" }.Where(f => !File.Exists(pvDir + f));
 
@@ -205,7 +204,7 @@ static string GetBackupDrive() {
         Beep();
 
         WriteLine("\r\n아래의 목록을 보고 백업을 저장할 드라이브를 입력하세요.\r\n\r\n" + line + "\r\n 문자  레이블      Fs    크기\r\n" + (new string('-', 50)));
-        DriveInfo.GetDrives().Where(SimpleVHD.Extensions.CheckFixed).Select(d => " " + d.Name[0] + "     " + d.VolumeLabel + "      " + d.DriveFormat + "    " + (d.TotalSize / 1024 / 1024 / 1024) + " GB").ForEach(WriteLine);
+        DriveInfo.GetDrives().Where(Extensions.CheckFixed).Select(d => " " + d.Name[0] + "     " + d.VolumeLabel + "      " + d.DriveFormat + "    " + (d.TotalSize / 1024 / 1024 / 1024) + " GB").ForEach(WriteLine);
         Write(line + "\r\n\r\n ex) D or D:");
 
         var input = ReadLine();
