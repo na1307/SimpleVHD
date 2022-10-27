@@ -16,23 +16,11 @@ public sealed partial class FormMain {
     }
 
     private void button_Click(object sender, EventArgs e) {
-        string text;
-        DoAction action;
-
-        switch (((Button)sender).Name) {
-            case nameof(button1):
-                text = "복원";
-                action = DoAction.DoRestore;
-                break;
-
-            case nameof(button2):
-                text = "초기화";
-                action = DoAction.DoRevert;
-                break;
-
-            default:
-                throw new NotImplementedException();
-        }
+        (string text, DoAction action) = ((Button)sender).Name switch {
+            nameof(button1) => ("복원", DoAction.DoRestore),
+            nameof(button2) => ("초기화", DoAction.DoRevert),
+            _ => throw new NotImplementedException()
+        };
 
         if (MessageBox.Show("정말 " + text + " 작업을 실행할까요?", "경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes) {
             Hide();

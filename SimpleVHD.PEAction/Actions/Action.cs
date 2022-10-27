@@ -59,7 +59,6 @@ internal abstract class Action {
         };
 
         ipForm.Controls.Add(l);
-
         ipForm.Disposed += (sender, e) => l.Dispose();
     }
 
