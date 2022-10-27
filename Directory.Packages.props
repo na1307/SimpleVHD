@@ -3,6 +3,11 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Bluehill.Hangul" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageVersion Include="Bluehill.Hangul" Version="1.0.1" />
+    <PackageVersion Include="PostSharp" Version="6.10.15" />
+    <PackageVersion Include="PostSharp.Patterns.Model" Version="6.10.15" />
   </ItemGroup>
 </Project>

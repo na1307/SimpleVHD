@@ -1,22 +1,14 @@
-﻿using System.ComponentModel;
+﻿using PostSharp.Patterns.Model;
+using System.ComponentModel;
 
 namespace SimpleVHD.ControlPanel;
 
 /// <summary>
 /// MainWindow.xaml에 대한 상호 작용 논리
 /// </summary>
-public sealed partial class MainWindow : INotifyPropertyChanged {
-    private Screen _Screen = new HomeScreen();
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    public Screen Screen {
-        get => _Screen;
-        set {
-            _Screen = value;
-            OnPropertyChanged(nameof(Screen));
-        }
-    }
+[NotifyPropertyChanged]
+public sealed partial class MainWindow {
+    public Screen Screen { get; set; } = new HomeScreen();
 
     public MainWindow() {
         InitializeComponent();
@@ -62,6 +54,4 @@ public sealed partial class MainWindow : INotifyPropertyChanged {
                 throw new InvalidOperationException();
         }
     }
-
-    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new(name));
 }

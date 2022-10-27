@@ -19,6 +19,18 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BluehillShared.Forms", "Blu
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BluehillShared.Wpf", "BluehillShared\BluehillShared.Wpf\BluehillShared.Wpf.shproj", "{1203C637-39D4-4B72-9AD5-D0F06DCA37F0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8C6B6E78-A937-448F-9672-DEBD8D6981F0}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		nuget.config = nuget.config
+		README.md = README.md
+		SimpleVHD.vsext = SimpleVHD.vsext
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

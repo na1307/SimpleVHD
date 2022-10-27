@@ -1,0 +1,12 @@
+{
+  "id": "98972157-02e1-4bf4-8545-c84e2e411f48",
+  "name": "My Visual Studio extensions",
+  "description": "A collection of my Visual Studio extensions",
+  "version": "1.0",
+  "extensions": [
+    {
+      "name": "PostSharp",
+      "vsixId": "B1E3658F-0093-4C51-B4D2-5B31354F3E77"
+    }
+  ]
+}

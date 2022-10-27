@@ -47,6 +47,7 @@
     <ProjectReference Include="..\SimpleVHD\SimpleVHD.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Bluehill.Hangul" />
+    <PackageReference Include="PostSharp" />
+    <PackageReference Include="PostSharp.Patterns.Model" />
   </ItemGroup>
 </Project>
