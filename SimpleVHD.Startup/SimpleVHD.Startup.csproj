@@ -6,9 +6,6 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <Using Remove="System.Net.Http" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="..\SimpleVHD\Properties\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

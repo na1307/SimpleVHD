@@ -1,10 +1,4 @@
-﻿global using System.Diagnostics;
-global using System.Windows;
-global using System.Windows.Controls;
-global using System.Windows.Media;
-global using System.Windows.Media.Imaging;
-
-namespace SimpleVHD.ControlPanel;
+﻿namespace SimpleVHD.ControlPanel;
 
 /// <summary>
 /// App.xaml에 대한 상호 작용 논리

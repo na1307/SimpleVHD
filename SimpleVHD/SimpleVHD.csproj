@@ -5,7 +5,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Using Include="System.IO" />
-    <Using Remove="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bluehill.Hangul" />

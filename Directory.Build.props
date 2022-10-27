@@ -1,7 +1,6 @@
 <Project>
   <PropertyGroup>
-    <TargetFramework>net40-client</TargetFramework>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFramework>net45</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <IsPublishable>False</IsPublishable>
@@ -22,5 +21,8 @@
     <Using Include="SimpleVHD.GlobalConstants" Static="true" />
     <Using Include="SimpleVHD.GlobalProperties" Static="true" />
     <Using Include="SimpleVHD.Extensions" Alias="Extensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
 </Project>

@@ -31,10 +31,14 @@
     <Resource Include="resources\tools.png" />
   </ItemGroup>
   <ItemGroup>
+    <Using Include="System.Diagnostics" />
+    <Using Include="System.Windows" />
+    <Using Include="System.Windows.Controls" />
+    <Using Include="System.Windows.Media" />
+    <Using Include="System.Windows.Media.Imaging" />
     <Using Include="BluehillShared.ErrDialogWpf" Static="true" />
     <Using Include="SimpleVHD.BcdEdit" Static="true" />
     <Using Include="SimpleVHD.ControlPanel.Constants" Static="true" />
-    <Using Remove="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SimpleVHD\Properties\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />

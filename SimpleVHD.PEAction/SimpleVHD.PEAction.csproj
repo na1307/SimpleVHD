@@ -6,11 +6,10 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
+    <Using Include="System.Diagnostics" />
     <Using Include="BluehillShared.ErrDialogForms" Static="true" />
     <Using Include="SimpleVHD.BcdEdit" Static="true" />
     <Using Include="SimpleVHD.PEAction.Constants" Static="true" />
-    <Using Include="System.Diagnostics" />
-    <Using Remove="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SimpleVHD\Properties\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
