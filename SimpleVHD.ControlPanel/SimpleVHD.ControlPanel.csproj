@@ -45,5 +45,4 @@
   <ItemGroup>
     <PackageReference Include="Bluehill.Hangul" />
   </ItemGroup>
-  <Import Project="..\BluehillShared\BluehillShared.Wpf\BluehillShared.Wpf.projitems" Label="Shared" />
 </Project>

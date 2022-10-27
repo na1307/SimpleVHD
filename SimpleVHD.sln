@@ -53,10 +53,10 @@ Global
 		SolutionGuid = {343D573F-ECAA-4FA4-BFCC-43EB772D8CF9}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		BluehillShared\BluehillShared.Forms\BluehillShared.Forms.projitems*{0b627772-77d8-40e9-abb6-8ed8e1c86fed}*SharedItemsImports = 5
 		BluehillShared\BluehillShared.Wpf\BluehillShared.Wpf.projitems*{1203c637-39d4-4b72-9ad5-d0f06dca37f0}*SharedItemsImports = 13
 		BluehillShared\BluehillShared\BluehillShared.projitems*{924f3c61-e147-416f-b112-a070a8a04a82}*SharedItemsImports = 13
-		BluehillShared\BluehillShared.Wpf\BluehillShared.Wpf.projitems*{b06d377b-cc67-4f48-a9af-87a913f6740f}*SharedItemsImports = 5
+		BluehillShared\BluehillShared.Forms\BluehillShared.Forms.projitems*{b4b1c8a9-35ec-44e6-a5a9-89c9baa0dbaa}*SharedItemsImports = 5
+		BluehillShared\BluehillShared.Wpf\BluehillShared.Wpf.projitems*{b4b1c8a9-35ec-44e6-a5a9-89c9baa0dbaa}*SharedItemsImports = 5
 		BluehillShared\BluehillShared\BluehillShared.projitems*{b4b1c8a9-35ec-44e6-a5a9-89c9baa0dbaa}*SharedItemsImports = 5
 		BluehillShared\BluehillShared.Forms\BluehillShared.Forms.projitems*{cb3af7fc-e7f2-4a85-adff-e1095aea9ba4}*SharedItemsImports = 13
 	EndGlobalSection
