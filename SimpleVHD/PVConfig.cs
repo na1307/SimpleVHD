@@ -143,11 +143,11 @@ public sealed class PVConfig : IXmlSerializable {
             if (reader.NodeType == XmlNodeType.Element) {
                 switch (reader.LocalName) {
                     case "ShutdownAfterAction":
-                        shutdownAfter[(DoAction)Enum.Parse(typeof(DoAction), "Do" + reader.GetAttribute("Type"), false)] = reader.ReadElementContentAsBoolean();
+                        shutdownAfter[EnumParser.Parse<DoAction>("Do" + reader.GetAttribute("Type"), false)] = reader.ReadElementContentAsBoolean();
                         break;
 
                     case "Guid":
-                        bcdGuids[(GuidType)Enum.Parse(typeof(GuidType), reader.GetAttribute("Type"), false)] = Guid.Parse(reader.ReadElementContentAsString());
+                        bcdGuids[EnumParser.Parse<GuidType>(reader.GetAttribute("Type"), false)] = Guid.Parse(reader.ReadElementContentAsString());
                         break;
 
                     default:

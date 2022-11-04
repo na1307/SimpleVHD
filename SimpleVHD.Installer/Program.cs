@@ -106,7 +106,7 @@ try {
             new XElement("WindowsVersion", Winver.WindowsVersion.ToString()),
             new XElement("OperatingStyle", OperatingStyle.Simple.ToString()),
             new XElement("VhdType", vhdType.ToString()),
-            new XElement("VhdFormat", ((VhdFormat)Enum.Parse(typeof(VhdFormat), vhdFormat, true)).ToString()),
+            new XElement("VhdFormat", EnumParser.Parse<VhdFormat>(vhdFormat, true).ToString()),
             new XElement("VhdDirectory", vhdPath),
             new XElement("VhdFile", vhdName),
             new XElement("Action", DoAction.DoSwitchStyle.ToString()),
