@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageVersion Include="Bluehill.Hangul" Version="1.1.0" />
     <PackageVersion Include="PostSharp" Version="6.10.16" />
-    <PackageVersion Include="PostSharp.Patterns.Model" Version="6.10.15" />
+    <PackageVersion Include="PostSharp.Patterns.Model" Version="6.10.16" />
     <PackageVersion Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
 </Project>
