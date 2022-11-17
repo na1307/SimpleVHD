@@ -26,8 +26,8 @@ public sealed partial class EntryControl {
         InitializeComponent();
         DataContext = this;
         startButton.Click += MainWindow.PlayClickSound;
-        startButton.Click += (s, e) => Start?.Invoke(this, EventArgs.Empty);
+        startButton.Click += (_, _) => Start?.Invoke(this, EventArgs.Empty);
         backButton.Click += MainWindow.PlayClickSound;
-        backButton.Click += (s, e) => Back?.Invoke(this, EventArgs.Empty);
+        backButton.Click += (_, _) => Back?.Invoke(this, EventArgs.Empty);
     }
 }

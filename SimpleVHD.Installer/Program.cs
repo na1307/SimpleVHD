@@ -62,7 +62,9 @@ try {
 
     var bcdDesctiption = BcdEditRegex("/enum {current}", @"^description\s+(?<name>.+)$").Groups["name"].Value;
 
+#pragma warning disable IDE0028 // Simplify collection initialization
     Dictionary<string, string> guids = new(5);
+#pragma warning restore IDE0028 // Simplify collection initialization
 
     guids.Add("Parent", BcdEditGuid($"/enum {{current}} /v"));
 
@@ -115,6 +117,7 @@ try {
         )
     ).Save(pvDir + "\\" + ConfigName);
 
+#pragma warning disable IDE0063 // Use simple 'using' statement
     using (Process shutdown = new() {
         StartInfo = {
             FileName = "shutdown.exe",
@@ -125,6 +128,7 @@ try {
     }) {
         shutdown.Start();
     }
+#pragma warning restore IDE0063 // Use simple 'using' statement
 } catch (PVInstallerException ex) {
     ErrorControl(ex.Message);
 } catch (Exception ex) {

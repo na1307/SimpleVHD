@@ -59,7 +59,7 @@ internal abstract class Action {
         };
 
         ipForm.Controls.Add(l);
-        ipForm.Disposed += (sender, e) => l.Dispose();
+        ipForm.Disposed += (_, _) => l.Dispose();
     }
 
     public sealed override string? ToString() => null;

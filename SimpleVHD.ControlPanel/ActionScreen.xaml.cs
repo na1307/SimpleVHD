@@ -17,7 +17,7 @@ public partial class ActionScreen {
         DoButton.Click += DoButton_Click;
         BackButton.Click += MainWindow.PlayClickSound;
         BackButton.Click += BackButton_Click;
-        if (action is PanelAction.DoBackup or PanelAction.DoRestore or PanelAction.DoRevert or PanelAction.DoMerge) ShutdownBox.IsChecked = PVConfig.Instance[(DoAction)pAction]; else ShutdownBox.Visibility = Visibility.Hidden;
+        if (ShutdownAction.Contains((DoAction)action)) ShutdownBox.IsChecked = PVConfig.Instance[(DoAction)pAction]; else ShutdownBox.Visibility = Visibility.Hidden;
     }
 
     private void DoButton_Click(object sender, RoutedEventArgs e) {

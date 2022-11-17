@@ -170,11 +170,8 @@ public sealed class PVConfig : IXmlSerializable {
         writer.WriteComment(ConfigComment);
         writer.WriteStartElement("Config");
 
-        foreach (var p in GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)) {
+        foreach (var p in GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(p => p.Name != "Item")) {
             switch (p.Name) {
-                //인덱서는 처리 안함
-                case "Item": continue;
-
                 case nameof(Temp):
                     if (Temp != null) writer.WriteElementString(nameof(Temp), Temp);
                     break;
