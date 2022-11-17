@@ -10,6 +10,6 @@ public static class Firmware {
         IsWindowsUEFI = Marshal.GetLastWin32Error() != 1;
 
         [DllImport("kernel32.dll", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, EntryPoint = "GetFirmwareEnvironmentVariableW", ExactSpelling = true, SetLastError = true)]
-        static extern uint GetFirmwareType(string lpName, string lpGUID, IntPtr pBuffer, uint size);
+        static extern uint GetFirmwareType([MarshalAs(UnmanagedType.LPWStr)] string lpName, [MarshalAs(UnmanagedType.LPWStr)] string lpGUID, IntPtr pBuffer, uint size);
     }
 }
