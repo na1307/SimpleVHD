@@ -1,5 +1,5 @@
 {
-  "id": "98972157-02e1-4bf4-8545-c84e2e411f48",
+  "id": "70497481-0bbd-4ea2-b10b-770fdd1ecdd1",
   "name": "My Visual Studio extensions",
   "description": "A collection of my Visual Studio extensions",
   "version": "1.0",
@@ -7,6 +7,10 @@
     {
       "name": "PostSharp",
       "vsixId": "B1E3658F-0093-4C51-B4D2-5B31354F3E77"
+    },
+    {
+      "name": "SonarLint for Visual Studio 2022",
+      "vsixId": "SonarLint.0DE19254-1DCA-4479-8EAF-58E5D677FF4D"
     }
   ]
 }
