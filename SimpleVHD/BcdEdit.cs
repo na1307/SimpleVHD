@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 
 namespace SimpleVHD;
@@ -98,11 +99,13 @@ public static class BcdEdit {
         return m.Count > 0 ? m : throw new BcdException(output);
     }
 
+    [Serializable]
     public class BcdException : PVException {
         private const string message = "bcdedit 작업 도중 오류가 발생했습니다.";
 
         public BcdException() : base(message) { }
         public BcdException(string reason) : base(message + "\r\n\r\n" + reason) { }
         public BcdException(string reason, Exception innerException) : base(message + "\r\n\r\n" + reason, innerException) { }
+        protected BcdException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 }

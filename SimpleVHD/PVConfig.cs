@@ -87,10 +87,10 @@ public sealed class PVConfig : IXmlSerializable {
     private PVConfig() {
         try {
             var drvs = from d in DriveInfo.GetDrives()
-                       where d.CheckFixed() && File.Exists(d.Name + DirName + "\\" + ConfigName)
+                       where d.CheckFixed() && File.Exists(d.Name + DirName + Path.DirectorySeparatorChar.ToString() + ConfigName)
                        select d.Name;
 
-            xPath = drvs.Any() ? drvs.First() + DirName + "\\" + ConfigName : throw new PVConfigException(ConfigFileNotFoundMessage);
+            xPath = drvs.Any() ? drvs.First() + DirName + Path.DirectorySeparatorChar.ToString() + ConfigName : throw new PVConfigException(ConfigFileNotFoundMessage);
 
             shutdownAfter = new(4) {
                 { DoAction.DoBackup, default },

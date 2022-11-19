@@ -6,10 +6,10 @@ try {
     string pvDir, vhdDir;
 
     var drvs = DriveInfo.GetDrives().Where(Extensions.CheckFixed);
-    var pvDrvs = drvs.Where(d => File.Exists(d + "\\" + DirName + "\\" + ConfigName)).Select(d => d.Name);
+    var pvDrvs = drvs.Where(d => File.Exists(d + Path.DirectorySeparatorChar.ToString() + DirName + Path.DirectorySeparatorChar.ToString() + ConfigName)).Select(d => d.Name);
     var vhdDrvs = drvs.Where(d => File.Exists(d + PVConfig.Instance.VhdDirectory + PVConfig.Instance.VhdFile)).Select(Extensions.GetLetter);
 
-    pvDir = pvDrvs.Any() ? pvDrvs.First() + DirName + "\\" : throw new FileNotFoundException("설정 파일을 찾을 수 없습니다.", ConfigName);
+    pvDir = pvDrvs.Any() ? pvDrvs.First() + DirName + Path.DirectorySeparatorChar.ToString() : throw new FileNotFoundException("설정 파일을 찾을 수 없습니다.", ConfigName);
     vhdDir = vhdDrvs.Any() ? vhdDrvs.First() + PVConfig.Instance.VhdDirectory : throw new FileNotFoundException("VHD 파일을 찾을 수 없습니다.", PVConfig.Instance.VhdFile);
 
     if (PVConfig.Instance.Action == DoAction.DoUninstall) {

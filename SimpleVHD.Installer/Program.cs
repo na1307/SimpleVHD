@@ -24,7 +24,7 @@ try {
 
     if (drvs.Any()) {
         pvDrv = drvs.First();
-        pvPath = "\\" + DirName + "\\";
+        pvPath = Path.DirectorySeparatorChar.ToString() + DirName + Path.DirectorySeparatorChar.ToString();
         pvDir = pvDrv + pvPath;
     } else {
         throw new RequirementNotFoundException();
@@ -34,7 +34,7 @@ try {
 
     if (requires.Any()) throw new RequirementNotFoundException(Path.GetFileName(requires.First()));
 
-    if (File.Exists(pvDir + "\\" + ConfigName) && !ConfigExists()) return;
+    if (File.Exists(pvDir + Path.DirectorySeparatorChar.ToString() + ConfigName) && !ConfigExists()) return;
 
     string vhdDrv, vhdPath, vhdName;
 
@@ -43,7 +43,7 @@ try {
 
         vhdDrv = m.Groups["drv"].Value;
         vhdPath = Path.GetDirectoryName(m.Groups["path"].Value);
-        if (vhdPath.Length > 1) vhdPath += "\\";
+        if (vhdPath.Length > 1) vhdPath += Path.DirectorySeparatorChar.ToString();
         vhdName = Path.GetFileName(m.Groups["path"].Value);
     } catch (BcdException ex) {
         throw new VhdNotFoundException(ex);
@@ -54,7 +54,7 @@ try {
     var operatingStyle = GetOperatingStyle();
     var backDrv = GetBackupDrive();
 
-    Directory.CreateDirectory(backDrv.Equals(pvDrv, StringComparison.OrdinalIgnoreCase) ? pvDir + IncludedBackupDirName : backDrv + "\\" + BackupDirName);
+    Directory.CreateDirectory(backDrv.Equals(pvDrv, StringComparison.OrdinalIgnoreCase) ? pvDir + IncludedBackupDirName : backDrv + Path.DirectorySeparatorChar.ToString() + BackupDirName);
 
     Registry.SetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "PVStartup", pvDir + "Bin\\Startup.exe", RegistryValueKind.String);
 
@@ -115,7 +115,7 @@ try {
             GenerateXEs(guids),
             new XElement("Temp", operatingStyle.ToString())
         )
-    ).Save(pvDir + "\\" + ConfigName);
+    ).Save(pvDir + Path.DirectorySeparatorChar.ToString() + ConfigName);
 
 #pragma warning disable IDE0063 // Use simple 'using' statement
     using (Process shutdown = new() {
