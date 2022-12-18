@@ -1,5 +1,4 @@
 ﻿using PostSharp.Patterns.Model;
-using System.ComponentModel;
 
 namespace SimpleVHD.ControlPanel;
 
