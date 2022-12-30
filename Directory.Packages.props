@@ -6,7 +6,7 @@
     <PackageReference Include="Bluehill.Hangul" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="Bluehill.Hangul" Version="1.1.0" />
+    <PackageVersion Include="Bluehill.Hangul" Version="2.0.0" />
     <PackageVersion Include="PostSharp" Version="6.10.16" />
     <PackageVersion Include="PostSharp.Patterns.Model" Version="6.10.16" />
     <PackageVersion Include="System.ValueTuple" Version="4.5.0" />
