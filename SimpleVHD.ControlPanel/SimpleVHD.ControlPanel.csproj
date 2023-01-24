@@ -36,7 +36,7 @@
     <Using Include="System.Windows.Controls" />
     <Using Include="System.Windows.Media" />
     <Using Include="System.Windows.Media.Imaging" />
-    <Using Include="BluehillShared.ErrDialogWpf" Static="true" />
+    <Using Include="Bluehill.ErrDialogWpf" Static="true" />
     <Using Include="SimpleVHD.BcdEdit" Static="true" />
     <Using Include="SimpleVHD.ControlPanel.Constants" Static="true" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-﻿using static BluehillShared.AssemblyProperties;
+﻿using static Bluehill.AssemblyProperties;
 
 namespace SimpleVHD.PEAction;
 

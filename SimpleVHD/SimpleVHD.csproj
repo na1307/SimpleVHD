@@ -1,12 +1,2 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-  <PropertyGroup>
-    <UseWindowsForms>true</UseWindowsForms>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
-  <ItemGroup>
-    <Using Include="System.IO" />
-  </ItemGroup>
-  <Import Project="..\BluehillShared\BluehillShared\BluehillShared.projitems" Label="Shared" />
-  <Import Project="..\BluehillShared\BluehillShared.Forms\BluehillShared.Forms.projitems" Label="Shared" />
-  <Import Project="..\BluehillShared\BluehillShared.Wpf\BluehillShared.Wpf.projitems" Label="Shared" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
 </Project>

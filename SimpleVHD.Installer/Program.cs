@@ -5,7 +5,9 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using static SimpleVHD.BcdEdit;
+using static SimpleVHD.WindowsVersion;
 using static System.Console;
+using static System.Environment;
 
 const string line = "==================================================";
 
@@ -15,6 +17,23 @@ try {
     BackgroundColor = ConsoleColor.DarkBlue;
     ForegroundColor = ConsoleColor.White;
     Clear();
+
+    var windows = OSVersion.Platform switch {
+        PlatformID.Win32NT => OSVersion.Version.Major switch {
+            6 => OSVersion.Version.Minor switch {
+                1 => Seven,
+                2 => Eight,
+                3 => EightPointOne,
+                4 => Ten,
+                _ => Unknown
+            },
+            10 => Ten,
+            _ => Unknown
+        },
+        _ => Unknown
+    };
+
+    if (windows == Unknown) throw new PlatformNotSupportedException();
 
     string pvDir, pvDrv, pvPath;
 
@@ -105,10 +124,10 @@ try {
         new XComment(ConfigComment),
         new XElement(
             "Config",
-            new XElement("WindowsVersion", Winver.WindowsVersion.ToString()),
+            new XElement("WindowsVersion", windows.ToString()),
             new XElement("OperatingStyle", OperatingStyle.Simple.ToString()),
             new XElement("VhdType", vhdType.ToString()),
-            new XElement("VhdFormat", EnumParser.Parse<VhdFormat>(vhdFormat, true).ToString()),
+            new XElement("VhdFormat", Enum.Parse(typeof(VhdFormat), vhdFormat, true).ToString()),
             new XElement("VhdDirectory", vhdPath),
             new XElement("VhdFile", vhdName),
             new XElement("Action", DoAction.DoSwitchStyle.ToString()),
@@ -129,6 +148,8 @@ try {
         shutdown.Start();
     }
 #pragma warning restore IDE0063 // Use simple 'using' statement
+} catch (PlatformNotSupportedException) {
+    ErrorControl("이 운영 체제는 지원되지 않습니다.");
 } catch (PVInstallerException ex) {
     ErrorControl(ex.Message);
 } catch (Exception ex) {
@@ -207,7 +228,7 @@ static string GetBackupDrive() {
         Clear();
         Beep();
 
-        WriteLine("\r\n아래의 목록을 보고 백업을 저장할 드라이브를 입력하세요.\r\n\r\n" + line + "\r\n 문자  레이블      Fs    크기\r\n" + (new string('-', 50)));
+        WriteLine("\r\n아래의 목록을 보고 백업을 저장할 드라이브를 입력하세요.\r\n\r\n" + line + "\r\n 문자  레이블      Fs    크기\r\n" + new string('-', 50));
         DriveInfo.GetDrives().Where(Extensions.CheckFixed).Select(d => " " + d.Name[0] + "     " + d.VolumeLabel + "      " + d.DriveFormat + "    " + (d.TotalSize / 1024 / 1024 / 1024) + " GB").ForEach(WriteLine);
         Write(line + "\r\n\r\n ex) D or D:");
 

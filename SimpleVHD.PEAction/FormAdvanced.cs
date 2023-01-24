@@ -5,7 +5,7 @@ namespace SimpleVHD.PEAction;
 public partial class FormAdvanced {
     public FormAdvanced() {
         InitializeComponent();
-        OK_Button.Visible = false;
+        HideOKButton();
 
         if (!BackupExists) {
             button2.Enabled = false;
@@ -18,7 +18,7 @@ public partial class FormAdvanced {
 
     private void start<TAction>(string name) where TAction : Actions.Action, new() {
         if (MessageBox.Show("정말 " + name + " 작업을 실행할까요?", "경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes) {
-            base.OK_Button_Click(null, EventArgs.Empty);
+            base.OK_Button_Click(this, EventArgs.Empty);
             new TAction().Run();
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace SimpleVHD.PEAction;
 
-partial class FormInput : FormDialog {
+partial class FormInput : Dialog {
     /// <summary>
     /// Required designer variable.
     /// </summary>

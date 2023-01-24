@@ -14,10 +14,10 @@
     <CodeAnalysisRuleSet>..\.sonarlint\na1307_simplevhdcsharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /IY &quot;$(TargetDir)*.*&quot; &quot;$(SolutionDir)Bin&quot;" />
+    <Exec Command="xcopy /SIY &quot;$(TargetDir)*.*&quot; &quot;$(SolutionDir)Bin&quot;" />
   </Target>
   <ItemGroup>
-    <Using Include="BluehillShared" />
+    <Using Include="Bluehill" />
     <Using Include="Bluehill.Hangul" />
     <Using Include="SimpleVHD.GlobalConstants" Static="true" />
     <Using Include="SimpleVHD.GlobalProperties" Static="true" />

@@ -4,11 +4,21 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Bluehill.Hangul" />
+    <PackageReference Include="Bluehill.Features" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseWindowsForms)' == 'true'">
+    <PackageReference Include="Bluehill.Forms" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseWPF)' == 'true'">
+    <PackageReference Include="Bluehill.Wpf" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="Bluehill.Hangul" Version="2.0.0" />
     <PackageVersion Include="PostSharp" Version="6.10.16" />
     <PackageVersion Include="PostSharp.Patterns.Model" Version="6.10.16" />
     <PackageVersion Include="System.ValueTuple" Version="4.5.0" />
+    <PackageVersion Include="Bluehill.Features" Version="0.0.0" />
+    <PackageVersion Include="Bluehill.Forms" Version="0.0.0" />
+    <PackageVersion Include="Bluehill.Wpf" Version="0.0.0" />
   </ItemGroup>
 </Project>
