@@ -83,11 +83,11 @@ try {
 
 #pragma warning disable IDE0028 // Simplify collection initialization
     Dictionary<string, string> guids = new(5);
-#pragma warning restore IDE0028 // Simplify collection initialization
 
     guids.Add("Parent", BcdEditGuid($"/enum {{current}} /v"));
 
     guids.Add("Child1", BcdEditGuid($"/copy {{current}} /d \"{bcdDesctiption}\""));
+#pragma warning restore IDE0028 // Simplify collection initialization
 
     ProcessBcdEdit($@"/set {guids["Child1"]} device vhd=""[{vhdDrv}]{vhdPath}{Child1Name}{vhdFormat}");
     ProcessBcdEdit($@"/set {guids["Child1"]} osdevice vhd=""[{vhdDrv}]{vhdPath}{Child1Name}{vhdFormat}");

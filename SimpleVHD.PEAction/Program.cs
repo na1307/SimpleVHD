@@ -8,6 +8,13 @@ Application.EnableVisualStyles();
 Application.SetCompatibleTextRenderingDefault(false);
 
 try {
+#if !DEBUG
+    if (!BcdEditRegexAll("/enum {current} /v", @"\{.+\}").Cast<System.Text.RegularExpressions.Match>().Select(m => m.Value).Contains(PVConfig.Instance[GuidType.PE])) {
+        ErrMsg("SimpleVHD PE에서만 실행할 수 있습니다.");
+        return;
+    }
+
+#endif
     if (string.IsNullOrEmpty(PVDir)) {
         ErrMsg("설정 파일을 찾지 못하였습니다.");
         return;
