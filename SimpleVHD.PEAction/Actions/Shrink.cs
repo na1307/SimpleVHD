@@ -3,10 +3,12 @@
 namespace SimpleVHD.PEAction.Actions;
 
 internal class Shrink : Action {
-    protected override string Name => "VHD 축소";
-    protected sealed override bool NeedBackup => true;
-    protected sealed override bool AfterRebuild => true;
-    protected sealed override bool AfterRevert => true;
+    public Shrink() {
+        Name = "VHD 축소";
+        NeedBackup = true;
+        AfterRebuild = true;
+        AfterRevert = true;
+    }
 
     protected override void RunCore() {
         var output = ProcessDiskpartOutput($"select vdisk file \"{VhdDir}{PVConfig.Instance.VhdFile}\"", "detail vdisk");

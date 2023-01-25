@@ -67,23 +67,6 @@ public sealed class PVConfig : IXmlSerializable {
     /// </summary>
     public string? Temp { get; set; }
 
-    /// <summary>
-    /// 현재 ShutdownAfterAction
-    /// </summary>
-    /// <param name="type">해당 작업 ShutdownType</param>
-    /// <returns>해당 작업에서 다시 시작하는 대신 종료해야 하는지 여부</returns>
-    public bool this[DoAction type] {
-        get => shutdownAfter[type];
-        set => shutdownAfter[type] = value;
-    }
-
-    /// <summary>
-    /// 현재 BCD GUID
-    /// </summary>
-    /// <param name="type">해당 GUID 종류</param>
-    /// <returns>GUID 문자열</returns>
-    public string this[GuidType type] => bcdGuids[type].ToString("B");
-
     private PVConfig() {
         try {
             var drvs = from d in DriveInfo.GetDrives()
@@ -130,6 +113,9 @@ public sealed class PVConfig : IXmlSerializable {
         return sb.ToString();
     }
 
+    public bool GetShutdown(DoAction type) => shutdownAfter[type];
+    public void SetShutdown(DoAction type, bool value) => shutdownAfter[type] = value;
+    public string GetGuid(GuidType type) => bcdGuids[type].ToString("B");
     public void SaveConfig() => ((IXmlSerializable)this).WriteXml(XmlWriter.Create(xPath, new() { Indent = true }));
 
     System.Xml.Schema.XmlSchema? IXmlSerializable.GetSchema() => null;

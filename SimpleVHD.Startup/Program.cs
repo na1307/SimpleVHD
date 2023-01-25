@@ -52,7 +52,7 @@ static void rebuild(string vhdDir) {
     PVConfig.Instance.Action = DoAction.DoRebuild;
     PVConfig.Instance.SaveConfig();
 
-    ProcessBcdEdit($"/bootsequence {PVConfig.Instance[GuidType.PE]}");
+    ProcessBcdEdit($"/bootsequence {PVConfig.Instance.GetGuid(GuidType.PE)}");
 
     MessageBox.Show("VHDX 포맷을 사용 중인 상태에서 원본 윈도우로 부팅하였습니다.\r\n\r\n시스템 재시작시 자동으로 자식 VHD를 재구축하도록 작업이 예약되었습니다. 그러니 지금은 초기화와 같은 다른 작업들은 진행하지 마시길 바라며, 원하는 작업을 모두 마친 후 그대로 시스템을 재시작하시길 바랍니다.", "SimpleVHD", MessageBoxButtons.OK, MessageBoxIcon.Information);
 }
@@ -70,8 +70,8 @@ static void auto(string vhdDir) {
     checkadmin();
 
     var guidc = BcdEditRegex("/enum {current} /v", @"^identifier\s+(?<guid>\{.+\})").Groups["guid"].Value;
-    var guid1 = PVConfig.Instance[GuidType.Child1];
-    var guid2 = PVConfig.Instance[GuidType.Child2];
+    var guid1 = PVConfig.Instance.GetGuid(GuidType.Child1);
+    var guid2 = PVConfig.Instance.GetGuid(GuidType.Child2);
 
     if (guidc == guid2) {
         copy(vhdDir, Child1Name);
@@ -96,12 +96,12 @@ static void uninstall(string pvDir, string vhdDir) {
     File.Delete(pvDir + "Backup-BCD-01");
     File.Delete(pvDir + "Backup-BCD-02");
 
-    ProcessBcdEdit($"/default {PVConfig.Instance[GuidType.Parent]}");
-    ProcessBcdEdit($"/displayorder {PVConfig.Instance[GuidType.Parent]} /addfirst");
-    ProcessBcdEdit($"/delete {PVConfig.Instance[GuidType.Child1]} /cleanup");
-    ProcessBcdEdit($"/delete {PVConfig.Instance[GuidType.Child2]} /cleanup");
-    ProcessBcdEdit($"/delete {PVConfig.Instance[GuidType.PE]} /cleanup");
-    ProcessBcdEdit($"/delete {PVConfig.Instance[GuidType.Ramdisk]} /cleanup");
+    ProcessBcdEdit($"/default {PVConfig.Instance.GetGuid(GuidType.Parent)}");
+    ProcessBcdEdit($"/displayorder {PVConfig.Instance.GetGuid(GuidType.Parent)} /addfirst");
+    ProcessBcdEdit($"/delete {PVConfig.Instance.GetGuid(GuidType.Child1)} /cleanup");
+    ProcessBcdEdit($"/delete {PVConfig.Instance.GetGuid(GuidType.Child2)} /cleanup");
+    ProcessBcdEdit($"/delete {PVConfig.Instance.GetGuid(GuidType.PE)} /cleanup");
+    ProcessBcdEdit($"/delete {PVConfig.Instance.GetGuid(GuidType.Ramdisk)} /cleanup");
 
     Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).DeleteValue("PVStartup");
 

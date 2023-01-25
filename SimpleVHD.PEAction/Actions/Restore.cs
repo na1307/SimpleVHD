@@ -1,12 +1,15 @@
 ﻿namespace SimpleVHD.PEAction.Actions;
 
 internal class Restore : Action {
-    protected override string Name => "복원";
-    protected sealed override bool NeedBackup => true;
-    protected sealed override bool AfterRebuild => true;
-    protected sealed override bool AfterRevert => true;
-    protected override bool Shutdown => PVConfig.Instance[DoAction.DoRestore];
-    protected virtual VhdType VType => PVConfig.Instance.VhdType;
+    protected VhdType VType { get; init; } = PVConfig.Instance.VhdType;
+
+    public Restore() {
+        Name = "복원";
+        NeedBackup = true;
+        AfterRebuild = true;
+        AfterRevert = true;
+        Shutdown = PVConfig.Instance.GetShutdown(DoAction.DoRestore);
+    }
 
     protected override void RunCore() {
         File.Delete(VhdDir + PVConfig.Instance.VhdFile);

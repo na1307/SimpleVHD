@@ -1,8 +1,10 @@
 ﻿namespace SimpleVHD.PEAction.Actions;
 
 internal class SwitchStyle : Action {
-    protected override string Name => "운영 스타일 전환";
-    protected sealed override bool RemoveTempAfterProcess => true;
+    public SwitchStyle() {
+        Name = "운영 스타일 전환";
+        RemoveTempAfterProcess = true;
+    }
 
     protected override void RunCore() {
         // 파일 삭제
@@ -16,11 +18,11 @@ internal class SwitchStyle : Action {
             // 단순 스타일
             case OperatingStyle.Simple:
                 // BCD 업데이트
-                ProcessBcdEdit("/default " + PVConfig.Instance[GuidType.Parent]);
-                ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.Parent] + " /addfirst");
-                ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.PE] + " /addlast");
-                ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.Child1] + " /remove");
-                ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.Child2] + " /remove");
+                ProcessBcdEdit("/default " + PVConfig.Instance.GetGuid(GuidType.Parent));
+                ProcessBcdEdit("/displayorder " + PVConfig.Instance.GetGuid(GuidType.Parent) + " /addfirst");
+                ProcessBcdEdit("/displayorder " + PVConfig.Instance.GetGuid(GuidType.PE) + " /addlast");
+                ProcessBcdEdit("/displayorder " + PVConfig.Instance.GetGuid(GuidType.Child1) + " /remove");
+                ProcessBcdEdit("/displayorder " + PVConfig.Instance.GetGuid(GuidType.Child2) + " /remove");
                 break;
 
             // 차등 스타일 (수동 초기화)
@@ -32,11 +34,11 @@ internal class SwitchStyle : Action {
                 File.Copy(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
 
                 // BCD 업데이트
-                ProcessBcdEdit("/default " + PVConfig.Instance[GuidType.Child1]);
-                ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.Child1] + " /addfirst");
-                ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.PE] + " /addlast");
-                ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.Parent] + " /remove");
-                ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.Child2] + " /remove");
+                ProcessBcdEdit("/default " + PVConfig.Instance.GetGuid(GuidType.Child1));
+                ProcessBcdEdit("/displayorder " + PVConfig.Instance.GetGuid(GuidType.Child1) + " /addfirst");
+                ProcessBcdEdit("/displayorder " + PVConfig.Instance.GetGuid(GuidType.PE) + " /addlast");
+                ProcessBcdEdit("/displayorder " + PVConfig.Instance.GetGuid(GuidType.Parent) + " /remove");
+                ProcessBcdEdit("/displayorder " + PVConfig.Instance.GetGuid(GuidType.Child2) + " /remove");
                 break;
 
             // 차등 스타일 (자동 초기화)
@@ -48,11 +50,11 @@ internal class SwitchStyle : Action {
                 File.Copy(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
 
                 // BCD 업데이트
-                ProcessBcdEdit("/default " + PVConfig.Instance[GuidType.Child1]);
-                ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.Child1] + " /addfirst");
-                ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.PE] + " /addlast");
-                ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.Parent] + " /remove");
-                ProcessBcdEdit("/displayorder " + PVConfig.Instance[GuidType.Child2] + " /remove");
+                ProcessBcdEdit("/default " + PVConfig.Instance.GetGuid(GuidType.Child1));
+                ProcessBcdEdit("/displayorder " + PVConfig.Instance.GetGuid(GuidType.Child1) + " /addfirst");
+                ProcessBcdEdit("/displayorder " + PVConfig.Instance.GetGuid(GuidType.PE) + " /addlast");
+                ProcessBcdEdit("/displayorder " + PVConfig.Instance.GetGuid(GuidType.Parent) + " /remove");
+                ProcessBcdEdit("/displayorder " + PVConfig.Instance.GetGuid(GuidType.Child2) + " /remove");
                 break;
 
             default:

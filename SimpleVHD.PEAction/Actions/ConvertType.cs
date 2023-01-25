@@ -1,11 +1,13 @@
 ﻿namespace SimpleVHD.PEAction.Actions;
 
 internal class ConvertType : Action {
-    protected override string Name => "VHD 형식 변환";
-    protected sealed override bool NeedBackup => true;
-    protected sealed override bool AfterRebuild => true;
-    protected sealed override bool AfterRevert => true;
-    protected sealed override bool RemoveTempAfterProcess => true;
+    public ConvertType() {
+        Name = "VHD 형식 변환";
+        NeedBackup = true;
+        AfterRebuild = true;
+        AfterRevert = true;
+        RemoveTempAfterProcess = true;
+    }
 
     protected override void RunCore() {
         File.Delete(VhdDir + PVConfig.Instance.VhdFile);

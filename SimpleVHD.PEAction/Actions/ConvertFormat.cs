@@ -3,9 +3,11 @@
 namespace SimpleVHD.PEAction.Actions;
 
 internal class ConvertFormat : Action {
-    protected override string Name => "VHD 포맷 변환";
-    protected sealed override bool NeedBackup => true;
-    protected sealed override bool RemoveTempAfterProcess => true;
+    public ConvertFormat() {
+        Name = "VHD 포맷 변환";
+        NeedBackup = true;
+        RemoveTempAfterProcess = true;
+    }
 
     protected override void RunCore() {
         // 기존 파일 삭제
@@ -35,9 +37,9 @@ internal class ConvertFormat : Action {
         // BCD 업데이트
         var drv = VhdDir.Left(2);
 
-        ProcessBcdEdit($"/set {PVConfig.Instance[GuidType.Parent]} device vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newVhd}\"", $"/set {PVConfig.Instance[GuidType.Parent]} osdevice vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newVhd}\"");
-        ProcessBcdEdit($"/set {PVConfig.Instance[GuidType.Child1]} device vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild1}\"", $"/set {PVConfig.Instance[GuidType.Child1]} osdevice vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild1}\"");
-        ProcessBcdEdit($"/set {PVConfig.Instance[GuidType.Child2]} device vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild2}\"", $"/set {PVConfig.Instance[GuidType.Child2]} osdevice vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild2}\"");
+        ProcessBcdEdit($"/set {PVConfig.Instance.GetGuid(GuidType.Parent)} device vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newVhd}\"", $"/set {PVConfig.Instance.GetGuid(GuidType.Parent)} osdevice vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newVhd}\"");
+        ProcessBcdEdit($"/set {PVConfig.Instance.GetGuid(GuidType.Child1)} device vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild1}\"", $"/set {PVConfig.Instance.GetGuid(GuidType.Child1)} osdevice vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild1}\"");
+        ProcessBcdEdit($"/set {PVConfig.Instance.GetGuid(GuidType.Child2)} device vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild2}\"", $"/set {PVConfig.Instance.GetGuid(GuidType.Child2)} osdevice vhd=\"[{drv}]{PVConfig.Instance.VhdDirectory}{newChild2}\"");
 
         // 백업 파일 삭제
         File.Delete(BackupDir + PVConfig.Instance.VhdFile);

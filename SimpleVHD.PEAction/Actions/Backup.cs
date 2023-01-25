@@ -1,8 +1,10 @@
 ﻿namespace SimpleVHD.PEAction.Actions;
 
 internal class Backup : Action {
-    protected override string Name => "백업";
-    protected override bool Shutdown => PVConfig.Instance[DoAction.DoBackup];
+    public Backup() {
+        Name = "백업";
+        Shutdown = PVConfig.Instance.GetShutdown(DoAction.DoBackup);
+    }
 
     protected override void RunCore() {
         File.Delete(BackupDir + PVConfig.Instance.VhdFile);

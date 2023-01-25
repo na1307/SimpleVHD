@@ -1,11 +1,13 @@
 ﻿namespace SimpleVHD.PEAction.Actions;
 
 internal class Merge : Action {
-    protected override string Name => "병합";
-    protected sealed override bool DifferentialOnly => true;
-    protected sealed override bool AfterRebuild => true;
-    protected sealed override bool AfterRevert => true;
-    protected override bool Shutdown => PVConfig.Instance[DoAction.DoMerge];
+    public Merge() {
+        Name = "병합";
+        DifferentialOnly = true;
+        AfterRebuild = true;
+        AfterRevert = true;
+        Shutdown = PVConfig.Instance.GetShutdown(DoAction.DoMerge);
+    }
 
     protected override void RunCore() {
         // 파일 크기 측정

@@ -3,9 +3,11 @@
 namespace SimpleVHD.PEAction.Actions;
 
 internal class Expand : Action {
-    protected override string Name => "VHD 확장";
-    protected sealed override bool AfterRebuild => true;
-    protected sealed override bool AfterRevert => true;
+    public Expand() {
+        Name = "VHD 확장";
+        AfterRebuild = true;
+        AfterRevert = true;
+    }
 
     protected override void RunCore() {
         var output = ProcessDiskpartOutput($"select vdisk file \"{VhdDir}{PVConfig.Instance.VhdFile}\"", "detail vdisk");

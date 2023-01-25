@@ -7,37 +7,37 @@ internal abstract class Action {
     /// <summary>
     /// 작업의 이름
     /// </summary>
-    protected abstract string Name { get; }
+    protected string Name { get; init; } = string.Empty;
 
     /// <summary>
     /// 작업이 차등 스타일에서만 지원되는지 여부
     /// </summary>
-    protected virtual bool DifferentialOnly => false;
+    protected bool DifferentialOnly { get; init; } = false;
 
     /// <summary>
     /// 작업을 진행하기 위해 백업이 필요한지 여부
     /// </summary>
-    protected virtual bool NeedBackup => false;
+    protected bool NeedBackup { get; init; } = false;
 
     /// <summary>
     /// 작업 후 깨끗한 자식을 재구축할지 여부
     /// </summary>
-    protected virtual bool AfterRebuild => false;
+    protected bool AfterRebuild { get; init; } = false;
 
     /// <summary>
     /// 작업 후 디스크를 초기화할지 여부
     /// </summary>
-    protected virtual bool AfterRevert => false;
+    protected bool AfterRevert { get; init; } = false;
 
     /// <summary>
     /// 작업을 완료한 후 설정 파일의 Temp 항목을 제거해야 하는지 여부
     /// </summary>
-    protected virtual bool RemoveTempAfterProcess => false;
+    protected bool RemoveTempAfterProcess { get; init; } = false;
 
     /// <summary>
     /// 작업 후 다시 시작하는 대신 종료할지 여부
     /// </summary>
-    protected virtual bool Shutdown => false;
+    protected bool Shutdown { get; init; } = false;
 
     protected Action() {
         ipForm = new() {
@@ -69,6 +69,8 @@ internal abstract class Action {
     /// </summary>
     public void Run() {
         try {
+            if (string.IsNullOrWhiteSpace(Name)) throw new ProcessFailedException("이름");
+
             ipForm.Show();
             if (DifferentialOnly && !IsDifferentialStyle) throw new ProcessFailedException("단순 스타일에서는 " + Name + " 작업이 지원되지 않습니다.");
             if (NeedBackup && !File.Exists(BackupDir + PVConfig.Instance.VhdFile)) throw new ProcessFailedException("백업 파일을 찾을 수 없습니다.");
