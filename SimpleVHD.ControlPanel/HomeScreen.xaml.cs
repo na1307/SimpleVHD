@@ -9,11 +9,6 @@ public partial class HomeScreen {
     public HomeScreen() {
         InitializeComponent();
 
-        foreach (var button in new[] { RevertButton, MergeButton, BackupButton, RestoreButton }) {
-            button.Click += MainWindow.PlayClickSound;
-            button.Click += Button_Click;
-        }
-
         if (!BackupExists) RestoreButton.IsEnabled = false;
 
         switch (PVConfig.Instance.OperatingStyle) {

@@ -13,10 +13,6 @@ public partial class ActionScreen {
         TitleBlock.Text = typeof(Constants).GetField(pAction.ToString().Substring(2) + "Name").GetValue(null).ToString();
         DescriptionBlock.Text = typeof(Constants).GetField(pAction.ToString().Substring(2) + "Description").GetValue(null).ToString();
         AdditionalBlock.Text = typeof(Constants).GetField(pAction.ToString().Substring(2) + "Additional").GetValue(null).ToString();
-        DoButton.Click += MainWindow.PlayClickSound;
-        DoButton.Click += DoButton_Click;
-        BackButton.Click += MainWindow.PlayClickSound;
-        BackButton.Click += BackButton_Click;
         if (ShutdownAction.Contains((DoAction)action)) ShutdownBox.IsChecked = PVConfig.Instance[(DoAction)pAction]; else ShutdownBox.Visibility = Visibility.Hidden;
     }
 

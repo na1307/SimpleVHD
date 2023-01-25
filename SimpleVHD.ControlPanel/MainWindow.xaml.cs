@@ -11,17 +11,8 @@ public sealed partial class MainWindow {
 
     public MainWindow() {
         InitializeComponent();
-        DataContext = this;
-
-        foreach (var button in new[] { HomeButton, ToolsButton, OptionButton, HelpButton, AboutButton, ExitButton }) {
-            button.Click += PlayClickSound;
-            button.Click += Button_Click;
-        }
-
         AboutButton.ToolTip = AssemblyProperties.AssemblyTitle + (string)AboutButton.ToolTip;
     }
-
-    internal static void PlayClickSound(object sender, RoutedEventArgs e) => new System.Media.SoundPlayer(Application.GetResourceStream(new(@"pack://application:,,,/resources/interaction.wav", UriKind.Absolute)).Stream).Play();
 
     private void Button_Click(object sender, RoutedEventArgs e) {
         switch (((Button)sender).Name) {

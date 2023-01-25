@@ -25,7 +25,6 @@
     <Resource Include="resources\home.png" />
     <Resource Include="resources\icon.ico" />
     <Resource Include="resources\info.png" />
-    <Resource Include="resources\interaction.wav" />
     <Resource Include="resources\options.png" />
     <Resource Include="resources\start.png" />
     <Resource Include="resources\tools.png" />

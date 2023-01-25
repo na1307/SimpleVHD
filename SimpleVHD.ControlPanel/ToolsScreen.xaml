@@ -26,7 +26,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="ParentButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
+            <Button x:Name="ParentButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Click="Button_Click">
                 <Image Source="resources/doparentboot.png"/>
             </Button>
             <TextBlock Text="{StaticResource ParentBootName}" FontSize="15" FontWeight="Bold" Width="125" Height="20" Grid.Row="0" Grid.Column="1"/>
@@ -41,7 +41,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="PEButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
+            <Button x:Name="PEButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Click="Button_Click">
                 <Image Source="resources/dopeboot.png"/>
             </Button>
             <TextBlock Text="{StaticResource PEBootName}" FontSize="15" FontWeight="Bold" Width="125" Height="20" Grid.Row="0" Grid.Column="1"/>
@@ -56,7 +56,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="ExpandButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
+            <Button x:Name="ExpandButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Click="Button_Click">
                 <Image Source="resources/doexpand.png"/>
             </Button>
             <TextBlock Text="{StaticResource ExpandName}" FontSize="15" FontWeight="Bold" Width="125" Height="20" Grid.Row="0" Grid.Column="1"/>
@@ -71,7 +71,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="ShrinkButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
+            <Button x:Name="ShrinkButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Click="Button_Click">
                 <Image Source="resources/doshrink.png"/>
             </Button>
             <TextBlock Text="{StaticResource ShrinkName}" FontSize="15" FontWeight="Bold" Width="125" Height="20" Grid.Row="0" Grid.Column="1"/>
@@ -86,7 +86,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="TypeButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
+            <Button x:Name="TypeButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Click="Button_Click">
                 <Image Source="resources/dotype.png"/>
             </Button>
             <TextBlock Text="{StaticResource ConvertTypeName}" FontSize="15" FontWeight="Bold" Width="125" Height="20" Grid.Row="0" Grid.Column="1"/>
@@ -101,7 +101,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="FormatButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
+            <Button x:Name="FormatButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Click="Button_Click">
                 <Image Source="resources/doformat.png"/>
             </Button>
             <TextBlock Text="{StaticResource ConvertFormatName}" FontSize="15" FontWeight="Bold" Width="125" Height="20" Grid.Row="0" Grid.Column="1"/>
@@ -116,7 +116,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="StyleButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
+            <Button x:Name="StyleButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Click="Button_Click">
                 <Image Source="resources/doswitch.png"/>
             </Button>
             <TextBlock Text="{StaticResource SwitchStyleName}" FontSize="15" FontWeight="Bold" Width="125" Height="20" Grid.Row="0" Grid.Column="1"/>
@@ -131,7 +131,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="UninstallButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
+            <Button x:Name="UninstallButton" Width="50" Height="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Click="Button_Click">
                 <Image Source="resources/douninstall.png"/>
             </Button>
             <TextBlock Text="{StaticResource UninstallName}" FontSize="15" FontWeight="Bold" Width="125" Height="20" Grid.Row="0" Grid.Column="1"/>
