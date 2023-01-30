@@ -6,15 +6,12 @@ public partial class FormAdvanced {
     public FormAdvanced() {
         InitializeComponent();
         HideOKButton();
-
-        if (!BackupExists) {
-            button2.Enabled = false;
-        }
+        advancedEntry2.Enabled = BackupExists;
     }
 
-    private void button1_Click(object sender, EventArgs e) => start<Rebuild>("재구축");
-    private void button2_Click(object sender, EventArgs e) => start<EmergencyRestore>("응급 복원");
-    private void button3_Click(object sender, EventArgs e) => start<SwitchSimpleStyle>("단순 스타일 전환");
+    private void advancedEntry1_Start(object sender, EventArgs e) => start<Rebuild>("재구축");
+    private void advancedEntry2_Start(object sender, EventArgs e) => start<EmergencyRestore>("응급 복원");
+    private void advancedEntry3_Start(object sender, EventArgs e) => start<SwitchSimpleStyle>("단순 스타일 전환");
 
     private void start<TAction>(string name) where TAction : Actions.Action, new() {
         if (MessageBox.Show("정말 " + name + " 작업을 실행할까요?", "경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes) {

@@ -24,98 +24,59 @@ partial class FormAdvanced : Dialog {
     /// 이 메서드의 내용을 코드 편집기로 수정하지 마세요.
     /// </summary>
     private void InitializeComponent() {
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.advancedEntry1 = new SimpleVHD.PEAction.AdvancedEntry();
+            this.advancedEntry2 = new SimpleVHD.PEAction.AdvancedEntry();
+            this.advancedEntry3 = new SimpleVHD.PEAction.AdvancedEntry();
             this.SuspendLayout();
             // 
-            // button1
+            // advancedEntry1
             // 
-            this.button1.Location = new System.Drawing.Point(397, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 25);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "시작";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.advancedEntry1.Location = new System.Drawing.Point(12, 12);
+            this.advancedEntry1.Name = "advancedEntry1";
+            this.advancedEntry1.Size = new System.Drawing.Size(460, 90);
+            this.advancedEntry1.TabIndex = 1;
+            this.advancedEntry1.Text = "이 경우는 부모 VHD와 자식 VHD의 정보 불일치가 원인일 수 있습니다. VHD 재구축 작업을 실행하면 해결할 수 있습니다. VHD 포맷에서는 " +
+    "초기화만으로도 해결할 수 있습니다.";
+            this.advancedEntry1.Title = "VHDX 포맷에서 VHD_BOOT_INITIALIZATION_FAILED 블루스크린이 발생하는 경우";
+            this.advancedEntry1.Start += new System.EventHandler(this.advancedEntry1_Start);
             // 
-            // label1
+            // advancedEntry2
             // 
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(379, 100);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "VHDX 포맷에서 VHD_BOOT_INITIALIZATION_FAILED 블루스크린이 발생하는 경우\r\n\r\n이 경우는 부모 VHD와 자식 VHD의 " +
-    "정보 불일치가 원인일 수 있습니다. VHD 재구축 작업을 실행하면 해결할 수 있습니다. VHD 포맷에서는 초기화만으로도 해결할 수 있습니다.";
+            this.advancedEntry2.Location = new System.Drawing.Point(12, 108);
+            this.advancedEntry2.Name = "advancedEntry2";
+            this.advancedEntry2.Size = new System.Drawing.Size(460, 90);
+            this.advancedEntry2.TabIndex = 2;
+            this.advancedEntry2.Text = "이 경우는 용량 부족이 원인일 수 있습니다. VHD를 동적 확장 형식으로 변환하는 응급 복원 작업을 실행하여 해결할 수 있습니다.";
+            this.advancedEntry2.Title = "차등 스타일에서 고정 크기 형식으로 변환한 후 부팅이 불가능한 경우";
+            this.advancedEntry2.Start += new System.EventHandler(this.advancedEntry2_Start);
             // 
-            // button2
+            // advancedEntry3
             // 
-            this.button2.Location = new System.Drawing.Point(397, 112);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 25);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "시작";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(12, 109);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(379, 100);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "차등 스타일에서 고정 크기 형식으로 변환한 후 부팅이 불가능한 경우\r\n\r\n이 경우는 용량 부족이 원인일 수 있습니다. VHD를 동적 확장 형식으로" +
-    " 변환하는 응급 복원 작업을 실행하여 해결할 수 있습니다.";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(397, 212);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 25);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "시작";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(12, 209);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(379, 100);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "차등 스타일로 전환한 후 부팅이 불가능한 경우\r\n\r\n이 경우는 용량 부족이 원인일 수 있습니다. 단순 스타일로 전환하여 문제를 해결할 수 있습니다" +
-    ".";
+            this.advancedEntry3.Location = new System.Drawing.Point(12, 204);
+            this.advancedEntry3.Name = "advancedEntry3";
+            this.advancedEntry3.Size = new System.Drawing.Size(460, 90);
+            this.advancedEntry3.TabIndex = 3;
+            this.advancedEntry3.Text = "이 경우는 용량 부족이 원인일 수 있습니다. 단순 스타일로 전환하여 문제를 해결할 수 있습니다.";
+            this.advancedEntry3.Title = "차등 스타일로 전환한 후 부팅이 불가능한 경우";
+            this.advancedEntry3.Start += new System.EventHandler(this.advancedEntry3_Start);
             // 
             // FormAdvanced
             // 
             this.ClientSize = new System.Drawing.Size(484, 361);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.advancedEntry3);
+            this.Controls.Add(this.advancedEntry2);
+            this.Controls.Add(this.advancedEntry1);
             this.Name = "FormAdvanced";
             this.Text = "문제 해결사";
-            this.Controls.SetChildIndex(this.button1, 0);
-            this.Controls.SetChildIndex(this.button2, 0);
-            this.Controls.SetChildIndex(this.button3, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.advancedEntry1, 0);
+            this.Controls.SetChildIndex(this.advancedEntry2, 0);
+            this.Controls.SetChildIndex(this.advancedEntry3, 0);
             this.ResumeLayout(false);
 
     }
 
     #endregion
-
-    private Button button1;
-    private Label label1;
-    private Button button2;
-    private Label label2;
-    private Button button3;
-    private Label label3;
+    private AdvancedEntry advancedEntry1;
+    private AdvancedEntry advancedEntry2;
+    private AdvancedEntry advancedEntry3;
 }
