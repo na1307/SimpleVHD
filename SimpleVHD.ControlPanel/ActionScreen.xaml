@@ -35,7 +35,7 @@
             <CheckBox x:Name="ShutdownBox" Content="작업 후 시스템 종료" Width="150" Height="15" Margin="0,-5,0,0" Click="ShutdownBox_Click"/>
             <Button x:Name="DoButton" Width="225" Height="50" Margin="0,8,0,0" Click="DoButton_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="resources\start.png" Width="30" Height="30"/>
+                    <Image x:Name="SB" Source="resources\start.png" Width="30" Height="30"/>
                     <TextBlock Text="작업 시작" FontWeight="Bold" TextAlignment="Center" Width="175" Height="15"/>
                 </StackPanel>
             </Button>

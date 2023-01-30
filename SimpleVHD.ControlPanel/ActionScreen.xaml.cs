@@ -8,6 +8,9 @@ public partial class ActionScreen {
 
     public ActionScreen(Screen backscreen, PanelAction action) : base(backscreen) {
         InitializeComponent();
+        if (Properties.Settings.Default.UseExperimentalIcon) {
+            SB.Source = (ImageSource)Application.Current.FindResource("StartIcon");
+        }
         pAction = action;
         PanelImage.Source = new BitmapImage(new("resources\\" + pAction.ToString().ToLower() + ".png", UriKind.Relative));
         TitleBlock.Text = typeof(Constants).GetField(pAction.ToString().Substring(2) + "Name").GetValue(null).ToString();

@@ -28,5 +28,23 @@
         <x:Static x:Key="SwitchStyleDescription" Member="local:Constants.SwitchStyleDescription"/>
         <x:Static x:Key="UninstallName" Member="local:Constants.UninstallName"/>
         <x:Static x:Key="UninstallDescription" Member="local:Constants.UninstallDescription"/>
+        <DrawingImage x:Key="StartIcon">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <DrawingGroup.Children>
+                        <GeometryDrawing Brush="#00FFFFFF" Geometry="F1 M 256.5,16.5C 389.048,16.5 496.5,123.952 496.5,256.5C 496.5,389.048 389.048,496.5 256.5,496.5C 123.952,496.5 16.5,389.048 16.5,256.5C 16.5,123.952 123.952,16.5 256.5,16.5 Z ">
+                            <GeometryDrawing.Pen>
+                                <Pen Thickness="30" LineJoin="Round" Brush="#FF000000"/>
+                            </GeometryDrawing.Pen>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#00FFFFFF" Geometry="F1 M 367.5,253.5L 167.5,138.03L 167.5,368.97L 367.5,253.5 Z ">
+                            <GeometryDrawing.Pen>
+                                <Pen Thickness="30" LineJoin="Round" Brush="#FF000000"/>
+                            </GeometryDrawing.Pen>
+                        </GeometryDrawing>
+                    </DrawingGroup.Children>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
     </Application.Resources>
 </Application>

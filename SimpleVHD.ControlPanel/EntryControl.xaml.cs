@@ -24,6 +24,9 @@ public sealed partial class EntryControl {
 
     public EntryControl() {
         InitializeComponent();
+        if (Properties.Settings.Default.UseExperimentalIcon) {
+            SB.Source = (ImageSource)Application.Current.FindResource("StartIcon");
+        }
         DataContext = this;
         startButton.Click += (_, _) => Start?.Invoke(this, EventArgs.Empty);
         backButton.Click += (_, _) => Back?.Invoke(this, EventArgs.Empty);
