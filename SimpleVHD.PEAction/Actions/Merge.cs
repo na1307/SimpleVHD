@@ -1,8 +1,9 @@
 ﻿namespace SimpleVHD.PEAction.Actions;
 
 internal class Merge : Action {
+    protected override string Name => "병합";
+
     public Merge() {
-        Name = "병합";
         DifferentialOnly = true;
         AfterRebuild = true;
         AfterRevert = true;

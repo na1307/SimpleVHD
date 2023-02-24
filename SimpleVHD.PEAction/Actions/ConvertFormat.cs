@@ -3,8 +3,9 @@
 namespace SimpleVHD.PEAction.Actions;
 
 internal class ConvertFormat : Action {
+    protected override string Name => "VHD 포맷 변환";
+
     public ConvertFormat() {
-        Name = "VHD 포맷 변환";
         NeedBackup = true;
         RemoveTempAfterProcess = true;
     }

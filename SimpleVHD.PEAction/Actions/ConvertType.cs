@@ -1,8 +1,9 @@
 ﻿namespace SimpleVHD.PEAction.Actions;
 
 internal class ConvertType : Action {
+    protected override string Name => "VHD 형식 변환";
+
     public ConvertType() {
-        Name = "VHD 형식 변환";
         NeedBackup = true;
         AfterRebuild = true;
         AfterRevert = true;

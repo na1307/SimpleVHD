@@ -7,7 +7,7 @@ internal abstract class Action {
     /// <summary>
     /// 작업의 이름
     /// </summary>
-    protected string Name { get; init; } = string.Empty;
+    protected abstract string Name { get; }
 
     /// <summary>
     /// 작업이 차등 스타일에서만 지원되는지 여부

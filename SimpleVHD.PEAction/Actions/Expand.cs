@@ -3,8 +3,9 @@
 namespace SimpleVHD.PEAction.Actions;
 
 internal class Expand : Action {
+    protected override string Name => "VHD 확장";
+
     public Expand() {
-        Name = "VHD 확장";
         AfterRebuild = true;
         AfterRevert = true;
     }

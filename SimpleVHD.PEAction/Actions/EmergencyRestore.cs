@@ -1,8 +1,9 @@
 ﻿namespace SimpleVHD.PEAction.Actions;
 
 internal class EmergencyRestore : Restore {
+    protected override string Name => "응급 복원";
+
     public EmergencyRestore() {
-        Name = "응급 복원";
         Shutdown = false;
         VType = VhdType.Expandable;
     }

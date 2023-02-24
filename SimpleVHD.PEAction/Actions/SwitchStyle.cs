@@ -1,8 +1,9 @@
 ﻿namespace SimpleVHD.PEAction.Actions;
 
 internal class SwitchStyle : Action {
+    protected override string Name => "운영 스타일 전환";
+
     public SwitchStyle() {
-        Name = "운영 스타일 전환";
         RemoveTempAfterProcess = true;
     }
 

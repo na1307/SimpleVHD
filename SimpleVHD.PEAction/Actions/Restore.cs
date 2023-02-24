@@ -1,10 +1,10 @@
 ﻿namespace SimpleVHD.PEAction.Actions;
 
 internal class Restore : Action {
+    protected override string Name => "복원";
     protected VhdType VType { get; init; } = PVConfig.Instance.VhdType;
 
     public Restore() {
-        Name = "복원";
         NeedBackup = true;
         AfterRebuild = true;
         AfterRevert = true;

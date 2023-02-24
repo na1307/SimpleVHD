@@ -3,8 +3,9 @@
 namespace SimpleVHD.PEAction.Actions;
 
 internal class Shrink : Action {
+    protected override string Name => "VHD 축소";
+
     public Shrink() {
-        Name = "VHD 축소";
         NeedBackup = true;
         AfterRebuild = true;
         AfterRevert = true;
