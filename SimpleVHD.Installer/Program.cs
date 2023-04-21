@@ -89,14 +89,14 @@ try {
     guids.Add("Child1", BcdEditGuid($"/copy {{current}} /d \"{bcdDesctiption}\""));
 #pragma warning restore IDE0028 // Simplify collection initialization
 
-    ProcessBcdEdit($@"/set {guids["Child1"]} device vhd=""[{vhdDrv}]{vhdPath}{Child1Name}{vhdFormat}");
-    ProcessBcdEdit($@"/set {guids["Child1"]} osdevice vhd=""[{vhdDrv}]{vhdPath}{Child1Name}{vhdFormat}");
+    ProcessBcdEdit($@"/set {guids["Child1"]} device vhd=""[{vhdDrv}]{vhdPath}{Child1Name}{vhdFormat},locate=custom:12000002");
+    ProcessBcdEdit($@"/set {guids["Child1"]} osdevice vhd=""[{vhdDrv}]{vhdPath}{Child1Name}{vhdFormat},locate=custom:22000002");
     ProcessBcdEdit($@"/displayorder {guids["Child1"]} /remove");
 
     guids.Add("Child2", BcdEditGuid($"/copy {{current}} /d \"{bcdDesctiption}\""));
 
-    ProcessBcdEdit($@"/set {guids["Child2"]} device vhd=""[{vhdDrv}]{vhdPath}{Child2Name}{vhdFormat}");
-    ProcessBcdEdit($@"/set {guids["Child2"]} osdevice vhd=""[{vhdDrv}]{vhdPath}{Child2Name}{vhdFormat}");
+    ProcessBcdEdit($@"/set {guids["Child2"]} device vhd=""[{vhdDrv}]{vhdPath}{Child2Name}{vhdFormat},locate=custom:12000002");
+    ProcessBcdEdit($@"/set {guids["Child2"]} osdevice vhd=""[{vhdDrv}]{vhdPath}{Child2Name}{vhdFormat},locate=custom:22000002");
     ProcessBcdEdit($@"/displayorder {guids["Child2"]} /remove");
 
     guids.Add("Ramdisk", BcdEditGuid($"/create /device"));

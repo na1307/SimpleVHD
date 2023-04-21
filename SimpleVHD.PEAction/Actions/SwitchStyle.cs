@@ -32,7 +32,6 @@ internal class SwitchStyle : Action {
                 ProcessDiskpart($"create vdisk file \"{VhdDir}{ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower()}\" parent \"{VhdDir}{PVConfig.Instance.VhdFile}\"");
 
                 File.Copy(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
-                File.Copy(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower(), VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower(), true);
 
                 // BCD 업데이트
                 ProcessBcdEdit("/default " + PVConfig.Instance.GetGuid(GuidType.Child1));

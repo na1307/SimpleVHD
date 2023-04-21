@@ -32,7 +32,7 @@ internal class ConvertFormat : Action {
         if (IsDifferentialStyle) {
             ProcessDiskpart($"create vdisk file \"{VhdDir}{newChildC}\" parent \"{VhdDir}{newVhd}\"");
             File.Copy(VhdDir + newChildC, VhdDir + newChild1, true);
-            File.Copy(VhdDir + newChildC, VhdDir + newChild2, true);
+            if (PVConfig.Instance.OperatingStyle == OperatingStyle.DifferentialAuto) File.Copy(VhdDir + newChildC, VhdDir + newChild2, true);
         }
 
         // BCD 업데이트

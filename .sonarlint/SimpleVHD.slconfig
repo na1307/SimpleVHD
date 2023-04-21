@@ -9,7 +9,11 @@
   "Profiles": {
     "CSharp": {
       "ProfileKey": "AYPu4xsGQgwvvVUq4_3U",
-      "ProfileTimestamp": "2022-12-21T10:42:51Z"
+      "ProfileTimestamp": "2023-02-22T15:28:17Z"
+    },
+    "Secrets": {
+      "ProfileKey": "AYXoTK3C9Ao2yLWbNdIE",
+      "ProfileTimestamp": "2023-01-25T09:40:14Z"
     }
   }
 }

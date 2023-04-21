@@ -47,7 +47,7 @@ static void rebuild(string vhdDir) {
     checkadmin();
 
     copy(vhdDir, Child1Name);
-    copy(vhdDir, Child2Name);
+    if (PVConfig.Instance.OperatingStyle == OperatingStyle.DifferentialAuto) copy(vhdDir, Child2Name);
 
     PVConfig.Instance.Action = DoAction.DoRebuild;
     PVConfig.Instance.SaveConfig();
@@ -59,10 +59,9 @@ static void rebuild(string vhdDir) {
 
 static void manual(string vhdDir) {
     try {
-        copy(vhdDir, Child2Name);
         copy(vhdDir, Child1Name);
     } catch (IOException) {
-        //
+        // no
     }
 }
 
