@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageVersion Include="Bluehill.Hangul" Version="2.0.0" />
     <PackageVersion Include="PostSharp" Version="2023.0.5" />
-    <PackageVersion Include="PostSharp.Patterns.Model" Version="2023.0.4" />
+    <PackageVersion Include="PostSharp.Patterns.Model" Version="2023.0.5" />
     <PackageVersion Include="System.ValueTuple" Version="4.5.0" />
     <PackageVersion Include="Bluehill.Features" Version="0.0.0" />
     <PackageVersion Include="Bluehill.Forms" Version="0.0.0" />
