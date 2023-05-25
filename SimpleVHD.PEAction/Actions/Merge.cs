@@ -11,15 +11,15 @@ internal class Merge : Action {
     }
 
     protected override void RunCore() {
-        // 파일 크기 측정
+         // 파일 크기 측정
         var clean = new FileInfo(VhdDir + ChildCName + PVConfig.Instance.VhdFormat.ToString().ToLower()).Length;
         var child1 = new FileInfo(VhdDir + Child1Name + PVConfig.Instance.VhdFormat.ToString().ToLower()).Length;
-        var child2 = new FileInfo(VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower()).Length;
+        var child2 = PVConfig.Instance.OperatingStyle == OperatingStyle.DifferentialAuto ? new FileInfo(VhdDir + Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower()).Length : clean;
 
         string child;
 
         if (clean == child1 && clean == child2) {
-            throw new ProcessFailedException("병합할 항목이 없습니다.");
+            throw new ProcessFailedException("병합할 내용이 없습니다.");
         } else if (clean == child1) {
             child = Child2Name + PVConfig.Instance.VhdFormat.ToString().ToLower();
         } else if (clean == child2) {

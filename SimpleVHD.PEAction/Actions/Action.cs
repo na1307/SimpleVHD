@@ -62,7 +62,7 @@ internal abstract class Action {
         ipForm.Disposed += (_, _) => l.Dispose();
     }
 
-    public sealed override string ToString() => string.Empty;
+    public sealed override string ToString() => Name;
 
     /// <summary>
     /// 작업을 실행함
