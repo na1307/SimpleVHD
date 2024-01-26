@@ -1,0 +1,5 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyTitle>SimpleVHD DLL</AssemblyTitle>
+  </PropertyGroup>
+</Project>
