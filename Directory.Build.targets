@@ -2,4 +2,7 @@
   <PropertyGroup>
     <Description>$(AssemblyTitle)</Description>
   </PropertyGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /SIY &quot;$(TargetDir)*&quot; &quot;$(SolutionDir)Bin&quot;" />
+  </Target>
 </Project>

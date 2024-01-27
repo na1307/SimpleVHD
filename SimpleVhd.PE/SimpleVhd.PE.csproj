@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>PE</AssemblyName>
+    <AssemblyTitle>SimpleVHD PE</AssemblyTitle>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleVhd\SimpleVhd.csproj" />
+  </ItemGroup>
+</Project>

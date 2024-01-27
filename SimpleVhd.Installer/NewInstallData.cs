@@ -80,7 +80,6 @@ public sealed class NewInstallData : InstallData {
         ProcessBcdEdit($@"/displayorder {pe:B} /addlast");
 
         ProcessBcdEdit($@"/timeout 5");
-        ProcessBcdEdit($@"/bootsequence {pe:B}");
 
         using FileStream fs = new(Path.Combine(Application.StartupPath, "..", SettingsFileName), FileMode.Create, FileAccess.Write, FileShare.None);
         using Utf8JsonWriter writer = new(fs, new JsonWriterOptions() { Indented = true });

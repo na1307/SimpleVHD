@@ -16,6 +16,7 @@
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>
+    <SelfContained>true</SelfContained>
   </PropertyGroup>
   <ItemGroup>
     <Using Include="SimpleVhd.Constants" Static="true" />
