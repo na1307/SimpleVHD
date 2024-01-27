@@ -78,15 +78,15 @@ partial class FormWizard {
         // 
         label2.Location = new Point(12, 34);
         label2.Name = "label2";
-        label2.Size = new Size(710, 50);
+        label2.Size = new Size(710, 30);
         label2.TabIndex = 4;
         label2.Text = "설명";
         // 
         // panel1
         // 
-        panel1.Location = new Point(12, 87);
+        panel1.Location = new Point(12, 67);
         panel1.Name = "panel1";
-        panel1.Size = new Size(710, 333);
+        panel1.Size = new Size(710, 353);
         panel1.TabIndex = 5;
         panel1.ControlAdded += panel1_ControlAdded;
         // 
@@ -118,7 +118,7 @@ partial class FormWizard {
         MinimizeBox = false;
         Name = "FormWizard";
         StartPosition = FormStartPosition.CenterParent;
-        Text = "FormWizard";
+        Text = "마법사";
         ResumeLayout(false);
     }
 

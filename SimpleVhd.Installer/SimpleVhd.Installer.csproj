@@ -2,6 +2,9 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>Installer</AssemblyName>
+    <AssemblyTitle>SimpleVHD Installer</AssemblyTitle>
+    <SelfContained>true</SelfContained>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleVhd\SimpleVhd.csproj" />

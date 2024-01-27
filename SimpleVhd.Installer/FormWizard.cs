@@ -20,7 +20,6 @@ public partial class FormWizard : Form {
 
     protected override void OnHelpButtonClicked(CancelEventArgs e) {
         e.Cancel = true;
-        currentPage.Value.HelpAction.Invoke();
     }
 
     private void buttonNext_Click(object sender, EventArgs e) {
@@ -29,8 +28,6 @@ public partial class FormWizard : Form {
         if (currentPage.Next != null) {
             currentPage = currentPage.Next;
             panel1.Controls.Add(currentPage.Value.Panel);
-            label1.Text = currentPage.Value.Title;
-            label2.Text = currentPage.Value.Description;
         } else {
             throw new InvalidOperationException();
         }
@@ -42,14 +39,15 @@ public partial class FormWizard : Form {
         if (currentPage.Previous != null) {
             currentPage = currentPage.Previous;
             panel1.Controls.Add(currentPage.Value.Panel);
-            label1.Text = currentPage.Value.Title;
-            label2.Text = currentPage.Value.Description;
         } else {
             throw new InvalidOperationException();
         }
     }
 
     private void panel1_ControlAdded(object sender, ControlEventArgs e) {
+        label1.Text = currentPage.Value.Title;
+        label2.Text = currentPage.Value.Description;
+
         if (currentPage.Next != null) {
             buttonNext.Visible = true;
             buttonOK.Visible = false;
