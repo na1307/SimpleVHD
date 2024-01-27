@@ -17,4 +17,7 @@
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>
   </PropertyGroup>
+  <ItemGroup>
+    <Using Include="SimpleVhd.Constants" Static="true" />
+  </ItemGroup>
 </Project>

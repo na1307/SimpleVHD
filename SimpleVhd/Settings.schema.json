@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SimpleVHD Settings file schema",
+  "type": "object",
+  "properties": {
+    "VhdInstances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Directory": {
+            "type": "string"
+          },
+          "ParentFile": {
+            "type": "string"
+          },
+          "Style": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          },
+          "Format": {
+            "type": "string"
+          },
+          "ParentGuid": {
+            "type": "string"
+          },
+          "Child1Guid": {
+            "type": "string"
+          },
+          "Child2Guid": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Directory",
+          "ParentFile",
+          "Style",
+          "Type",
+          "Format",
+          "ParentGuid",
+          "Child1Guid",
+          "Child2Guid"
+        ]
+      }
+    },
+    "RamdiskGuid": {
+      "type": "string"
+    },
+    "PEGuid": {
+      "type": "string"
+    },
+    "WorkType": {
+      "type": "string"
+    },
+    "WorkInstance": {
+      "type": "integer"
+    },
+    "TempValue": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "VhdInstances",
+    "RamdiskGuid",
+    "PEGuid"
+  ]
+}

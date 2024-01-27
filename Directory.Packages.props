@@ -2,4 +2,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="JsonSchema.Net" Version="5.5.1" />
+  </ItemGroup>
 </Project>
