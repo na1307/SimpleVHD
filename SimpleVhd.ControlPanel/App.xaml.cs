@@ -21,10 +21,10 @@ public partial class App : Application {
 
     private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) {
         if (e.Exception is SimpleVhdException) {
-            MessageBox.Show(e.Exception.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+            ErrMsg(e.Exception.Message);
             e.Handled = true;
         } else {
-            MessageBox.Show(e.Exception.ToString(), "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+            ErrMsg(e.Exception.ToString());
         }
     }
 }

@@ -5,5 +5,7 @@
   <ItemGroup>
     <PackageVersion Include="JsonSchema.Net" Version="5.5.1" />
     <PackageVersion Include="System.Management" Version="8.0.0" />
+    <PackageVersion Include="Bluehill.Forms" Version="0.1.2" />
+    <PackageVersion Include="Bluehill.Wpf" Version="0.1.0" />
   </ItemGroup>
 </Project>

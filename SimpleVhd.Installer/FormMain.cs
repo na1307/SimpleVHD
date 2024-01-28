@@ -13,7 +13,7 @@ public partial class FormMain : Form {
         try {
             check.Check();
         } catch (RequirementsNotMetException ex) {
-            MessageBox.Show("요구 사항이 맞지 않습니다." + Environment.NewLine + Environment.NewLine + ex.Message);
+            ErrMsg("요구 사항이 맞지 않습니다." + Environment.NewLine + Environment.NewLine + ex.Message);
             return;
         }
 
@@ -21,7 +21,7 @@ public partial class FormMain : Form {
 
         if (wizard.ShowDialog(this) == DialogResult.OK) {
             Statics.Data?.InstallProcess();
-            MessageBox.Show("설치 성공!");
+            MessageBox.Show("설치 성공!", "설치", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Process.Start("ControlPanel.exe");
             Close();
         }
