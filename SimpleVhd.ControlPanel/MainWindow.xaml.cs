@@ -10,11 +10,13 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SimpleVhd.ControlPanel;
+
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
 public partial class MainWindow : Window {
     public MainWindow() {
         InitializeComponent();
+        c8.Text = Settings.Instance.ToString();
     }
 }

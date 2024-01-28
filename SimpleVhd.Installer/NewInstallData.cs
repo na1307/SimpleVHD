@@ -14,29 +14,29 @@ public sealed class NewInstallData : InstallData {
         IEnumerable<string> drvs = DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed && Directory.Exists(Path.Combine(d.Name, DirName))).Select(d => d.Name.Split("\\")[0]);
 
         if (drvs.Any()) {
-            Statics.Data!.SVDrive = drvs.First();
-            Statics.Data.SVPath = Path.DirectorySeparatorChar.ToString() + DirName + Path.DirectorySeparatorChar.ToString();
-            Statics.Data.SVDir = Statics.Data.SVDrive + Statics.Data.SVPath;
+            SVDrive = drvs.First();
+            SVPath = Path.DirectorySeparatorChar.ToString() + DirName + Path.DirectorySeparatorChar.ToString();
+            SVDir = SVDrive + SVPath;
         } else {
             throw new RequirementsNotMetException("아무 드라이브의 루트에 " + DirName + " 폴더가 없습니다.");
         }
 
-        IEnumerable<string> requires = ((string[])["Boot\\x64.wim", "Boot\\arm64.wim", "Boot\\boot.sdi"]).Where(f => !File.Exists(Path.Combine(Statics.Data.SVDir, f)));
+        IEnumerable<string> requires = ((string[])["Boot\\x64.wim", "Boot\\arm64.wim", "Boot\\boot.sdi"]).Where(f => !File.Exists(Path.Combine(SVDir, f)));
 
         if (requires.Any()) {
             throw new RequirementsNotMetException(Path.GetFileName(requires.First()) + " 파일이 없습니다.");
         }
 
         Match m = BcdEditRegex("/enum {current} /v", @"^device\s+vhd=\[(?<drv>[A-Z]:)\](?<path>.+\.vhdx?)");
-        Statics.Data.VhdDrive = m.Groups["drv"].Value;
-        Statics.Data.VhdPath = Path.GetDirectoryName(m.Groups["path"].Value)!;
+        VhdDrive = m.Groups["drv"].Value;
+        VhdPath = Path.GetDirectoryName(m.Groups["path"].Value)!;
 
-        if (Statics.Data.VhdPath.Length > 1) {
-            Statics.Data.VhdPath += Path.DirectorySeparatorChar.ToString();
+        if (VhdPath.Length > 1) {
+            VhdPath += Path.DirectorySeparatorChar.ToString();
         }
 
-        Statics.Data.VhdName = Path.GetFileNameWithoutExtension(m.Groups["path"].Value);
-        Statics.Data.Format = Enum.Parse<VhdFormat>(Regex.Match(Path.GetFileName(m.Groups["path"].Value), "^.+\\.(?<ext>vhdx?)$", RegexOptions.IgnoreCase).Groups["ext"].Value, true);
+        VhdName = Path.GetFileNameWithoutExtension(m.Groups["path"].Value);
+        Format = Enum.Parse<VhdFormat>(Regex.Match(Path.GetFileName(m.Groups["path"].Value), "^.+\\.(?<ext>vhdx?)$", RegexOptions.IgnoreCase).Groups["ext"].Value, true);
     }
 
     public override void InstallProcess() {
@@ -50,7 +50,7 @@ public sealed class NewInstallData : InstallData {
         } else if (Statics.IsArm64) {
             arch = "arm64";
         } else {
-            throw new InvalidProgramException();
+            throw new InvalidOperationException();
         }
 
         parent = BcdEditGuid($"/enum {{current}} /v");

@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace SimpleVhd.Installer;
 
 public partial class FormMain : Form {
@@ -18,8 +20,10 @@ public partial class FormMain : Form {
         using FormWizard wizard = new([new GetVhdType()]);
 
         if (wizard.ShowDialog(this) == DialogResult.OK) {
-            Statics.Data!.InstallProcess();
+            Statics.Data?.InstallProcess();
             MessageBox.Show("설치 성공!");
+            Process.Start("ControlPanel.exe");
+            Close();
         }
     }
 }

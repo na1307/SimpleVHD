@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 namespace SimpleVhd;
 
 public sealed class Settings {
-    private static readonly SettingsConverter converter = new(SettingsFileName);
+    private static readonly SettingsConverter converter = new("..\\" + SettingsFileName);
     private static readonly Lazy<Settings> _instance = new(converter.Load);
     private static readonly JsonWriterOptions indentedWriterOptions = new() { Indented = true };
 
@@ -21,7 +21,7 @@ public sealed class Settings {
             using Stream ss = Assembly.GetExecutingAssembly().GetManifestResourceStream("SimpleVhd.Settings.schema.json")!;
             using StreamReader sr = new(ss);
 
-            return JsonSchema.FromText(sr.ReadToEnd()).Evaluate(JsonDocument.Parse(File.ReadAllBytes(SettingsFileName))).IsValid;
+            return JsonSchema.FromText(sr.ReadToEnd()).Evaluate(JsonDocument.Parse(File.ReadAllBytes("..\\" + SettingsFileName))).IsValid;
         }
     }
 
@@ -35,11 +35,11 @@ public sealed class Settings {
     public void SaveSettings() => converter.Save(this);
 
     public override string ToString() {
-        using MemoryStream ms = new(1024);
-        using Utf8JsonWriter writer = new(ms, indentedWriterOptions);
+        MemoryStream ms = new(1024);
 
-        converter.Write(writer, this, new());
-        writer.Flush();
+        using (Utf8JsonWriter writer = new(ms, indentedWriterOptions)) {
+            converter.Write(writer, this, new());
+        }
 
         return Encoding.UTF8.GetString(ms.ToArray());
     }

@@ -8,7 +8,7 @@ public partial class FormCheckRequirements : Form {
 
     public void Check() {
         try {
-            Statics.Data!.CheckRequirements();
+            Statics.Data?.CheckRequirements();
         } finally {
             Close();
         }

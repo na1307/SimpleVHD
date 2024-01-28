@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVhd", "SimpleVhd\Simp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVhd.Installer", "SimpleVhd.Installer\SimpleVhd.Installer.csproj", "{D49B3634-A3C7-4C1B-A444-8070387650D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleVhd.ControlPanel", "SimpleVhd.ControlPanel\SimpleVhd.ControlPanel.csproj", "{E8C59EBA-79C0-4812-822B-9C268ADE1DC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVhd.ControlPanel", "SimpleVhd.ControlPanel\SimpleVhd.ControlPanel.csproj", "{E8C59EBA-79C0-4812-822B-9C268ADE1DC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleVhd.PE", "SimpleVhd.PE\SimpleVhd.PE.csproj", "{38503AE5-C2E8-4105-BC27-888850A641B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVhd.PE", "SimpleVhd.PE\SimpleVhd.PE.csproj", "{38503AE5-C2E8-4105-BC27-888850A641B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleVhd.Startup", "SimpleVhd.Startup\SimpleVhd.Startup.csproj", "{A6FD2B04-E0EA-4413-9297-1BF90A06CD63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{38503AE5-C2E8-4105-BC27-888850A641B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38503AE5-C2E8-4105-BC27-888850A641B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38503AE5-C2E8-4105-BC27-888850A641B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6FD2B04-E0EA-4413-9297-1BF90A06CD63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6FD2B04-E0EA-4413-9297-1BF90A06CD63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6FD2B04-E0EA-4413-9297-1BF90A06CD63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6FD2B04-E0EA-4413-9297-1BF90A06CD63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
