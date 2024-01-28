@@ -44,7 +44,7 @@ partial class FormCheckRequirements {
         ControlBox = false;
         Controls.Add(label1);
         Name = "FormCheckRequirements";
-        StartPosition = FormStartPosition.CenterParent;
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "요구 사항 확인 중";
         ResumeLayout(false);
     }

@@ -3,7 +3,13 @@ using System.Diagnostics;
 namespace SimpleVhd.Installer;
 
 public partial class FormMain : Form {
-    public FormMain() => InitializeComponent();
+    public FormMain() {
+        InitializeComponent();
+
+        if (File.Exists(Path.Combine(Application.StartupPath, "..", SettingsFileName))) {
+            button1.Enabled = false;
+        }
+    }
 
     private void button1_Click(object sender, EventArgs e) {
         FormCheckRequirements check = new();

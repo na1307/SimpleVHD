@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Microsoft.Win32;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 using static SimpleVhd.BcdEdit;
@@ -40,7 +41,10 @@ public sealed class NewInstallData : InstallData {
     }
 
     public override void InstallProcess() {
-        var bcdDesctiption = BcdEditRegex("/enum {current}", @"^description\s+(?<name>.+)$").Groups["name"].Value;
+        Directory.CreateDirectory(Path.Combine(SVDir, BackupDirName));
+        Registry.SetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "SimpleVHD Startup", Path.Combine(SVDir, "Bin", "Startup.exe"), RegistryValueKind.String);
+
+        var parentDesctiption = BcdEditRegex("/enum {current}", @"^description\s+(?<name>.+)$").Groups["name"].Value;
 
         Guid parent, child1, child2, ramdisk, pe;
         string arch;
@@ -55,12 +59,12 @@ public sealed class NewInstallData : InstallData {
 
         parent = BcdEditGuid($"/enum {{current}} /v");
 
-        child1 = BcdEditGuid($"/copy {{current}} /d \"{bcdDesctiption}\"");
+        child1 = BcdEditGuid($"/copy {{current}} /d \"{parentDesctiption}\"");
         ProcessBcdEdit($@"/set {child1:B} device vhd=""[{VhdDrive}]{VhdPath}{Child1Name}.{Format},locate=custom:12000002");
         ProcessBcdEdit($@"/set {child1:B} osdevice vhd=""[{VhdDrive}]{VhdPath}{Child1Name}.{Format},locate=custom:22000002");
         ProcessBcdEdit($@"/displayorder {child1:B} /remove");
 
-        child2 = BcdEditGuid($"/copy {{current}} /d \"{bcdDesctiption}\"");
+        child2 = BcdEditGuid($"/copy {{current}} /d \"{parentDesctiption}\"");
         ProcessBcdEdit($@"/set {child2:B} device vhd=""[{VhdDrive}]{VhdPath}{Child2Name}.{Format},locate=custom:12000002");
         ProcessBcdEdit($@"/set {child2:B} osdevice vhd=""[{VhdDrive}]{VhdPath}{Child2Name}.{Format},locate=custom:22000002");
         ProcessBcdEdit($@"/displayorder {child2:B} /remove");

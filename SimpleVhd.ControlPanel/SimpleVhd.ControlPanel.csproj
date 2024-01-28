@@ -4,6 +4,7 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>ControlPanel</AssemblyName>
     <AssemblyTitle>SimpleVHD Control Panel</AssemblyTitle>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleVhd\SimpleVhd.csproj" />

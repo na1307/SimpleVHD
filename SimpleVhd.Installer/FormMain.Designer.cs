@@ -30,12 +30,13 @@ partial class FormMain {
         // button1
         // 
         button1.Image = Properties.Resources.test;
-        button1.ImageAlign = ContentAlignment.TopCenter;
+        button1.ImageAlign = ContentAlignment.MiddleLeft;
         button1.Location = new Point(12, 12);
         button1.Name = "button1";
-        button1.Size = new Size(460, 187);
+        button1.Size = new Size(75, 65);
         button1.TabIndex = 0;
         button1.Text = "설치";
+        button1.TextAlign = ContentAlignment.MiddleRight;
         button1.UseVisualStyleBackColor = true;
         button1.Click += button1_Click;
         // 
@@ -43,12 +44,13 @@ partial class FormMain {
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(484, 211);
+        ClientSize = new Size(184, 161);
         Controls.Add(button1);
         MaximizeBox = false;
         MinimizeBox = false;
         Name = "FormMain";
         StartPosition = FormStartPosition.CenterScreen;
+        Text = "SimpleVHD Installer";
         ResumeLayout(false);
     }
 
