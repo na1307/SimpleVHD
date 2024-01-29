@@ -1,7 +1,7 @@
 ﻿namespace SimpleVhd;
 
 public static class Constants {
-    public const ulong BuildNumber = 1;
+    public const ulong BuildNumber = 2;
     public const string SettingsFileName = "Settings.json";
     public const string DirName = "SimpleVHD";
     public const string BackupDirName = "Backup";

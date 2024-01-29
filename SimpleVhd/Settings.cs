@@ -103,6 +103,19 @@ public sealed class Settings {
             writer.WriteEndArray();
             writer.WriteString(nameof(RamdiskGuid), value.RamdiskGuid.ToString("B"));
             writer.WriteString(nameof(PEGuid), value.PEGuid.ToString("B"));
+
+            if (value.WorkType != null) {
+                writer.WriteString(nameof(WorkType), value.WorkType.Value.ToString());
+            }
+
+            if (value.WorkInstance != null) {
+                writer.WriteNumber(nameof(WorkInstance), value.WorkInstance.Value);
+            }
+
+            if (value.TempValue != null) {
+                writer.WriteString(nameof(TempValue), value.TempValue);
+            }
+
             writer.WriteEndObject();
         }
     }
