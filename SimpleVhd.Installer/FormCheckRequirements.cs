@@ -1,14 +1,18 @@
 ﻿namespace SimpleVhd.Installer;
 
 public partial class FormCheckRequirements : Form {
-    public FormCheckRequirements() {
+    public FormCheckRequirements(InstallType type) {
         InitializeComponent();
-        Statics.Data = new NewInstallData();
+
+        Status.Processor = type switch {
+            InstallType.NewInstall => new NewInstallProcessor(),
+            _ => throw new ArgumentException("No", nameof(type)),
+        };
     }
 
     public void Check() {
         try {
-            Statics.Data?.CheckRequirements();
+            Status.Processor?.CheckRequirements();
         } finally {
             Close();
         }

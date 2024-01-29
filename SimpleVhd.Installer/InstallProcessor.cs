@@ -1,6 +1,6 @@
 ﻿namespace SimpleVhd.Installer;
 
-public abstract class InstallData {
+public abstract class InstallProcessor {
     public string SVDrive { get; set; } = string.Empty;
     public string SVPath { get; set; } = string.Empty;
     public string SVDir { get; set; } = string.Empty;
