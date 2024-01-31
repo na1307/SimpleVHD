@@ -1,7 +1,7 @@
 ﻿namespace SimpleVhd.Installer;
 
 public partial class FormCheckRequirements : Form {
-    public FormCheckRequirements(InstallType type) {
+    private FormCheckRequirements(InstallType type) {
         InitializeComponent();
 
         Status.Processor = type switch {
@@ -10,9 +10,16 @@ public partial class FormCheckRequirements : Form {
         };
     }
 
-    public void Check() {
+    public static async Task CheckAsync(InstallType installType) {
+        using FormCheckRequirements form = new(installType);
+        Task task = form.check();
+        form.ShowDialog();
+        await task;
+    }
+
+    private async Task check() {
         try {
-            Status.Processor?.CheckRequirements();
+            await Task.Run(() => Status.Processor!.CheckRequirements());
         } finally {
             Close();
         }

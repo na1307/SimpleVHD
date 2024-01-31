@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace SimpleVhd.Installer;
 
 public partial class FormMain : Form {
@@ -11,26 +9,15 @@ public partial class FormMain : Form {
         }
     }
 
-    private void button1_Click(object sender, EventArgs e) {
+    private async void button1_Click(object sender, EventArgs e) {
         try {
-            checkRequirements(new FormCheckRequirements(InstallType.NewInstall));
+            await FormCheckRequirements.CheckAsync(InstallType.NewInstall);
         } catch (RequirementsNotMetException ex) {
             ErrMsg("요구 사항이 맞지 않습니다." + Environment.NewLine + Environment.NewLine + ex.Message);
             return;
         }
 
-        using FormWizard wizard = new([new GetVhdType()]);
-
-        if (wizard.ShowDialog(this) == DialogResult.OK) {
-            Status.Processor?.InstallProcess();
-            MessageBox.Show("설치 성공!", "설치", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Process.Start("ControlPanel.exe");
-            Close();
-        }
-    }
-
-    private static void checkRequirements(FormCheckRequirements form) {
-        form.Show();
-        form.Check();
+        await FormWizard.RunWizard([new GetVhdType()]);
+        Close();
     }
 }
