@@ -10,6 +10,27 @@ public abstract class InstallProcessor {
     public VhdType Type { get; set; }
     public VhdFormat Format { get; set; }
 
-    public abstract void CheckRequirements();
+    public void CheckRequirements() {
+        if (!Environment.Is64BitOperatingSystem) {
+            throw new RequirementsNotMetException("64비트 운영 체제만 지원합니다.");
+        }
+
+        IEnumerable<string> drvs = DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed && Directory.Exists(Path.Combine(d.Name, DirName))).Select(d => d.Name.TrimEnd('\\'));
+
+        if (drvs.Any()) {
+            SVDrive = drvs.First();
+            SVPath = Path.DirectorySeparatorChar.ToString() + DirName + Path.DirectorySeparatorChar.ToString();
+            SVDir = SVDrive + SVPath;
+        } else {
+            throw new RequirementsNotMetException("아무 드라이브의 루트에 " + DirName + " 폴더가 없습니다.");
+        }
+
+        IEnumerable<string> requires = ((string[])["Boot\\x64.wim", "Boot\\arm64.wim", "Boot\\boot.sdi"]).Where(f => !File.Exists(Path.Combine(SVDir, f)));
+
+        if (requires.Any()) {
+            throw new RequirementsNotMetException(Path.GetFileName(requires.First()) + " 파일이 없습니다.");
+        }
+    }
+
     public abstract void InstallProcess();
 }

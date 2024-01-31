@@ -12,7 +12,12 @@ public partial class FormMain : Form {
     }
 
     private void button1_Click(object sender, EventArgs e) {
-        checkRequirements(new FormCheckRequirements(InstallType.NewInstall));
+        try {
+            checkRequirements(new FormCheckRequirements(InstallType.NewInstall));
+        } catch (RequirementsNotMetException ex) {
+            ErrMsg("요구 사항이 맞지 않습니다." + Environment.NewLine + Environment.NewLine + ex.Message);
+            return;
+        }
 
         using FormWizard wizard = new([new GetVhdType()]);
 
@@ -26,11 +31,6 @@ public partial class FormMain : Form {
 
     private static void checkRequirements(FormCheckRequirements form) {
         form.Show();
-
-        try {
-            form.Check();
-        } catch (RequirementsNotMetException ex) {
-            ErrMsg("요구 사항이 맞지 않습니다." + Environment.NewLine + Environment.NewLine + ex.Message);
-        }
+        form.Check();
     }
 }

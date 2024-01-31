@@ -1,46 +1,25 @@
 ﻿using Microsoft.Win32;
 using SimpleVhd.Bcd;
+using System.Management;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
-using static SimpleVhd.BcdEdit;
+using static SimpleVhd.DevicePathMapper;
 
 namespace SimpleVhd.Installer;
 
 public sealed class NewInstallProcessor : InstallProcessor {
-    public override void CheckRequirements() {
-        if (!Environment.Is64BitOperatingSystem) {
-            throw new RequirementsNotMetException("64비트 운영 체제만 지원합니다.");
-        }
-
-        IEnumerable<string> drvs = DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed && Directory.Exists(Path.Combine(d.Name, DirName))).Select(d => d.Name.Split("\\")[0]);
-
-        if (drvs.Any()) {
-            SVDrive = drvs.First();
-            SVPath = Path.DirectorySeparatorChar.ToString() + DirName + Path.DirectorySeparatorChar.ToString();
-            SVDir = SVDrive + SVPath;
-        } else {
-            throw new RequirementsNotMetException("아무 드라이브의 루트에 " + DirName + " 폴더가 없습니다.");
-        }
-
-        IEnumerable<string> requires = ((string[])["Boot\\x64.wim", "Boot\\arm64.wim", "Boot\\boot.sdi"]).Where(f => !File.Exists(Path.Combine(SVDir, f)));
-
-        if (requires.Any()) {
-            throw new RequirementsNotMetException(Path.GetFileName(requires.First()) + " 파일이 없습니다.");
-        }
-    }
-
     public override void InstallProcess() {
-        Match m = BcdEditRegex("/enum {current} /v", @"^device\s+vhd=\[(?<drv>[A-Z]:)\](?<path>.+\.vhdx?)");
-        VhdDrive = m.Groups["drv"].Value;
-        VhdPath = Path.GetDirectoryName(m.Groups["path"].Value)!;
+        var vp = getVhdPath(getSystemDiskNumber());
+        VhdDrive = Path.GetPathRoot(vp)!.TrimEnd('\\');
+        VhdPath = Path.GetDirectoryName(vp[2..])!;
 
         if (VhdPath.Length > 1) {
             VhdPath += Path.DirectorySeparatorChar.ToString();
         }
 
-        VhdName = Path.GetFileNameWithoutExtension(m.Groups["path"].Value);
-        Format = Enum.Parse<VhdFormat>(Regex.Match(Path.GetFileName(m.Groups["path"].Value), "^.+\\.(?<ext>vhdx?)$", RegexOptions.IgnoreCase).Groups["ext"].Value, true);
+        VhdName = Path.GetFileNameWithoutExtension(vp);
+        Format = Enum.Parse<VhdFormat>(Path.GetExtension(vp)[1..], true);
 
         Directory.CreateDirectory(Path.Combine(SVDir, BackupDirName));
         Registry.SetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "SimpleVHD Startup", Path.Combine(SVDir, "Bin", "Startup.exe"), RegistryValueKind.String);
@@ -58,23 +37,23 @@ public sealed class NewInstallProcessor : InstallProcessor {
         BcdObject parrent = BcdStore.SystemStore.OpenObject(WellKnownGuids.Current);
 
         BcdObject child1 = BcdStore.SystemStore.CopyObject(parrent);
-        child1.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, $"{VhdPath}{Child1Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, DevicePath.GetDevicePath(VhdDrive), 0);
-        child1.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, $"{VhdPath}{Child1Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, DevicePath.GetDevicePath(VhdDrive), 0);
+        child1.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, $"{VhdPath}{Child1Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
+        child1.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, $"{VhdPath}{Child1Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
 
         BcdObject child2 = BcdStore.SystemStore.CopyObject(parrent);
-        child2.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, $"{VhdPath}{Child2Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, DevicePath.GetDevicePath(VhdDrive), 0);
-        child2.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, $"{VhdPath}{Child2Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, DevicePath.GetDevicePath(VhdDrive), 0);
+        child2.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, $"{VhdPath}{Child2Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
+        child2.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, $"{VhdPath}{Child2Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
 
         BcdObject ramdisk = BcdStore.SystemStore.CreateObject(Guid.NewGuid(), BcdObjectType.Device);
-        ramdisk.SetPartitionDeviceElement(BcdElementType.BcdDeviceSdiDevice, DeviceType.PartitionDevice, null, DevicePath.GetDevicePath(SVDrive));
+        ramdisk.SetPartitionDeviceElement(BcdElementType.BcdDeviceSdiDevice, DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
         ramdisk.SetStringElement(BcdElementType.BcdDeviceSdiPath, SVPath + "Boot\\boot.sdi");
 
         BcdObject pe = BcdStore.SystemStore.CreateObject(Guid.NewGuid(), BcdObjectType.BootLoader);
         pe.SetStringElement(BcdElementType.BcdLibraryDescription, "SimpleVHD PE");
-        pe.SetFileDeviceElement(BcdElementType.BcdLibraryApplicationDevice, DeviceType.RamdiskDevice, ramdisk, $"{SVPath}Boot\\{arch}.wim", DeviceType.PartitionDevice, null, DevicePath.GetDevicePath(SVDrive));
+        pe.SetFileDeviceElement(BcdElementType.BcdLibraryApplicationDevice, DeviceType.RamdiskDevice, ramdisk, $"{SVPath}Boot\\{arch}.wim", DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
         pe.SetStringElement(BcdElementType.BcdLibraryApplicationPath, $@"\windows\system32\winload.{(Firmware.IsWindowsUEFI ? "efi" : "exe")}");
         pe.SetObjectListElement(BcdElementType.BcdLibraryInheritedObjects, BcdStore.SystemStore.OpenObject(WellKnownGuids.BootLoaderSettings));
-        pe.SetFileDeviceElement(BcdElementType.BcdOSLoaderOSDevice, DeviceType.RamdiskDevice, ramdisk, $"{SVPath}Boot\\{arch}.wim", DeviceType.PartitionDevice, null, DevicePath.GetDevicePath(SVDrive));
+        pe.SetFileDeviceElement(BcdElementType.BcdOSLoaderOSDevice, DeviceType.RamdiskDevice, ramdisk, $"{SVPath}Boot\\{arch}.wim", DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
         pe.SetStringElement(BcdElementType.BcdOSLoaderSystemRoot, "\\windows");
         pe.SetBooleanElement(BcdElementType.BcdOSLoaderDetectKernelAndHal, true);
         pe.SetBooleanElement(BcdElementType.BcdOSLoaderWinPEMode, true);
@@ -105,5 +84,23 @@ public sealed class NewInstallProcessor : InstallProcessor {
             { "RamdiskGuid", ramdisk.Id.ToString("B") },
             { "PEGuid", pe.Id.ToString("B") },
         }.WriteTo(writer);
+    }
+
+    private static string getVhdPath(int number) {
+        ManagementBaseObject queryObj = new ManagementObjectSearcher(@"root\Microsoft\Windows\Storage", "SELECT * FROM MSFT_PhysicalDisk WHERE DeviceID=\"" + number.ToString() + "\"").Get().Cast<ManagementBaseObject>().First();
+        var pl = queryObj["PhysicalLocation"].ToString();
+
+        if (pl![..22] is not @"\Device\HarddiskVolume") {
+            throw new SimpleVhdException("부팅된 가상 디스크가 아닙니다.");
+        }
+
+        return FromDevicePath(pl);
+    }
+
+    private static int getSystemDiskNumber() {
+        const string q = "SELECT * FROM Win32_LogicalDiskToPartition";
+        var a = new ManagementObjectSearcher(q).Get().Cast<ManagementObject>().Where(drive => ((string)drive["Dependent"]).Contains("C:")).Select(drive => (string)drive["Antecedent"]).First();
+
+        return int.Parse(Regex.Match(a, "Disk #(?<number>[0-9]+), Partition #[0-9]+").Groups["number"].Value);
     }
 }

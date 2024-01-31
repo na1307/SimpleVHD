@@ -5,6 +5,9 @@
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="xcopy /SIY &quot;$(TargetDir)*&quot; &quot;$(SolutionDir)Bin&quot;" />
   </Target>
+  <Target Name="AfterClean">
+    <RemoveDir Directories="$(SolutionDir)Bin" />
+  </Target>
   <ItemGroup Condition="'$(UseWindowsForms)' == 'true'">
     <PackageReference Include="Bluehill.Forms" />
     <Using Include="Bluehill.ErrDialogForms" Static="true" />
