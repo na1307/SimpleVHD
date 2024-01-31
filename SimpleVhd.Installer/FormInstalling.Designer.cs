@@ -1,6 +1,6 @@
 ﻿namespace SimpleVhd.Installer;
 
-partial class FormCheckRequirements {
+partial class FormInstalling {
     /// <summary>
     /// Required designer variable.
     /// </summary>
@@ -26,14 +26,14 @@ partial class FormCheckRequirements {
     private void InitializeComponent() {
         SuspendLayout();
         // 
-        // FormCheckRequirements
+        // FormInstalling
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(284, 111);
-        LabelText = "요구 사항을 확인하는 중입니다.\r\n\r\n잠시만 기다려 주세요...";
-        Name = "FormCheckRequirements";
-        Text = "요구 사항 확인 중";
+        LabelText = "작업을 진행 중입니다.\r\n\r\n잠시만 기다려 주세요...";
+        Name = "FormInstalling";
+        Text = "작업 중...";
         ResumeLayout(false);
     }
 

@@ -1,6 +1,6 @@
 ﻿namespace SimpleVhd.Installer;
 
-partial class FormCheckRequirements {
+partial class FormWorkingDialog {
     /// <summary>
     /// Required designer variable.
     /// </summary>
@@ -24,18 +24,34 @@ partial class FormCheckRequirements {
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+        label1 = new Label();
         SuspendLayout();
         // 
-        // FormCheckRequirements
+        // label1
+        // 
+        label1.Location = new Point(12, 9);
+        label1.Name = "label1";
+        label1.Size = new Size(260, 93);
+        label1.TabIndex = 0;
+        label1.Text = "label1";
+        label1.TextAlign = ContentAlignment.MiddleCenter;
+        // 
+        // FormWorkingDialog
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(284, 111);
-        LabelText = "요구 사항을 확인하는 중입니다.\r\n\r\n잠시만 기다려 주세요...";
-        Name = "FormCheckRequirements";
-        Text = "요구 사항 확인 중";
+        ControlBox = false;
+        Controls.Add(label1);
+        Name = "FormWorkingDialog";
+        ShowInTaskbar = false;
+        StartPosition = FormStartPosition.CenterParent;
+        Text = "FormWorkingDialog";
+        TopMost = true;
         ResumeLayout(false);
     }
 
     #endregion
+
+    private Label label1;
 }

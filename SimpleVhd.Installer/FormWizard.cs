@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel;
-using System.Diagnostics;
 
 namespace SimpleVhd.Installer;
 
 public partial class FormWizard : Form {
     private LinkedListNode<ISetupWizardPage> currentPage;
 
-    private FormWizard(IEnumerable<ISetupWizardPage> pages) {
+    public FormWizard(IEnumerable<ISetupWizardPage> pages) {
         InitializeComponent();
         currentPage = new LinkedList<ISetupWizardPage>(pages).First ?? throw new ArgumentException("pages should not be empty.", nameof(pages));
         panel1.Controls.Add(currentPage.Value.Panel);
@@ -16,16 +15,6 @@ public partial class FormWizard : Form {
         if (currentPage.Next == null) {
             buttonNext.Visible = false;
             buttonOK.Visible = true;
-        }
-    }
-
-    public static async Task RunWizard(IEnumerable<ISetupWizardPage> pages) {
-        using FormWizard wizard = new(pages);
-
-        if (wizard.ShowDialog() == DialogResult.OK) {
-            await Task.Run(() => Status.Processor!.InstallProcess());
-            MessageBox.Show("설치 성공!", "설치", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Process.Start("ControlPanel.exe");
         }
     }
 

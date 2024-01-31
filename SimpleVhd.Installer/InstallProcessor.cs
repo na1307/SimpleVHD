@@ -1,4 +1,7 @@
-﻿namespace SimpleVhd.Installer;
+﻿using System.Management;
+using System.Text.RegularExpressions;
+
+namespace SimpleVhd.Installer;
 
 public abstract class InstallProcessor {
     public string SVDrive { get; set; } = string.Empty;
@@ -30,7 +33,27 @@ public abstract class InstallProcessor {
         if (requires.Any()) {
             throw new RequirementsNotMetException(Path.GetFileName(requires.First()) + " 파일이 없습니다.");
         }
+
+        _ = getVhdPath(getSystemDiskNumber());
     }
 
     public abstract void InstallProcess();
+
+    protected static int getSystemDiskNumber() {
+        const string q = "SELECT * FROM Win32_LogicalDiskToPartition";
+        var a = new ManagementObjectSearcher(q).Get().Cast<ManagementObject>().Where(drive => ((string)drive["Dependent"]).Contains("C:")).Select(drive => (string)drive["Antecedent"]).First();
+
+        return int.Parse(Regex.Match(a, "Disk #(?<number>[0-9]+), Partition #[0-9]+").Groups["number"].Value);
+    }
+
+    protected static string getVhdPath(int number) {
+        ManagementBaseObject queryObj = new ManagementObjectSearcher(@"root\Microsoft\Windows\Storage", "SELECT * FROM MSFT_PhysicalDisk WHERE DeviceID=\"" + number.ToString() + "\"").Get().Cast<ManagementBaseObject>().First();
+        var pl = queryObj["PhysicalLocation"].ToString();
+
+        if (pl![..22] is not @"\Device\HarddiskVolume") {
+            throw new RequirementsNotMetException("현재 가상 디스크로 부팅하지 않았습니다.");
+        }
+
+        return DevicePathMapper.FromDevicePath(pl);
+    }
 }

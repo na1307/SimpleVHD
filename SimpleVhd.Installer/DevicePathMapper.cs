@@ -1,14 +1,15 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SimpleVhd;
+namespace SimpleVhd.Installer;
 
 public static class DevicePathMapper {
     public static string GetDevicePath(string drive) {
         const uint length = 128;
         StringBuilder sb = new((int)length);
 
-        return QueryDosDeviceW(drive, sb, length + 1) != 0 ? sb.ToString() : throw new SimpleVhdException("QueryDosDevice Failed: " + Marshal.GetLastWin32Error().ToString());
+        return QueryDosDeviceW(drive, sb, length + 1) != 0 ? sb.ToString() : throw new SimpleVhdException("QueryDosDevice Failed: " + new Win32Exception(Marshal.GetLastWin32Error()).Message);
     }
 
     public static string FromDevicePath(string devicePath) {

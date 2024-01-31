@@ -1,10 +1,8 @@
 ﻿using Microsoft.Win32;
 using SimpleVhd.Bcd;
-using System.Management;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using System.Text.RegularExpressions;
-using static SimpleVhd.DevicePathMapper;
+using static SimpleVhd.Installer.DevicePathMapper;
 
 namespace SimpleVhd.Installer;
 
@@ -84,23 +82,5 @@ public sealed class NewInstallProcessor : InstallProcessor {
             { "RamdiskGuid", ramdisk.Id.ToString("B") },
             { "PEGuid", pe.Id.ToString("B") },
         }.WriteTo(writer);
-    }
-
-    private static string getVhdPath(int number) {
-        ManagementBaseObject queryObj = new ManagementObjectSearcher(@"root\Microsoft\Windows\Storage", "SELECT * FROM MSFT_PhysicalDisk WHERE DeviceID=\"" + number.ToString() + "\"").Get().Cast<ManagementBaseObject>().First();
-        var pl = queryObj["PhysicalLocation"].ToString();
-
-        if (pl![..22] is not @"\Device\HarddiskVolume") {
-            throw new SimpleVhdException("부팅된 가상 디스크가 아닙니다.");
-        }
-
-        return FromDevicePath(pl);
-    }
-
-    private static int getSystemDiskNumber() {
-        const string q = "SELECT * FROM Win32_LogicalDiskToPartition";
-        var a = new ManagementObjectSearcher(q).Get().Cast<ManagementObject>().Where(drive => ((string)drive["Dependent"]).Contains("C:")).Select(drive => (string)drive["Antecedent"]).First();
-
-        return int.Parse(Regex.Match(a, "Disk #(?<number>[0-9]+), Partition #[0-9]+").Groups["number"].Value);
     }
 }
