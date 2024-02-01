@@ -21,7 +21,11 @@ public sealed class Settings {
             using Stream ss = Assembly.GetExecutingAssembly().GetManifestResourceStream("SimpleVhd.Settings.schema.json")!;
             using StreamReader sr = new(ss);
 
-            return JsonSchema.FromText(sr.ReadToEnd()).Evaluate(JsonDocument.Parse(File.ReadAllBytes("..\\" + SettingsFileName))).IsValid;
+            try {
+                return JsonSchema.FromText(sr.ReadToEnd()).Evaluate(JsonDocument.Parse(File.ReadAllBytes("..\\" + SettingsFileName))).IsValid;
+            } catch (FileNotFoundException fnfex) {
+                throw new SimpleVhdException("구성 파일을 찾을 수 없습니다.", fnfex);
+            }
         }
     }
 
