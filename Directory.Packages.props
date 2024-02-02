@@ -5,7 +5,13 @@
   <ItemGroup>
     <PackageVersion Include="JsonSchema.Net" Version="5.5.1" />
     <PackageVersion Include="System.Management" Version="8.0.0" />
+    <PackageVersion Include="Bluehill.Features" Version="0.1.0" />
     <PackageVersion Include="Bluehill.Forms" Version="0.1.2" />
-    <PackageVersion Include="Bluehill.Wpf" Version="0.1.0" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.4.231219000" />
+    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.2428" />
+    <PackageVersion Include="WinUIEx" Version="2.3.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Bluehill.Features" />
   </ItemGroup>
 </Project>

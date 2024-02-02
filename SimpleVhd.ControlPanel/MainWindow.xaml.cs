@@ -1,22 +1,17 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Bluehill;
+using Microsoft.UI.Xaml.Controls;
+
+// To learn more about WinUI, the WinUI project structure,
+// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace SimpleVhd.ControlPanel;
 
 /// <summary>
-/// Interaction logic for MainWindow.xaml
+/// An empty window that can be used on its own or navigated to within a Frame.
 /// </summary>
-public partial class MainWindow : Window {
+public sealed partial class MainWindow {
     public MainWindow() {
         InitializeComponent();
-        c8.Text = Settings.Instance.ToString();
+        ToolTipService.SetToolTip(AboutButton, AssemblyProperties.AssemblyTitle + (string)ToolTipService.GetToolTip(AboutButton));
     }
 }
