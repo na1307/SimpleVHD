@@ -1,5 +1,5 @@
-﻿using Microsoft.Win32;
-using SimpleVhd.Bcd;
+﻿using Bluehill.Bcd;
+using Microsoft.Win32;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using static SimpleVhd.Installer.DevicePathMapper;
