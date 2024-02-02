@@ -34,11 +34,11 @@ public sealed class NewInstallProcessor : InstallProcessor {
 
         BcdObject parrent = BcdStore.SystemStore.OpenObject(WellKnownGuids.Current);
 
-        BcdObject child1 = BcdStore.SystemStore.CopyObject(parrent);
+        BcdObject child1 = BcdStore.SystemStore.CopyObject(parrent, CopyObjectOptions.CreateNewId);
         child1.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, $"{VhdPath}{Child1Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
         child1.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, $"{VhdPath}{Child1Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
 
-        BcdObject child2 = BcdStore.SystemStore.CopyObject(parrent);
+        BcdObject child2 = BcdStore.SystemStore.CopyObject(parrent, CopyObjectOptions.CreateNewId);
         child2.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, $"{VhdPath}{Child2Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
         child2.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, $"{VhdPath}{Child2Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
 
