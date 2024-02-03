@@ -12,8 +12,6 @@ namespace SimpleVhd.ControlPanel;
 /// Provides application-specific behavior to supplement the default Application class.
 /// </summary>
 public sealed partial class App {
-    private Window? window;
-
     /// <summary>
     /// Initializes the singleton application object.  This is the first line of authored code
     /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -22,6 +20,8 @@ public sealed partial class App {
         InitializeComponent();
         UnhandledException += App_UnhandledException;
     }
+
+    public MainWindow? MWindow { get; private set; }
 
     /// <summary>
     /// Invoked when the application is launched.
@@ -32,17 +32,17 @@ public sealed partial class App {
         //    throw new SimpleVhdException("설정 파일이 올바르지 않습니다.");
         //}
 
-        window = new MainWindow();
-        window.Closed += Window_Closed;
-        window.SetWindowSize(750, 500);
-        window.SetIsResizable(false);
-        window.SetIsMaximizable(false);
-        window.CenterOnScreen();
-        window.Activate();
+        MWindow = new();
+        MWindow.Closed += Window_Closed;
+        MWindow.SetWindowSize(750, 500);
+        MWindow.SetIsResizable(false);
+        MWindow.SetIsMaximizable(false);
+        MWindow.CenterOnScreen();
+        MWindow.Activate();
     }
 
     private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e) {
-        _ = MessageBoxW(window is not null ? WindowNative.GetWindowHandle(window) : nint.Zero, e.Exception is SimpleVhdException ? e.Exception.Message : e.Exception.ToString(), "오류", 16);
+        _ = MessageBoxW(MWindow is not null ? WindowNative.GetWindowHandle(MWindow) : nint.Zero, e.Exception is SimpleVhdException ? e.Exception.Message : e.Exception.ToString(), "오류", 16);
         Exit();
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]

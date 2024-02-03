@@ -18,34 +18,26 @@
             <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0">
-            <!--<Image Margin="5" Source="resources/icon.ico"/>-->
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEDA2;" />
             <Border BorderBrush="LightGray" BorderThickness="0,0,0,2"/>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
             <TextBlock Text="SimpleVHD Control Panel" Margin="5" FontSize="24"/>
             <Border BorderBrush="LightGray" BorderThickness="0,0,0,2"/>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="0" Background="WhiteSmoke">
-            <Button x:Name="HomeButton" Width="50" Height="50" Margin="11,-350,0,0" ToolTipService.ToolTip="홈">
-                <!--<Image Source="resources/home.png"/>-->
-            </Button>
-            <Button x:Name="ToolsButton" Width="50" Height="50" Margin="11,-240,0,0" ToolTipService.ToolTip="도구">
-                <!--<Image Source="resources/tools.png"/>-->
-            </Button>
-            <Button x:Name="OptionButton" Width="50" Height="50" Margin="11,-130,0,0" ToolTipService.ToolTip="옵션">
-                <!--<Image Source="resources/options.png"/>-->
-            </Button>
-            <Button x:Name="HelpButton" Width="50" Height="50" Margin="11,0,0,-130" ToolTipService.ToolTip="도움말">
-                <!--<Image Source="resources/help.png"/>-->
-            </Button>
-            <Button x:Name="AboutButton" Width="50" Height="50" Margin="11,0,0,-240" ToolTipService.ToolTip=" 정보">
-                <!--<Image Source="resources/info.png"/>-->
-            </Button>
-            <Button x:Name="ExitButton" Width="50" Height="50" Margin="11,0,0,-350" ToolTipService.ToolTip="끝내기">
-                <!--<Image Source="resources/exit.png"/>-->
-            </Button>
+        <Grid Grid.Row="1" Grid.Column="0" Background="{ThemeResource BarColor}">
+            <AppBarButton x:Name="HomeButton" Width="60" Height="60" Margin="5.5,5,0,0" Icon="Home"  Label="홈" Click="HomeButton_Click"/>
+            <AppBarButton x:Name="ToolsButton" Width="60" Height="60" Margin="5.5,60,0,0" Icon="Repair" Label="도구" Click="ToolsButton_Click"/>
+            <AppBarButton x:Name="OptionButton" Width="60" Height="60" Margin="5.5,115,0,0" Icon="Setting" Label="옵션" Click="OptionButton_Click"/>
+            <AppBarButton x:Name="HelpButton" Width="60" Height="60" Margin="5.5,245,0,0" Icon="Help" Label="도움말" Click="HelpButton_Click"/>
+            <AppBarButton x:Name="AboutButton" Width="60" Height="60" Margin="5.5,300,0,0" Label="정보" Click="AboutButton_Click">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE946;"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton x:Name="ExitButton" Width="60" Height="60" Margin="5.5,355,0,0" Icon="Cancel" Label="끝내기" Click="ExitButton_Click"/>
             <Border BorderBrush="LightGray" BorderThickness="0,0,1,0"/>
         </Grid>
-        <ContentControl Content="{Binding Path=Screen, Mode=OneWay}" IsTabStop="False" Grid.Row="1" Grid.Column="1"/>
+        <ContentControl Content="{x:Bind Screen, Mode=OneWay}" IsTabStop="False" Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </Window>
