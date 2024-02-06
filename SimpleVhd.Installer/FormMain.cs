@@ -24,7 +24,7 @@ public partial class FormMain : Form {
 
     private void endProcess() {
         MessageBox.Show("작업을 완료했습니다.", "작업 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        Process.Start("ControlPanel.exe");
+        Process.Start(Application.StartupPath + "ControlPanel.exe");
         Close();
     }
 }
