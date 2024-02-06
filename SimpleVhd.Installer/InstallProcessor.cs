@@ -1,5 +1,4 @@
 ﻿using System.Management;
-using System.Text.RegularExpressions;
 
 namespace SimpleVhd.Installer;
 
@@ -39,12 +38,7 @@ public abstract class InstallProcessor {
 
     public abstract void InstallProcess();
 
-    protected static int getSystemDiskNumber() {
-        const string q = "SELECT * FROM Win32_LogicalDiskToPartition";
-        var a = new ManagementObjectSearcher(q).Get().Cast<ManagementObject>().Where(drive => ((string)drive["Dependent"]).Contains("C:")).Select(drive => (string)drive["Antecedent"]).First();
-
-        return int.Parse(Regex.Match(a, "Disk #(?<number>[0-9]+), Partition #[0-9]+").Groups["number"].Value);
-    }
+    protected static int getSystemDiskNumber() => (int)(uint)new ManagementObjectSearcher("ASSOCIATORS OF {Win32_LogicalDisk.DeviceID='C:'} WHERE AssocClass=Win32_LogicalDiskToPartition").Get().Cast<ManagementBaseObject>().First()["DiskIndex"];
 
     protected static string getVhdPath(int number) {
         ManagementBaseObject queryObj = new ManagementObjectSearcher(@"root\Microsoft\Windows\Storage", "SELECT * FROM MSFT_PhysicalDisk WHERE DeviceID=\"" + number.ToString() + "\"").Get().Cast<ManagementBaseObject>().First();
