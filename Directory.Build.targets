@@ -2,8 +2,17 @@
   <PropertyGroup>
     <Description>$(AssemblyTitle)</Description>
   </PropertyGroup>
-  <Target Name="AfterClean">
-    <RemoveDir Directories="$(SolutionDir)Bin" />
+  <PropertyGroup Condition="'$(SelfContained)' == 'true'">
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+  </PropertyGroup>
+  <Target Name="SetNoBuild">
+    <PropertyGroup>
+      <NoBuild>true</NoBuild>
+    </PropertyGroup>
+  </Target>
+  <Target Name="PublishAfterBuild" AfterTargets="AfterBuild" DependsOnTargets="SetNoBuild;Publish" Condition="'$(OutputType)' != 'Library'" />
+  <Target Name="CleanAfterBuild" AfterTargets="AfterClean">
+    <RemoveDir Directories="$(PublishDir)" Condition="'$(PublishDir)' != ''"/>
   </Target>
   <ItemGroup Condition="'$(UseWindowsForms)' == 'true'">
     <PackageReference Include="Bluehill.Forms" />

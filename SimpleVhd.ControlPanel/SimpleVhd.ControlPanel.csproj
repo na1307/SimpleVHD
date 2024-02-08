@@ -4,9 +4,8 @@
     <AssemblyName>ControlPanel</AssemblyName>
     <AssemblyTitle>SimpleVHD Control Panel</AssemblyTitle>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <UseRidGraph>true</UseRidGraph>
-    <Platforms>x86;x64;ARM64</Platforms>
-    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+    <Platforms>x64</Platforms>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <UseWinUI>true</UseWinUI>
     <WindowsPackageType>None</WindowsPackageType>
     <EnableMsixTooling>true</EnableMsixTooling>

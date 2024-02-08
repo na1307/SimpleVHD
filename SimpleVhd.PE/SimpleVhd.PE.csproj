@@ -5,6 +5,7 @@
     <AssemblyName>PE</AssemblyName>
     <AssemblyTitle>SimpleVHD PE</AssemblyTitle>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <SelfContained>true</SelfContained>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleVhd\SimpleVhd.csproj" />

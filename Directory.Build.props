@@ -3,8 +3,11 @@
     <TargetFramework>net8.0-windows10.0.18362.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <OutputPath>..\Bin</OutputPath>
-    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <DebugType>embedded</DebugType>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <PublishDir>..\Bin</PublishDir>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
