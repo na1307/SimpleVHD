@@ -27,6 +27,7 @@ public sealed partial class App {
     /// Invoked when the application is launched.
     /// </summary>
     /// <param name="args">Details about the launch request and process.</param>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S125:Sections of code should not be commented out", Justification = "<보류 중>")]
     protected override void OnLaunched(LaunchActivatedEventArgs args) {
         //BaseChecker.Check(true);
         MWindow = new();
@@ -46,6 +47,7 @@ public sealed partial class App {
         static extern int MessageBoxW(nint hWnd, [MarshalAs(UnmanagedType.LPWStr)] string lpText, [MarshalAs(UnmanagedType.LPWStr)] string lpCaption, uint uType);
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S125:Sections of code should not be commented out", Justification = "<보류 중>")]
     private void Window_Closed(object sender, WindowEventArgs args) {
         //Settings.Instance.SaveSettings();
     }

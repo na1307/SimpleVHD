@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System.ComponentModel;
 using System.Diagnostics;
 using static Bluehill.AssemblyProperties;
 
@@ -11,19 +12,29 @@ namespace SimpleVhd.ControlPanel;
 /// <summary>
 /// An empty window that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class MainWindow {
+public sealed partial class MainWindow : INotifyPropertyChanged {
+    private Screen screen = new HomeScreen();
+
     public MainWindow() => InitializeComponent();
 
-    public Screen Screen { get; set; } = new HomeScreen();
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    public Screen Screen {
+        get => screen;
+        set {
+            screen = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Screen)));
+        }
+    }
 
     private void HomeButton_Click(object sender, RoutedEventArgs e) => Screen = new HomeScreen();
 
     private void ToolsButton_Click(object sender, RoutedEventArgs e) {
-
+        throw new NotImplementedException();
     }
 
     private void OptionButton_Click(object sender, RoutedEventArgs e) {
-
+        throw new NotImplementedException();
     }
 
     private void HelpButton_Click(object sender, RoutedEventArgs e) {
