@@ -28,7 +28,7 @@ public sealed partial class App {
     /// </summary>
     /// <param name="args">Details about the launch request and process.</param>
     protected override void OnLaunched(LaunchActivatedEventArgs args) {
-        //BaseChecker.Check();
+        //BaseChecker.Check(true);
         MWindow = new();
         MWindow.Closed += Window_Closed;
         MWindow.SetWindowSize(750, 500);

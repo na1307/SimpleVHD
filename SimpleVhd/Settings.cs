@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace SimpleVhd;
 
 public sealed class Settings {
-    private static readonly SettingsConverter converter = new("..\\" + SettingsFileName);
+    private static readonly SettingsConverter converter = new(AppContext.BaseDirectory + "..\\" + SettingsFileName);
     private static readonly Lazy<Settings> _instance = new(converter.Load);
     private static readonly JsonWriterOptions indentedWriterOptions = new() { Indented = true };
 

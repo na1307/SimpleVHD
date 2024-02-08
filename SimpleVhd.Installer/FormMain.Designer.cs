@@ -24,6 +24,7 @@ partial class FormMain {
     ///  the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+        var resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
         button1 = new Button();
         SuspendLayout();
         // 
@@ -46,6 +47,7 @@ partial class FormMain {
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(184, 161);
         Controls.Add(button1);
+        Icon = (Icon)resources.GetObject("$this.Icon");
         MaximizeBox = false;
         MinimizeBox = false;
         Name = "FormMain";

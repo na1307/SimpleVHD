@@ -5,7 +5,11 @@
     <AssemblyName>Installer</AssemblyName>
     <AssemblyTitle>SimpleVHD Installer</AssemblyTitle>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>program.ico</ApplicationIcon>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="program.ico" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleVhd\SimpleVhd.csproj" />
   </ItemGroup>

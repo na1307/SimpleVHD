@@ -11,7 +11,7 @@ internal static class Program {
         ApplicationConfiguration.Initialize();
 
         try {
-            BaseChecker.Check();
+            BaseChecker.Check(true);
         } catch (CheckException ex) {
             ErrMsg(ex.Message);
             return;

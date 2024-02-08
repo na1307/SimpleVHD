@@ -10,7 +10,11 @@
     <WindowsPackageType>None</WindowsPackageType>
     <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <ApplicationIcon>vhd.ico</ApplicationIcon>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="vhd.ico" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleVhd\SimpleVhd.csproj" />
   </ItemGroup>
