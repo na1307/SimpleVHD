@@ -28,10 +28,7 @@ public sealed partial class App {
     /// </summary>
     /// <param name="args">Details about the launch request and process.</param>
     protected override void OnLaunched(LaunchActivatedEventArgs args) {
-        //if (!Settings.IsSettingsJsonValid) {
-        //    throw new SimpleVhdException("설정 파일이 올바르지 않습니다.");
-        //}
-
+        //BaseChecker.Check();
         MWindow = new();
         MWindow.Closed += Window_Closed;
         MWindow.SetWindowSize(750, 500);

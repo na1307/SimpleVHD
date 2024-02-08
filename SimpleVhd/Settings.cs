@@ -1,6 +1,4 @@
-﻿using Json.Schema;
-using System.Reflection;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
@@ -15,19 +13,6 @@ public sealed class Settings {
     private Settings() { }
 
     public static Settings Instance => _instance.Value;
-
-    public static bool IsSettingsJsonValid {
-        get {
-            using Stream ss = Assembly.GetExecutingAssembly().GetManifestResourceStream("SimpleVhd.Settings.schema.json")!;
-            using StreamReader sr = new(ss);
-
-            try {
-                return JsonSchema.FromText(sr.ReadToEnd()).Evaluate(JsonDocument.Parse(File.ReadAllBytes("..\\" + SettingsFileName))).IsValid;
-            } catch (FileNotFoundException fnfex) {
-                throw new SimpleVhdException("구성 파일을 찾을 수 없습니다.", fnfex);
-            }
-        }
-    }
 
     public required Vhd[] VhdInstances { get; init; }
     public required Guid RamdiskGuid { get; init; }
