@@ -1,6 +1,6 @@
 ﻿namespace SimpleVhd;
 
-public enum WorkType {
+public enum OperationType {
     Backup,
     Restore
 }

@@ -51,13 +51,13 @@
     "PEGuid": {
       "type": "string"
     },
-    "WorkType": {
+    "OperationType": {
       "type": "string"
     },
-    "WorkInstance": {
+    "InstanceToOperationOn": {
       "type": "integer"
     },
-    "TempValue": {
+    "OperationTempValue": {
       "type": "string"
     }
   },

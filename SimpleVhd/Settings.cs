@@ -17,9 +17,9 @@ public sealed class Settings {
     public required Vhd[] VhdInstances { get; init; }
     public required Guid RamdiskGuid { get; init; }
     public required Guid PEGuid { get; init; }
-    public required WorkType? WorkType { get; set; }
-    public required int? WorkInstance { get; set; }
-    public required string? TempValue { get; set; }
+    public required OperationType? OperationType { get; set; }
+    public required int? InstanceToOperationOn { get; set; }
+    public required string? OperationTempValue { get; set; }
 
     public void SaveSettings() => converter.Save(this);
 
@@ -63,9 +63,9 @@ public sealed class Settings {
                 }).ToArray(),
                 RamdiskGuid = parseGuid(jo[nameof(RamdiskGuid)]),
                 PEGuid = parseGuid(jo[nameof(PEGuid)]),
-                WorkType = Enum.TryParse(jo[nameof(WorkType)]?.ToString(), out WorkType wa) ? wa : null,
-                WorkInstance = int.TryParse(jo[nameof(WorkInstance)]?.ToString(), out var i) ? i : null,
-                TempValue = jo[nameof(TempValue)]?.ToString(),
+                OperationType = Enum.TryParse(jo[nameof(OperationType)]?.ToString(), out OperationType wa) ? wa : null,
+                InstanceToOperationOn = int.TryParse(jo[nameof(InstanceToOperationOn)]?.ToString(), out var i) ? i : null,
+                OperationTempValue = jo[nameof(OperationTempValue)]?.ToString(),
             };
 
             static TEnum parseEnum<TEnum>(JsonNode? node) where TEnum : struct, Enum => Enum.TryParse<TEnum>(node?.ToString(), out TEnum value) ? value : default;
@@ -93,16 +93,16 @@ public sealed class Settings {
             writer.WriteString(nameof(RamdiskGuid), value.RamdiskGuid.ToString("B"));
             writer.WriteString(nameof(PEGuid), value.PEGuid.ToString("B"));
 
-            if (value.WorkType != null) {
-                writer.WriteString(nameof(WorkType), value.WorkType.Value.ToString());
+            if (value.OperationType != null) {
+                writer.WriteString(nameof(OperationType), value.OperationType.Value.ToString());
             }
 
-            if (value.WorkInstance != null) {
-                writer.WriteNumber(nameof(WorkInstance), value.WorkInstance.Value);
+            if (value.InstanceToOperationOn != null) {
+                writer.WriteNumber(nameof(InstanceToOperationOn), value.InstanceToOperationOn.Value);
             }
 
-            if (value.TempValue != null) {
-                writer.WriteString(nameof(TempValue), value.TempValue);
+            if (value.OperationTempValue != null) {
+                writer.WriteString(nameof(OperationTempValue), value.OperationTempValue);
             }
 
             writer.WriteEndObject();
