@@ -24,16 +24,34 @@ partial class FormMain {
     ///  the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+        button1 = new Button();
         SuspendLayout();
+        // 
+        // button1
+        // 
+        button1.Location = new Point(12, 399);
+        button1.Name = "button1";
+        button1.Size = new Size(460, 50);
+        button1.TabIndex = 0;
+        button1.Text = "끝내기";
+        button1.UseVisualStyleBackColor = true;
+        button1.Click += button1_Click;
         // 
         // FormMain
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(484, 461);
+        ControlBox = false;
+        Controls.Add(button1);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         Name = "FormMain";
+        StartPosition = FormStartPosition.CenterScreen;
+        Text = "SimpleVHD PE";
         ResumeLayout(false);
     }
 
     #endregion
+
+    private Button button1;
 }
