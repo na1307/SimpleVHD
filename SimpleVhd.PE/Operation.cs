@@ -1,11 +1,12 @@
-﻿using System.Diagnostics;
+﻿using Bluehill;
+using System.Diagnostics;
 
 namespace SimpleVhd.PE;
 
 public abstract class Operation {
     protected static readonly Vhd OInstance = Settings.Instance.VhdInstances[Settings.Instance.InstanceToOperationOn!.Value];
     protected static readonly string OFile = $"{OInstance.ParentFile}.{OInstance.Format.ToString().ToLowerInvariant()}";
-    protected static readonly string ODrv = DriveInfo.GetDrives().First(d => File.Exists(d.Name.TrimEnd('\\') + OInstance.Directory + OFile)).Name.TrimEnd('\\');
+    protected static readonly string ODrv = DriveInfo.GetDrives().First(d => File.Exists(d.Name.TrimEnd('\\') + OInstance.Directory + OFile)).GetDriveLetter();
     private static readonly string dptemp = Path.Combine(SVDir, "dptemp.txt");
 
     public abstract string OperationName { get; }

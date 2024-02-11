@@ -18,8 +18,4 @@
     <PackageReference Include="Bluehill.Forms" />
     <Using Include="Bluehill.ErrDialogForms" Static="true" />
   </ItemGroup>
-  <ItemGroup Condition="'$(UseWPF)' == 'true'">
-    <PackageReference Include="Bluehill.Wpf" />
-    <Using Include="Bluehill.ErrDialogWpf" Static="true" />
-  </ItemGroup>
 </Project>

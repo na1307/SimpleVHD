@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using Bluehill;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace SimpleVhd.Installer;
@@ -16,8 +17,6 @@ public static class DevicePathMapper {
 
         return drive != null ? devicePath.ReplaceFirst(GetDevicePath(drive.GetDriveLetter()), drive.GetDriveLetter()) : string.Empty;
     }
-
-    private static string GetDriveLetter(this DriveInfo driveInfo) => driveInfo.Name.TrimEnd('\\');
 
     private static string ReplaceFirst(this string text, string search, string replace) {
         var pos = text.IndexOf(search);

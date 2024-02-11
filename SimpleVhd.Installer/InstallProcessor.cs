@@ -1,4 +1,5 @@
-﻿using System.Management;
+﻿using Bluehill;
+using System.Management;
 
 namespace SimpleVhd.Installer;
 
@@ -17,7 +18,7 @@ public abstract class InstallProcessor {
             throw new RequirementsNotMetException("64비트 운영 체제만 지원합니다.");
         }
 
-        SVDrive = DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed && Directory.Exists(Path.Combine(d.Name, DirName))).Select(d => d.Name.TrimEnd('\\')).First();
+        SVDrive = DriveInfo.GetDrives().First(d => d.DriveType == DriveType.Fixed && Directory.Exists(Path.Combine(d.Name, DirName))).GetDriveLetter();
         SVPath = Path.DirectorySeparatorChar.ToString() + DirName + Path.DirectorySeparatorChar.ToString();
         SVDir = SVDrive + SVPath;
         _ = getVhdPath(getSystemDiskNumber());

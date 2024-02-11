@@ -5,7 +5,7 @@
   <ItemGroup>
     <PackageVersion Include="JsonSchema.Net" Version="5.5.1" />
     <PackageVersion Include="System.Management" Version="8.0.0" />
-    <PackageVersion Include="Bluehill.Features" Version="0.1.0" />
+    <PackageVersion Include="Bluehill.Features" Version="0.2.0" />
     <PackageVersion Include="Bluehill.Forms" Version="0.1.2" />
     <PackageVersion Include="Bluehill.Bcd" Version="1.0-alpha.1" />
     <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.5.240205001-preview1" />
