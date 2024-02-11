@@ -8,6 +8,9 @@
     <SelfContained>true</SelfContained>
   </PropertyGroup>
   <ItemGroup>
+    <Using Include="SimpleVhd.PE.PEConstants" Static="true" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\SimpleVhd\SimpleVhd.csproj" />
   </ItemGroup>
 </Project>
