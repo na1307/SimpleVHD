@@ -11,12 +11,29 @@ internal static class Program {
         ApplicationConfiguration.Initialize();
 
         try {
-            //BaseChecker.Check(true);
+            BaseChecker.Check(true);
         } catch (CheckException ex) {
             ErrMsg(ex.Message);
             return;
         }
 
-        Application.Run(new FormMain());
+        Form? working = null;
+
+        if (Settings.Instance.OperationType is not null) {
+            if (Settings.Instance.InstanceToOperationOn is not null) {
+                working = new FormWorking(Settings.Instance.OperationType.Value);
+            } else {
+                ErrMsg("OperationType이 설정되어 있지만 InstanceToOperationOn이 설정되어 있지 않습니다.");
+                return;
+            }
+        }
+
+        Application.ApplicationExit += Application_ApplicationExit;
+        Application.Run(working ?? FormMain.Instance);
+    }
+
+    private static void Application_ApplicationExit(object? sender, EventArgs e) {
+        Settings.Instance.SaveSettings();
+        Application.ApplicationExit -= Application_ApplicationExit;
     }
 }
