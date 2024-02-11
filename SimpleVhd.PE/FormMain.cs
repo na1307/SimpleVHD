@@ -1,4 +1,4 @@
-namespace SimpleVhd.PE;
+﻿namespace SimpleVhd.PE;
 
 public partial class FormMain : FormNonClosed {
     private static readonly Lazy<FormMain> instance = new(() => new FormMain());

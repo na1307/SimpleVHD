@@ -1,4 +1,4 @@
-using System.Diagnostics;
+ï»¿using System.Diagnostics;
 
 namespace SimpleVhd.Installer;
 
@@ -23,7 +23,7 @@ public partial class FormMain : Form {
     }
 
     private void endProcess() {
-        MessageBox.Show("ÀÛ¾÷À» ¿Ï·áÇß½À´Ï´Ù.", "ÀÛ¾÷ ¿Ï·á", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show("ì‘ì—…ì„ ì™„ë£Œí–ˆìŠµë‹ˆë‹¤.", "ì‘ì—… ì™„ë£Œ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         Process.Start(Application.StartupPath + "ControlPanel.exe");
         Close();
     }

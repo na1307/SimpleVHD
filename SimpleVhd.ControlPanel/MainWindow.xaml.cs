@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml;
+Ôªøusing Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -48,9 +48,9 @@ public sealed partial class MainWindow : INotifyPropertyChanged {
 
     private async void AboutButton_Click(object sender, RoutedEventArgs e) {
         await new ContentDialog() {
-            Title = AssemblyTitle + " ¡§∫∏",
-            Content = $"{AssemblyProduct}{Environment.NewLine}{Environment.NewLine}πˆ¿¸ {AssemblyInformationalVersion} (∫ÙµÂ {BuildNumber}){Environment.NewLine}{Environment.NewLine}{AssemblyCopyright}",
-            CloseButtonText = "»Æ¿Œ",
+            Title = AssemblyTitle + " Ï†ïÎ≥¥",
+            Content = $"{AssemblyProduct}{Environment.NewLine}{Environment.NewLine}Î≤ÑÏ†Ñ {AssemblyInformationalVersion} (ÎπåÎìú {BuildNumber}){Environment.NewLine}{Environment.NewLine}{AssemblyCopyright}",
+            CloseButtonText = "ÌôïÏù∏",
             XamlRoot = Content.XamlRoot,
         }.ShowAsync();
     }

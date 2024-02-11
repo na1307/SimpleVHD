@@ -1,4 +1,4 @@
-namespace SimpleVhd.PE;
+ï»¿namespace SimpleVhd.PE;
 
 internal static class Program {
     /// <summary>
@@ -23,7 +23,7 @@ internal static class Program {
             if (Settings.Instance.InstanceToOperationOn is not null) {
                 working = new FormWorking(Settings.Instance.OperationType.Value);
             } else {
-                ErrMsg("OperationTypeÀÌ ¼³Á¤µÇ¾î ÀÖÁö¸¸ InstanceToOperationOnÀÌ ¼³Á¤µÇ¾î ÀÖÁö ¾Ê½À´Ï´Ù.");
+                ErrMsg("OperationTypeì´ ì„¤ì •ë˜ì–´ ìˆì§€ë§Œ InstanceToOperationOnì´ ì„¤ì •ë˜ì–´ ìˆì§€ ì•ŠìŠµë‹ˆë‹¤.");
                 return;
             }
         }
