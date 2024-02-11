@@ -1,5 +1,4 @@
 ﻿using Bluehill.Bcd;
-using Microsoft.Win32;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using static SimpleVhd.Installer.DevicePathMapper;
@@ -20,7 +19,9 @@ public sealed class NewInstallProcessor : InstallProcessor {
         Format = Enum.Parse<VhdFormat>(Path.GetExtension(vp)[1..], true);
 
         Directory.CreateDirectory(Path.Combine(SVDir, BackupDirName));
-        Registry.SetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "SimpleVHD Startup", Path.Combine(SVDir, "Bin", "Startup.exe"), RegistryValueKind.String);
+#pragma warning disable S125 // Sections of code should not be commented out
+        //Registry.SetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "SimpleVHD Startup", Path.Combine(SVDir, "Bin", "Startup.exe"), RegistryValueKind.String);
+#pragma warning restore S125 // Sections of code should not be commented out
 
         string arch;
 

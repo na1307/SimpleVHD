@@ -47,6 +47,7 @@ partial class FormMain {
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(184, 161);
         Controls.Add(button1);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         Icon = (Icon)resources.GetObject("$this.Icon");
         MaximizeBox = false;
         MinimizeBox = false;

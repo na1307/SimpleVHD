@@ -113,6 +113,7 @@ partial class FormWizard {
         Controls.Add(buttonCancel);
         Controls.Add(buttonOK);
         Controls.Add(buttonNext);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         HelpButton = true;
         MaximizeBox = false;
         MinimizeBox = false;

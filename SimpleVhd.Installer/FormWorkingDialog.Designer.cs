@@ -43,6 +43,7 @@ partial class FormWorkingDialog {
         ClientSize = new Size(284, 111);
         ControlBox = false;
         Controls.Add(label1);
+        FormBorderStyle = FormBorderStyle.FixedDialog;
         Name = "FormWorkingDialog";
         ShowInTaskbar = false;
         StartPosition = FormStartPosition.CenterParent;
