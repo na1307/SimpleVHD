@@ -10,12 +10,15 @@
       <NoBuild>true</NoBuild>
     </PropertyGroup>
   </Target>
-  <Target Name="PublishAfterBuild" AfterTargets="AfterBuild" DependsOnTargets="SetNoBuild;Publish" Condition="'$(OutputType)' != 'Library'" />
+  <Target Name="PublishAfterBuild" AfterTargets="AfterBuild" DependsOnTargets="SetNoBuild;Publish" Condition="'$(OutputType)' != 'Library' and '$(IsTestProject)' != 'true'" />
   <Target Name="CleanAfterBuild" AfterTargets="AfterClean">
     <RemoveDir Directories="$(PublishDir)" Condition="'$(PublishDir)' != ''"/>
   </Target>
   <ItemGroup Condition="'$(UseWindowsForms)' == 'true'">
     <PackageReference Include="Bluehill.Forms" />
     <Using Include="Bluehill.ErrDialogForms" Static="true" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(IsTestProject)' == 'true'">
+    <Using Include="Xunit" />
   </ItemGroup>
 </Project>
