@@ -28,10 +28,7 @@ public sealed partial class MainWindow : INotifyPropertyChanged {
     }
 
     private void HomeButton_Click(object sender, RoutedEventArgs e) => Screen = new HomeScreen();
-
-    private void ToolsButton_Click(object sender, RoutedEventArgs e) {
-        throw new NotImplementedException();
-    }
+    private void ToolsButton_Click(object sender, RoutedEventArgs e) => Screen = new ToolsScreen();
 
     private void OptionButton_Click(object sender, RoutedEventArgs e) {
         throw new NotImplementedException();
