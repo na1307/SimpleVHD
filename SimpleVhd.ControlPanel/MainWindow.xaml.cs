@@ -15,7 +15,11 @@ namespace SimpleVhd.ControlPanel;
 public sealed partial class MainWindow : INotifyPropertyChanged {
     private Screen screen = new HomeScreen();
 
-    public MainWindow() => InitializeComponent();
+    public MainWindow() {
+        InitializeComponent();
+        ExtendsContentIntoTitleBar = true;
+        SetTitleBar(TitleBar);
+    }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
