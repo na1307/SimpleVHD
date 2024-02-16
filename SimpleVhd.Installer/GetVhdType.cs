@@ -7,6 +7,15 @@ public partial class GetVhdType : UserControl, ISetupWizardPage {
     public string Description => "현재 VHD의 형식을 선택해주세요.";
     public UserControl Panel => this;
 
-    private void radioButton1_CheckedChanged(object sender, EventArgs e) => Status.Processor!.Type = VhdType.Fixed;
-    private void radioButton2_CheckedChanged(object sender, EventArgs e) => Status.Processor!.Type = VhdType.Expandable;
+    private void radioButton1_CheckedChanged(object sender, EventArgs e) {
+        if (radioButton1.Checked) {
+            Status.Processor!.Type = VhdType.Fixed;
+        }
+    }
+
+    private void radioButton2_CheckedChanged(object sender, EventArgs e) {
+        if (radioButton2.Checked) {
+            Status.Processor!.Type = VhdType.Expandable;
+        }
+    }
 }

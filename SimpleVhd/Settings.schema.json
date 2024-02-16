@@ -8,6 +8,9 @@
       "items": {
         "type": "object",
         "properties": {
+          "Name": {
+            "type":  "string"
+          },
           "Directory": {
             "type": "string"
           },
@@ -34,6 +37,7 @@
           }
         },
         "required": [
+          "Name",
           "Directory",
           "ParentFile",
           "Style",

@@ -1,6 +1,7 @@
 ﻿namespace SimpleVhd;
 
 public sealed record class Vhd {
+    public required string Name { get; set; }
     public required string Directory { get; init; }
     public required string ParentFile { get; init; }
     public required Style Style { get; set; }

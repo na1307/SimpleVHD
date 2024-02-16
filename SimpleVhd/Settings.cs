@@ -48,10 +48,11 @@ public sealed class Settings {
         }
 
         public override Settings Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
-            JsonObject jo = JsonNode.Parse(ref reader)!.AsObject();
+            var jo = JsonNode.Parse(ref reader)!.AsObject();
 
             return new() {
                 VhdInstances = jo[nameof(VhdInstances)]!.AsArray().Cast<JsonObject>().Select(jo => new Vhd() {
+                    Name = jo[nameof(Vhd.Name)]!.ToString(),
                     Directory = jo[nameof(Vhd.Directory)]!.ToString(),
                     ParentFile = jo[nameof(Vhd.ParentFile)]!.ToString(),
                     Style = parseEnum<Style>(jo[nameof(Vhd.Style)]),
@@ -69,15 +70,17 @@ public sealed class Settings {
             };
 
             static TEnum parseEnum<TEnum>(JsonNode? node) where TEnum : struct, Enum => Enum.TryParse<TEnum>(node?.ToString(), out TEnum value) ? value : default;
-            static Guid parseGuid(JsonNode? node) => Guid.TryParse(node?.ToString(), out Guid value) ? value : Guid.Empty;
+            static Guid parseGuid(JsonNode? node) => Guid.TryParse(node?.ToString(), out var value) ? value : Guid.Empty;
         }
 
         public override void Write(Utf8JsonWriter writer, Settings value, JsonSerializerOptions options) {
             writer.WriteStartObject();
+            writer.WriteString("$schema", SchemaUrl);
             writer.WriteStartArray(nameof(VhdInstances));
 
             foreach (var vhd in value.VhdInstances) {
                 writer.WriteStartObject();
+                writer.WriteString(nameof(Vhd.Name), vhd.Name);
                 writer.WriteString(nameof(Vhd.Directory), vhd.Directory);
                 writer.WriteString(nameof(Vhd.ParentFile), vhd.ParentFile);
                 writer.WriteString(nameof(Vhd.Style), vhd.Style.ToString());

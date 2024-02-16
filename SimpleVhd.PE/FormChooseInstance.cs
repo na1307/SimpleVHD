@@ -11,9 +11,9 @@ public partial class FormChooseInstance : Dialog {
 
     protected override void OK_Button_Click(object sender, EventArgs e) {
         var chosen = dataGridView1.SelectedRows[0].Index;
-        Vhd cv = Settings.Instance.VhdInstances[chosen];
+        var cv = Settings.Instance.VhdInstances[chosen];
 
-        if (File.Exists(Path.Combine(BackupDir, $"{cv.ParentFile}.{cv.Format.ToString().ToLowerInvariant()}"))) {
+        if (File.Exists(Path.Combine(BackupDir, $"{cv.ParentFile}.{cv.Format}"))) {
             Settings.Instance.InstanceToOperationOn = chosen;
             base.OK_Button_Click(sender, e);
         } else {

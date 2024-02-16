@@ -15,7 +15,7 @@ public sealed class NewInstallProcessor : InstallProcessor {
             VhdPath += Path.DirectorySeparatorChar.ToString();
         }
 
-        VhdName = Path.GetFileNameWithoutExtension(vp);
+        VhdFileName = Path.GetFileNameWithoutExtension(vp);
         Format = Enum.Parse<VhdFormat>(Path.GetExtension(vp)[1..], true);
 
         Directory.CreateDirectory(Path.Combine(SVDir, BackupDirName));
@@ -33,21 +33,21 @@ public sealed class NewInstallProcessor : InstallProcessor {
             throw new InvalidOperationException();
         }
 
-        BcdObject parrent = BcdStore.SystemStore.OpenObject(WellKnownGuids.Current);
+        var parrent = BcdStore.SystemStore.OpenObject(WellKnownGuids.Current);
 
-        BcdObject child1 = BcdStore.SystemStore.CopyObject(parrent, CopyObjectOptions.CreateNewId);
+        var child1 = BcdStore.SystemStore.CopyObject(parrent, CopyObjectOptions.CreateNewId);
         child1.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, $"{VhdPath}{Child1Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
         child1.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, $"{VhdPath}{Child1Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
 
-        BcdObject child2 = BcdStore.SystemStore.CopyObject(parrent, CopyObjectOptions.CreateNewId);
+        var child2 = BcdStore.SystemStore.CopyObject(parrent, CopyObjectOptions.CreateNewId);
         child2.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, $"{VhdPath}{Child2Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
         child2.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, $"{VhdPath}{Child2Name}.{Format.ToString().ToLower()}", DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
 
-        BcdObject ramdisk = BcdStore.SystemStore.CreateObject(Guid.NewGuid(), BcdObjectType.Device);
+        var ramdisk = BcdStore.SystemStore.CreateObject(Guid.NewGuid(), BcdObjectType.Device);
         ramdisk.SetPartitionDeviceElement(BcdElementType.BcdDeviceSdiDevice, DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
         ramdisk.SetStringElement(BcdElementType.BcdDeviceSdiPath, SVPath + "Boot\\boot.sdi");
 
-        BcdObject pe = BcdStore.SystemStore.CreateObject(Guid.NewGuid(), BcdObjectType.BootLoader);
+        var pe = BcdStore.SystemStore.CreateObject(Guid.NewGuid(), BcdObjectType.BootLoader);
         pe.SetStringElement(BcdElementType.BcdLibraryDescription, "SimpleVHD PE");
         pe.SetFileDeviceElement(BcdElementType.BcdLibraryApplicationDevice, DeviceType.RamdiskDevice, ramdisk, $"{SVPath}Boot\\{arch}.wim", DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
         pe.SetStringElement(BcdElementType.BcdLibraryApplicationPath, $@"\windows\system32\winload.{(Firmware.IsWindowsUEFI ? "efi" : "exe")}");
@@ -57,7 +57,7 @@ public sealed class NewInstallProcessor : InstallProcessor {
         pe.SetBooleanElement(BcdElementType.BcdOSLoaderDetectKernelAndHal, true);
         pe.SetBooleanElement(BcdElementType.BcdOSLoaderWinPEMode, true);
 
-        BcdObject bootmgr = BcdStore.SystemStore.OpenObject(WellKnownGuids.BootMgr);
+        var bootmgr = BcdStore.SystemStore.OpenObject(WellKnownGuids.BootMgr);
         bootmgr.SetIntegerElement(BcdElementType.BcdBootMgrTimeout, 5);
         bootmgr.SetObjectListElement(BcdElementType.BcdBootMgrDisplayOrder, [.. ((BcdObject[])bootmgr.GetElement(BcdElementType.BcdBootMgrDisplayOrder)), pe]);
 
@@ -65,12 +65,14 @@ public sealed class NewInstallProcessor : InstallProcessor {
         using Utf8JsonWriter writer = new(fs, new JsonWriterOptions() { Indented = true });
 
         new JsonObject() {
+            { "$schema", SchemaUrl },
             {
                 "VhdInstances",
                 (JsonArray)([
             new JsonObject() {
+                { nameof(Name), Name },
                 { "Directory", VhdPath },
-                { "ParentFile", VhdName },
+                { "ParentFile", VhdFileName },
                 { "Style", Style.Normal.ToString() },
                 { nameof(Type), Type.ToString() },
                 { nameof(Format), Format.ToString() },

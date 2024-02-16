@@ -13,7 +13,7 @@ public partial class FormMain : Form {
 
     private async void button1_Click(object sender, EventArgs e) {
         if (await FormCheckRequirements.CheckAsync(InstallType.NewInstall)) {
-            using FormWizard wizard = new([new GetVhdType()]);
+            using FormWizard wizard = new([new GetName(), new GetVhdType()]);
 
             if (wizard.ShowDialog() == DialogResult.OK) {
                 await FormInstalling.InstallAsync();

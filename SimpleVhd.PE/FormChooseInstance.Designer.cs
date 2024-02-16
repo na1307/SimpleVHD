@@ -28,6 +28,7 @@ partial class FormChooseInstance {
         var dataGridViewCellStyle2 = new DataGridViewCellStyle();
         var dataGridViewCellStyle3 = new DataGridViewCellStyle();
         dataGridView1 = new DataGridView();
+        ColumnInstanceName = new DataGridViewTextBoxColumn();
         ColumnDirectory = new DataGridViewTextBoxColumn();
         ColumnParentFile = new DataGridViewTextBoxColumn();
         ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -49,7 +50,7 @@ partial class FormChooseInstance {
         dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
         dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
         dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ColumnDirectory, ColumnParentFile });
+        dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ColumnInstanceName, ColumnDirectory, ColumnParentFile });
         dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle2.BackColor = SystemColors.Window;
         dataGridViewCellStyle2.Font = new Font("맑은 고딕", 9F);
@@ -75,21 +76,28 @@ partial class FormChooseInstance {
         dataGridView1.Size = new Size(560, 212);
         dataGridView1.TabIndex = 1;
         // 
+        // ColumnInstanceName
+        // 
+        ColumnInstanceName.DataPropertyName = "Name";
+        ColumnInstanceName.HeaderText = "이름";
+        ColumnInstanceName.Name = "ColumnInstanceName";
+        ColumnInstanceName.ReadOnly = true;
+        // 
         // ColumnDirectory
         // 
         ColumnDirectory.DataPropertyName = "Directory";
         ColumnDirectory.HeaderText = "디렉토리 경로";
         ColumnDirectory.Name = "ColumnDirectory";
         ColumnDirectory.ReadOnly = true;
-        ColumnDirectory.Width = 350;
+        ColumnDirectory.Width = 300;
         // 
         // ColumnParentFile
         // 
         ColumnParentFile.DataPropertyName = "ParentFile";
-        ColumnParentFile.HeaderText = "파일 이름";
+        ColumnParentFile.HeaderText = "VHD 파일 이름";
         ColumnParentFile.Name = "ColumnParentFile";
         ColumnParentFile.ReadOnly = true;
-        ColumnParentFile.Width = 180;
+        ColumnParentFile.Width = 130;
         // 
         // FormChooseInstance
         // 
@@ -107,6 +115,7 @@ partial class FormChooseInstance {
     #endregion
 
     private DataGridView dataGridView1;
+    private DataGridViewTextBoxColumn ColumnInstanceName;
     private DataGridViewTextBoxColumn ColumnDirectory;
     private DataGridViewTextBoxColumn ColumnParentFile;
 }
