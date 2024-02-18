@@ -22,7 +22,7 @@
             <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
         <StackPanel x:Name="TitleBar" Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <ImageIcon Source="vhd.ico" Width="25" Height="25" Margin="25,0,25,0"/>
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEDA2;" Width="25" Height="25" Margin="25,0,25,0"/>
             <TextBlock Text="SimpleVHD Control Panel" FontSize="24" Margin="5,5,0,0"/>
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="0">
