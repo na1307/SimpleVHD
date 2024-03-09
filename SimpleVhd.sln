@@ -13,6 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVhd.PE", "SimpleVhd.P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVhd.Test", "SimpleVhd.Test\SimpleVhd.Test.csproj", "{CE0A9DE2-E04A-496C-A7E7-1C4CAE0DD4DF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "솔루션 항목", "솔루션 항목", "{BAA4B358-4614-4971-8CA6-94402DA0A93A}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		Directory.Packages.props = Directory.Packages.props
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
