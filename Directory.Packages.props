@@ -3,7 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="JsonSchema.Net" Version="6.0.4" />
+    <PackageVersion Include="JsonSchema.Net" Version="6.0.5" />
     <PackageVersion Include="System.Management" Version="8.0.0" />
     <PackageVersion Include="Bluehill.Features" Version="0.2.0" />
     <PackageVersion Include="Bluehill.Forms" Version="0.1.2" />
