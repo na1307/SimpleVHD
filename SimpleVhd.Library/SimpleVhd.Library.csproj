@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <RootNamespace>SimpleVhd</RootNamespace>
     <AssemblyName>SimpleVhd</AssemblyName>
     <AssemblyTitle>SimpleVhd Library</AssemblyTitle>
