@@ -12,7 +12,7 @@ public static class Checker {
         var requireNotFound = requires.Where(f => !File.Exists(Path.Combine(baseDirectory, "..", f)));
 
         if (requireNotFound.Any()) {
-            throw new CheckException($"{Path.GetFileName(requireNotFound.First())} 파일을 찾을 수 없습니다.");
+            throw new CheckException($"{requireNotFound.Select(f => Path.GetFileName(f)).ToJoinedString(", ")} 파일을 찾을 수 없습니다.");
         }
     }
 }

@@ -3,8 +3,12 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="Bluehill.Features" Version="0.4.0" />
     <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.5.240428000" />
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.3233" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Bluehill.Features" />
   </ItemGroup>
   <ItemGroup>
     <GlobalPackageReference Include="Bluehill.Imports" Version="1.0.4" />

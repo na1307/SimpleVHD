@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -34,6 +35,13 @@ public sealed partial class App {
     /// executed, and as such is the logical equivalent of main() or WinMain().
     /// </summary>
     public App() {
+        try {
+            Checker.Check();
+        } catch (CheckException cex) {
+            MessageBoxW(nint.Zero, cex.Message, null, 16);
+            Process.GetCurrentProcess().Kill();
+        }
+
         InitializeComponent();
         UnhandledException += App_UnhandledException;
     }
