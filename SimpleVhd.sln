@@ -7,6 +7,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVhd.Library", "Simple
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVhd.ControlPanel", "SimpleVhd.ControlPanel\SimpleVhd.ControlPanel.csproj", "{65C46AE2-5F35-4978-8610-3E4A733657D5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "솔루션 항목", "솔루션 항목", "{89BE1C33-093D-4C48-B087-DBD9E1968E60}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		Publish-Core.cmd = Publish-Core.cmd
+		Publish-Debug.cmd = Publish-Debug.cmd
+		Publish-Release.cmd = Publish-Release.cmd
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
