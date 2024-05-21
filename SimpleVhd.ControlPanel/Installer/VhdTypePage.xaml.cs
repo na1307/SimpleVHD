@@ -1,4 +1,4 @@
-// To learn more about WinUI, the WinUI project structure,
+﻿// To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace SimpleVhd.ControlPanel.Installer;
@@ -14,6 +14,6 @@ public sealed partial class VhdTypePage {
         this.input = input;
     }
 
-    public override string Title => "�׽�Ʈ ������";
-    public override string Description => "�� �ٸ� �׽�Ʈ ������";
+    public override string Title => "테스트 페이지";
+    public override string Description => "또 다른 테스트 페이지";
 }

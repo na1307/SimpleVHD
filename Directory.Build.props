@@ -30,4 +30,7 @@
     <Using Include="Bluehill" />
     <Using Include="SimpleVhd.Constants" Static="true" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Bluehill.Features" />
+  </ItemGroup>
 </Project>

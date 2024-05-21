@@ -1,7 +1,4 @@
-﻿// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
-namespace SimpleVhd.ControlPanel.Installer;
+﻿namespace SimpleVhd.ControlPanel.Installer;
 
 public enum InstallType {
     New

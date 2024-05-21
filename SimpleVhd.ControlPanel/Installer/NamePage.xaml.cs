@@ -1,4 +1,4 @@
-// To learn more about WinUI, the WinUI project structure,
+﻿// To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace SimpleVhd.ControlPanel.Installer;
@@ -7,13 +7,13 @@ namespace SimpleVhd.ControlPanel.Installer;
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
 public sealed partial class NamePage {
-    private readonly InstallInput input;
-
     public NamePage(InstallInput input) {
         InitializeComponent();
-        this.input = input;
+        Input = input;
     }
 
-    public override string Title => "����";
-    public override string Description => "�̰� ����";
+    private InstallInput Input { get; }
+
+    public override string Title => "인스턴스 이름";
+    public override string Description => "이 VHD 인스턴스의 이름(별명)을 입력해 주세요.";
 }

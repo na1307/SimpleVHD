@@ -1,4 +1,4 @@
-using Microsoft.UI.Xaml;
+Ôªøusing Microsoft.UI.Xaml;
 using System.ComponentModel;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -11,20 +11,18 @@ namespace SimpleVhd.ControlPanel.Installer;
 /// </summary>
 public sealed partial class MainWindow : INotifyPropertyChanged {
     private readonly InstallType installType;
+    private readonly InstallInput input;
     private LinkedListNode<StepPage> cp;
 
     public MainWindow(InstallType installType) {
         InitializeComponent();
-
-        InstallInput input = new();
-        LinkedList<StepPage> pages = new([new NamePage(input), new VhdTypePage(input)]);
-
         this.installType = installType;
-        cp = pages.First!;
+        input = new();
+        cp = new LinkedList<StepPage>([new NamePage(input), new VhdTypePage(input)]).First!;
 
         PropertyChanged += (_, e) => {
             if (e.PropertyName == nameof(CurrentPage)) {
-                NextButton.Content = CurrentPage.Next != null ? "¥Ÿ¿Ω" : "øœ∑·";
+                NextButton.Content = CurrentPage.Next != null ? "Îã§Ïùå" : "ÏôÑÎ£å";
                 PreviousButton.IsEnabled = CurrentPage.Previous != null;
             }
         };
@@ -49,10 +47,12 @@ public sealed partial class MainWindow : INotifyPropertyChanged {
     }
 
     private void NextButton_Click(object sender, RoutedEventArgs e) {
-        if (CurrentPage.Next != null) {
-            CurrentPage = CurrentPage.Next;
-        } else {
-            // Do Something
+        if (!input.HasErrors) {
+            if (CurrentPage.Next != null) {
+                CurrentPage = CurrentPage.Next;
+            } else {
+                // Do Something
+            }
         }
     }
 }

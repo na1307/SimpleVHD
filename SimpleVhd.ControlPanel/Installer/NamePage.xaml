@@ -1,4 +1,4 @@
-<local:StepPage
+﻿<local:StepPage
     x:Class="SimpleVhd.ControlPanel.Installer.NamePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,6 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Text="기본 페이지입니다." />
+        <TextBox Text="{x:Bind Input.Name, Mode=TwoWay}" Header="이름(별명)" Width="675" Height="60" Margin="0, 10, 0, 0" VerticalAlignment="Top" />
     </Grid>
 </local:StepPage>
