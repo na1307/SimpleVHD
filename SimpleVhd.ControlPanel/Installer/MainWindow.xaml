@@ -1,0 +1,30 @@
+<Window
+    x:Class="SimpleVhd.ControlPanel.Installer.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SimpleVhd.ControlPanel.Installer"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Title="SimpleVhd Installer">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="7*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" >
+            <TextBlock Text="{x:Bind CurrentPage.Value.Title, Mode=OneWay}" FontWeight="Bold" Margin="5, 5, 0, 0" />
+            <TextBlock Text="{x:Bind CurrentPage.Value.Description, Mode=OneWay}" TextWrapping="Wrap" Margin="5, 5, 0, 0" />
+        </StackPanel>
+        <Page Content="{x:Bind CurrentPage.Value, Mode=OneWay}" Width="710" Height="340" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+            <Button x:Name="PreviousButton" Content="이전" IsEnabled="False" Width="100" Margin="0, 0, 5, 0" VerticalAlignment="Center" Click="PreviousButton_Click" />
+            <Button x:Name="NextButton" Content="다음" Width="100" Margin="5, 0, 0, 0" VerticalAlignment="Center" Click="NextButton_Click" />
+        </StackPanel>
+    </Grid>
+</Window>
