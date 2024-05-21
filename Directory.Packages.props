@@ -6,6 +6,7 @@
     <PackageVersion Include="Bluehill.Features" Version="0.4.0" />
     <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.5.240428000" />
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.3233" />
+    <PackageVersion Include="WinUIEx" Version="2.3.4" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bluehill.Features" />

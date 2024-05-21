@@ -22,6 +22,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
+    <PackageReference Include="WinUIEx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleVhd.Library\SimpleVhd.Library.csproj" />
