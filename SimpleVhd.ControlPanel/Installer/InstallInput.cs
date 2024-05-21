@@ -11,4 +11,6 @@ public sealed class InstallInput : ObservableValidator {
         get => name;
         set => SetProperty(ref name, value, true);
     }
+
+    public VhdType VhdType { get; set; }
 }

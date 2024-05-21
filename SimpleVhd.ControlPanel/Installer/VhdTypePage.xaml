@@ -9,6 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Text="테스트 페이지입니다." />
+        <RadioButtons x:Name="VhdTypeRadioButtons" SelectedIndex="0" Header="VHD 형식" SelectionChanged="VhdTypeRadioButtons_SelectionChanged">
+            <x:String>고정 크기</x:String>
+            <x:String>동적 확장</x:String>
+        </RadioButtons>
     </Grid>
 </local:StepPage>

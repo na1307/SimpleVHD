@@ -12,8 +12,7 @@ public sealed partial class NamePage {
         Input = input;
     }
 
-    private InstallInput Input { get; }
-
     public override string Title => "인스턴스 이름";
     public override string Description => "이 VHD 인스턴스의 이름(별명)을 입력해 주세요.";
+    private InstallInput Input { get; }
 }
