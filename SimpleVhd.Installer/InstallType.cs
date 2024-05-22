@@ -1,5 +1,6 @@
 ﻿namespace SimpleVhd.Installer;
 
 public enum InstallType {
-    New
+    New,
+    AddInstance
 }

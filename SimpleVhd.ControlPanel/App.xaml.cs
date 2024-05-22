@@ -23,7 +23,7 @@ public sealed partial class App {
         try {
             Checker.Check();
         } catch (CheckException cex) {
-            MessageBoxW(nint.Zero, cex.Message, null, 16);
+            _ = MessageBoxW(nint.Zero, cex.Message, null, 16);
             Process.GetCurrentProcess().Kill();
         }
 
@@ -36,7 +36,12 @@ public sealed partial class App {
     /// </summary>
     /// <param name="args">Details about the launch request and process.</param>
     protected override void OnLaunched(LaunchActivatedEventArgs args) {
-        m_window = File.Exists(Path.Combine(SVPath, SettingsFileName)) ? new MainWindow() : new Installer.MainWindow(Installer.InstallType.New);
+        if (File.Exists(Path.Combine(SVPath, SettingsFileName))) {
+            m_window = new MainWindow();
+        } else {
+            m_window = new Installer.MainWindow(Installer.InstallType.New);
+        }
+
         m_window.SetWindowSize(750, 500);
         m_window.SetIsResizable(false);
         m_window.SetIsMaximizable(false);
@@ -51,7 +56,7 @@ public sealed partial class App {
         var hWnd = m_window != null ? WindowNative.GetWindowHandle(m_window) : nint.Zero;
         var text = e.Exception is SimpleVhdException ? e.Exception.Message : e.Exception.ToString();
 
-        MessageBoxW(hWnd, text, null, 16);
+        _ = MessageBoxW(hWnd, text, null, 16);
         Exit();
     }
 }
