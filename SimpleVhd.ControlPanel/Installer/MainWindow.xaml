@@ -23,7 +23,7 @@
         </StackPanel>
         <Page Content="{x:Bind CurrentPage.Value, Mode=OneWay}" Width="710" Height="340" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
-            <Button x:Name="PreviousButton" Content="이전" IsEnabled="False" Width="100" Margin="0, 0, 5, 0" VerticalAlignment="Center" Click="PreviousButton_Click" />
+            <Button x:Name="BackButton" Content="뒤로" IsEnabled="False" Width="100" Margin="0, 0, 5, 0" VerticalAlignment="Center" Click="BackButton_Click" />
             <Button x:Name="NextButton" Content="다음" Width="100" Margin="5, 0, 0, 0" VerticalAlignment="Center" Click="NextButton_Click" />
         </StackPanel>
     </Grid>

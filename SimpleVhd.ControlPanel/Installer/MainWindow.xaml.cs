@@ -23,7 +23,7 @@ public sealed partial class MainWindow : INotifyPropertyChanged {
         PropertyChanged += (_, e) => {
             if (e.PropertyName == nameof(CurrentPage)) {
                 NextButton.Content = CurrentPage.Next != null ? "다음" : "완료";
-                PreviousButton.IsEnabled = CurrentPage.Previous != null;
+                BackButton.IsEnabled = CurrentPage.Previous != null;
             }
         };
     }
@@ -38,7 +38,7 @@ public sealed partial class MainWindow : INotifyPropertyChanged {
         }
     }
 
-    private void PreviousButton_Click(object sender, RoutedEventArgs e) {
+    private void BackButton_Click(object sender, RoutedEventArgs e) {
         if (CurrentPage.Previous != null) {
             CurrentPage = CurrentPage.Previous;
         } else {
