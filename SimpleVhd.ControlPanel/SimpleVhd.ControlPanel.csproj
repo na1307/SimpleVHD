@@ -23,5 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleVhd.Library\SimpleVhd.Library.csproj" />
+    <ProjectReference Include="..\SimpleVhd.Installer\SimpleVhd.Installer.csproj" />
   </ItemGroup>
 </Project>
