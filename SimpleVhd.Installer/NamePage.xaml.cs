@@ -7,12 +7,12 @@ namespace SimpleVhd.Installer;
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
 public sealed partial class NamePage {
-    public NamePage(InstallInput input) {
+    public NamePage(InstallProcessor processor) {
         InitializeComponent();
-        Input = input;
+        Processor = processor;
     }
 
     public override string Title => "인스턴스 이름";
     public override string Description => "이 VHD 인스턴스의 이름(별명)을 입력해 주세요.";
-    private InstallInput Input { get; }
+    private InstallProcessor Processor { get; }
 }

@@ -9,6 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBox Text="{x:Bind Input.Name, Mode=TwoWay}" Header="이름(별명)" Width="675" Height="60" Margin="0, 10, 0, 0" VerticalAlignment="Top" />
+        <TextBox Text="{x:Bind Processor.Name, Mode=TwoWay}" Header="이름(별명)" Width="675" Height="60" Margin="0, 10, 0, 0" VerticalAlignment="Top" />
     </Grid>
 </local:StepPage>

@@ -10,15 +10,13 @@ namespace SimpleVhd.Installer;
 /// An empty window that can be used on its own or navigated to within a Frame.
 /// </summary>
 public sealed partial class MainWindow : INotifyPropertyChanged {
-    private readonly InstallType installType;
-    private readonly InstallInput input;
+    private readonly InstallProcessor processor;
     private LinkedListNode<StepPage> cp;
 
     public MainWindow(InstallType installType) {
         InitializeComponent();
-        this.installType = installType;
-        input = new();
-        cp = new LinkedList<StepPage>([new NamePage(input), new VhdTypePage(input)]).First!;
+        processor = InstallProcessorFactory.Create(installType);
+        cp = new LinkedList<StepPage>([new NamePage(processor), new VhdTypePage(processor)]).First!;
 
         PropertyChanged += (_, e) => {
             if (e.PropertyName == nameof(CurrentPage)) {
@@ -47,11 +45,11 @@ public sealed partial class MainWindow : INotifyPropertyChanged {
     }
 
     private void NextButton_Click(object sender, RoutedEventArgs e) {
-        if (!input.HasErrors) {
+        if (!processor.HasErrors) {
             if (CurrentPage.Next != null) {
                 CurrentPage = CurrentPage.Next;
             } else {
-                // Do Something
+                processor.InstallProcess();
             }
         }
     }
