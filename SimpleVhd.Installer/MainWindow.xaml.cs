@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using System.ComponentModel;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -44,12 +45,16 @@ public sealed partial class MainWindow : INotifyPropertyChanged {
         }
     }
 
-    private void NextButton_Click(object sender, RoutedEventArgs e) {
+    private async void NextButton_Click(object sender, RoutedEventArgs e) {
         if (!processor.HasErrors) {
             if (CurrentPage.Next != null) {
                 CurrentPage = CurrentPage.Next;
             } else {
-                processor.InstallProcess();
+                Content = new TextBlock() { Text = "설치 중...", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
+                await Task.Run(processor.InstallProcess);
+                Content = new TextBlock() { Text = "설치 완료!", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
+                await Task.Delay(1500);
+                Application.Current.Exit();
             }
         }
     }

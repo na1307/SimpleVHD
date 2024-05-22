@@ -3,6 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="Bluehill.Bcd" Version="1.0.0-alpha.2" />
     <PackageVersion Include="Bluehill.Features" Version="0.4.0" />
     <PackageVersion Include="System.Management" Version="8.0.0" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.2.2" />
