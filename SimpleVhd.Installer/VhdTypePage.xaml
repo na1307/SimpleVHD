@@ -1,14 +1,17 @@
 ﻿<local:StepPage
-    x:Class="SimpleVhd.ControlPanel.Installer.NamePage"
+    x:Class="SimpleVhd.Installer.VhdTypePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SimpleVhd.ControlPanel.Installer"
+    xmlns:local="using:SimpleVhd.Installer"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBox Text="{x:Bind Input.Name, Mode=TwoWay}" Header="이름(별명)" Width="675" Height="60" Margin="0, 10, 0, 0" VerticalAlignment="Top" />
+        <RadioButtons x:Name="VhdTypeRadioButtons" SelectedIndex="0" Header="VHD 형식" SelectionChanged="VhdTypeRadioButtons_SelectionChanged">
+            <x:String>고정 크기</x:String>
+            <x:String>동적 확장</x:String>
+        </RadioButtons>
     </Grid>
 </local:StepPage>

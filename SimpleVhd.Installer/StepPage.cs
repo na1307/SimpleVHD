@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 
-namespace SimpleVhd.ControlPanel.Installer;
+namespace SimpleVhd.Installer;
 
 public abstract class StepPage : Page {
     public abstract string Title { get; }

@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace SimpleVhd.ControlPanel.Installer;
+namespace SimpleVhd.Installer;
 
 public sealed class InstallInput : ObservableValidator {
     private string name = "여기에 이름을 입력해주세요";
