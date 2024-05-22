@@ -4,4 +4,7 @@
     <AssemblyName>SimpleVhd</AssemblyName>
     <AssemblyTitle>SimpleVhd Library</AssemblyTitle>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Management" />
+  </ItemGroup>
 </Project>
