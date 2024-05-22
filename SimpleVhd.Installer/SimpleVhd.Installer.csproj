@@ -2,6 +2,7 @@
   <PropertyGroup>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
+    <PublishSingleFile>false</PublishSingleFile>
     <AssemblyName>SimpleVhd.Installer</AssemblyName>
     <AssemblyTitle>SimpleVhd Installer Library</AssemblyTitle>
   </PropertyGroup>
