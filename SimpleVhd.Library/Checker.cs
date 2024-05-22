@@ -16,13 +16,14 @@ public static class Checker {
 
         static void checkSvPath() {
             foreach (var drv in DriveInfo.GetDrives()) {
-                var isFixed = drv.DriveType == DriveType.Fixed;
-                var dirs = drv.RootDirectory.EnumerateDirectories().Where(dir => dir.Name == SVDirName);
-                var isSvDirExists = dirs.Any();
+                if (drv.DriveType == DriveType.Fixed) {
+                    var dirs = drv.RootDirectory.EnumerateDirectories().Where(dir => dir.Name == SVDirName);
+                    var isSvDirExists = dirs.Any();
 
-                if (isFixed && isSvDirExists && !Array.Exists(["Boot\\x64.wim", "Boot\\arm64.wim", "Boot\\boot.sdi"], f => !File.Exists(Path.Combine(dirs.First().FullName, f)))) {
-                    SVPath = dirs.First().FullName;
-                    return;
+                    if (isSvDirExists && !Array.Exists(["Boot\\x64.wim", "Boot\\arm64.wim", "Boot\\boot.sdi"], f => !File.Exists(Path.Combine(dirs.First().FullName, f)))) {
+                        SVPath = dirs.First().FullName;
+                        return;
+                    }
                 }
             }
         }
