@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SimpleVHD Settings file schema",
+  "type": "object",
+  "properties": {
+    "Instances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type":  "string"
+          },
+          "Directory": {
+            "type": "string"
+          },
+          "FileName": {
+            "type": "string"
+          },
+          "Style": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          },
+          "Format": {
+            "type": "string"
+          },
+          "ParentGuid": {
+            "type": "string"
+          },
+          "Child1Guid": {
+            "type": "string"
+          },
+          "Child2Guid": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Directory",
+          "FileName",
+          "Style",
+          "Type",
+          "Format",
+          "ParentGuid",
+          "Child1Guid",
+          "Child2Guid"
+        ]
+      }
+    },
+    "RamdiskGuid": {
+      "type": "string"
+    },
+    "PEGuid": {
+      "type": "string"
+    },
+    "OperationType": {
+      "type": "string"
+    },
+    "InstanceToOperationOn": {
+      "type": "integer"
+    },
+    "OperationTempValue": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Instances",
+    "RamdiskGuid",
+    "PEGuid"
+  ]
+}

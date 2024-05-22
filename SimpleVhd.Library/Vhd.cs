@@ -8,6 +8,8 @@ public sealed class Vhd : IEquatable<Vhd?> {
     public required VhdType Type { get; set; }
     public required VhdFormat Format { get; set; }
     public required Guid ParentGuid { get; init; }
+    public required Guid Child1Guid { get; init; }
+    public required Guid Child2Guid { get; init; }
 
     public override bool Equals(object? obj) => Equals(obj as Vhd);
     public bool Equals(Vhd? other) => other is not null && Directory == other.Directory && FileName == other.FileName;

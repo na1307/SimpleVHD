@@ -49,23 +49,23 @@ public sealed class NewInstallProcessor : InstallProcessor {
         new JsonObject() {
             { "$schema", SettingsSchemaUrl },
             {
-                "VhdInstances",
+                nameof(Settings.Instances),
                 (JsonArray)([
             new JsonObject() {
-                { nameof(Name), Name },
-                { "Directory", VhdPath },
-                { "ParentFile", VhdFileName },
-                { "Style", Style.Normal.ToString() },
-                { nameof(VhdType), VhdType.ToString() },
-                { nameof(VhdFormat), VhdFormat.ToString() },
-                { "ParentGuid", parrent.Id.ToString("B") },
-                { "Child1Guid", child1.Id.ToString("B") },
-                { "Child2Guid", child2.Id.ToString("B") }
+                { nameof(Vhd.Name), Name },
+                { nameof(Vhd.Directory), VhdPath },
+                { nameof(Vhd.FileName), VhdFileName },
+                { nameof(Vhd.Style), Style.Normal.ToString() },
+                { nameof(Vhd.Type), VhdType.ToString() },
+                { nameof(Vhd.Format), VhdFormat.ToString() },
+                { nameof(Vhd.ParentGuid), parrent.Id.ToString("B") },
+                { nameof(Vhd.Child1Guid), child1.Id.ToString("B") },
+                { nameof(Vhd.Child2Guid), child2.Id.ToString("B") }
             },
                 ])
             },
-            { "RamdiskGuid", ramdisk.Id.ToString("B") },
-            { "PEGuid", pe.Id.ToString("B") },
+            { nameof(Settings.RamdiskGuid), ramdisk.Id.ToString("B") },
+            { nameof(Settings.PEGuid), pe.Id.ToString("B") },
         }.WriteTo(writer);
     }
 }

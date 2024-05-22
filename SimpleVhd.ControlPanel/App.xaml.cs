@@ -35,8 +35,15 @@ public sealed partial class App {
     /// Invoked when the application is launched.
     /// </summary>
     /// <param name="args">Details about the launch request and process.</param>
-    protected override void OnLaunched(LaunchActivatedEventArgs args) {
+    protected override async void OnLaunched(LaunchActivatedEventArgs args) {
         if (File.Exists(Path.Combine(SVPath, SettingsFileName))) {
+            try {
+                await Checker.CheckSettingsJsonAsync();
+            } catch (CheckException cex) {
+                _ = MessageBoxW(nint.Zero, cex.Message, null, 16);
+                Process.GetCurrentProcess().Kill();
+            }
+
             m_window = new MainWindow();
         } else {
             m_window = new Installer.MainWindow(Installer.InstallType.New);

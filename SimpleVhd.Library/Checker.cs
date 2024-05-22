@@ -1,4 +1,8 @@
-﻿namespace SimpleVhd;
+﻿using Json.Schema;
+using System.Reflection;
+using System.Text.Json;
+
+namespace SimpleVhd;
 
 public static class Checker {
     public static void Check() {
@@ -24,6 +28,20 @@ public static class Checker {
                     }
                 }
             }
+        }
+    }
+
+    public static async Task CheckSettingsJsonAsync() {
+        using var ss = Assembly.GetExecutingAssembly().GetManifestResourceStream("SimpleVhd.Settings.schema.json")!;
+
+        try {
+            var schema = await JsonSchema.FromStream(ss);
+
+            if (!schema.Evaluate(JsonDocument.Parse(File.ReadAllBytes(Path.Combine(SVPath, SettingsFileName)))).IsValid) {
+                throw new CheckException("설정 파일이 올바르지 않습니다.");
+            }
+        } catch (FileNotFoundException fnfex) {
+            throw new CheckException("설정 파일을 찾을 수 없습니다.", fnfex);
         }
     }
 }

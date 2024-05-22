@@ -59,6 +59,8 @@ public sealed class Settings {
                     Type = parseEnum<VhdType>(jo[nameof(Vhd.Type)]),
                     Format = parseEnum<VhdFormat>(jo[nameof(Vhd.Format)]),
                     ParentGuid = parseGuid(jo[nameof(Vhd.ParentGuid)]),
+                    Child1Guid = parseGuid(jo[nameof(Vhd.Child1Guid)]),
+                    Child2Guid = parseGuid(jo[nameof(Vhd.Child2Guid)]),
                 }).ToArray(),
                 RamdiskGuid = parseGuid(jo[nameof(RamdiskGuid)]),
                 PEGuid = parseGuid(jo[nameof(PEGuid)]),

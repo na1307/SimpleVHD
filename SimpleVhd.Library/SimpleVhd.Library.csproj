@@ -5,6 +5,10 @@
     <AssemblyTitle>SimpleVhd Library</AssemblyTitle>
   </PropertyGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Settings.schema.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="JsonSchema.Net" />
     <PackageReference Include="System.Management" />
   </ItemGroup>
 </Project>
