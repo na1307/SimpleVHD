@@ -13,21 +13,10 @@ public static class Checker {
                 var isFixed = drv.DriveType == DriveType.Fixed;
                 var dirs = drv.RootDirectory.EnumerateDirectories().Where(dir => dir.Name == SVDirName);
                 var isSvDirExists = dirs.Any();
-                var value = isFixed && isSvDirExists && isFilesExists(dirs.First(), ["Boot\\x64.wim", "Boot\\arm64.wim", "Boot\\boot.sdi"]);
 
-                if (value) {
+                if (isFixed && isSvDirExists && !Array.Exists(["Boot\\x64.wim", "Boot\\arm64.wim", "Boot\\boot.sdi"], f => !File.Exists(Path.Combine(dirs.First().FullName, f)))) {
                     SVPath = dirs.First().FullName;
                     return;
-                }
-
-                static bool isFilesExists(DirectoryInfo directory, IEnumerable<string> fileNames) {
-                    var value = true;
-
-                    foreach (var fileName in fileNames) {
-                        value = value && File.Exists(Path.Combine(directory.FullName, fileName));
-                    }
-
-                    return value;
                 }
             }
         }
