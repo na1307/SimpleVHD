@@ -41,12 +41,18 @@ public sealed partial class App {
                 await Checker.CheckSettingsJsonAsync();
             } catch (CheckException cex) {
                 _ = MessageBoxW(nint.Zero, cex.Message, null, 16);
-                Process.GetCurrentProcess().Kill();
+                Exit();
+                return;
             }
 
-            m_window = new MainWindow();
+            if (Settings.Instance.CurrentInstance is not null) {
+                m_window = new MainWindow();
+                m_window.Closed += (_, _) => Settings.Instance.SaveSettings();
+            } else {
+                m_window = new Installer.InstallerMainWindow(Installer.InstallType.AddInstance);
+            }
         } else {
-            m_window = new Installer.MainWindow(Installer.InstallType.New);
+            m_window = new Installer.InstallerMainWindow(Installer.InstallType.New);
         }
 
         m_window.SetWindowSize(750, 500);

@@ -14,12 +14,22 @@ public sealed class Settings {
 
     public static Settings Instance => _instance.Value;
 
-    public required Vhd[] Instances { get; init; }
+    public required List<Vhd> Instances { get; init; }
     public required Guid RamdiskGuid { get; init; }
     public required Guid PEGuid { get; init; }
     public required OperationType? OperationType { get; set; }
     public required int? InstanceToOperationOn { get; set; }
     public required string? OperationTempValue { get; set; }
+
+    public Vhd? CurrentInstance {
+        get {
+            var vhdFullPath = GetSystemVhdPath()[2..];
+            var vhdDirectory = vhdFullPath[..^Path.GetFileName(vhdFullPath).Length];
+            var vhdFileNameWithoutExtension = Path.GetFileNameWithoutExtension(vhdFullPath);
+
+            return Instances.Find(vhd => vhd.Directory == vhdDirectory && vhd.FileName == vhdFileNameWithoutExtension);
+        }
+    }
 
     public void SaveSettings() => converter.Save(this);
 
@@ -61,7 +71,7 @@ public sealed class Settings {
                     ParentGuid = parseGuid(jo[nameof(Vhd.ParentGuid)]),
                     Child1Guid = parseGuid(jo[nameof(Vhd.Child1Guid)]),
                     Child2Guid = parseGuid(jo[nameof(Vhd.Child2Guid)]),
-                }).ToArray(),
+                }).ToList(),
                 RamdiskGuid = parseGuid(jo[nameof(RamdiskGuid)]),
                 PEGuid = parseGuid(jo[nameof(PEGuid)]),
                 OperationType = Enum.TryParse(jo[nameof(OperationType)]?.ToString(), out OperationType wa) ? wa : null,

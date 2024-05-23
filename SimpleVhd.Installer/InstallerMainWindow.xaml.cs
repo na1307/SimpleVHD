@@ -10,11 +10,11 @@ namespace SimpleVhd.Installer;
 /// <summary>
 /// An empty window that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class MainWindow : INotifyPropertyChanged {
+public sealed partial class InstallerMainWindow : INotifyPropertyChanged {
     private readonly InstallProcessor processor;
     private LinkedListNode<StepPage> cp;
 
-    public MainWindow(InstallType installType) {
+    public InstallerMainWindow(InstallType installType) {
         InitializeComponent();
         processor = InstallProcessorFactory.Create(installType);
         cp = new LinkedList<StepPage>([new NamePage(processor), new VhdTypePage(processor)]).First!;
