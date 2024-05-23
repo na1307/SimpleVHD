@@ -2,7 +2,9 @@
 cd /d %~dp0
 
 rd /s /q x64
-rd /s /q ARM64
 
-call Publish-Core.cmd SimpleVhd.ControlPanel Debug
-call Publish-Core.cmd SimpleVhd.PE Debug
+dotnet restore SimpleVhd.ControlPanel
+dotnet restore SimpleVhd.PE
+
+dotnet publish SimpleVhd.ControlPanel --no-restore -c Debug -p=Platform=x64
+dotnet publish SimpleVhd.PE --no-restore -c Debug -p=Platform=x64

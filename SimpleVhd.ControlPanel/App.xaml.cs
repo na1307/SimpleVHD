@@ -37,19 +37,19 @@ public sealed partial class App {
     /// <param name="args">Details about the launch request and process.</param>
     protected override async void OnLaunched(LaunchActivatedEventArgs args) {
         if (File.Exists(Path.Combine(SVPath, SettingsFileName))) {
-            try {
-                await Checker.CheckSettingsJsonAsync();
-            } catch (CheckException cex) {
-                _ = MessageBoxW(nint.Zero, cex.Message, null, 16);
-                Exit();
-                return;
-            }
+            await Checker.CheckSettingsJsonAsync();
 
-            if (Settings.Instance.CurrentInstance is not null) {
-                m_window = new MainWindow();
-                m_window.Closed += (_, _) => Settings.Instance.SaveSettings();
+            var settings = Settings.Instance;
+
+            if (settings.OperationType == null) {
+                if (settings.CurrentInstance is not null) {
+                    m_window = new MainWindow();
+                    m_window.Closed += (_, _) => settings.SaveSettings();
+                } else {
+                    m_window = new Installer.InstallerMainWindow(Installer.InstallType.AddInstance);
+                }
             } else {
-                m_window = new Installer.InstallerMainWindow(Installer.InstallType.AddInstance);
+                throw new CantLaunchException($"대기 중인 작업이 존재합니다.{Environment.NewLine}{Environment.NewLine}PE로 부팅하여 대기 중인 작업을 먼저 실행해 주세요.");
             }
         } else {
             m_window = new Installer.InstallerMainWindow(Installer.InstallType.New);
@@ -72,4 +72,6 @@ public sealed partial class App {
         _ = MessageBoxW(hWnd, text, null, 16);
         Exit();
     }
+
+    private sealed class CantLaunchException(string message) : SimpleVhdException(message);
 }
