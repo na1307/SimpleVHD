@@ -97,6 +97,8 @@ public sealed class Settings {
                 writer.WriteString(nameof(Vhd.Type), vhd.Type.ToString());
                 writer.WriteString(nameof(Vhd.Format), vhd.Format.ToString());
                 writer.WriteString(nameof(Vhd.ParentGuid), vhd.ParentGuid.ToString("B"));
+                writer.WriteString(nameof(Vhd.Child1Guid), vhd.Child1Guid.ToString("B"));
+                writer.WriteString(nameof(Vhd.Child2Guid), vhd.Child2Guid.ToString("B"));
                 writer.WriteEndObject();
             }
 

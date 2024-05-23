@@ -15,13 +15,13 @@ public sealed class NewInstallProcessor : InstallProcessor {
             _ => throw new NotImplementedException(),
         };
 
-        var parrent = BcdStore.SystemStore.OpenObject(WellKnownGuids.Current);
+        var parent = BcdStore.SystemStore.OpenObject(WellKnownGuids.Current);
 
-        var child1 = BcdStore.SystemStore.CopyObject(parrent, CopyObjectOptions.CreateNewId);
+        var child1 = BcdStore.SystemStore.CopyObject(parent, CopyObjectOptions.CreateNewId);
         child1.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, Path.Combine(VhdPath, $"{Child1FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
         child1.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, Path.Combine(VhdPath, $"{Child1FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
 
-        var child2 = BcdStore.SystemStore.CopyObject(parrent, CopyObjectOptions.CreateNewId);
+        var child2 = BcdStore.SystemStore.CopyObject(parent, CopyObjectOptions.CreateNewId);
         child2.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, Path.Combine(VhdPath, $"{Child2FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
         child2.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, Path.Combine(VhdPath, $"{Child2FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
 
@@ -58,7 +58,7 @@ public sealed class NewInstallProcessor : InstallProcessor {
                 { nameof(Vhd.Style), Style.Normal.ToString() },
                 { nameof(Vhd.Type), VhdType.ToString() },
                 { nameof(Vhd.Format), VhdFormat.ToString() },
-                { nameof(Vhd.ParentGuid), parrent.Id.ToString("B") },
+                { nameof(Vhd.ParentGuid), parent.Id.ToString("B") },
                 { nameof(Vhd.Child1Guid), child1.Id.ToString("B") },
                 { nameof(Vhd.Child2Guid), child2.Id.ToString("B") }
             },
