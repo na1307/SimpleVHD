@@ -108,14 +108,11 @@ public sealed class Settings {
 
             if (value.OperationType != null) {
                 writer.WriteString(nameof(OperationType), value.OperationType.Value.ToString());
-            }
+                writer.WriteNumber(nameof(InstanceToOperationOn), value.InstanceToOperationOn!.Value);
 
-            if (value.InstanceToOperationOn != null) {
-                writer.WriteNumber(nameof(InstanceToOperationOn), value.InstanceToOperationOn.Value);
-            }
-
-            if (value.OperationTempValue != null) {
-                writer.WriteString(nameof(OperationTempValue), value.OperationTempValue);
+                if (value.OperationTempValue != null) {
+                    writer.WriteString(nameof(OperationTempValue), value.OperationTempValue);
+                }
             }
 
             writer.WriteEndObject();

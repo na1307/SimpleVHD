@@ -10,6 +10,9 @@
     <AssemblyTitle>SimpleVhd PE</AssemblyTitle>
   </PropertyGroup>
   <ItemGroup>
+    <Using Include="Bluehill.ErrDialogForms" Static="true" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Bluehill.Forms" />
   </ItemGroup>
   <ItemGroup>
