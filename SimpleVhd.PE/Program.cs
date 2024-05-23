@@ -31,7 +31,7 @@ internal static class Program {
         }
 
         Application.ApplicationExit += Application_ApplicationExit;
-        Application.Run(working ?? new MainForm());
+        Application.Run(working ?? MainForm.Instance);
     }
 
     private static void Application_ApplicationExit(object? sender, EventArgs e) => Settings.Instance.SaveSettings();
