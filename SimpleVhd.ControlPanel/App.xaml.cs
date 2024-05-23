@@ -13,8 +13,6 @@ namespace SimpleVhd.ControlPanel;
 /// Provides application-specific behavior to supplement the default Application class.
 /// </summary>
 public sealed partial class App {
-    private Window? m_window;
-
     /// <summary>
     /// Initializes the singleton application object.  This is the first line of authored code
     /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -31,6 +29,8 @@ public sealed partial class App {
         UnhandledException += App_UnhandledException;
     }
 
+    public Window? MWindow { get; private set; }
+
     /// <summary>
     /// Invoked when the application is launched.
     /// </summary>
@@ -43,30 +43,30 @@ public sealed partial class App {
 
             if (settings.OperationType == null) {
                 if (settings.CurrentInstance is not null) {
-                    m_window = new MainWindow();
-                    m_window.Closed += (_, _) => settings.SaveSettings();
+                    MWindow = new MainWindow();
+                    MWindow.Closed += (_, _) => settings.SaveSettings();
                 } else {
-                    m_window = new Installer.InstallerMainWindow(Installer.InstallType.AddInstance);
+                    MWindow = new Installer.InstallerMainWindow(Installer.InstallType.AddInstance);
                 }
             } else {
                 throw new CantLaunchException($"대기 중인 작업이 존재합니다.{Environment.NewLine}{Environment.NewLine}PE로 부팅하여 대기 중인 작업을 먼저 실행해 주세요.");
             }
         } else {
-            m_window = new Installer.InstallerMainWindow(Installer.InstallType.New);
+            MWindow = new Installer.InstallerMainWindow(Installer.InstallType.New);
         }
 
-        m_window.SetWindowSize(750, 500);
-        m_window.SetIsResizable(false);
-        m_window.SetIsMaximizable(false);
-        m_window.CenterOnScreen();
-        m_window.Activate();
+        MWindow.SetWindowSize(750, 500);
+        MWindow.SetIsResizable(false);
+        MWindow.SetIsMaximizable(false);
+        MWindow.CenterOnScreen();
+        MWindow.Activate();
     }
 
     [DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
     private static extern int MessageBoxW(nint hWnd, string? text, string? caption, uint type);
 
     private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e) {
-        var hWnd = m_window != null ? WindowNative.GetWindowHandle(m_window) : nint.Zero;
+        var hWnd = MWindow != null ? WindowNative.GetWindowHandle(MWindow) : nint.Zero;
         var text = e.Exception is SimpleVhdException ? e.Exception.Message : e.Exception.ToString();
 
         _ = MessageBoxW(hWnd, text, null, 16);

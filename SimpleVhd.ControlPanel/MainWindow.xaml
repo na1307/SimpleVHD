@@ -8,6 +8,6 @@
     mc:Ignorable="d">
 
     <Grid>
-
+        <ContentControl Content="{x:Bind Screen, Mode=OneWay}" IsTabStop="False" />
     </Grid>
 </Window>
