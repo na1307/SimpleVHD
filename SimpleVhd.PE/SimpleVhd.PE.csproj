@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <SelfContained>true</SelfContained>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <AssemblyName>PE</AssemblyName>
+    <AssemblyTitle>SimpleVhd PE</AssemblyTitle>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Bluehill.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleVhd.Library\SimpleVhd.Library.csproj" />
+  </ItemGroup>
+</Project>
