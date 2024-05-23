@@ -18,12 +18,12 @@ public sealed class NewInstallProcessor : InstallProcessor {
         var parent = BcdStore.SystemStore.OpenObject(WellKnownGuids.Current);
 
         var child1 = BcdStore.SystemStore.CopyObject(parent, CopyObjectOptions.CreateNewId);
-        child1.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, Path.Combine(VhdPath, $"{Child1FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
-        child1.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, Path.Combine(VhdPath, $"{Child1FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
+        child1.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, Path.Combine(VhdPath, $"{VhdFileName}-{Child1FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
+        child1.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, Path.Combine(VhdPath, $"{VhdFileName}-{Child1FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
 
         var child2 = BcdStore.SystemStore.CopyObject(parent, CopyObjectOptions.CreateNewId);
-        child2.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, Path.Combine(VhdPath, $"{Child2FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
-        child2.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, Path.Combine(VhdPath, $"{Child2FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
+        child2.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, Path.Combine(VhdPath, $"{VhdFileName}-{Child2FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
+        child2.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, Path.Combine(VhdPath, $"{VhdFileName}-{Child2FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
 
         var ramdisk = BcdStore.SystemStore.CreateObject(Guid.NewGuid(), BcdObjectType.Device);
         ramdisk.SetPartitionDeviceElement(BcdElementType.BcdDeviceSdiDevice, DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
