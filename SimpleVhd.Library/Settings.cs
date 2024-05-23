@@ -18,7 +18,7 @@ public sealed class Settings {
     public required Guid RamdiskGuid { get; init; }
     public required Guid PEGuid { get; init; }
     public required OperationType? OperationType { get; set; }
-    public required int? InstanceToOperationOn { get; set; }
+    public required int? OperationTarget { get; set; }
     public required string? OperationTempValue { get; set; }
 
     public Vhd? CurrentInstance {
@@ -75,7 +75,7 @@ public sealed class Settings {
                 RamdiskGuid = parseGuid(jo[nameof(RamdiskGuid)]),
                 PEGuid = parseGuid(jo[nameof(PEGuid)]),
                 OperationType = Enum.TryParse(jo[nameof(OperationType)]?.ToString(), out OperationType wa) ? wa : null,
-                InstanceToOperationOn = int.TryParse(jo[nameof(InstanceToOperationOn)]?.ToString(), out var i) ? i : null,
+                OperationTarget = int.TryParse(jo[nameof(OperationTarget)]?.ToString(), out var i) ? i : null,
                 OperationTempValue = jo[nameof(OperationTempValue)]?.ToString(),
             };
 
@@ -108,7 +108,7 @@ public sealed class Settings {
 
             if (value.OperationType != null) {
                 writer.WriteString(nameof(OperationType), value.OperationType.Value.ToString());
-                writer.WriteNumber(nameof(InstanceToOperationOn), value.InstanceToOperationOn!.Value);
+                writer.WriteNumber(nameof(OperationTarget), value.OperationTarget!.Value);
 
                 if (value.OperationTempValue != null) {
                     writer.WriteString(nameof(OperationTempValue), value.OperationTempValue);

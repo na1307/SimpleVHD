@@ -4,7 +4,7 @@ using System.Text;
 namespace SimpleVhd.PE.Operations;
 
 public abstract class Operation {
-    protected static readonly Vhd OInstance = Settings.Instance.Instances[Settings.Instance.InstanceToOperationOn!.Value];
+    protected static readonly Vhd OInstance = Settings.Instance.Instances[Settings.Instance.OperationTarget!.Value];
     protected static readonly string OFile = $"{OInstance.FileName}.{OInstance.Format.ToString().ToLowerInvariant()}";
     protected static readonly string ODrv = DriveInfo.GetDrives().First(d => File.Exists(Path.Combine(d.Name, OInstance.Directory, OFile))).GetDriveLetterAndColon();
     private static readonly string dptemp = Path.Combine(SVPath, "dptemp.txt");
@@ -21,7 +21,7 @@ public abstract class Operation {
             ErrMsg(ex.ToString());
         } finally {
             Settings.Instance.OperationType = null;
-            Settings.Instance.InstanceToOperationOn = null;
+            Settings.Instance.OperationTarget = null;
             Settings.Instance.OperationTempValue = null;
         }
     }
@@ -55,7 +55,12 @@ public abstract class Operation {
 
     protected abstract Task WorkCore();
 
-    protected sealed class DiskpartException : SimpleVhdException {
+    protected class OperationFailedException : SimpleVhdException {
+        public OperationFailedException(string message) : base(message) { }
+        public OperationFailedException(string message, Exception innerException) : base(message, innerException) { }
+    }
+
+    private sealed class DiskpartException : OperationFailedException {
         public DiskpartException(string message) : base(message) { }
         public DiskpartException(string message, Exception innerException) : base(message, innerException) { }
     }
