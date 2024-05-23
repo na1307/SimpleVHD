@@ -27,14 +27,14 @@ public sealed class NewInstallProcessor : InstallProcessor {
 
         var ramdisk = BcdStore.SystemStore.CreateObject(Guid.NewGuid(), BcdObjectType.Device);
         ramdisk.SetPartitionDeviceElement(BcdElementType.BcdDeviceSdiDevice, DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
-        ramdisk.SetStringElement(BcdElementType.BcdDeviceSdiPath, Path.Combine(SVPath, "Boot", "boot.sdi"));
+        ramdisk.SetStringElement(BcdElementType.BcdDeviceSdiPath, Path.Combine(SVPath[2..], "Boot", "boot.sdi"));
 
         var pe = BcdStore.SystemStore.CreateObject(Guid.NewGuid(), BcdObjectType.BootLoader);
-        pe.SetStringElement(BcdElementType.BcdLibraryDescription, "SimpleVHD PE");
-        pe.SetFileDeviceElement(BcdElementType.BcdLibraryApplicationDevice, DeviceType.RamdiskDevice, ramdisk, Path.Combine(SVPath, "Boot", $"{arch}.wim"), DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
+        pe.SetStringElement(BcdElementType.BcdLibraryDescription, "SimpleVhd PE");
+        pe.SetFileDeviceElement(BcdElementType.BcdLibraryApplicationDevice, DeviceType.RamdiskDevice, ramdisk, Path.Combine(SVPath[2..], "Boot", $"{arch}.wim"), DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
         pe.SetStringElement(BcdElementType.BcdLibraryApplicationPath, $@"\windows\system32\winload.{(IsWindowsUefi() ? "efi" : "exe")}");
         pe.SetObjectListElement(BcdElementType.BcdLibraryInheritedObjects, BcdStore.SystemStore.OpenObject(WellKnownGuids.BootLoaderSettings));
-        pe.SetFileDeviceElement(BcdElementType.BcdOSLoaderOSDevice, DeviceType.RamdiskDevice, ramdisk, Path.Combine(SVPath, "Boot", $"{arch}.wim"), DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
+        pe.SetFileDeviceElement(BcdElementType.BcdOSLoaderOSDevice, DeviceType.RamdiskDevice, ramdisk, Path.Combine(SVPath[2..], "Boot", $"{arch}.wim"), DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
         pe.SetStringElement(BcdElementType.BcdOSLoaderSystemRoot, "\\windows");
         pe.SetBooleanElement(BcdElementType.BcdOSLoaderDetectKernelAndHal, true);
         pe.SetBooleanElement(BcdElementType.BcdOSLoaderWinPEMode, true);
