@@ -19,5 +19,6 @@ public sealed partial class VhdTypePage {
     public override string Title => "VHD 형식";
     public override string Description => "이 VHD의 형식을 선택해주세요.";
 
-    private void VhdTypeRadioButtons_SelectionChanged(object sender, SelectionChangedEventArgs e) => processor.VhdType = (VhdType)((RadioButtons)sender).SelectedIndex;
+    private void VhdTypeRadioButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        => processor.VhdType = (VhdType)((RadioButtons)sender).SelectedIndex;
 }

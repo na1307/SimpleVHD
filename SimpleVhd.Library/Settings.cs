@@ -79,7 +79,8 @@ public sealed class Settings {
                 OperationTempValue = jo[nameof(OperationTempValue)]?.ToString(),
             };
 
-            static TEnum parseEnum<TEnum>(JsonNode? node) where TEnum : struct, Enum => Enum.TryParse<TEnum>(node?.ToString(), out TEnum value) ? value : default;
+            static TEnum parseEnum<TEnum>(JsonNode? node) where TEnum : struct, Enum
+                => Enum.TryParse<TEnum>(node?.ToString(), out TEnum value) ? value : default;
             static Guid parseGuid(JsonNode? node) => Guid.TryParse(node?.ToString(), out var value) ? value : Guid.Empty;
         }
 

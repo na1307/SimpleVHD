@@ -6,7 +6,8 @@ namespace SimpleVhd.PE.Operations;
 public abstract class Operation {
     protected static readonly Vhd OInstance = Settings.Instance.Instances[Settings.Instance.OperationTarget!.Value];
     protected static readonly string OFile = $"{OInstance.FileName}.{OInstance.Format.ToString().ToLowerInvariant()}";
-    protected static readonly string ODrv = DriveInfo.GetDrives().First(d => File.Exists(Path.Combine(d.Name, OInstance.Directory, OFile))).GetDriveLetterAndColon();
+    protected static readonly string ODrv =
+        DriveInfo.GetDrives().First(d => File.Exists(Path.Combine(d.Name, OInstance.Directory, OFile))).GetDriveLetterAndColon();
     private static readonly string dptemp = Path.Combine(SVPath, "dptemp.txt");
     private static readonly Encoding systemEncoding = CodePagesEncodingProvider.Instance.GetEncoding(0)!;
 
@@ -29,9 +30,12 @@ public abstract class Operation {
     protected static async Task ProcessDiskpartAsync(params string[] cmds) {
         ArgumentNullException.ThrowIfNull(cmds);
 
-        using (StreamWriter ds = new(dptemp, false, systemEncoding)) {
-            Array.ForEach(cmds, ds.WriteLine);
-            ds.WriteLine("exit");
+        await using (StreamWriter ds = new(dptemp, false, systemEncoding)) {
+            foreach (var cmd in cmds) {
+                await ds.WriteLineAsync(cmd);
+            }
+
+            await ds.WriteLineAsync("exit");
         }
 
         using Process diskpart = new() {

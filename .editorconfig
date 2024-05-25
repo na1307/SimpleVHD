@@ -666,9 +666,6 @@ dotnet_diagnostic.rcs1191.severity = warning
 # Unnecessary usage of verbatim string literal
 dotnet_diagnostic.rcs1192.severity = warning
 
-# Avoid unnecessary boxing of value type
-dotnet_diagnostic.rcs1198.severity = warning
-
 # Unnecessary null check
 dotnet_diagnostic.rcs1199.severity = warning
 
@@ -727,6 +724,9 @@ dotnet_diagnostic.rcs1108.severity = none
 
 # Enum should declare explicit values
 dotnet_diagnostic.rcs1161.severity = none
+
+# Unused parameter
+dotnet_diagnostic.rcs1163.severity = none
 
 # Convert comment to documentation comment
 dotnet_diagnostic.rcs1181.severity = none

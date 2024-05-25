@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace SimpleVhd.Installer;
 
 public abstract class InstallProcessor : ObservableValidator {
-    private string name = "여기에 이름을 입력해주세요";
+    private string _name = "여기에 이름을 입력해주세요";
 
     protected InstallProcessor() {
         SVDrive = SVPath.Left(2);
@@ -22,8 +22,8 @@ public abstract class InstallProcessor : ObservableValidator {
 
     [Required(ErrorMessage = "이름은 비워둘 수 없습니다.")]
     public string Name {
-        get => name;
-        set => SetProperty(ref name, value, true);
+        get => _name;
+        set => SetProperty(ref _name, value, true);
     }
 
     public VhdType VhdType { get; set; }

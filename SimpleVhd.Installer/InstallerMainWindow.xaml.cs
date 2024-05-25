@@ -37,22 +37,25 @@ public sealed partial class InstallerMainWindow : INotifyPropertyChanged {
         }
     }
 
-    private void BackButton_Click(object sender, RoutedEventArgs e) {
-        if (CurrentPage.Previous != null) {
-            CurrentPage = CurrentPage.Previous;
-        } else {
-            throw new InvalidOperationException();
-        }
-    }
+    private void BackButton_Click(object sender, RoutedEventArgs e)
+        => CurrentPage = CurrentPage.Previous ?? throw new InvalidOperationException();
 
     private async void NextButton_Click(object sender, RoutedEventArgs e) {
         if (!processor.HasErrors) {
             if (CurrentPage.Next != null) {
                 CurrentPage = CurrentPage.Next;
             } else {
-                Content = new TextBlock() { Text = "설치 중...", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
+                Content = new TextBlock() {
+                    Text = "설치 중...",
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
                 await Task.Run(processor.InstallProcess);
-                Content = new TextBlock() { Text = "설치 완료!", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
+                Content = new TextBlock() {
+                    Text = "설치 완료!",
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
                 await Task.Delay(1500);
                 Application.Current.Exit();
             }

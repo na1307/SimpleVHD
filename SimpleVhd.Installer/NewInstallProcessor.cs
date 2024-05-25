@@ -16,25 +16,30 @@ public sealed class NewInstallProcessor : InstallProcessor {
         };
 
         var parent = BcdStore.SystemStore.OpenObject(WellKnownGuids.Current);
+        var driveDP = GetDevicePath(VhdDrive);
 
         var child1 = BcdStore.SystemStore.CopyObject(parent, CopyObjectOptions.CreateNewId);
-        child1.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, Path.Combine(VhdPath, $"{VhdFileName}-{Child1FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
-        child1.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, Path.Combine(VhdPath, $"{VhdFileName}-{Child1FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
+        var child1Path = Path.Combine(VhdPath, $"{VhdFileName}-{Child1FileName}.{VhdFormat.ToString().ToLower()}");
+        child1.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, child1Path, DeviceType.PartitionDevice, null, driveDP, 0);
+        child1.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, child1Path, DeviceType.PartitionDevice, null, driveDP, 0);
 
         var child2 = BcdStore.SystemStore.CopyObject(parent, CopyObjectOptions.CreateNewId);
-        child2.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, Path.Combine(VhdPath, $"{VhdFileName}-{Child2FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
-        child2.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, Path.Combine(VhdPath, $"{VhdFileName}-{Child2FileName}.{VhdFormat.ToString().ToLower()}"), DeviceType.PartitionDevice, null, GetDevicePath(VhdDrive), 0);
+        var child2Path = Path.Combine(VhdPath, $"{VhdFileName}-{Child2FileName}.{VhdFormat.ToString().ToLower()}");
+        child2.SetVhdDeviceElement(BcdElementType.BcdLibraryApplicationDevice, child2Path, DeviceType.PartitionDevice, null, driveDP, 0);
+        child2.SetVhdDeviceElement(BcdElementType.BcdOSLoaderOSDevice, child2Path, DeviceType.PartitionDevice, null, driveDP, 0);
 
         var ramdisk = BcdStore.SystemStore.CreateObject(Guid.NewGuid(), BcdObjectType.Device);
-        ramdisk.SetPartitionDeviceElement(BcdElementType.BcdDeviceSdiDevice, DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
+        var svDP = GetDevicePath(SVDrive);
+        ramdisk.SetPartitionDeviceElement(BcdElementType.BcdDeviceSdiDevice, DeviceType.PartitionDevice, null, svDP);
         ramdisk.SetStringElement(BcdElementType.BcdDeviceSdiPath, Path.Combine(SVPath[2..], "Boot", "boot.sdi"));
 
         var pe = BcdStore.SystemStore.CreateObject(Guid.NewGuid(), BcdObjectType.BootLoader);
+        var pePath = Path.Combine(SVPath[2..], "Boot", $"{arch}.wim");
         pe.SetStringElement(BcdElementType.BcdLibraryDescription, "SimpleVhd PE");
-        pe.SetFileDeviceElement(BcdElementType.BcdLibraryApplicationDevice, DeviceType.RamdiskDevice, ramdisk, Path.Combine(SVPath[2..], "Boot", $"{arch}.wim"), DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
+        pe.SetFileDeviceElement(BcdElementType.BcdLibraryApplicationDevice, DeviceType.RamdiskDevice, ramdisk, pePath, DeviceType.PartitionDevice, null, svDP);
         pe.SetStringElement(BcdElementType.BcdLibraryApplicationPath, $@"\windows\system32\winload.{(IsWindowsUefi() ? "efi" : "exe")}");
         pe.SetObjectListElement(BcdElementType.BcdLibraryInheritedObjects, BcdStore.SystemStore.OpenObject(WellKnownGuids.BootLoaderSettings));
-        pe.SetFileDeviceElement(BcdElementType.BcdOSLoaderOSDevice, DeviceType.RamdiskDevice, ramdisk, Path.Combine(SVPath[2..], "Boot", $"{arch}.wim"), DeviceType.PartitionDevice, null, GetDevicePath(SVDrive));
+        pe.SetFileDeviceElement(BcdElementType.BcdOSLoaderOSDevice, DeviceType.RamdiskDevice, ramdisk, pePath, DeviceType.PartitionDevice, null, svDP);
         pe.SetStringElement(BcdElementType.BcdOSLoaderSystemRoot, "\\windows");
         pe.SetBooleanElement(BcdElementType.BcdOSLoaderDetectKernelAndHal, true);
         pe.SetBooleanElement(BcdElementType.BcdOSLoaderWinPEMode, true);

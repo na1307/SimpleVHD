@@ -9,16 +9,16 @@ namespace SimpleVhd.ControlPanel;
 /// An empty window that can be used on its own or navigated to within a Frame.
 /// </summary>
 public sealed partial class MainWindow : INotifyPropertyChanged {
-    private Screen screen = new HomeScreen();
+    private Screen _screen = new HomeScreen();
 
     public MainWindow() => InitializeComponent();
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
     public Screen Screen {
-        get => screen;
+        get => _screen;
         set {
-            screen = value;
+            _screen = value;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Screen)));
         }
     }

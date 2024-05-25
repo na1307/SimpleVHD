@@ -3,12 +3,12 @@ using System.Diagnostics;
 namespace SimpleVhd.PE;
 
 public partial class MainForm : NoCloseForm {
-    private static readonly Lazy<MainForm> instance = new(() => new());
+    private static readonly Lazy<MainForm> _instance = new(() => new());
 
     private MainForm() => InitializeComponent();
 
-    public static MainForm Instance => instance.Value;
-    public static bool IsInitialized => instance.IsValueCreated;
+    public static MainForm Instance => _instance.Value;
+    public static bool IsInitialized => _instance.IsValueCreated;
 
     private static bool chooseInstance() {
         using ChooseInstanceDialog cid = new();
@@ -18,7 +18,9 @@ public partial class MainForm : NoCloseForm {
 
     private void button1_Click(object sender, EventArgs e) {
         if (chooseInstance()) {
-            new Working(OperationType.Restore).Show();
+            using Working working = new(OperationType.Restore);
+
+            working.Show();
         }
     }
 
