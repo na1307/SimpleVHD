@@ -1,6 +1,6 @@
 ﻿namespace SimpleVhd.PE;
 
-public partial class ChooseInstanceDialog : Dialog {
+public sealed partial class ChooseInstanceDialog : Dialog {
     public ChooseInstanceDialog() {
         InitializeComponent();
         dataGridView1.AutoGenerateColumns = false;

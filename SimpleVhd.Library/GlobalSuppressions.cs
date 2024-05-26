@@ -11,7 +11,5 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Roslynator", "RCS0056:A line is too long", Justification = "<보류 중>", Scope = "member", Target = "~M:SimpleVhd.Checker.Check")]
 [assembly: SuppressMessage("Design", "CA1032:표준 예외 생성자를 구현하세요.", Justification = "<보류 중>", Scope = "type", Target = "~T:SimpleVhd.CheckException")]
 [assembly: SuppressMessage("Design", "CA1032:표준 예외 생성자를 구현하세요.", Justification = "<보류 중>", Scope = "type", Target = "~T:SimpleVhd.SimpleVhdException")]
-[assembly: SuppressMessage("Roslynator", "RCS1194:Implement exception constructors", Justification = "<보류 중>", Scope = "type", Target = "~T:SimpleVhd.SimpleVhdException")]
 [assembly: SuppressMessage("Roslynator", "RCS0056:A line is too long", Justification = "<보류 중>", Scope = "member", Target = "~T:SimpleVhd.StaticFunctions")]
 [assembly: SuppressMessage("Design", "CA1032:표준 예외 생성자를 구현하세요.", Justification = "<보류 중>", Scope = "type", Target = "~T:SimpleVhd.StaticFunctions.DevicePathMapperException")]
-[assembly: SuppressMessage("Roslynator", "RCS1194:Implement exception constructors", Justification = "<보류 중>", Scope = "type", Target = "~T:SimpleVhd.StaticFunctions.DevicePathMapperException")]

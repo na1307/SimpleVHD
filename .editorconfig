@@ -539,9 +539,6 @@ dotnet_diagnostic.rcs0003.severity = error
 # Add blank line between declaration and documentation comment
 dotnet_diagnostic.rcs0009.severity = error
 
-# Add blank line between single-line declarations of different kind
-dotnet_diagnostic.rcs0013.severity = error
-
 # Put attribute list on its own line
 dotnet_diagnostic.rcs0016.severity = error
 
@@ -730,6 +727,9 @@ dotnet_diagnostic.rcs1163.severity = none
 
 # Convert comment to documentation comment
 dotnet_diagnostic.rcs1181.severity = none
+
+# Implement exception constructors
+dotnet_diagnostic.rcs1194.severity = none
 
 # Call extension method as instance method
 dotnet_diagnostic.rcs1196.severity = none
