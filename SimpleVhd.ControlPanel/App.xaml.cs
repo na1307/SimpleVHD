@@ -1,8 +1,8 @@
 ﻿using Microsoft.UI.Xaml;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using WinRT.Interop;
 using WinUIEx;
+using static SimpleVhd.ControlPanel.NativeMethods;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -61,9 +61,6 @@ public sealed partial class App {
         MWindow.CenterOnScreen();
         MWindow.Activate();
     }
-
-    [DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
-    private static extern int MessageBoxW(nint hWnd, string? text, string? caption, uint type);
 
     private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e) {
         var hWnd = MWindow != null ? WindowNative.GetWindowHandle(MWindow) : nint.Zero;

@@ -1,6 +1,7 @@
 ﻿using System.Management;
 using System.Runtime.InteropServices;
 using System.Text;
+using static SimpleVhd.NativeMethods;
 
 namespace SimpleVhd;
 
@@ -43,13 +44,6 @@ public static class StaticFunctions {
 
         return pos < 0 ? text : text[..pos] + replace + text[(pos + search.Length)..];
     }
-
-    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
-    private static extern uint QueryDosDeviceW([MarshalAs(UnmanagedType.LPWStr)] string lpDeviceName, [MarshalAs(UnmanagedType.LPWStr)] StringBuilder lpTargetPath, uint ucchMax);
-
-    [DllImport("kernel32.dll", ExactSpelling = true, SetLastError = true)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static extern bool GetFirmwareType(out int firmwareType);
 
     private sealed class DevicePathMapperException(string message) : SimpleVhdException(message);
 }
