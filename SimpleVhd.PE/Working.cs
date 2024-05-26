@@ -2,7 +2,7 @@
 
 namespace SimpleVhd.PE;
 
-public partial class Working : NoCloseForm {
+public sealed partial class Working : NoCloseForm {
     private readonly Operation operation;
 
     public Working(OperationType operationType) {

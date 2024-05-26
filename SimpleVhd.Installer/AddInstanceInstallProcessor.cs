@@ -2,7 +2,7 @@
 
 namespace SimpleVhd.Installer;
 
-public class AddInstanceInstallProcessor : InstallProcessor {
+public sealed class AddInstanceInstallProcessor : InstallProcessor {
     public override void InstallProcess() {
         var parent = BcdStore.SystemStore.OpenObject(WellKnownGuids.Current);
         var driveDP = GetDevicePath(VhdDrive);

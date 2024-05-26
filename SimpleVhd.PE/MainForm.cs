@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace SimpleVhd.PE;
 
-public partial class MainForm : NoCloseForm {
+public sealed partial class MainForm : NoCloseForm {
     private static readonly Lazy<MainForm> _instance = new(() => new());
 
     private MainForm() => InitializeComponent();
