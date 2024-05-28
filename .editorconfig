@@ -327,10 +327,6 @@ dotnet_diagnostic.CA1513.severity = warning
 # Do not name enum values 'Reserved'
 dotnet_diagnostic.CA1700.severity = warning
 
-# Identifiers should differ by more than case
-dotnet_diagnostic.CA1708.severity = warning
-dotnet_code_quality.CA1708.api_surface = all
-
 # Identifiers should have correct suffix
 dotnet_diagnostic.CA1710.severity = warning
 dotnet_code_quality.CA1710.api_surface = all
@@ -536,9 +532,6 @@ dotnet_diagnostic.SYSLIB1096.severity = silent
 # Add blank line after using directive list
 dotnet_diagnostic.rcs0003.severity = error
 
-# Add blank line between declaration and documentation comment
-dotnet_diagnostic.rcs0009.severity = error
-
 # Put attribute list on its own line
 dotnet_diagnostic.rcs0016.severity = error
 
@@ -718,6 +711,9 @@ dotnet_diagnostic.rcs1005.severity = none
 
 # Add 'static' modifier to all partial class declarations
 dotnet_diagnostic.rcs1108.severity = none
+
+# Use string.Length instead of comparison with empty string
+dotnet_diagnostic.rcs1156.severity = none
 
 # Enum should declare explicit values
 dotnet_diagnostic.rcs1161.severity = none
