@@ -11,6 +11,11 @@ public abstract class InstallProcessor : ObservableValidator {
         var vp = GetSystemVhdPath();
         VhdDrive = Path.GetPathRoot(vp)!.TrimEnd('\\');
         VhdPath = Path.GetDirectoryName(vp[2..])!;
+
+        if (VhdPath.Length > 1) {
+            VhdPath += "\\";
+        }
+
         VhdFileName = Path.GetFileNameWithoutExtension(vp);
         VhdFormat = Enum.Parse<VhdFormat>(Path.GetExtension(vp)[1..], true);
     }

@@ -5,7 +5,7 @@ public class Backup : Operation {
 
     protected override async Task WorkCore() {
         var backupFile = Path.Combine(SVPath, BackupDirName, OFile);
-        var sourceFile = Path.Combine(ODrv, OInstance.Directory, OFile);
+        var sourceFile = ODrv + OInstance.Directory + OFile;
 
         File.Delete(backupFile);
         await ProcessDiskpartAsync($"create vdisk file \"{backupFile}\" source \"{sourceFile}\" type expandable");
