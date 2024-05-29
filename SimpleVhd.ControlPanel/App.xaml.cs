@@ -19,7 +19,8 @@ public sealed partial class App {
     /// </summary>
     public App() {
         try {
-            Checker.Check();
+            Checker.CheckSvPath();
+            Checker.CheckSystemVhd();
         } catch (CheckException cex) {
             _ = MessageBoxW(nint.Zero, cex.Message, null, 16);
             Process.GetCurrentProcess().Kill();
