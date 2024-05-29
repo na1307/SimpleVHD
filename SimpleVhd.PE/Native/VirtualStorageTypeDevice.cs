@@ -1,6 +1,6 @@
 ﻿namespace SimpleVhd.PE.Native;
 
-public enum VirtualStorageTypeDevice : uint {
+internal enum VirtualStorageTypeDevice : uint {
     Unknown,
     Iso,
     Vhd,

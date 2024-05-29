@@ -1,7 +1,7 @@
 ﻿namespace SimpleVhd.PE.Native;
 
 [Flags]
-public enum VirtualDiskAccessMask {
+internal enum VirtualDiskAccessMask {
     None = 0x00000000,
     AttachRO = 0x00010000,
     AttachRW = 0x00020000,

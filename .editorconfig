@@ -105,12 +105,6 @@ dotnet_diagnostic.IDE0038.severity = warning
 # Use 'is null' check
 dotnet_diagnostic.IDE0041.severity = warning
 
-# Use conditional expression for assignment
-dotnet_diagnostic.IDE0045.severity = warning
-
-# Use conditional expression for return
-dotnet_diagnostic.IDE0046.severity = warning
-
 # Use simple 'using' statement
 dotnet_diagnostic.IDE0063.severity = warning
 

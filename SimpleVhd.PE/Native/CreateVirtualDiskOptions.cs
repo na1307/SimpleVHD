@@ -1,7 +1,7 @@
 ﻿namespace SimpleVhd.PE.Native;
 
 [Flags]
-public enum CreateVirtualDiskOptions {
+internal enum CreateVirtualDiskOptions {
     None = 0x0,
     FullPhysicalAllocation = 0x1,
     PreventWritesToSourceDisk = 0X2,

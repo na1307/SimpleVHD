@@ -3,7 +3,7 @@
 namespace SimpleVhd.PE.Native;
 
 [StructLayout(LayoutKind.Sequential)]
-public struct CreateVirtualDiskParameters {
+internal struct CreateVirtualDiskParameters {
     private readonly int Version = 1;
     public Guid UniqueId;
     public ulong MaximumSize;

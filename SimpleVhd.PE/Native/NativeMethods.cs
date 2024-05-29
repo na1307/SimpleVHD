@@ -3,7 +3,7 @@
 namespace SimpleVhd.PE.Native;
 
 internal static class NativeMethods {
-    [DllImport("VirtDisk.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
+    [DllImport("virtdisk.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
     public static extern uint CreateVirtualDisk(
         in VirtualStorageType virtualStorageType,
         [MarshalAs(UnmanagedType.LPWStr)] string path,
