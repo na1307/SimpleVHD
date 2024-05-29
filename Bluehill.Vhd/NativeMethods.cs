@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace SimpleVhd.PE.Native;
+namespace Bluehill.Vhd;
 
 internal static class NativeMethods {
     [DllImport("virtdisk.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]

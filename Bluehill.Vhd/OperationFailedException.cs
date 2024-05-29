@@ -1,4 +1,4 @@
-﻿namespace SimpleVhd.PE.Native;
+﻿namespace Bluehill.Vhd;
 
 public sealed class OperationFailedException : Exception {
     public OperationFailedException() : base("Operation failed.") { }

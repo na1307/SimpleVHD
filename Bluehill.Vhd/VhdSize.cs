@@ -1,4 +1,4 @@
-﻿namespace SimpleVhd.PE.Native;
+﻿namespace Bluehill.Vhd;
 
 public readonly struct VhdSize : IEquatable<VhdSize>, IComparable<VhdSize>, IComparable {
     public VhdSize(long bytes) {

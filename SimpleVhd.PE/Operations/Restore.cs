@@ -1,17 +1,23 @@
-﻿namespace SimpleVhd.PE.Operations;
+﻿using Bluehill.Vhd;
 
-public class Restore : Operation {
+namespace SimpleVhd.PE.Operations;
+
+internal class Restore : Operation {
     public override string OperationName => "복원";
 
-    protected override async Task WorkCore() {
-        var backupFile = Path.Combine(SVPath, BackupDirName, OFile);
-        var sourceFile = ODrv + OInstance.Directory + OFile;
+    protected override Task WorkCore() {
+        return Task.Run(restore);
 
-        if (!File.Exists(backupFile)) {
-            throw new OperationFailedException("백업 파일이 존재하지 않습니다.");
+        static void restore() {
+            var backupFile = Path.Combine(SVPath, BackupDirName, OFile);
+            var sourceFile = ODrv + OInstance.Directory + OFile;
+
+            if (!File.Exists(backupFile)) {
+                throw new OperationFailedException("백업 파일이 존재하지 않습니다.");
+            }
+
+            File.Delete(sourceFile);
+            VhdFunctions.CloneVhd(sourceFile, backupFile, default, OInstance.Type == VhdType.Fixed);
         }
-
-        File.Delete(sourceFile);
-        await ProcessDiskpartAsync($"create vdisk file \"{sourceFile}\" source \"{backupFile}\" type {OInstance.Type}");
     }
 }

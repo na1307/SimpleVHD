@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVhd.ControlPanel", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVhd.Installer", "SimpleVhd.Installer\SimpleVhd.Installer.csproj", "{CB8FA622-556F-4B2D-BF7D-74420C72ECD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleVhd.PE", "SimpleVhd.PE\SimpleVhd.PE.csproj", "{3D7EBEB5-2F99-408B-88DD-C1D139E5BFEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVhd.PE", "SimpleVhd.PE\SimpleVhd.PE.csproj", "{3D7EBEB5-2F99-408B-88DD-C1D139E5BFEE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "솔루션 항목", "솔루션 항목", "{89BE1C33-093D-4C48-B087-DBD9E1968E60}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "솔루션 항목", "솔루�
 		Publish-Release.cmd = Publish-Release.cmd
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluehill.Vhd", "Bluehill.Vhd\Bluehill.Vhd.csproj", "{218D762C-7BB6-43FB-BA09-FC6666D5D9BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,14 @@ Global
 		{3D7EBEB5-2F99-408B-88DD-C1D139E5BFEE}.Release|ARM64.Build.0 = Release|ARM64
 		{3D7EBEB5-2F99-408B-88DD-C1D139E5BFEE}.Release|x64.ActiveCfg = Release|x64
 		{3D7EBEB5-2F99-408B-88DD-C1D139E5BFEE}.Release|x64.Build.0 = Release|x64
+		{218D762C-7BB6-43FB-BA09-FC6666D5D9BC}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{218D762C-7BB6-43FB-BA09-FC6666D5D9BC}.Debug|ARM64.Build.0 = Debug|ARM64
+		{218D762C-7BB6-43FB-BA09-FC6666D5D9BC}.Debug|x64.ActiveCfg = Debug|x64
+		{218D762C-7BB6-43FB-BA09-FC6666D5D9BC}.Debug|x64.Build.0 = Debug|x64
+		{218D762C-7BB6-43FB-BA09-FC6666D5D9BC}.Release|ARM64.ActiveCfg = Release|ARM64
+		{218D762C-7BB6-43FB-BA09-FC6666D5D9BC}.Release|ARM64.Build.0 = Release|ARM64
+		{218D762C-7BB6-43FB-BA09-FC6666D5D9BC}.Release|x64.ActiveCfg = Release|x64
+		{218D762C-7BB6-43FB-BA09-FC6666D5D9BC}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

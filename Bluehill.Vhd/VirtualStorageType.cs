@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace SimpleVhd.PE.Native;
+namespace Bluehill.Vhd;
 
 [StructLayout(LayoutKind.Sequential)]
 internal struct VirtualStorageType {

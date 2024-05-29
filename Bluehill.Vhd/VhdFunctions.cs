@@ -1,7 +1,7 @@
 ﻿using Microsoft.Win32.SafeHandles;
 using System.Runtime.InteropServices;
 
-namespace SimpleVhd.PE.Native;
+namespace Bluehill.Vhd;
 
 public static class VhdFunctions {
     public static SafeFileHandle CreateVhd(string path, VhdSize size, bool isFixed = false) {

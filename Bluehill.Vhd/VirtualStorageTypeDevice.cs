@@ -1,4 +1,4 @@
-﻿namespace SimpleVhd.PE.Native;
+﻿namespace Bluehill.Vhd;
 
 internal enum VirtualStorageTypeDevice : uint {
     Unknown,

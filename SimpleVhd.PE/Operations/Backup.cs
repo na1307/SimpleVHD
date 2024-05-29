@@ -1,13 +1,19 @@
-﻿namespace SimpleVhd.PE.Operations;
+﻿using Bluehill.Vhd;
 
-public class Backup : Operation {
+namespace SimpleVhd.PE.Operations;
+
+internal class Backup : Operation {
     public override string OperationName => "백업";
 
-    protected override async Task WorkCore() {
-        var backupFile = Path.Combine(SVPath, BackupDirName, OFile);
-        var sourceFile = ODrv + OInstance.Directory + OFile;
+    protected override Task WorkCore() {
+        return Task.Run(backup);
 
-        File.Delete(backupFile);
-        await ProcessDiskpartAsync($"create vdisk file \"{backupFile}\" source \"{sourceFile}\" type expandable");
+        static void backup() {
+            var backupFile = Path.Combine(SVPath, BackupDirName, OFile);
+            var sourceFile = ODrv + OInstance.Directory + OFile;
+
+            File.Delete(backupFile);
+            VhdFunctions.CloneVhd(backupFile, sourceFile).Dispose();
+        }
     }
 }

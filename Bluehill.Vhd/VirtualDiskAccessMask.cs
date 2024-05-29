@@ -1,4 +1,4 @@
-﻿namespace SimpleVhd.PE.Native;
+﻿namespace Bluehill.Vhd;
 
 [Flags]
 internal enum VirtualDiskAccessMask {

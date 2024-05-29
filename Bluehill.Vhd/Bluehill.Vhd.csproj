@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Description>Vhd</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Remove="SimpleVhd.Constants" />
+    <Using Remove="SimpleVhd.StaticFunctions"  />
+  </ItemGroup>
+</Project>

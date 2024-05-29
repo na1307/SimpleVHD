@@ -3,7 +3,7 @@ using System.Text;
 
 namespace SimpleVhd.PE.Operations;
 
-public abstract class Operation {
+internal abstract class Operation {
     protected static readonly Vhd OInstance = Settings.Instance.Instances[Settings.Instance.OperationTarget!.Value];
     protected static readonly string OFile = $"{OInstance.FileName}.{OInstance.Format.ToString().ToLowerInvariant()}";
     protected static readonly string ODrv =

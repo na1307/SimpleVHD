@@ -17,6 +17,7 @@
     <PackageReference Include="Bluehill.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bluehill.Vhd\Bluehill.Vhd.csproj" />
     <ProjectReference Include="..\SimpleVhd.Library\SimpleVhd.Library.csproj" />
   </ItemGroup>
 </Project>

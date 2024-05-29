@@ -1,6 +1,6 @@
 ﻿namespace SimpleVhd.PE.Operations;
 
-public static class OperationFactory {
+internal static class OperationFactory {
     public static Operation Create(OperationType type) => type switch {
         OperationType.Backup => new Backup(),
         OperationType.Restore => new Restore(),
