@@ -1,5 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 
-namespace SimpleVhd.ControlPanel;
+namespace SimpleVhd.ControlPanel.Views;
 
 public abstract class Screen : ContentControl;

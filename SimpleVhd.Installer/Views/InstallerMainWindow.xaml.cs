@@ -5,7 +5,7 @@ using System.ComponentModel;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace SimpleVhd.Installer;
+namespace SimpleVhd.Installer.Views;
 
 /// <summary>
 /// An empty window that can be used on its own or navigated to within a Frame.
