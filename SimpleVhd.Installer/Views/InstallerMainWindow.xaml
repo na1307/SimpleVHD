@@ -18,13 +18,13 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" >
-            <TextBlock Text="{x:Bind CurrentPage.Value.Title, Mode=OneWay}" FontWeight="Bold" Margin="5, 5, 0, 0" />
-            <TextBlock Text="{x:Bind CurrentPage.Value.Description, Mode=OneWay}" TextWrapping="Wrap" Margin="5, 5, 0, 0" />
+            <TextBlock Text="{x:Bind ViewModel.CurrentPage.Value.ViewModel.Title, Mode=OneWay}" FontWeight="Bold" Margin="5, 5, 0, 0" />
+            <TextBlock Text="{x:Bind ViewModel.CurrentPage.Value.ViewModel.Description, Mode=OneWay}" TextWrapping="Wrap" Margin="5, 5, 0, 0" />
         </StackPanel>
-        <Page Content="{x:Bind CurrentPage.Value, Mode=OneWay}" Width="710" Height="340" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+        <Page Content="{x:Bind ViewModel.CurrentPage.Value, Mode=OneWay}" Width="710" Height="340" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
-            <Button x:Name="BackButton" Content="뒤로" IsEnabled="False" Width="100" Margin="0, 0, 5, 0" VerticalAlignment="Center" Click="BackButton_Click" />
-            <Button x:Name="NextButton" Content="다음" Width="100" Margin="5, 0, 0, 0" VerticalAlignment="Center" Click="NextButton_Click" />
+            <Button x:Name="BackButton" Content="뒤로" IsEnabled="False" Width="100" Margin="0, 0, 5, 0" VerticalAlignment="Center" />
+            <Button x:Name="NextButton" Content="다음" Width="100" Margin="5, 0, 0, 0" VerticalAlignment="Center" />
         </StackPanel>
     </Grid>
 </Window>

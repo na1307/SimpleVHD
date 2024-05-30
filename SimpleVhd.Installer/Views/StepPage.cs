@@ -1,8 +1,8 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using SimpleVhd.Installer.ViewModels;
 
 namespace SimpleVhd.Installer.Views;
 
 public abstract class StepPage : Page {
-    public abstract string Title { get; }
-    public abstract string Description { get; }
+    public abstract StepPageViewModel ViewModel { get; }
 }

@@ -20,6 +20,7 @@ public abstract class InstallProcessor : ObservableValidator {
         VhdFormat = Enum.Parse<VhdFormat>(Path.GetExtension(vp)[1..], true);
     }
 
+    public static InstallProcessor? Model { get; private set; }
     public string SVDrive { get; }
     public string VhdDrive { get; }
     public string VhdPath { get; }
@@ -33,6 +34,12 @@ public abstract class InstallProcessor : ObservableValidator {
 
     public VhdType VhdType { get; set; }
     public VhdFormat VhdFormat { get; }
+
+    public static void CreateModel(InstallType installType) => Model = installType switch {
+        InstallType.New => new NewInstallProcessor(),
+        InstallType.AddInstance => new AddInstanceInstallProcessor(),
+        _ => throw new NotImplementedException(),
+    };
 
     public abstract void InstallProcess();
 }
