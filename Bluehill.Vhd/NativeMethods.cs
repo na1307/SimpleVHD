@@ -30,4 +30,10 @@ internal static class NativeMethods {
         uint providerSpecificFlags,
         nint parameters,
         nint overlapped);
+
+    [DllImport("virtdisk.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
+    public static extern uint DetachVirtualDisk(
+        SafeFileHandle virtualDiskHandle,
+        DetachVirtualDiskOptions flags,
+        uint providerSpecificFlags);
 }
