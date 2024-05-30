@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace Bluehill.Vhd;
+﻿namespace Bluehill.Vhd;
 
 internal static class NativeMethods {
     [DllImport("virtdisk.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
@@ -13,7 +11,7 @@ internal static class NativeMethods {
         uint providerSpecificFlags,
         in CreateVirtualDiskParameters parameters,
         nint overlapped,
-        out nint handle);
+        out SafeFileHandle handle);
 
     [DllImport("virtdisk.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
     public static extern uint OpenVirtualDisk(
@@ -22,5 +20,14 @@ internal static class NativeMethods {
         VirtualDiskAccessMask virtualDiskAccessMask,
         OpenVirtualDiskOptions flags,
         nint parameters,
-        out nint handle);
+        out SafeFileHandle handle);
+
+    [DllImport("virtdisk.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
+    public static extern uint AttachVirtualDisk(
+        SafeFileHandle virtualDiskHandle,
+        nint securityDescriptor,
+        AttachVirtualDiskOptions flag,
+        uint providerSpecificFlags,
+        nint parameters,
+        nint overlapped);
 }

@@ -1,7 +1,4 @@
-﻿using Microsoft.Win32.SafeHandles;
-using System.Runtime.InteropServices;
-
-namespace Bluehill.Vhd;
+﻿namespace Bluehill.Vhd;
 
 public static partial class VhdFunctions {
     public static SafeFileHandle CreateVhd(string path, VhdSize size, bool isFixed = false) {
@@ -56,6 +53,6 @@ public static partial class VhdFunctions {
             nint.Zero,
             out var handle);
 
-        return result == 0 ? new(handle, true) : throw new OperationFailedException(Marshal.GetPInvokeErrorMessage((int)result));
+        return result == 0 ? handle : throw new OperationFailedException(Marshal.GetPInvokeErrorMessage((int)result));
     }
 }

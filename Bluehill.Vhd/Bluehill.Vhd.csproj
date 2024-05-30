@@ -6,6 +6,8 @@
     <Description>Vhd</Description>
   </PropertyGroup>
   <ItemGroup>
+    <Using Include="Microsoft.Win32.SafeHandles" />
+    <Using Include="System.Runtime.InteropServices" />
     <Using Remove="SimpleVhd.Constants" />
     <Using Remove="SimpleVhd.StaticFunctions"  />
   </ItemGroup>

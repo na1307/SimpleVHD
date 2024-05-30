@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace Bluehill.Vhd;
+﻿namespace Bluehill.Vhd;
 
 [StructLayout(LayoutKind.Sequential)]
 internal struct VirtualStorageType {
