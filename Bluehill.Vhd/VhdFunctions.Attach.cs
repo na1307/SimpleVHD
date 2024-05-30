@@ -32,7 +32,7 @@ public static partial class VhdFunctions {
             nint.Zero);
 
         if (result != 0) {
-            throw new OperationFailedException(Marshal.GetPInvokeErrorMessage((int)result));
+            throw new VhdOperationFailedException(Marshal.GetPInvokeErrorMessage((int)result));
         }
     }
 }

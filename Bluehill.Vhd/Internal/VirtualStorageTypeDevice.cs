@@ -1,4 +1,4 @@
-﻿namespace Bluehill.Vhd;
+﻿namespace Bluehill.Vhd.Internal;
 
 internal enum VirtualStorageTypeDevice : uint {
     Unknown,

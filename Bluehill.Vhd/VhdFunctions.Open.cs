@@ -17,6 +17,6 @@ public static partial class VhdFunctions {
             nint.Zero,
             out var handle);
 
-        return result == 0 ? handle : throw new OperationFailedException(Marshal.GetPInvokeErrorMessage((int)result));
+        return result == 0 ? handle : throw new VhdOperationFailedException(Marshal.GetPInvokeErrorMessage((int)result));
     }
 }

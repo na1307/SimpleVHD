@@ -1,4 +1,4 @@
-﻿namespace Bluehill.Vhd;
+﻿namespace Bluehill.Vhd.Internal;
 
 [Flags]
 internal enum CreateVirtualDiskOptions {

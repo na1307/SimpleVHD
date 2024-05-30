@@ -6,9 +6,10 @@
     <Description>Vhd</Description>
   </PropertyGroup>
   <ItemGroup>
+    <Using Include="Bluehill.Vhd.Internal" />
     <Using Include="Microsoft.Win32.SafeHandles" />
     <Using Include="System.Runtime.InteropServices" />
     <Using Remove="SimpleVhd.Constants" />
-    <Using Remove="SimpleVhd.StaticFunctions"  />
+    <Using Remove="SimpleVhd.StaticFunctions" />
   </ItemGroup>
 </Project>

@@ -15,7 +15,7 @@ public static partial class VhdFunctions {
         var result = NativeMethods.DetachVirtualDisk(handle, DetachVirtualDiskOptions.None, 0);
 
         if (result != 0) {
-            throw new OperationFailedException(Marshal.GetPInvokeErrorMessage((int)result));
+            throw new VhdOperationFailedException(Marshal.GetPInvokeErrorMessage((int)result));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Bluehill.Vhd;
+﻿namespace Bluehill.Vhd.Internal;
 
 [StructLayout(LayoutKind.Sequential)]
 internal struct VirtualStorageType {
