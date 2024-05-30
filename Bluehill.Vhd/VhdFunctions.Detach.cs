@@ -9,9 +9,9 @@ public static partial class VhdFunctions {
         detachVhdCore(handle);
     }
 
-    public static void DetachVhd(SafeFileHandle vhdHandle) => detachVhdCore(vhdHandle);
+    public static void DetachVhd(SafeVirtualDiskHandle vhdHandle) => detachVhdCore(vhdHandle);
 
-    private static void detachVhdCore(SafeFileHandle handle) {
+    private static void detachVhdCore(SafeVirtualDiskHandle handle) {
         var result = NativeMethods.DetachVirtualDisk(handle, DetachVirtualDiskOptions.None, 0);
 
         if (result != 0) {

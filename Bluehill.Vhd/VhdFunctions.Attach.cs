@@ -9,10 +9,10 @@ public static partial class VhdFunctions {
         attachVhdCore(handle, readOnly, noDriveLetter);
     }
 
-    public static void AttachVhd(SafeFileHandle vhdHandle, bool readOnly = false, bool noDriveLetter = false)
+    public static void AttachVhd(SafeVirtualDiskHandle vhdHandle, bool readOnly = false, bool noDriveLetter = false)
         => attachVhdCore(vhdHandle, readOnly, noDriveLetter);
 
-    private static void attachVhdCore(SafeFileHandle handle, bool readOnly, bool noDriveLetter) {
+    private static void attachVhdCore(SafeVirtualDiskHandle handle, bool readOnly, bool noDriveLetter) {
         var options = AttachVirtualDiskOptions.PermanentLifetime;
 
         if (readOnly) {

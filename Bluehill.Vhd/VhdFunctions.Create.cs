@@ -1,27 +1,27 @@
 ﻿namespace Bluehill.Vhd;
 
 public static partial class VhdFunctions {
-    public static SafeFileHandle CreateVhd(string path, VhdSize size, bool isFixed = false) {
+    public static SafeVirtualDiskHandle CreateVhd(string path, VhdSize size, bool isFixed = false) {
         ArgumentException.ThrowIfNullOrWhiteSpace(path);
 
         return createVhdCore(path, null, null, size, isFixed);
     }
 
-    public static SafeFileHandle CreateChildVhd(string child, string parent) {
+    public static SafeVirtualDiskHandle CreateChildVhd(string child, string parent) {
         ArgumentException.ThrowIfNullOrWhiteSpace(child);
         ArgumentException.ThrowIfNullOrWhiteSpace(parent);
 
         return createVhdCore(child, parent, null, default, false);
     }
 
-    public static SafeFileHandle CloneVhd(string destination, string source, VhdSize size = default, bool isFixed = false) {
+    public static SafeVirtualDiskHandle CloneVhd(string destination, string source, VhdSize size = default, bool isFixed = false) {
         ArgumentException.ThrowIfNullOrWhiteSpace(destination);
         ArgumentException.ThrowIfNullOrWhiteSpace(source);
 
         return createVhdCore(destination, null, source, size, isFixed);
     }
 
-    private static SafeFileHandle createVhdCore(string path, string? parent, string? source, VhdSize size, bool isFixed) {
+    private static SafeVirtualDiskHandle createVhdCore(string path, string? parent, string? source, VhdSize size, bool isFixed) {
         if (parent is not null && source is not null) {
             throw new ArgumentException("Both");
         }

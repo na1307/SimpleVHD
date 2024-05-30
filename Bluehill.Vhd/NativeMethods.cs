@@ -11,7 +11,7 @@ internal static class NativeMethods {
         uint providerSpecificFlags,
         in CreateVirtualDiskParameters parameters,
         nint overlapped,
-        out SafeFileHandle handle);
+        out SafeVirtualDiskHandle handle);
 
     [DllImport("virtdisk.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
     public static extern uint OpenVirtualDisk(
@@ -20,11 +20,11 @@ internal static class NativeMethods {
         VirtualDiskAccessMask virtualDiskAccessMask,
         OpenVirtualDiskOptions flags,
         nint parameters,
-        out SafeFileHandle handle);
+        out SafeVirtualDiskHandle handle);
 
     [DllImport("virtdisk.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
     public static extern uint AttachVirtualDisk(
-        SafeFileHandle virtualDiskHandle,
+        SafeVirtualDiskHandle virtualDiskHandle,
         nint securityDescriptor,
         AttachVirtualDiskOptions flag,
         uint providerSpecificFlags,
@@ -33,7 +33,11 @@ internal static class NativeMethods {
 
     [DllImport("virtdisk.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
     public static extern uint DetachVirtualDisk(
-        SafeFileHandle virtualDiskHandle,
+        SafeVirtualDiskHandle virtualDiskHandle,
         DetachVirtualDiskOptions flags,
         uint providerSpecificFlags);
+
+    [DllImport("kernel32.dll", ExactSpelling = true, SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool CloseHandle(nint handle);
 }
