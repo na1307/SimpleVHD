@@ -1,32 +1,38 @@
-﻿namespace Bluehill.Vhd;
+﻿using System.Numerics;
 
-public readonly struct VhdSize : IEquatable<VhdSize>, IComparable<VhdSize>, IComparable {
+namespace Bluehill.Vhd;
+
+public readonly struct VhdSize : IEquatable<VhdSize>, IComparable<VhdSize>, IComparable
+    , IComparisonOperators<VhdSize, VhdSize, bool>, IMinMaxValue<VhdSize> {
     public VhdSize(long bytes) {
         const long threeMega = (long)3 * 1024 * 1024;
         const long sixtyFourTera = (long)64 * 1024 * 1024 * 1024 * 1024;
         ArgumentOutOfRangeException.ThrowIfLessThan(bytes, threeMega);
         ArgumentOutOfRangeException.ThrowIfGreaterThan(bytes, sixtyFourTera);
-        Value = bytes;
+        Bytes = bytes;
     }
 
-    public long Value { get; }
+    public static VhdSize MaxValue { get; } = new((long)3 * 1024 * 1024);
+    public static VhdSize MinValue { get; } = new((long)64 * 1024 * 1024 * 1024 * 1024);
 
-    public static VhdSize FromMegabyte(long megabyte) => new(megabyte * 1024 * 1024);
-    public static VhdSize FromMegabyte(double megabyte) => new((long)(megabyte * 1024 * 1024));
+    public long Bytes { get; }
 
-    public static VhdSize FromGigabyte(long gigabyte) => new(gigabyte * 1024 * 1024 * 1024);
-    public static VhdSize FromGigabyte(double gigabyte) => new((long)(gigabyte * 1024 * 1024 * 1024));
+    public static VhdSize FromMegabytes(long megabyte) => new(megabyte * 1024 * 1024);
+    public static VhdSize FromMegabytes(double megabyte) => new((long)(megabyte * 1024 * 1024));
 
-    public static VhdSize FromTerabyte(long terabyte) => new(terabyte * 1024 * 1024 * 1024 * 1024);
-    public static VhdSize FromTerabyte(double terabyte) => new((long)(terabyte * 1024 * 1024 * 1024 * 1024));
+    public static VhdSize FromGigabytes(long gigabyte) => new(gigabyte * 1024 * 1024 * 1024);
+    public static VhdSize FromGigabytes(double gigabyte) => new((long)(gigabyte * 1024 * 1024 * 1024));
+
+    public static VhdSize FromTerabytes(long terabyte) => new(terabyte * 1024 * 1024 * 1024 * 1024);
+    public static VhdSize FromTerabytes(double terabyte) => new((long)(terabyte * 1024 * 1024 * 1024 * 1024));
 
     public static VhdSize FromInt64(long value) => new(value);
-    public static long ToInt64(VhdSize size) => size.Value;
+    public static long ToInt64(VhdSize size) => size.Bytes;
 
     public override bool Equals(object? obj) => obj is VhdSize size && Equals(size);
-    public bool Equals(VhdSize other) => Value == other.Value;
-    public override int GetHashCode() => Value.GetHashCode();
-    public int CompareTo(VhdSize other) => Value.CompareTo(other.Value);
+    public bool Equals(VhdSize other) => Bytes == other.Bytes;
+    public override int GetHashCode() => Bytes.GetHashCode();
+    public int CompareTo(VhdSize other) => Bytes.CompareTo(other.Bytes);
 
     public int CompareTo(object? obj) {
         if (obj == null) {
@@ -34,24 +40,24 @@ public readonly struct VhdSize : IEquatable<VhdSize>, IComparable<VhdSize>, ICom
         } else if (obj is VhdSize x) {
             return CompareTo(x);
         } else {
-            throw new ArgumentException($"'{nameof(obj)}' is not VhdSize", nameof(obj));
+            throw new ArgumentException($"'{nameof(obj)}' is not a VhdSize", nameof(obj));
         }
     }
 
-    public override string? ToString() {
+    public override string ToString() {
         const long tera = (long)1024 * 1024 * 1024 * 1024;
         const long giga = (long)1024 * 1024 * 1024;
         string bt;
 
-        if (Value is >= tera) {
-            bt = $"{(decimal)Value / 1024 / 1024 / 1024 / 1024:G2} Tetabytes";
-        } else if (Value is >= giga) {
-            bt = $"{(decimal)Value / 1024 / 1024 / 1024:G2} Gigabytes";
+        if (Bytes is >= tera) {
+            bt = $"{(decimal)Bytes / 1024 / 1024 / 1024 / 1024:G2} Tetabyte(s)";
+        } else if (Bytes is >= giga) {
+            bt = $"{(decimal)Bytes / 1024 / 1024 / 1024:G2} Gigabyte(s)";
         } else {
-            bt = $"{(decimal)Value / 1024 / 1024:G2} Megabytes";
+            bt = $"{(decimal)Bytes / 1024 / 1024:G2} Megabyte(s)";
         }
 
-        bt += $" ({Value} Bytes)";
+        bt += $" ({Bytes} Byte(s))";
 
         return bt;
     }
@@ -63,6 +69,6 @@ public readonly struct VhdSize : IEquatable<VhdSize>, IComparable<VhdSize>, ICom
     public static bool operator >(VhdSize left, VhdSize right) => left.CompareTo(right) > 0;
     public static bool operator >=(VhdSize left, VhdSize right) => left.CompareTo(right) >= 0;
 
-    public static implicit operator long(VhdSize size) => size.Value;
+    public static implicit operator long(VhdSize size) => size.Bytes;
     public static implicit operator VhdSize(long value) => new(value);
 }

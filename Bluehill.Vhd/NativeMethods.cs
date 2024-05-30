@@ -14,4 +14,13 @@ internal static class NativeMethods {
         in CreateVirtualDiskParameters parameters,
         nint overlapped,
         out nint handle);
+
+    [DllImport("virtdisk.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
+    public static extern uint OpenVirtualDisk(
+        in VirtualStorageType virtualStorageType,
+        [MarshalAs(UnmanagedType.LPWStr)] string path,
+        VirtualDiskAccessMask virtualDiskAccessMask,
+        OpenVirtualDiskOptions flags,
+        nint parameters,
+        out nint handle);
 }
