@@ -46,11 +46,11 @@ public static partial class VhdFunctions {
             in vst,
             path,
             VirtualDiskAccessMask.Create,
-            nint.Zero,
+            IntPtr.Zero,
             parent is not null && isFixed ? CreateVirtualDiskOptions.FullPhysicalAllocation : CreateVirtualDiskOptions.None,
             0,
             in cvdp,
-            nint.Zero,
+            IntPtr.Zero,
             out var handle);
 
         return result == 0 ? handle : throw new VhdOperationFailedException(Marshal.GetPInvokeErrorMessage((int)result));

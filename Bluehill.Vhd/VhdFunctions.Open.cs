@@ -14,7 +14,7 @@ public static partial class VhdFunctions {
             path,
             VirtualDiskAccessMask.All,
             OpenVirtualDiskOptions.None,
-            nint.Zero,
+            IntPtr.Zero,
             out var handle);
 
         return result == 0 ? handle : throw new VhdOperationFailedException(Marshal.GetPInvokeErrorMessage((int)result));

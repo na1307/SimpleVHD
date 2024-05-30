@@ -25,11 +25,11 @@ public static partial class VhdFunctions {
 
         var result = NativeMethods.AttachVirtualDisk(
             handle,
-            nint.Zero,
+            IntPtr.Zero,
             options,
             0,
-            nint.Zero,
-            nint.Zero);
+            IntPtr.Zero,
+            IntPtr.Zero);
 
         if (result != 0) {
             throw new VhdOperationFailedException(Marshal.GetPInvokeErrorMessage((int)result));
