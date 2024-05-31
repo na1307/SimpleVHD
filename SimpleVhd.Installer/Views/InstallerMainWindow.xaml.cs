@@ -9,10 +9,7 @@ namespace SimpleVhd.Installer.Views;
 /// An empty window that can be used on its own or navigated to within a Frame.
 /// </summary>
 public sealed partial class InstallerMainWindow {
-    public InstallerMainWindow(InstallType installType) {
-        InitializeComponent();
-        ViewModel = new(installType);
-    }
+    public InstallerMainWindow() => InitializeComponent();
 
-    private InstallerMainWindowViewModel ViewModel { get; }
+    private InstallerMainWindowViewModel ViewModel { get; } = new();
 }

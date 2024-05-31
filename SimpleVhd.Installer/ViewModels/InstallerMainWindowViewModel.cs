@@ -5,10 +5,5 @@ namespace SimpleVhd.Installer.ViewModels;
 
 public sealed partial class InstallerMainWindowViewModel : ObservableObject {
     [ObservableProperty]
-    private LinkedListNode<StepPage> currentPage;
-
-    public InstallerMainWindowViewModel(InstallType installType) {
-        InstallProcessor.CreateModel(installType);
-        currentPage = new LinkedList<StepPage>([new NamePage()]).First!;
-    }
+    private LinkedListNode<StepPage> currentPage = new LinkedList<StepPage>([new NamePage()]).First!;
 }

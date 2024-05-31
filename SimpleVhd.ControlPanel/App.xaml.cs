@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
+using SimpleVhd.Installer;
 using SimpleVhd.Installer.Views;
 using System.Diagnostics;
 using WinRT.Interop;
@@ -43,18 +44,18 @@ public sealed partial class App {
 
             var settings = Settings.Instance;
 
-            if (settings.OperationType == null) {
-                if (settings.CurrentInstance is not null) {
-                    MWindow = new Views.MainWindow();
-                    MWindow.Closed += (_, _) => settings.SaveSettings();
-                } else {
-                    MWindow = new InstallerMainWindow(Installer.InstallType.AddInstance);
-                }
-            } else {
+            if (settings.OperationType is not null) {
                 throw new CantLaunchException($"대기 중인 작업이 존재합니다.{Environment.NewLine}{Environment.NewLine}PE로 부팅하여 대기 중인 작업을 먼저 실행해 주세요.");
+            } else if (settings.CurrentInstance is null) {
+                InstallProcessor.CreateModel(InstallType.AddInstance);
+                MWindow = new InstallerMainWindow();
+            } else {
+                MWindow = new Views.MainWindow();
+                MWindow.Closed += (_, _) => settings.SaveSettings();
             }
         } else {
-            MWindow = new InstallerMainWindow(Installer.InstallType.New);
+            InstallProcessor.CreateModel(InstallType.New);
+            MWindow = new InstallerMainWindow();
         }
 
         MWindow.SetWindowSize(750, 500);
