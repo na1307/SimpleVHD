@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace SimpleVhd.Installer;
+namespace SimpleVhd.Installer.Models;
 
 public sealed class NewInstallProcessor : InstallProcessor {
     public override void InstallProcess() {
@@ -48,7 +48,7 @@ public sealed class NewInstallProcessor : InstallProcessor {
         bootmgr.SetIntegerElement(BcdElementType.BcdBootMgrTimeout, 5);
         bootmgr.SetObjectListElement(BcdElementType.BcdBootMgrDisplayOrder, [.. ((BcdObject[])bootmgr.GetElement(BcdElementType.BcdBootMgrDisplayOrder)), pe]);
 
-        using FileStream fs = new(Path.Combine(SVPath, SettingsFileName), FileMode.Create, FileAccess.Write, FileShare.None);
+        using FileStream fs = new(Path.Combine(SVPath, SettingsFileName), FileMode.CreateNew, FileAccess.Write, FileShare.None);
         using Utf8JsonWriter writer = new(fs, new JsonWriterOptions() { Indented = true });
 
         new JsonObject() {
@@ -56,17 +56,17 @@ public sealed class NewInstallProcessor : InstallProcessor {
             {
                 nameof(Settings.Instances),
                 (JsonArray)([
-            new JsonObject() {
-                { nameof(Vhd.Name), Name },
-                { nameof(Vhd.Directory), VhdPath },
-                { nameof(Vhd.FileName), VhdFileName },
-                { nameof(Vhd.Style), Style.Normal.ToString() },
-                { nameof(Vhd.Type), VhdType.ToString() },
-                { nameof(Vhd.Format), VhdFormat.ToString() },
-                { nameof(Vhd.ParentGuid), parent.Id.ToString("B") },
-                { nameof(Vhd.Child1Guid), child1.Id.ToString("B") },
-                { nameof(Vhd.Child2Guid), child2.Id.ToString("B") }
-            },
+                    new JsonObject() {
+                        { nameof(Vhd.Name), Name },
+                        { nameof(Vhd.Directory), VhdPath },
+                        { nameof(Vhd.FileName), VhdFileName },
+                        { nameof(Vhd.Style), Style.Normal.ToString() },
+                        { nameof(Vhd.Type), VhdType.ToString() },
+                        { nameof(Vhd.Format), VhdFormat.ToString() },
+                        { nameof(Vhd.ParentGuid), parent.Id.ToString("B") },
+                        { nameof(Vhd.Child1Guid), child1.Id.ToString("B") },
+                        { nameof(Vhd.Child2Guid), child2.Id.ToString("B") }
+                    },
                 ])
             },
             { nameof(Settings.RamdiskGuid), ramdisk.Id.ToString("B") },

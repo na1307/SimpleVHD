@@ -8,7 +8,8 @@ public sealed partial class InstallerMainWindowViewModel : ObservableObject {
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(GoNextCommand))]
     [NotifyCanExecuteChangedFor(nameof(GoBackCommand))]
-    private LinkedListNode<StepPage> currentPage = new LinkedList<StepPage>([new NamePage(), new VhdTypePage()]).First!;
+    private LinkedListNode<StepPage> currentPage
+        = new LinkedList<StepPage>([new NamePage(), new VhdTypePage(), new InstallingPage()]).First!;
 
     private bool CanNext => CurrentPage.Value.ViewModel.CanNext;
     private bool CanBack => CurrentPage.Value.ViewModel.CanBack;

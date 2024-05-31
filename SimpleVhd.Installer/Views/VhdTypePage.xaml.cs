@@ -12,7 +12,7 @@ namespace SimpleVhd.Installer.Views;
 public sealed partial class VhdTypePage {
     public VhdTypePage() => InitializeComponent();
 
-    public override VhdTypePageViewModel ViewModel => new();
+    public override VhdTypePageViewModel ViewModel { get; } = new();
 
     private void VhdTypeRadioButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
         => ViewModel.VhdType = (VhdType)((RadioButtons)sender).SelectedIndex;

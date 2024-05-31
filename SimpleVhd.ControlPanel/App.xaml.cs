@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using SimpleVhd.Installer;
+using SimpleVhd.Installer.Models;
 using SimpleVhd.Installer.Views;
 using System.Diagnostics;
 using WinRT.Interop;

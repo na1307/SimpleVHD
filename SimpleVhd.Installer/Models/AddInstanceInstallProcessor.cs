@@ -1,6 +1,6 @@
 ﻿using Bluehill.Bcd;
 
-namespace SimpleVhd.Installer;
+namespace SimpleVhd.Installer.Models;
 
 public sealed class AddInstanceInstallProcessor : InstallProcessor {
     public override void InstallProcess() {

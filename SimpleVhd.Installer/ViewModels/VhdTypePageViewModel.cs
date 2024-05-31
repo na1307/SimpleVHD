@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SimpleVhd.Installer.Models;
 
 namespace SimpleVhd.Installer.ViewModels;
 

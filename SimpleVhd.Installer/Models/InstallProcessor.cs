@@ -1,4 +1,4 @@
-﻿namespace SimpleVhd.Installer;
+﻿namespace SimpleVhd.Installer.Models;
 
 public abstract class InstallProcessor {
     protected InstallProcessor() {

@@ -1,0 +1,16 @@
+<local:StepPage
+    x:Class="SimpleVhd.Installer.Views.InstallingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SimpleVhd.Installer.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="StepPage_Loaded">
+
+    <Grid>
+        <ProgressRing IsActive="{x:Bind ViewModel.Installing, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Text="설치 완료!" Visibility="{x:Bind ViewModel.CompletedVisiblity, Mode=OneWay}"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </Grid>
+</local:StepPage>

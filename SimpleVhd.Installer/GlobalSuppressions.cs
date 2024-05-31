@@ -6,4 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 #pragma warning disable RCS0056
-[assembly: SuppressMessage("Roslynator", "RCS0056:A line is too long", Justification = "<보류 중>", Scope = "member", Target = "~M:SimpleVhd.Installer.NewInstallProcessor.InstallProcess")]
+[assembly: SuppressMessage("Roslynator", "RCS0056:A line is too long", Justification = "<보류 중>", Scope = "member", Target = "~M:SimpleVhd.Installer.Models.NewInstallProcessor.InstallProcess")]
