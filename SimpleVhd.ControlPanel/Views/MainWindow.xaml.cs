@@ -8,8 +8,11 @@ namespace SimpleVhd.ControlPanel.Views;
 /// <summary>
 /// An empty window that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class MainWindow {
-    public MainWindow() => InitializeComponent();
+public sealed partial class MainWindow : IWindow {
+    public MainWindow() {
+        InitializeComponent();
+        ViewModel = new(this);
+    }
 
-    private MainWindowViewModel ViewModel { get; } = new();
+    public MainWindowViewModel ViewModel { get; }
 }

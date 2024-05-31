@@ -2,4 +2,4 @@
 
 namespace SimpleVhd.ControlPanel.Views;
 
-public abstract class Screen : ContentControl;
+public abstract class Screen : UserControl, IScreen;
