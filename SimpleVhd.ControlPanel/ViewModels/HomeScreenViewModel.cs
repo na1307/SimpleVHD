@@ -12,6 +12,7 @@ public sealed partial class HomeScreenViewModel(IWindow window, IScreen screen) 
 
     [RelayCommand]
     private void RestoreButton() {
-
+        var mw = (MainWindow)window;
+        mw.ViewModel.Screen = new RestoreScreen(window, screen);
     }
 }
