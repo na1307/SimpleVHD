@@ -7,7 +7,7 @@ namespace SimpleVhd.Installer;
 
 public sealed class NewInstallProcessor : InstallProcessor {
     public override void InstallProcess() {
-        Directory.CreateDirectory(Path.Combine(SVDrive, SVDirName, BackupDirName));
+        Directory.CreateDirectory(Path.Combine(SVPath, BackupDirName));
 
         var arch = RuntimeInformation.ProcessArchitecture switch {
             Architecture.X64 => "x64",
@@ -48,7 +48,7 @@ public sealed class NewInstallProcessor : InstallProcessor {
         bootmgr.SetIntegerElement(BcdElementType.BcdBootMgrTimeout, 5);
         bootmgr.SetObjectListElement(BcdElementType.BcdBootMgrDisplayOrder, [.. ((BcdObject[])bootmgr.GetElement(BcdElementType.BcdBootMgrDisplayOrder)), pe]);
 
-        using FileStream fs = new(Path.Combine(SVDrive, SVDirName, SettingsFileName), FileMode.Create, FileAccess.Write, FileShare.None);
+        using FileStream fs = new(Path.Combine(SVPath, SettingsFileName), FileMode.Create, FileAccess.Write, FileShare.None);
         using Utf8JsonWriter writer = new(fs, new JsonWriterOptions() { Indented = true });
 
         new JsonObject() {

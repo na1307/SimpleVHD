@@ -8,7 +8,7 @@ public sealed partial class InstallerMainWindowViewModel : ObservableObject {
     private LinkedListNode<StepPage> currentPage;
 
     public InstallerMainWindowViewModel(InstallType installType) {
-        currentPage = new LinkedList<StepPage>([new NamePage()]).First!;
         InstallProcessor.CreateModel(installType);
+        currentPage = new LinkedList<StepPage>([new NamePage()]).First!;
     }
 }
