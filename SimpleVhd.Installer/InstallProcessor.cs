@@ -1,11 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿namespace SimpleVhd.Installer;
 
-namespace SimpleVhd.Installer;
-
-public abstract class InstallProcessor : ObservableValidator {
-    private string _name = "여기에 이름을 입력해주세요";
-
+public abstract class InstallProcessor {
     protected InstallProcessor() {
         SVDrive = SVPath.Left(2);
         var vp = GetSystemVhdPath();
@@ -25,13 +20,7 @@ public abstract class InstallProcessor : ObservableValidator {
     public string VhdDrive { get; }
     public string VhdPath { get; }
     public string VhdFileName { get; }
-
-    [Required(ErrorMessage = "이름은 비워둘 수 없습니다.")]
-    public string Name {
-        get => _name;
-        set => SetProperty(ref _name, value, true);
-    }
-
+    public string Name { get; set; } = "여기에 이름을 입력해주세요";
     public VhdType VhdType { get; set; }
     public VhdFormat VhdFormat { get; }
 

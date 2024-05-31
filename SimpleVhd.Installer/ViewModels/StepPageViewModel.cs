@@ -2,7 +2,7 @@
 
 namespace SimpleVhd.Installer.ViewModels;
 
-public abstract class StepPageViewModel : ObservableObject {
+public abstract class StepPageViewModel : ObservableValidator {
     public abstract string Title { get; }
     public abstract string Description { get; }
     public abstract bool CanNext { get; }

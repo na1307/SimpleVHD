@@ -1,10 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SimpleVhd.Installer.ViewModels;
 
 public sealed partial class NamePageViewModel : StepPageViewModel {
     [ObservableProperty]
+    [NotifyDataErrorInfo]
     [NotifyPropertyChangedFor(nameof(CanNext))]
+    [Required(ErrorMessage = "이름은 비워둘 수 없습니다.")]
     private string name = InstallProcessor.Model!.Name;
 
     public override string Title => "인스턴스 이름";
