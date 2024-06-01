@@ -1,3 +1,5 @@
 ﻿namespace SimpleVhd.ControlPanel.Views;
 
-public interface IScreen;
+public interface IScreen {
+    Screen Self { get; }
+}

@@ -4,7 +4,7 @@ using SimpleVhd.ControlPanel.Views;
 
 namespace SimpleVhd.ControlPanel.ViewModels;
 
-public sealed class BackupScreenViewModel(IWindow window, IScreen previousScreen) : OperationScreenViewModel(window, previousScreen) {
+public sealed class BackupScreenViewModel(IMainWindow window, IScreen previousScreen) : OperationScreenViewModel(window, previousScreen) {
     public override string Title => "백업";
     public override string Description => "원본 VHD를 백업합니다.";
     public override string Icon => "\xEDA2";

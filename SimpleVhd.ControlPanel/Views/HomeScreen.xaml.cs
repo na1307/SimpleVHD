@@ -6,7 +6,7 @@ using SimpleVhd.ControlPanel.ViewModels;
 namespace SimpleVhd.ControlPanel.Views;
 
 public sealed partial class HomeScreen {
-    public HomeScreen(IWindow window) {
+    public HomeScreen(IMainWindow window) {
         InitializeComponent();
         ViewModel = new(window, this);
     }

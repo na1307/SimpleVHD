@@ -2,4 +2,6 @@
 
 namespace SimpleVhd.ControlPanel.Views;
 
-public abstract class Screen : UserControl, IScreen;
+public abstract class Screen : UserControl, IScreen {
+    public Screen Self => this;
+}
