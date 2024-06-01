@@ -8,18 +8,28 @@
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
 
-    <controls:UniformGrid Rows="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" ColumnSpacing="25">
-        <Button Width="125" Height="125" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Bind ViewModel.BackupButtonCommand}">
-            <StackPanel Orientation="Vertical" Spacing="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="&#xEDA2;" FontFamily="Segoe MDL2 Assets" FontSize="48" />
-                <TextBlock Text="백업" FontSize="24" />
-            </StackPanel>
-        </Button>
-        <Button Width="125" Height="125" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Bind ViewModel.RestoreButtonCommand}">
-            <StackPanel Orientation="Vertical" Spacing="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="&#xE777;" FontFamily="Segoe MDL2 Assets" FontSize="48" />
-                <TextBlock Text="복원" FontSize="24" />
-            </StackPanel>
-        </Button>
-    </controls:UniformGrid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="9*" />
+        </Grid.RowDefinitions>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Spacing="10">
+            <TextBlock Text="{x:Bind ViewModel.Current, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button Content="이름 바꾸기" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Bind ViewModel.RenameButtonCommand}" />
+        </StackPanel>
+        <controls:UniformGrid Rows="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" ColumnSpacing="25" Grid.Row="1">
+            <Button Width="125" Height="125" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Bind ViewModel.BackupButtonCommand}">
+                <StackPanel Orientation="Vertical" Spacing="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="&#xEDA2;" FontFamily="Segoe MDL2 Assets" FontSize="48" />
+                    <TextBlock Text="백업" FontSize="24" />
+                </StackPanel>
+            </Button>
+            <Button Width="125" Height="125" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{x:Bind ViewModel.RestoreButtonCommand}">
+                <StackPanel Orientation="Vertical" Spacing="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="&#xE777;" FontFamily="Segoe MDL2 Assets" FontSize="48" />
+                    <TextBlock Text="복원" FontSize="24" />
+                </StackPanel>
+            </Button>
+        </controls:UniformGrid>
+    </Grid>
 </local:Screen>

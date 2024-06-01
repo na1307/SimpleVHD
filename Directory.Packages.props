@@ -16,6 +16,6 @@
     <PackageVersion Include="WinUIEx" Version="2.3.4" />
   </ItemGroup>
   <ItemGroup>
-    <GlobalPackageReference Include="Bluehill.Imports" Version="1.0.5-beta.1.1" />
+    <GlobalPackageReference Include="Bluehill.Imports" Version="1.0.5-beta.1.2" />
   </ItemGroup>
 </Project>
