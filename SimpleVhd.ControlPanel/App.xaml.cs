@@ -1,5 +1,4 @@
 ﻿using Microsoft.UI.Xaml;
-using SimpleVhd.Installer;
 using SimpleVhd.Installer.Models;
 using SimpleVhd.Installer.Views;
 using System.Diagnostics;
@@ -33,6 +32,8 @@ public sealed partial class App {
         UnhandledException += App_UnhandledException;
     }
 
+    public static new App Current => (App)Application.Current;
+
     public Window? MWindow { get; private set; }
 
     /// <summary>
@@ -48,14 +49,14 @@ public sealed partial class App {
             if (settings.OperationType is not null) {
                 throw new CantLaunchException($"대기 중인 작업이 존재합니다.{Environment.NewLine}{Environment.NewLine}PE로 부팅하여 대기 중인 작업을 먼저 실행해 주세요.");
             } else if (settings.CurrentInstance is null) {
-                InstallProcessor.CreateModel(InstallType.AddInstance);
+                InstallProcessor.CreateModel(true);
                 MWindow = new InstallerMainWindow();
             } else {
                 MWindow = new Views.MainWindow();
                 MWindow.Closed += (_, _) => settings.SaveSettings();
             }
         } else {
-            InstallProcessor.CreateModel(InstallType.New);
+            InstallProcessor.CreateModel(false);
             MWindow = new InstallerMainWindow();
         }
 

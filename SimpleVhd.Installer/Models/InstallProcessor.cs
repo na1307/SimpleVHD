@@ -24,11 +24,7 @@ public abstract class InstallProcessor {
     public VhdType VhdType { get; set; }
     public VhdFormat VhdFormat { get; }
 
-    public static void CreateModel(InstallType installType) => Model = installType switch {
-        InstallType.New => new NewInstallProcessor(),
-        InstallType.AddInstance => new AddInstanceInstallProcessor(),
-        _ => throw new NotImplementedException(),
-    };
+    public static void CreateModel(bool addInstance) => Model = !addInstance ? new NewInstallProcessor() : new AddInstanceInstallProcessor();
 
     public abstract void InstallProcess();
 }
