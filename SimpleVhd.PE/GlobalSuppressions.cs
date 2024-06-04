@@ -5,7 +5,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-#pragma warning disable RCS0056
 [assembly: SuppressMessage("Design", "CA1031:일반적인 예외 형식을 catch하지 마세요.", Justification = "<보류 중>", Scope = "member", Target = "~M:SimpleVhd.PE.Operations.Operation.WorkAsync~System.Threading.Tasks.Task")]
 [assembly: SuppressMessage("Design", "CA1032:표준 예외 생성자를 구현하세요.", Justification = "<보류 중>", Scope = "type", Target = "~T:SimpleVhd.PE.Operations.Operation.OperationFailedException")]
 [assembly: SuppressMessage("Design", "CA1032:표준 예외 생성자를 구현하세요.", Justification = "<보류 중>", Scope = "type", Target = "~T:SimpleVhd.PE.Operations.Operation.DiskpartException")]
