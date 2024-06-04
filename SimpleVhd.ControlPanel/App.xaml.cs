@@ -1,7 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using SimpleVhd.Installer.Models;
 using SimpleVhd.Installer.Views;
-using System.Diagnostics;
 using WinRT.Interop;
 using WinUIEx;
 using static SimpleVhd.ControlPanel.NativeMethods;
@@ -20,14 +19,6 @@ public sealed partial class App {
     /// executed, and as such is the logical equivalent of main() or WinMain().
     /// </summary>
     public App() {
-        try {
-            Checker.CheckSvPath();
-            Checker.CheckSystemVhd();
-        } catch (CheckException cex) {
-            _ = MessageBoxW(nint.Zero, cex.Message, null, 16);
-            Process.GetCurrentProcess().Kill();
-        }
-
         InitializeComponent();
         UnhandledException += App_UnhandledException;
     }
@@ -41,6 +32,9 @@ public sealed partial class App {
     /// </summary>
     /// <param name="args">Details about the launch request and process.</param>
     protected override async void OnLaunched(LaunchActivatedEventArgs args) {
+        Checker.CheckSvPath();
+        Checker.CheckSystemVhd();
+
         if (File.Exists(Path.Combine(SVPath, SettingsFileName))) {
             await Checker.CheckSettingsJsonAsync();
 

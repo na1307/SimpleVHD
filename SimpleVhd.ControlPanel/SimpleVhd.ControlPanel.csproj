@@ -5,6 +5,7 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsPackageType>None</WindowsPackageType>
+    <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>
     <AssemblyName>ControlPanel</AssemblyName>
     <AssemblyTitle>SimpleVhd Control Panel</AssemblyTitle>
     <!-- https://github.com/microsoft/WindowsAppSDK/issues/4419 -->
