@@ -4,7 +4,7 @@ using SimpleVhd.ControlPanel.Views;
 
 namespace SimpleVhd.ControlPanel.ViewModels;
 
-public sealed class RestoreScreenViewModel(IMainWindow window, IScreen previousScreen) : OperationScreenViewModel(window, previousScreen) {
+public sealed class RestoreViewModel(IScreen previousScreen) : OperationViewModel(previousScreen) {
     public override string Title => "복원";
     public override string Description => "원본 VHD를 복원합니다.";
     public override string Icon => "\xE777";

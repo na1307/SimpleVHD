@@ -1,4 +1,7 @@
-﻿using Microsoft.UI.Xaml;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
+using SimpleVhd.ControlPanel.ViewModels;
 using SimpleVhd.Installer.Models;
 using SimpleVhd.Installer.Views;
 using WinRT.Interop;
@@ -21,9 +24,8 @@ public sealed partial class App {
     public App() {
         InitializeComponent();
         UnhandledException += App_UnhandledException;
+        Ioc.Default.ConfigureServices(new ServiceCollection().AddSingleton<MainViewModel>().BuildServiceProvider());
     }
-
-    public static new App Current => (App)Application.Current;
 
     public Window? MWindow { get; private set; }
 

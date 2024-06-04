@@ -8,5 +8,5 @@ namespace SimpleVhd.ControlPanel.Views;
 public abstract partial class OperationScreen {
     protected OperationScreen() => InitializeComponent();
 
-    protected abstract OperationScreenViewModel ViewModel { get; }
+    protected abstract OperationViewModel ViewModel { get; }
 }

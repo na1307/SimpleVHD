@@ -3,7 +3,7 @@ using SimpleVhd.ControlPanel.Views;
 
 namespace SimpleVhd.ControlPanel.ViewModels;
 
-public sealed partial class MainWindowViewModel(IMainWindow window) : ObservableObject {
+public sealed partial class MainViewModel : ObservableObject {
     [ObservableProperty]
-    private Screen screen = new HomeScreen(window);
+    private Screen screen = new HomeScreen();
 }

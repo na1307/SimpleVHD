@@ -1,11 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
 using SimpleVhd.ControlPanel.Views;
 
 namespace SimpleVhd.ControlPanel.ViewModels;
 
-public sealed partial class HomeScreenViewModel(IMainWindow window, IScreen screen) : ScreenViewModel {
+public sealed partial class HomeViewModel(IScreen screen) : ScreenViewModel {
     private const string template = "현재 {0} 관리 중";
 
     [ObservableProperty]
@@ -32,8 +33,8 @@ public sealed partial class HomeScreenViewModel(IMainWindow window, IScreen scre
     }
 
     [RelayCommand]
-    private void BackupButton() => window.ViewModel.Screen = new BackupScreen(window, screen);
+    private void BackupButton() => Ioc.Default.GetRequiredService<MainViewModel>().Screen = new BackupScreen(screen);
 
     [RelayCommand]
-    private void RestoreButton() => window.ViewModel.Screen = new RestoreScreen(window, screen);
+    private void RestoreButton() => Ioc.Default.GetRequiredService<MainViewModel>().Screen = new RestoreScreen(screen);
 }
