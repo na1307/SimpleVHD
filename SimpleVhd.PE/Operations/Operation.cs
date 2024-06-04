@@ -6,8 +6,7 @@ namespace SimpleVhd.PE.Operations;
 internal abstract class Operation {
     protected static readonly Vhd OInstance = Settings.Instance.Instances[Settings.Instance.OperationTarget!.Value];
     protected static readonly string OFile = $"{OInstance.FileName}.{OInstance.Format.ToString().ToLowerInvariant()}";
-    protected static readonly string ODrv =
-        DriveInfo.GetDrives().First(d => File.Exists(d.GetDriveLetterAndColon() + OInstance.Directory + OFile)).GetDriveLetterAndColon();
+    protected static readonly string ODrv = DriveInfo.GetDrives().First(d => File.Exists(d.GetDriveLetterAndColon() + OInstance.Directory + OFile)).GetDriveLetterAndColon();
     private static readonly string dptemp = Path.Combine(SVPath, "dptemp.txt");
     private static readonly Encoding systemEncoding = CodePagesEncodingProvider.Instance.GetEncoding(0)!;
 

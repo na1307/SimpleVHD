@@ -14,6 +14,5 @@ public sealed partial class VhdTypePage {
 
     public override VhdTypePageViewModel ViewModel { get; } = new();
 
-    private void VhdTypeRadioButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        => ViewModel.VhdType = (VhdType)((RadioButtons)sender).SelectedIndex;
+    private void VhdTypeRadioButtons_SelectionChanged(object sender, SelectionChangedEventArgs e) => ViewModel.VhdType = (VhdType)((RadioButtons)sender).SelectedIndex;
 }

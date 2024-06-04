@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using SimpleVhd.ControlPanel.ViewModels;
+using SimpleVhd.ControlPanel.Views;
 using SimpleVhd.Installer.Models;
 using SimpleVhd.Installer.Views;
 using WinRT.Interop;
@@ -24,7 +25,6 @@ public sealed partial class App {
     public App() {
         InitializeComponent();
         UnhandledException += App_UnhandledException;
-        Ioc.Default.ConfigureServices(new ServiceCollection().AddSingleton<MainViewModel>().BuildServiceProvider());
     }
 
     public Window? MWindow { get; private set; }
@@ -48,7 +48,8 @@ public sealed partial class App {
                 InstallProcessor.CreateModel(true);
                 MWindow = new InstallerMainWindow();
             } else {
-                MWindow = new Views.MainWindow();
+                Ioc.Default.ConfigureServices(new ServiceCollection().AddSingleton<MainViewModel>().BuildServiceProvider());
+                MWindow = new MainWindow();
                 MWindow.Closed += (_, _) => settings.SaveSettings();
             }
         } else {
